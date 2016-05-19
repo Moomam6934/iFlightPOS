@@ -5926,6 +5926,9 @@ ion-tabs.tabs-color-active-dark .tab-item {
 a.item {
   color: inherit;
   text-decoration: none; }
+  a {
+  color: inherit;
+  text-decoration: none; }
   a.item:hover, a.item:focus {
     text-decoration: none; }
 
@@ -10575,6 +10578,13 @@ ion-nav-bar.shop-color * {
   .shop-view .shop-tabs .tab-item.activated {
     border-color: #191c1f; }
 
+    .main-view {
+  background-color: #EEE; }
+  .main-view .main-tabs .tab-item.tab-item-active,
+  .main-view .main-tabs .tab-item.active,
+  .main-view .main-tabs .tab-item.activated {
+    border-color: #191c1f; }
+
 .shop-section-title {
   background-color: transparent;
   border: none;
@@ -10744,6 +10754,18 @@ ion-nav-bar.product-color * {
   color: #FFFFFF; }
   ion-nav-bar.product-color * .buttons button::before {
     color: #FFFFFF; }
+
+    ion-nav-bar.main-color ion-header-bar {
+  background-color: #EE2E24 !important;
+  background: #EE2E24 !important;
+  border: none !important;
+  background-size: 0px !important; }
+
+ion-nav-bar.main-color * {
+  color: #FFFFFF; }
+  ion-nav-bar.main-color * .buttons button::before {
+    color: #FFFFFF; }
+
 
 .product-view {
   background-color: #EEE; }
