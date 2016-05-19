@@ -149,6 +149,48 @@ angular.module('your_app_name', [
             }
         }
     })
+    .state('app.main', {
+        url: "/main",
+        
+        views: {
+            'menuContent': {
+                templateUrl: "views/app/main.html"
+               
+            }
+        }
+    })
+    .state('app.main.all', {
+        url: "/all",
+        views: {
+            'main-all': {
+                templateUrl: "views/app/main-tabs/main-all.html"
+            }
+        }
+    })
+    .state('app.main.keep', {
+        url: "/keep",
+        views: {
+            'main-keep': {
+                templateUrl: "views/app/main-tabs/main-keep.html"
+            }
+        }
+    })
+    .state('app.main.sold', {
+        url: "/sold",
+        views: {
+            'main-sold': {
+                templateUrl: "views/app/main-tabs/main-sold.html"
+            }
+        }
+    })
+    .state('app.main.void', {
+        url: "/void",
+        views: {
+            'main-void': {
+                templateUrl: "views/app/main-tabs/main-void.html"
+            }
+        }
+    })
 
 
     //AUTH ROUTES
@@ -186,7 +228,12 @@ angular.module('your_app_name', [
         url: '/forgot-password',
         templateUrl: "views/auth/forgot-password.html",
         controller: 'ForgotPasswordCtrl'
-    });
+    })
+
+   
+
+
+
 
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/auth/welcome');
