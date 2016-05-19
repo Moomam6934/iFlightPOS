@@ -5,6 +5,7 @@ angular.module('underscore', [])
 
 angular.module('your_app_name', [
     'ionic',
+    'popover',
     'your_app_name.common.directives',
     'your_app_name.app.controllers',
     'your_app_name.auth.controllers',
@@ -47,7 +48,7 @@ angular.module('your_app_name', [
         }
     });
     $rootScope.$on("$stateChangeSuccess", function(event, toState, toParams, fromState, fromParams) {
-        if (toState.name.indexOf('app.shop.popular') > -1) {
+        if (toState.name.indexOf('app.shop') > -1) {
             // Restore platform default transition. We are just hardcoding android transitions to auth views.
             $ionicConfig.views.transition('platform');
             // If it's ios, then enable swipe back again
@@ -72,43 +73,14 @@ angular.module('your_app_name', [
 
     .state('app.shop', {
         url: "/shop",
-        abstract: true,
         views: {
             'menuContent': {
-                templateUrl: "views/app/shop/shop.html"
-            }
-        }
-    })
-
-    .state('app.shop.home', {
-        url: "/",
-        views: {
-            'shop-home': {
-                templateUrl: "views/app/shop/shop-home.html",
+                templateUrl: "views/app/shop/shop.html",
                 controller: 'ShopCtrl'
             }
         }
     })
 
-    .state('app.shop.popular', {
-        url: "/popular",
-        views: {
-            'shop-popular': {
-                templateUrl: "views/app/shop/shop-popular.html",
-                controller: 'ShopCtrl'
-            }
-        }
-    })
-
-    .state('app.shop.sale', {
-        url: "/sale",
-        views: {
-            'shop-sale': {
-                templateUrl: "views/app/shop/shop-sale.html",
-                controller: 'ShopCtrl'
-            }
-        }
-    })
 
     .state('app.cart', {
         url: "/cart",
