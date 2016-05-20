@@ -10138,6 +10138,9 @@ textarea {
     color: #0C0A0A;
     font-size: 16px;
     position: center;
+  /*  color: #b7b7b7;
+    font-size: 16px;*/
+    /*label*/
 }
 
 .placeholder-icon {
@@ -10267,6 +10270,15 @@ textarea:-ms-input-placeholder {
 
 textarea::-webkit-input-placeholder {
     color: white;
+  color: white;
+}
+
+textarea:-ms-input-placeholder {
+    color: white;
+}
+
+textarea::-webkit-input-placeholder {
+    color: white;
     text-indent: -3px;
 }
 
@@ -10343,6 +10355,7 @@ input[readonly]:not(.cloned-text-input),
 textarea[readonly]:not(.cloned-text-input),
 select[readonly] {
     background-color: rgba(248, 248, 248, 0.03);
+    /*background-color: #f8f8f8;*/
     cursor: not-allowed;
 }
 
@@ -11321,7 +11334,55 @@ progress {
     background-color: transparent;
     color: white;
     position: relative;
+    /*mam edit*/
+    /*   background-color: #f8f8f8;
+    color: #444;
+    position: relative;*/
     display: inline-block;
+    margin: 0;
+    padding: 0 12px;
+    min-width: 52px;
+    min-height: 47px;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 4px;
+    vertical-align: top;
+    text-align: center;
+    text-overflow: ellipsis;
+    font-size: 16px;
+    line-height: 42px;
+    cursor: pointer;
+}
+
+.button:hover {
+    color: #444;
+    text-decoration: none;
+}
+
+.button.active,
+.button.activated {
+    background-color: #e5e5e5;
+}
+
+.button:after {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    bottom: -6px;
+    left: -6px;
+    content: ' ';
+}
+
+.button .icon {
+    vertical-align: top;
+    pointer-events: none;
+}
+
+.button .icon:before,
+.button.icon:before,
+.button.icon-left:before,
+.button.icon-right:before {
+    >>>>>>> b1a0f291feb6692330579735e7c2d1d6701c108b display: inline-block;
     margin: 0;
     padding: 0 12px;
     min-width: 52px;
@@ -11515,6 +11576,7 @@ progress {
 }
 
 .button.button-calm {
+    /*mam edit*/
     border-color: transparent;
     background-color: #3E454C;
     color: #fff;
@@ -11531,6 +11593,47 @@ progress {
 }
 
 .button.button-calm.button-clear {
+    border-color: transparent;
+    background: none;
+    box-shadow: none;
+    color: #3E454C;
+}
+
+.button.button-calm.button-icon {
+    >>>>>>> b1a0f291feb6692330579735e7c2d1d6701c108b border-color: transparent;
+    background: none;
+}
+
+.button.button-calm.button-outline {
+    border-color: #3E454C;
+    background: transparent;
+    color: #3E454C;
+}
+
+.button.button-calm.button-outline.active,
+.button.button-calm.button-outline.activated {
+    background-color: #3E454C;
+    <<<<<<< HEAD color: #fff;
+}
+
+.button.button-calm:hover {
+    color: #fff;
+    text-decoration: none;
+}
+
+.button.button-calm.active,
+.button.button-calm.activated {
+    background-color: #272c30;
+}
+
+.button.button-calm.button-clear {
+    /*mam edit*/
+    box-shadow: none;
+    color: #fff;
+}
+
+.button.button-assertive {
+    /*mam edit*/
     border-color: transparent;
     background: none;
     box-shadow: none;
@@ -11569,6 +11672,19 @@ progress {
 .button.button-assertive.active,
 .button.button-assertive.activated {
     background-color: #EE2E24;
+    color: #fff;
+    /*mam edit*/
+}
+
+.button.button-assertive:hover {
+    color: #fff;
+    text-decoration: none;
+}
+
+.button.button-assertive.active,
+.button.button-assertive.activated {
+    background-color: #EE2E24;
+    /*mam edit*/
 }
 
 .button.button-assertive.button-clear {
@@ -11597,9 +11713,44 @@ progress {
 }
 
 .button.button-balanced {
+    /*mam edit*/
     border-color: transparent;
     background-color: #3E454C;
     color: #fff;
+}
+
+.button.button-balanced:hover {
+    color: #fff;
+    text-decoration: none;
+}
+
+.button.button-balanced.active,
+.button.button-balanced.activated {
+    background-color: #272c30;
+}
+
+.button.button-balanced.button-clear {
+    border-color: transparent;
+    background: none;
+    box-shadow: none;
+    color: #3E454C;
+}
+
+.button.button-balanced.button-icon {
+    >>>>>>> b1a0f291feb6692330579735e7c2d1d6701c108b border-color: transparent;
+    background: none;
+}
+
+.button.button-balanced.button-outline {
+    border-color: #3E454C;
+    background: transparent;
+    color: #3E454C;
+}
+
+.button.button-balanced.button-outline.active,
+.button.button-balanced.button-outline.activated {
+    background-color: #3E454C;
+    <<<<<<< HEAD color: #fff;
 }
 
 .button.button-balanced:hover {
@@ -11638,7 +11789,7 @@ progress {
 }
 
 .button.button-energized {
-    border-color: transparent;
+    <<<<<<< HEAD border-color: transparent;
     background-color: #79D279;
     color: #fff;
 }
@@ -11674,7 +11825,41 @@ progress {
 .button.button-energized.button-outline.active,
 .button.button-energized.button-outline.activated {
     background-color: #79D279;
+    color: #fff;
+}
+
+.button.button-energized:hover {
+    color: #fff;
+    text-decoration: none;
+}
+
+.button.button-energized.active,
+.button.button-energized.activated {
+    background-color: #66cc66;
+}
+
+.button.button-energized.button-clear {
+    border-color: transparent;
+    background: none;
     box-shadow: none;
+    color: #79D279;
+}
+
+.button.button-energized.button-icon {
+    border-color: transparent;
+    background: none;
+}
+
+.button.button-energized.button-outline {
+    border-color: #79D279;
+    background: transparent;
+    color: #79D279;
+}
+
+.button.button-energized.button-outline.active,
+.button.button-energized.button-outline.activated {
+    background-color: #79D279;
+    >>>>>>> b1a0f291feb6692330579735e7c2d1d6701c108b box-shadow: none;
     color: #fff;
 }
 
@@ -13031,7 +13216,7 @@ a.dark {
 }
 
 ion-nav-bar ion-header-bar {
-    background-color: #3E454C !important;
+    background-color: #EE2E24 !important;
     background: #EE2E24 !important;
     border: none !important;
     background-size: 0px !important;
@@ -13195,12 +13380,16 @@ ion-spinner.spinner-on-load {
     display: none;
 }
 
-.modal-view {
+modal-view {
     background-color: #fcfcfc;
 }
 
 .modal-view ion-header-bar {
     background-color: #EE2E24;
+}
+
+.modal-view ion-header-bar {
+    background-color: #fcfcfc;
 }
 
 .modal-view * {
@@ -13249,6 +13438,26 @@ ion-spinner.spinner-on-load {
     color: #FFFFFF;
 }
 
+<<<<<<< HEAD .welcome-view .bottom-content {
+    height: 60%;
+}
+
+.welcome-view .bottom-content .google-sign-in,
+.welcome-view .bottom-content .facebook-sign-in,
+.welcome-view .bottom-content .twitter-sign-in {
+    color: #FFF;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.welcome-view .bottom-content .google-sign-in:before,
+.welcome-view .bottom-content .facebook-sign-in:before,
+.welcome-view .bottom-content .twitter-sign-in:before {
+    width: 30px;
+    text-align: center;
+    font-size: 32px;
+}
+
 .welcome-view .bottom-content {
     height: 60%;
 }
@@ -13269,7 +13478,7 @@ ion-spinner.spinner-on-load {
     font-size: 32px;
 }
 
-.welcome-view .bottom-content .google-sign-in .btn-copy,
+>>>>>>> b1a0f291feb6692330579735e7c2d1d6701c108b .welcome-view .bottom-content .google-sign-in .btn-copy,
 .welcome-view .bottom-content .facebook-sign-in .btn-copy,
 .welcome-view .bottom-content .twitter-sign-in .btn-copy {
     margin-left: -30px;
@@ -13952,41 +14161,6 @@ ion-nav-bar.settings-color * .buttons button::before {
 .settings-view .icon {
     color: #777777;
     font-size: 22px;
-}
-
-ion-nav-bar.feed-color ion-header-bar {
-    background-color: #3E454C !important;
-    background: #3E454C !important;
-    border: none !important;
-    background-size: 0px !important;
-}
-
-ion-nav-bar.feed-color * {
-    color: #FFFFFF;
-}
-
-ion-nav-bar.feed-color * .buttons button::before {
-    color: #FFFFFF;
-}
-
-.feed-view {
-    background-color: #3E454C;
-}
-
-.feed-view .scroll-refresher * {
-    color: #FFFFFF;
-}
-
-.feed-view .scroll-refresher .spinner {
-    stroke: #FFFFFF;
-}
-
-.feed-view ion-infinite-scroll * {
-    color: #FFFFFF;
-}
-
-.feed-view ion-infinite-scroll .spinner {
-    stroke: #FFFFFF;
 }
 
 .comments-list {
@@ -14812,4 +14986,5 @@ ion-nav-bar.checkout-color * .buttons button::before {
 
 .checkout-view .submit-order-btn {
     font-weight: 500;
+   
 }
