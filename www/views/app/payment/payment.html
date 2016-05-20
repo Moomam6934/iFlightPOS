@@ -1,0 +1,45 @@
+<ion-view view-title="Payment" class="shop-home-view">
+    <ion-nav-buttons side="right">
+        <button class="button button-clear button-light"><b>Done</b></button>
+    </ion-nav-buttons>
+    <ion-content>
+        <br>
+        <ion-item class="style-width-100p">
+            <a class="front-black " href="#">
+                <h1>&nbsp;Total <span class="item-total1">65.00 THB</span>
+                </h1>
+                <span class="item-price style-margin-right">
+                    	<p>0.00 THB</p>
+                    </span>
+            </a>
+        </ion-item>
+        <br>
+        <div class="style-margin-left" ng-repeat="item in payments">
+            <div class="row ">
+                <div class="col col-25 style-margin-left10p" class="text-center" ng-click="typeOfPayment(item)"><span class="input-label">{{item.type}}<i class="icon ion-chevron-right text-margin-left"></i></span></div>
+                <div class="col col-75 text-border">
+                    <input type="text" ng-click="payment(typepayment,item)" ng-show="item.type === 'Cash'" class="style-width95" ng-model="item.currency.exchange" readOnly>
+                    <input type="text" ng-show="item.type === 'Credit'" class="style-width95" ng-model="item.currency.card_id">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col col-25 style-margin-left10p"></div>
+                <div class="col col-75 style-border-left1">
+                    <input type="text" class="style-width90" ng-model="item.currency.money">
+                </div>
+            </div>
+        </div>
+        <ul class="list">
+            <li class="item style-ul">
+                <div class="style-margin-left15p">
+                    <div class="row" ng-click="addPayment()">
+                        <div class="col col-25 style-text-align-center"><i class="ion-plus-circled"></i></div>
+                        <div class="col col-75 style-color-green">
+                            <span>Add Payment</span>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </ion-content>
+</ion-view>

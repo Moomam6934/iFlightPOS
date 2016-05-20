@@ -1,35 +1,127 @@
 .item-price {
-  float: right;
-  color:#000000;
-  font-size: 20px; }
-  .style-margin-right{
-margin-right:50px;
+    float: right;
+    color: #000000;
+    font-size: 20px;
+}
 
-  }
+.style-margin-right {
+    margin-right: 50px;
+}
 
-  .front-black{
-  	color:#000000;
-  font-size: 12px;
+.item-total {
+    float: right;
+    color: #000000;
+    font-size: 24px;
+}
 
-  }
-  .icon-margin{
-margin-right:8px;
-  }
-  .icon-gray{
-color:#848484;
-  }
-  .icon-green{
-color:#01DF3A;
-  }
-  .icon-red{
-color:#FF0000;
-  }
-  .icon-yellow{
-color:#FFFF00;
-  }
-  .style-width-100p{
-  	 width: 110%;
+.item-total1 {
+    float: right;
+    color: #000000;
+    font-size: 26px;
+}
 
-  }
+.front-black {
+    color: #000000;
+    font-size: 12px;
+}
 
+.icon-margin {
+    margin-right: 8px;
+}
 
+.icon-gray {
+    color: #848484;
+}
+
+.icon-green {
+    color: #01DF3A;
+}
+
+.icon-red {
+    color: #FF0000;
+}
+
+.icon-yellow {
+    color: #FFFF00;
+}
+
+.style-width-100p {
+    width: 110%;
+}
+
+.style-width-50 {
+    font-size: 24px;
+}
+
+.style-front-typepay {
+    font-size: 16px;
+    color: white;
+    font-size: bold;
+}
+
+.front-cancel {
+    color: white;
+}
+
+.text-center {
+    margin-left: 10px;
+    text-align: center;
+}
+
+.text-border {
+    border-left: 1px solid;
+    border-color: #D0D0D0;
+}
+
+.style-width95 {
+    width: 95%;
+}
+
+.style-margin-left {
+    margin-left: -15px;
+    background-color: white;
+}
+
+.text-margin-left {
+    margin-left: 20px;
+}
+
+.style-margin-left10p {
+    margin-left: 10px;
+    border-bottom: 1px solid;
+    border-color: #D0D0D0;
+}
+
+.style-border-left1 {
+    border-left: 1px solid;
+    border-bottom: 1px solid;
+    border-color: #D0D0D0;
+}
+
+.style-width90 {
+    width: 90%;
+}
+
+.style-margin-left15p {
+    margin-left: -15px;
+}
+
+.style-text-align-center {
+    margin-left: 10px;
+    text-align: center;
+    color: green;
+    font-size: 30px;
+    margin-top: -15px;
+}
+
+.style-color-green {
+    color: green;
+    font-size: 15px;
+    padding-top: 7px;
+    margin-top: -12px;
+}
+
+.style-ul {
+    height: 50px;
+    margin-top: 10px;
+}
