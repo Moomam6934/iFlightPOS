@@ -1,0 +1,12 @@
+<ion-modal-view class="modal-view">
+    <ion-header-bar>
+        <a class="button button-clear button-light  " ng-click="Type_of_Payment.hide()"><b class="front-cancel">Cancel</b></span></a>
+        <h1 class="title modal-title "><b class="front-cancel">Type of Payment</b></h1>
+    </ion-header-bar>
+    <ion-content>
+        <ion-list>
+            <ion-radio  ng-click="typeOfPay('Cash')">Cash</ion-radio>
+            <ion-radio ng-click="typeOfPay('Credit')">Credit</ion-radio>
+        </ion-list>
+    </ion-content>
+</ion-modal-view>

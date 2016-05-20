@@ -222,7 +222,87 @@ angular.module('your_app_name.app.controllers', [])
     };
 
 })
+.controller('PaymentCtrl', function($scope, $ionicModal, $state) {
+
+    $ionicModal.fromTemplateUrl('views/app/payment/type-of-payment.html', {
+        scope: $scope,
+        animation: 'slide-in-up'
+    }).then(function(modal) {
+        $scope.Type_of_Payment = modal;
+    });
+
+    $ionicModal.fromTemplateUrl('views/app/payment/currency.html', {
+        scope: $scope,
+        animation: 'slide-in-up'
+    }).then(function(modal) {
+        $scope.Payment = modal;
+    });
 
 
 
-;
+    $scope.payments = [];
+    $scope.paymentdetail = {
+        id: null,
+        type: 'Cash',
+        currency: {
+            exchange: null,
+            money: null,
+            card_id: null,
+            security: null,
+            exp: null
+        },
+        amount: null
+
+    }
+    $scope.currencys = [{
+        id: 1,
+        name: "USD",
+        exchange: 35.36,
+        desc: "ดอลลาร์สหรัฐอเมริกา"
+    }, {
+        id: 2,
+        name: "JPY",
+        exchange: 0.32,
+        desc: "เยนญี่ปุ่น"
+    }, {
+        id: 3,
+        name: "EUR",
+        exchange: 40.01,
+        desc: "ยูโร"
+    }]
+    $scope.itemTypePay;
+    $scope.typeOfPayment = function(item) {
+        $scope.Type_of_Payment.show();
+        $scope.itemTypePay = item;
+    }
+    $scope.payment = function(typepayment,item) {
+        $scope.Payment.show();
+        $scope.itemTypePay = item;
+    }
+    $scope.typeOfPay = function(type) {
+        $scope.itemTypePay.type = type;
+        $scope.Type_of_Payment.hide();
+    }
+    $scope.addPayment = function() {
+        var ids = $scope.payments.length + 1;
+        $scope.payments.push({
+            id: ids,
+            type: 'Cash',
+            currency: {
+                exchange: null,
+                money: null,
+                card_id: null,
+                security: null,
+                exp: null
+            },
+            amount: null
+        });
+
+    }
+    $scope.cur = function(currency) {
+        $scope.itemTypePay.currency.exchange = currency.name;
+        $scope.Payment.hide()
+    }
+
+});
+

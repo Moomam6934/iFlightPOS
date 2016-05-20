@@ -21,6 +21,7 @@ angular.module('your_app_name', [
 .config(function($ionicConfigProvider) {
     if (ionic.Platform.isAndroid()) {
         $ionicConfigProvider.scrolling.jsScrolling(false);
+         $ionicConfigProvider.navBar.alignTitle("center")
 
     }
     $ionicConfigProvider.tabs.position('bottom').style('standard');
@@ -56,6 +57,7 @@ angular.module('your_app_name', [
             // If it's ios, then enable swipe back again
             if (ionic.Platform.isIOS()) {
                 $ionicConfig.views.swipeBackEnabled(true);
+
             }
             console.log("enabling swipe back and restoring transition to platform default", $ionicConfig.views.transition());
         }
@@ -165,6 +167,18 @@ angular.module('your_app_name', [
                 }
             }
         })
+
+
+    .state('app.pay', {
+        url: "/pay",
+        views: {
+            'menuContent': {
+                templateUrl: "views/app/payment/payment.html",
+                controller:'PaymentCtrl'
+            }
+        }
+    })
+
 
 
     //AUTH ROUTES
