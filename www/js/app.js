@@ -114,6 +114,9 @@ angular.module('your_app_name', [
 
     .state('app.product-detail', {
             url: "/product/:productId",
+            params:{
+                data : null
+            },
             views: {
                 'menuContent': {
                     templateUrl: "views/app/shop/product-detail.html",

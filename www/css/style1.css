@@ -347,12 +347,67 @@
 
 
 /*ionic add animation*/
-.select-item-shop{
+
+.select-item-shop {
     background-color: red !important;
-    margin-right: -25px; 
+    margin-right: -25px;
     margin-top: -10px;
 }
+
 .badge.badge-assertive {
     background-color: red;
     color: #fff;
+}
+
+.product-pic-wh {
+    width: 50px;
+    height: 50px;
+}
+
+.style-height-100p {
+    height: 100%;
+}
+
+.style-col-right {
+    text-align: right;
+}
+
+.style-col-center {
+    text-align: center;
+}
+
+.style-text-size-30px {
+    font-size: 30px;
+}
+
+.style-text-size-20px {
+    font-size: 20px;
+}
+
+.style-margin-10px {
+    margin-top: 10px;
+}
+
+.style-bg-coler-dc {
+    background-color: #848484;
+    height: 5px;
+    width: 100%;
+}
+
+.style-height-80px {
+    height: 80px;
+}
+
+.style-margin-top-5px {
+    margin-top: 5px;
+}
+
+.style-margin-top--10px {
+    margin-top: -10px;
+}
+
+.style-width50-height50 {
+    width: 50px;
+    height: 50px;
+
 }

@@ -1,43 +1,48 @@
-<ion-view view-title="Product" >
-  <ion-nav-buttons side="secondary">
-    <button class="button button-clear"><h4>Done</h4></button>
-  </ion-nav-buttons>
-  <ion-content>
-    <div class="product-card-content">
-      <div class="item item-image ">
-        <pre-img ratio="_1_1" helper-class="main-image">
-          <img ng-src="{{product.picture}}" spinner-on-load>
-        </pre-img>
-      </div>
-      <div class="item item-body">
-        <h2 class="product-title">{{product.title}}</h2>
-        <!-- <div>
-          <p class="product-like"><i class="icon ion-heart"></i>Like</p>
-          <p class="likes"></i>837</p>
-        </div> -->
-        <p class="product-price" ng-click="showAddToCartPopup(product)">${{product.price}}</p>
-      </div><!-- product.price
-      <div class="item item-body">
-        <p class="product-description">{{product.description}}</p>
-      </div> -->
-    </div>
-    <div class="item item-divider shop-section-title">
-      <span class="title-copy">Products</span>
-    </div>
-    <div class="row shop-products-narrow-cards-outer shop-product-cards-scroller">
-      <div class="col col-50 shop-product-narrow-card" ui-sref="app.product-detail({productId: product._id})">
-        <div class="list card">
-          <div class="item item-image">
-            <pre-img ratio="_1_1" helper-class="main-image">
-              <img ng-src="{{product.picture}}" spinner-on-load>
-            </pre-img>
-          </div>
-          <!-- <div class="item item-body">
+<ion-view view-title="Product">
+    <ion-nav-buttons side="secondary">
+        <button class="button button-clear">
+            <h6>Done</h6></button>
+    </ion-nav-buttons>
+    <ion-content>
+        <div class="item item-thumbnail-left">
+            <img ng-src="{{product.picture}}">
+            <br>
+            <h2 class="product-title">{{product.title}}</h2>
+            <p class="product-price">{{product.price}}</p>
+        </div>
+        <div>
+            <span class="title-copy">Promotion</span>
+            <p> Bey 1 Free 1</p>
+        </div>
+        <div class="item item-divider shop-section-title">
+            <span class="title-copy">Product Edit</span>
+        </div>
+        <div class="row shop-products-narrow-cards-outer shop-product-cards-scroller">
+            <div  class="col col-50 shop-product-narrow-card"> <!-- ui-sref="app.product-detail({productId: related_product._id})" -->
+                <div class="list card">
+                    <div class="item item-image">
+                        <pre-img ratio="_1_1" helper-class="main-image">
+                            <img ng-src="{{product.picture}}" spinner-on-load>
+                        </pre-img>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- <div class="row shop-product-narrow-card-outer shop-product-cards-scroller">
+            <div class="col col-50 shop-product-narrow-card" ui-sref="app.product-detail({productId: product._id})">
+                <div class="list card">
+                    <div class="item item-image">
+                        <pre-img ratio="_1_1" helper-class="main-image">
+                            <img ng-src="{{product.picture}}" spinner-on-load>
+                        </pre-img>
+                    </div>
+                    <div class="item item-body">
             <h2 class="card-title">{{product.title}}</h2>
             <p class="card-description"><b>${{product.price}}</b> - {{product.description}}</p>
-          </div> -->
-        </div>
-      </div>
-    </div>
-  </ion-content>
+          </div>
+                </div>
+            </div>
+        </div> -->
+    </ion-content>
 </ion-view>

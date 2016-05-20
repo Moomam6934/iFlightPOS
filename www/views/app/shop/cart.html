@@ -1,4 +1,61 @@
-<ion-view view-title="Shopping cart" class="cart-view" cache-view="false">
+<ion-view view-title="Order" class="cart-view" cache-view="false">
+    <ion-nav-buttons side="right">
+        <button class="button button-clear">
+            <h6>Pay</h6></button>
+    </ion-nav-buttons>
+    <ion-content>
+        <ion-list>
+            <div class="item icon-red style-text-size-20px " href="#">
+                &nbsp;&nbsp;Total
+                <span class="item-note icon-red style-text-size-30px">200.00 THB</span>
+            </div>
+        </ion-list>
+        <br>
+        <ion-list>
+            <div class="list">
+                <div class="item style-height-80px">
+                    <div class="row">
+                        <div class="col col-10 style-margin-top-5px">
+                            <label>A1</label>
+                        </div>
+                        <div class="col col-25 style-margin-top--10px ">
+                            <img class="style-width50-height50" src="http://keeprecipes.com/sites/keeprecipes/files/kolo_mee_pok.jpg">
+                        </div>
+                        <div class="col col-40 style-margin-top-5px">
+                            <label>Kolo Mee</abel>
+                        </div>
+                        <div class="col col-25 style-margin-top-5px">200.00 THB</div>
+                    </div>
+                </div>
+                <div class="item style-height-80px">
+                    <div class="row">
+                        <div class="col col-10 style-margin-top-5px">
+                            <label>A1</label>
+                        </div>
+                        <div class="col col-25 style-margin-top--10px ">
+                            <img class="style-width50-height50" src="http://static1.squarespace.com/static/50e70ccbe4b0cdba76c4cad3/t/5137a580e4b0aafa8d413f8d/1362601347110/img_0198.jpg">
+                        </div>
+                        <div class="col col-40 style-margin-top-5px">
+                            <label>Chicken Satay Wrap</abel>
+                        </div>
+                        <div class="col col-25 style-margin-top-5px">80.00 THB</div>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="item  style-text-size-20px " href="#">
+
+                A1 Kolo Mee
+                <span class="item-note  style-text-size-30px">200.00 THB</span>
+            </div> -->
+        </ion-list>
+        <div class="list">
+            <div class="item item-divider">
+                Discount
+            </div>
+        </div>
+    </ion-content>
+</ion-view>
+<!-- <ion-view view-title="Shopping cart" class="cart-view" cache-view="false">
   <ion-content>
     <div ng-if="products.length == 0">
       <div class="empty-cart">
@@ -36,8 +93,8 @@
                 </div>
                 <div class="row remove-product-wrapper">
                   <div class="col col-center col-75">
-                    <!-- <span class="remove-product-button" ng-click="removeProductFromCart({{product}})">Remove</span> -->
-                    <!-- <span class="remove-product-button" ng-click="removeProductFromCart(product)">Remove</span> -->
+                    <span class="remove-product-button" ng-click="removeProductFromCart({{product}})">Remove</span>
+                    <span class="remove-product-button" ng-click="removeProductFromCart(product)">Remove</span>
                     <button class="button button-clear button-small button-assertive remove-product-button" ng-click="removeProductFromCart(product)">
                       Remove
                     </button>
@@ -62,4 +119,7 @@
       </div>
     </div>
   </ion-content>
-</ion-view>
+</ion-view> -->
+<!-- 
+<h2 class="product-title">{{product.title}}</h2>
+            <p class="product-price">{{product.price}}</p> -->

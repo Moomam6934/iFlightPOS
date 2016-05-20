@@ -64,7 +64,7 @@ angular.module('your_app_name.app.controllers', [])
 
 
 .controller('ProductCtrl', function($scope, $stateParams, ShopService, $ionicPopup, $ionicLoading) {
-    var productId = $stateParams.productId;
+    var productId = $stateParams.data._id;
 
     ShopService.getProduct(productId).then(function(product) {
         $scope.product = product;
@@ -127,7 +127,7 @@ angular.module('your_app_name.app.controllers', [])
 
 
 
-.controller('ShopCtrl', function($scope, ShopService, $ionicActionSheet, $timeout, $ionicPopover, $filter,$state) {
+.controller('ShopCtrl', function($scope, ShopService, $ionicActionSheet, $timeout, $ionicPopover, $filter, $state) {
     $scope.products = [];
     $scope.popular_products = [];
     ShopService.getProducts().then(function(products) {
@@ -159,10 +159,37 @@ angular.module('your_app_name.app.controllers', [])
 
 
     }
-    $scope.onHold = function() {
-        $state.go('app.product-detail');
+    $scope.onHold = function(product) {
+        $state.go('app.product-detail', {data: product});
+
+        // app.product-detail({productId: product._id})
 
     }
+    // Triggered on a button click, or some other target
+    $scope.showKeepPro = function() {
+
+        // Show the action sheet
+        var hideSheet = $ionicActionSheet.show({
+            buttons: [
+                { text: 'Keep' },
+                { text: 'Discard' }
+            ],
+            
+            cancelText: 'Cancel',
+            cancel: function() {
+                // add cancel code..
+            },
+            buttonClicked: function(index) {
+                return true;
+            }
+        });
+
+        // For example's sake, hide the sheet after two seconds
+        $timeout(function() {
+            hideSheet();
+        }, 2000);
+
+    };
 
 })
 
@@ -187,7 +214,8 @@ angular.module('your_app_name.app.controllers', [])
 
     $scope.getSubtotal = function() {
         return _.reduce($scope.products, function(memo, product) {
-            return memo + product.price; }, 0);
+            return memo + product.price;
+        }, 0);
     };
 
 })
@@ -221,8 +249,5 @@ angular.module('your_app_name.app.controllers', [])
         $scope.privacy_policy_modal.show();
     };
 
-})
+});
 
-
-
-;
