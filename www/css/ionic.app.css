@@ -4644,7 +4644,7 @@ a.subdued {
   background-image: none; }
 
 .tabs-striped.tabs-background-balanced .tabs {
-  background-color: #3E454C;
+  background-color: #EE2E24;
   background-image: none; }
 
 .tabs-striped.tabs-background-energized .tabs {
@@ -8674,13 +8674,13 @@ progress {
         color: #fff; }
   .button.button-assertive {
     border-color: transparent;
-    background-color: #2185C5;
+    background-color: #EE2E24;
     color: #fff; }
     .button.button-assertive:hover {
       color: #fff;
       text-decoration: none; }
     .button.button-assertive.active, .button.button-assertive.activated {
-      background-color: #1a6899; }
+      background-color: #EE2E24; }
     .button.button-assertive.button-clear {
       border-color: transparent;
       background: none;

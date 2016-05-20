@@ -21,7 +21,9 @@ angular.module('your_app_name', [
 .config(function($ionicConfigProvider) {
     if (ionic.Platform.isAndroid()) {
         $ionicConfigProvider.scrolling.jsScrolling(false);
+
     }
+    $ionicConfigProvider.tabs.position('bottom').style('standard');
 })
 
 .run(function($ionicPlatform, $rootScope, $ionicHistory, $timeout, $ionicConfig) {
