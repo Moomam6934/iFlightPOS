@@ -1,0 +1,39 @@
+<ion-view view-title="" >
+    <ion-nav-title>
+       <ione-popover title="Product" subtitle="change order" listmodel="products" templateurl='views/app/shop/shop-popover.html' model="cate" on-selected="onSelect">
+        </ione-popover>
+    </ion-nav-title>
+    <ion-content overflow-scroll="false" has-bouncing="true">
+        <div class="row shop-products-narrow-cards-outer">
+            <div ng-repeat="product in products| filter:fil" class="col col-33 shop-product-narrow-card" ng-click="select_item(product)" on-hold="onHold()">
+             <!-- ui-sref="app.product-detail({productId: product._id})" -->
+                <div ng-class="{selected: selectItem.indexOf(product) != -1}">
+                    <div class="list card">
+                        <div class="item item-image">
+                            <div  ng-repeat="itm in selectItem" ng-show="itm.piece > 0 && itm._id === product._id">
+                                <span class="badge badge-assertive select-item-shop">{{itm.piece}}</span>
+                                <!-- style="background-color: red;     margin-right: -25px; margin-top: -10px;" -->
+                            </div>
+                            <pre-img ratio="_1_1" helper-class="main-image">
+                                <img ng-src="{{product.picture}}" spinner-on-load>
+                            </pre-img>
+                        </div>
+                        <div class="item item-body">
+                            <h2 class="card-title">{{product.title}}</h2>
+                            <p class="card-description"><b>${{product.price}}</b> - {{product.description}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="row shop-products-narrow-cards-outer">
+            <div ng-repeat="product in products" class="shop-product-narrow-card" ui-sref="app.product-detail({productId: product._id})">
+                <div>
+                    <div class="col">.col</div>
+                    <div class="col">.col</div>
+                    <div class="col">.col</div>
+                </div>
+            </div -->
+        </div>
+    </ion-content>
+</ion-view>
