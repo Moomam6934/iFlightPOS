@@ -2,32 +2,35 @@
     <ion-nav-buttons side="right">
         <button class="button button-clear button-light" ui-sref="app.shop"><b>Done</b></button>
     </ion-nav-buttons>
-    <ion-content  overflow-scroll="false" has-bouncing="true">
-        <div class="item item-thumbnail-left">
-            <img ng-src="{{product.picture}}">
+    <ion-content overflow-scroll="false" has-bouncing="true" class="icon-red">
+        <div class="row item item-text-wrap">
+            <div class="col col-40 "><img class="style-pix-h130-w150" ng-src="{{product.picture}}">
+            </div>
+            <div class="col col-60 text-center">
+                <br>
+                <span class="product-title icon-red">{{product.title}}</span>
+                <h1 class="product-price icon-red ">{{product.price}} THB</h1>
+                </div>
+        </div>
+        <!-- <div class="item">
+            <div class="product-pic "><img ng-src="{{product.picture}}"></div>
             <br>
             <h2 class="product-title">{{product.title}}</h2>
-            <p class="product-price">{{product.price}}</p>
+            <h1 class="product-price ">{{product.price}} THB</h1>
+        </div> -->
+        <div class="icon-red">
+            &nbsp; <b>{{"Promotion"}}</b>
+            <br> &nbsp; <span>{{"Bey 1 Free 1"}}</span>
         </div>
-        <div>
-            <span class="title-copy">Promotion</span>
-            <p> Bey 1 Free 1</p>
-        </div>
-        <div class="item item-divider shop-section-title">
-            <span class="title-copy">Product Edit</span>
-        </div>
-        <div class="row shop-products-narrow-cards-outer shop-product-cards-scroller">
-            <div class="col col-50 shop-product-narrow-card">
-                <!-- ui-sref="app.product-detail({productId: related_product._id})" -->
-                <div class="list card">
-                    <div class="item item-image">
-                        <pre-img ratio="_1_1" helper-class="main-image">
-                            <img ng-src="{{product.picture}}" spinner-on-load>
-                        </pre-img>
-                    </div>
-                </div>
-            </div>
-        </div>
+        
+        <!-- <div class="row shop-products-narrow-cards-outer shop-product-cards-scroller">
+    <div class="item item-image product-pic-wh">
+        <pre-img ratio="_1_1" helper-class="main-image">
+            <img ng-src="{{product.picture}}" spinner-on-load>
+        </pre-img>
+    </div>
+</div>
+ -->
         <!-- <div class="row shop-product-narrow-card-outer shop-product-cards-scroller">
             <div class="col col-50 shop-product-narrow-card" ui-sref="app.product-detail({productId: product._id})">
                 <div class="list card">
@@ -43,5 +46,15 @@
                 </div>
             </div>
         </div> -->
+       
     </ion-content>
+     <div class="bar bar-footer style-height-100px">
+            <div class="row shop-products-narrow-cards-outer shop-product-cards-scroller ">
+                <div class="item item-image product-pic-wh">
+                    <pre-img ratio="_1_1" helper-class="main-image">
+                        <img ng-src="{{product.picture}}" spinner-on-load>
+                    </pre-img>
+                </div>
+            </div>
+        </div>  
 </ion-view>

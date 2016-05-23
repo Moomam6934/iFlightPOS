@@ -17,7 +17,7 @@
             "total_qty": 5,
             "sold_qty": 2,
             "left_qty": 3,
-            "img": "img/food/AK-2-Shepherd’sPie.png"
+            "img": "img/food/AK-2-ShepherdsPie.png"
         }, {
             "id": 3,
             "name": "Mee Goreng Mamak + Teh Tarik",
@@ -25,7 +25,7 @@
             "total_qty": 7,
             "sold_qty": 1,
             "left_qty": 6,
-            "img": "img/food/AK-3-MeeGorengMamak+TehTarik.png"
+            "img": "img/food/AK-3-MeeGorengMamakTehTarik.png"
         }]
     }, {
         "id": 2,
