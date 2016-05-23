@@ -25,6 +25,26 @@ angular.module('your_app_name.app.controllers', [])
     ShopService.getProduct(productId).then(function(product) {
         $scope.product = product;
     });
+    // $scope.addDiscount = function() {
+    //     var ids = $scope.payments.length + 1;
+    //     $scope.payments.push({
+    //         id: ids,
+    //         type: 'Discount',
+    //         currencye: {
+    //             exchange: null,
+    //             money: null,
+    //             card_id: null,
+    //             security: null,
+    //             exp: null
+    //         },
+    //         amount: null
+    //     });
+
+    // }
+    // $scope.cur = function(currency) {
+    //     $scope.itemTypePay.currency.exchange = currencye.name;
+    //     $scope.Discount.hide()
+    // }
 
     // show add to cart popup on button click
     $scope.showAddToCartPopup = function(product) {
@@ -264,7 +284,71 @@ angular.module('your_app_name.app.controllers', [])
         $scope.itemTypePay.currency.exchange = currency.name;
         $scope.Payment.hide()
     }
+////////////////////////////////////////////////////////////////
+// $scope.promotions = [];
+//     $scope.promotiondetail = {
+//         id: null,
+//         type: 'Pro',
+//         currency: {
+//             exchange: null,
+//             money: null,
+//             card_id: null,
+//             security: null,
+//             exp: null
+//         },
+//         amount: null
 
+//     }
+//     $scope.currencys = [{
+//         id: 1,
+//         name: "1 Free 1",
+//         exchange: 35.36,
+//         desc: "ดอลลาร์สหรัฐอเมริกา"
+//     }, {
+//         id: 2,
+//         name: "2 Free 2",
+//         exchange: 0.32,
+//         desc: "เยนญี่ปุ่น"
+//     }, {
+//         id: 3,
+//         name: "3 Free 3",
+//         exchange: 40.01,
+//         desc: "ยูโร"
+//     }]
+
+//     $scope.itemTypePro;
+//     $scope.typeOfPromotion = function(item) {
+//         $scope.Type_of_Promotion.show();
+//         $scope.itemTypePro = item;
+//     }
+//     $scope.promotion = function(typepromotion, item) {
+//         $scope.promotion.show();
+//         $scope.itemTypePro = item;
+//     }
+//     $scope.typeOfPro = function(type) {
+//         $scope.itemTypePro.type = type;
+//         $scope.Type_of_Promotion.hide();
+//     }
+//     $scope.addPromotion = function() {
+//         var ids = $scope.promotions.length + 1;
+//         $scope.promotions.push({
+//             id: ids,
+//             type: 'Pro',
+//             currency: {
+//                 exchange: null,
+//                 money: null,
+//                 card_id: null,
+//                 security: null,
+//                 exp: null
+//             },
+//             amount: null
+//         });
+
+//     }
+//     $scope.cur = function(currency) {
+//         $scope.itemTypePro.currency.exchange = currency.name;
+//         $scope.Promotion.hide()
+//     }
 })
 
 .controller('MainCtrl', function($scope, $state) {

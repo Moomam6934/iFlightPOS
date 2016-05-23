@@ -91,7 +91,8 @@ angular.module('your_app_name', [
         views: {
             'menuContent': {
                 templateUrl: "views/app/shop/cart.html",
-                controller: 'ShoppingCartCtrl'
+                controller: 'ShoppingCartCtrl',
+                controller: 'PaymentCtrl'
             }
         }
     })
