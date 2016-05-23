@@ -83,17 +83,25 @@ angular.module('your_app_name.app.controllers', [])
 
 
 
-.controller('ShopCtrl', function($scope, ShopService, $ionicActionSheet, $timeout, $ionicPopover, $filter, $state) {
+.controller('ShopCtrl', function($scope, ShopService, $ionicActionSheet, $timeout, $ionicPopover, $filter, $state, $filter) {
     $scope.products = [];
     $scope.popular_products = [];
     ShopService.getProducts().then(function(products) {
         $scope.products = products;
+        $scope.productsByCart = $scope.products[0].products;
+
+        $scope.select = {
+            data:$scope.products[0].class
+        }
+
     });
 
     $scope.cate = {};
-
     $scope.onSelect = function(item) {
-        $scope.fil = item.title;
+        var productsByCart = $filter('filter')($scope.products, function(data) {
+            return data.class === item.class;
+        })
+        $scope.productsByCart = productsByCart[0].products;
     }
 
     ShopService.getProducts().then(function(products) {
@@ -267,7 +275,9 @@ angular.module('your_app_name.app.controllers', [])
 
 })
 
-.controller('MainCtrl', function($scope, $state) {
+.controller('MainCtrl', function($scope, $state, ShopService) {
 
-
+    ShopService.getOrders().then(function(orders) {
+        $scope.orders = orders;
+    })
 });

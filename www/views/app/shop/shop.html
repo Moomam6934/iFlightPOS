@@ -12,7 +12,7 @@
     </ion-nav-buttons>
     <ion-content overflow-scroll="false" has-bouncing="true" >
         <div class="row shop-products-narrow-cards-outer">
-            <div ng-repeat="product in products| filter:fil" class="col col-33 shop-product-narrow-card" ng-click="select_item(product)" on-hold="onHold(product)">
+            <div ng-repeat="product in productsByCart" class="col col-33 shop-product-narrow-card" ng-click="select_item(product)" on-hold="onHold(product)">
                 <!-- ui-sref="app.product-detail({productId: product._id})" -->
                 <div ng-class="{selected: selectItem.indexOf(product) != -1}">
                     <div class="list card">
@@ -22,12 +22,12 @@
                                 <!-- style="background-color: red;     margin-right: -25px; margin-top: -10px;" -->
                             </div>
                             <pre-img ratio="_1_1" helper-class="main-image">
-                                <img ng-src="{{product.picture}}" spinner-on-load>
+                                <img ng-src="{{product.img}}" spinner-on-load>
                             </pre-img>
                         </div>
                         <div class="item item-body">
-                            <h2 class="card-title">{{product.title}}</h2>
-                            <p class="card-description"><b>${{product.price}}</b> - {{product.description}}</p>
+                            <h2 class="card-title">{{product.name}}</h2>
+                            <p class="card-description"><b>${{product.price}}</b></p>
                         </div>
                     </div>
                 </div>

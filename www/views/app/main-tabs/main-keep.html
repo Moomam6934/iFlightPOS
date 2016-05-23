@@ -9,14 +9,15 @@
                 <input type="text" placeholder="Search">
             </label>
         </div>
-        <ion-list>
-            <ion-item <a class="front-black " href="#">
-                <p class="front-black"> - Hot Dog</p>
-                <p> - Water <span class="item-price">330.00 Baht <i class="icon ion-chevron-right"></i></span>
-                </p>
-                <p> - Pizza <span class="item-price style-margin-right"> <i class="icon-gray  icon-margin  icon ion-ios-circle-filled"></i>
+        <ion-list >
+            <ion-item  ng-repeat="or in orders | filter:{'status':'keep'} ">
+            <a class="front-black " href="#">
+                 <p> Receipt Number : {{or.receipt_number}} <span class="item-price">{{or.total_gross_amount | number}}&nbsp;Baht&nbsp;&nbsp;<i class="icon ion-chevron-right"></i></span>
+                    </p>
+                    <p> Payment Date : {{or.payment_date | date:'dd MMMM yyyy'}}
+                 <span class="item-price style-margin-right"> <i class="icon-gray  icon-margin  icon ion-ios-circle-filled"></i>
                     <i class="icon-yellow icon-margin  icon ion-ios-circle-filled"></i>
-                    <i class="icon-gray  icon ion-ios-circle-filled"></i></span></p>
+                    <i class="icon-gray  icon ion-ios-circle-filled"></i></span>
                 </a>
                 <ion-option-button class="button-assertive">&nbsp;&nbsp;Delete&nbsp;&nbsp;</ion-opton-button>
             </ion-item>
