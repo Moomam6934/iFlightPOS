@@ -10,14 +10,13 @@
             </label>
         </div>
         <ion-list>
-            <ion-item>
+            <ion-item ng-repeat="or in orders">
                 <a class="front-black" href="#">
-                    <p class="front-black"> - Hot Dog</p>
-                    <p> - Water <span class="item-price">330.00 Baht <i class="icon ion-chevron-right"></i></span>
+                    <p> Receipt Number : {{or.receipt_number}} <span class="item-price">{{or.total_gross_amount | number}}&nbsp;Baht&nbsp;&nbsp;<i class="icon ion-chevron-right"></i></span>
                     </p>
-                    <p> - Pizza <span class="item-price style-margin-right"> <i class="icon-green  icon-margin  icon ion-ios-circle-filled"></i>
-                    <i class="icon-yellow icon-margin  icon ion-ios-circle-filled"></i>
-                    <i class="icon-red  icon ion-ios-circle-filled"></i></span></p>
+                    <p> Payment Date : {{or.payment_date | date:'dd MMMM yyyy'}} <span class="item-price style-margin-right"> <i class="{{or.status == 'sold' ? 'icon-green' : 'icon-gray'}}  icon-margin  icon ion-ios-circle-filled"></i>
+                    <i class="{{or.status == 'keep' ? 'icon-yellow' : 'icon-gray'}} icon-margin  icon ion-ios-circle-filled"></i>
+                    <i class="{{or.status == 'void' ? 'icon-red' : 'icon-gray'}}  icon ion-ios-circle-filled"></i></span></p>
                 </a>
                 <ion-option-button class="button-assertive">&nbsp;&nbsp;Delete&nbsp;&nbsp;
             </ion-item>

@@ -5,7 +5,7 @@
 }
 
 .style-margin-right {
-    margin-right: 30px;
+    margin-right: 10px;
 }
 
 .item-total {
@@ -15,9 +15,13 @@
 }
 
 .item-total1 {
-    float: right;
-    color: #000000;
-    font-size: 26px;
+    color: #EE2E24;
+    font-size: 20px;
+}
+
+.item-total2 {
+    color: #EE2E24;
+    font-size: 28px;
 }
 
 .front-black {
@@ -115,10 +119,10 @@
 }
 
 .style-color-green {
-    color: green;
+    color: gray;
     font-size: 15px;
     padding-top: 7px;
-    margin-top: -12px;
+    margin-top: -10px;
 }
 
 .style-ul {
@@ -133,9 +137,19 @@
 .input-balance {
     height: 35px;
 }
-.icon-button-balance{
-    font-size:25px !important;
+
+.icon-button-balance {
+    font-size: 25px !important;
 }
-.test{
-    color:red;
+
+.test {
+    color: red;
+}
+
+.style-text-size-25px {
+    font-size: 25px;
+}
+
+.style-text-size-24px {
+    font-size: 24px;
 }
