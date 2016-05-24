@@ -75,7 +75,12 @@ angular.module('your_app_name.app.services', [])
     };
 
 })
-
-
-
-;
+.service('paymentService',function($q,$http){
+    this.getCurrency = function(){
+        var dfd =$q.defer();
+        $http.get('database.json').success(function(database) {
+            dfd.resolve(database.orders);
+        });
+        return dfd.promise;
+    }
+})

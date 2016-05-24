@@ -10344,6 +10344,7 @@ textarea[readonly]:not(.cloned-text-input),
 select[readonly] {
     background-color: rgba(248, 248, 248, 0);
     cursor: not-allowed;
+    color:gray;
 }
 
 input[type="radio"][disabled],

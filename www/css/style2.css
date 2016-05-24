@@ -74,11 +74,15 @@
 
 .text-border {
     border-left: 1px solid;
+    border-bottom: 1px solid;
     border-color: #D0D0D0;
+    background-color: #ffffff;
 }
 
 .style-width95 {
     width: 95%;
+    text-align: center;
+    color:#9C9C9C;
 }
 
 .style-margin-left {
@@ -94,16 +98,20 @@
     margin-left: 10px;
     border-bottom: 1px solid;
     border-color: #D0D0D0;
+    background-color: #ffffff;
 }
 
 .style-border-left1 {
     border-left: 1px solid;
     border-bottom: 1px solid;
     border-color: #D0D0D0;
+    background-color: white;
 }
 
 .style-width90 {
     width: 90%;
+    text-align: right;
+    color: #9C9C9C;
 }
 
 .style-margin-left15p {
@@ -153,3 +161,8 @@
 .style-text-size-24px {
     font-size: 24px;
 }
+.style-text-color {
+    color: #9C9C9C;
+}
+ 
+

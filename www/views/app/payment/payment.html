@@ -2,33 +2,31 @@
     <ion-nav-buttons side="right">
         <button class="button button-clear button-light"><b>Done</b></button>
     </ion-nav-buttons>
-    <ion-content  overflow-scroll="false" has-bouncing="true">
-        
-           
-                <div class="item icon-red style-text-size-24px " href="#">
-                &nbsp;&nbsp;Total
-                <span class="item-note icon-red style-text-size-25px">200.00 THB</span>
-<p>
-                <span >
+    <ion-content overflow-scroll="false" has-bouncing="true">
+        <div class="item icon-red style-text-size-24px " href="#">
+            &nbsp;&nbsp;Total
+            <span class="item-note icon-red style-text-size-25px">200.00 THB</span>
+            <p>
+                <span>
                       <p class="item-price style-margin-right">0.00 THB</p>  
                 </span>
-</p>
-            </div>
-                
-           
-     
+            </p>
+        </div>
         <div class="style-margin-left" ng-repeat="item in payments">
-            <div class="row ">
+            <div class="row">
                 <div class="col col-25 style-margin-left10p" class="text-center" ng-click="typeOfPayment(item)"><span class="input-label">{{item.type}}<i class="icon ion-chevron-right text-margin-left"></i></span></div>
-                <div class="col col-75 text-border">
-                    <input type="text" ng-click="payment(typepayment,item)" ng-show="item.type === 'Cash'" class="style-width95" ng-model="item.currency.exchange" readOnly>
-                    <input type="text" ng-show="item.type === 'Credit'" class="style-width95" ng-model="item.currency.card_id">
+                <div class="col col-75 style-text-color  " style="border-left: 1px solid; border-color: #D0D0D0;">
+                    <input type="text" class="style-width95  style-text-color " ng-click="payment(typepayment,item)" ng-show="item.type === 'Cash'"  ng-model="item.currency.currencys.name" readOnly>
+                    <input type="text" ng-show="item.type === 'Credit'" class="style-width95   style-text-color" ng-model="item.currency.card_id">
                 </div>
             </div>
             <div class="row">
-                <div class="col col-25 style-margin-left10p"></div>
+                <div class="col col-25 style-margin-left10p" ng-click="showPopup(item)">
+                    <input type="text" class="style-width90  style-text-color" ng-model="item.currency.money" readOnly>
+                </div>
                 <div class="col col-75 style-border-left1">
-                    <input type="text" class="style-width90" ng-model="item.currency.money">
+                    <input type="text" ng-show="item.type === 'Cash'" class="style-width90 style-text-color" ng-model="item.amount" readOnly>
+                    <input type="text" ng-show="item.type === 'Credit'" class="style-width90 style-text-color" ng-model="item.currency.money" readOnly>
                 </div>
             </div>
         </div>

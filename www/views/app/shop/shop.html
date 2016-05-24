@@ -10,16 +10,15 @@
     <ion-nav-buttons side="right">
         <button class="button button-clear button-light" ui-sref="app.cart"><b>Orders</b></button>
     </ion-nav-buttons>
-    <ion-content overflow-scroll="false" has-bouncing="true" >
+    <ion-content overflow-scroll="false" has-bouncing="true">
         <div class="row shop-products-narrow-cards-outer">
             <div ng-repeat="product in productsByCart" class="col col-33 shop-product-narrow-card" ng-click="select_item(product)" on-hold="onHold(product)">
                 <!-- ui-sref="app.product-detail({productId: product._id})" -->
                 <div ng-class="{selected: selectItem.indexOf(product) != -1}">
                     <div class="list card">
                         <div class="item item-image">
-                            <div ng-repeat="itm in selectItem" ng-show="itm.piece > 0 && itm._id === product._id">
+                            <div ng-repeat="itm in selectItem" ng-show="itm.piece > 0 && itm.name === product.name">
                                 <span class="badge badge-assertive select-item-shop">{{itm.piece}}</span>
-                                <!-- style="background-color: red;     margin-right: -25px; margin-top: -10px;" -->
                             </div>
                             <pre-img ratio="_1_1" helper-class="main-image">
                                 <img ng-src="{{product.img}}" spinner-on-load>
@@ -27,7 +26,7 @@
                         </div>
                         <div class="item item-body">
                             <h2 class="card-title">{{product.name}}</h2>
-                            <p class="card-description"><b>${{product.price}}</b></p>
+                            <p class="card-description"><b>${{product.price}}</b></p><span class="badge badge-balanced select-item-shopgreen">{{product.total_qty}}</span>
                         </div>
                     </div>
                 </div>

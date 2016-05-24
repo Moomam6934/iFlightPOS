@@ -6,18 +6,18 @@
         <div class="list list-balance">
             <label class="item item-input input-balance">
                 <i class="icon ion-search placeholder-icon"></i>
-                <input type="text" placeholder="Search">
+                <input type="text" placeholder="Search" ng-model="searchkeep">
             </label>
         </div>
-        <ion-list >
-            <ion-item  ng-repeat="or in orders | filter:{'status':'keep'} ">
-            <a class="front-black " href="#">
-                 <p> Receipt Number : {{or.receipt_number}} <span class="item-price">{{or.total_gross_amount | number}}&nbsp;Baht&nbsp;&nbsp;<i class="icon ion-chevron-right"></i></span>
+        <ion-list>
+            <ion-item ng-repeat="or in orders | filter:{'status':'keep'} | filter: searchkeep" >
+                <a class="front-black " href="#">
+                    <p> Receipt Number : {{or.receipt_number}} <span class="item-price">{{or.total_gross_amount | number}}&nbsp;Baht&nbsp;&nbsp;<i class="icon ion-chevron-right"></i></span>
                     </p>
-                    <p> Payment Date : {{or.payment_date | date:'dd MMMM yyyy'}}
-                 <span class="item-price style-margin-right"> <i class="icon-gray  icon-margin  icon ion-ios-circle-filled"></i>
+                    <p> Date : {{or.payment_date | date:'dd MMMM yyyy hh:mm a'}}
+                        <span class="item-price style-margin-right"> <i class="icon-gray  icon-margin  icon ion-ios-circle-filled"></i>
                     <i class="icon-yellow icon-margin  icon ion-ios-circle-filled"></i>
-                    <i class="icon-gray  icon ion-ios-circle-filled"></i></span>
+                    <i class="icon-gray  icon ion-ios-circle-filled"></i></span></p>
                 </a>
                 <ion-option-button class="button-assertive">&nbsp;&nbsp;Delete&nbsp;&nbsp;</ion-opton-button>
             </ion-item>

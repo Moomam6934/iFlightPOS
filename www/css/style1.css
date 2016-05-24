@@ -353,6 +353,11 @@
     margin-right: -25px;
     margin-top: -10px;
 }
+.select-item-shopgreen {
+    background-color: #00AA00 !important;
+    margin-right: -25px;
+    margin-top: 10px;
+}
 
 .badge.badge-assertive {
     background-color: red;
