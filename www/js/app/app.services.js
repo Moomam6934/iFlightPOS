@@ -75,11 +75,11 @@ angular.module('your_app_name.app.services', [])
     };
 
 })
-.service('paymentService',function($q,$http){
+.service('PaymentService',function($q,$http){
     this.getCurrency = function(){
         var dfd =$q.defer();
         $http.get('database.json').success(function(database) {
-            dfd.resolve(database.orders);
+            dfd.resolve(database.currency);
         });
         return dfd.promise;
     }

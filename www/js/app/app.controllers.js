@@ -204,7 +204,13 @@ angular.module('your_app_name.app.controllers', [])
     //$scope.paymentDetails;
 })
 
-.controller('PaymentCtrl', function($scope, $ionicModal, $state, $ionicPopup) {
+.controller('PaymentCtrl', function($scope, $ionicModal, $state, $ionicPopup,PaymentService) {
+
+    $scope.currency = [];
+    PaymentService.getCurrency().then(function(currency){
+        $scope.currency = currency;
+    })
+
 
     $ionicModal.fromTemplateUrl('views/app/payment/type-of-payment.html', {
         scope: $scope,
@@ -235,22 +241,6 @@ angular.module('your_app_name.app.controllers', [])
 
     }];
 
-    $scope.currency = [{
-        id: 1,
-        name: "USD",
-        exchange: 35.36,
-        desc: "ดอลลาร์สหรัฐอเมริกา"
-    }, {
-        id: 2,
-        name: "JPY",
-        exchange: 0.32,
-        desc: "เยนญี่ปุ่น"
-    }, {
-        id: 3,
-        name: "EUR",
-        exchange: 40.01,
-        desc: "ยูโร"
-    }]
 
     $scope.itemTypePay;
     $scope.typePayment = ['Cash', 'Credit'];
