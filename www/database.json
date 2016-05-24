@@ -748,7 +748,7 @@
         "name": "THB",
         "name_desc": "(THB) - Thai Baht",
         "desc": "ไทยบาท",
-        "exchange": 1
+        "exchange": 1.00
     }],
 
     "blacklists": [{
