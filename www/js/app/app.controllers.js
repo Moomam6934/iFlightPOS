@@ -211,7 +211,6 @@ angular.module('your_app_name.app.controllers', [])
         $scope.currency = currency;
     })
 
-
     $ionicModal.fromTemplateUrl('views/app/payment/type-of-payment.html', {
         scope: $scope,
         animation: 'slide-in-up'
