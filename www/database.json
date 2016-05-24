@@ -4,6 +4,7 @@
         "class": "1A",
         "products": [{
             "id": 1,
+            "products_id": 1,
             "name": "Kolo Mee",
             "price": 180,
             "total_qty": 10,
@@ -250,7 +251,9 @@
             "sold_qty": 0,
             "left_qty": 10,
             "img": "img/food/XJ-1-Thaihotbasilchickenstirfrywithrice.jpg"
+
         }, {
+
             "id": 2,
             "name": "Tasty grilled chicken with sticky rice",
             "price": 250,
@@ -258,7 +261,9 @@
             "sold_qty": 0,
             "left_qty": 10,
             "img": "img/food/XJ-2-Tastygrilledchickenwithstickyrice.jpg"
+
         }, {
+
             "id": 3,
             "name": "Japanese Chicken Teriyaki with rice",
             "price": 320,
@@ -266,7 +271,9 @@
             "sold_qty": 0,
             "left_qty": 10,
             "img": "img/food/XJ-3-JapaneseChickenTeriyakiwithrice.jpg"
+
         }, {
+
             "id": 4,
             "name": "Korean kimchi stir-fried chicken with rice",
             "price": 290,
@@ -274,7 +281,9 @@
             "sold_qty": 0,
             "left_qty": 10,
             "img": "img/food/XJ-4-Koreankimchistirfriedchickenwithrice.jpg"
+
         }, {
+
             "id": 5,
             "name": "Vegetarian Thai Panaeng curry with rice",
             "price": 190,
@@ -282,7 +291,9 @@
             "sold_qty": 0,
             "left_qty": 10,
             "img": "img/food/XJ-5-VegetarianThaiPanaengcurrywithrice.jpg"
+
         }, {
+
             "id": 6,
             "name": "Spaghetti Chicken Bolognese",
             "price": 220,
@@ -290,7 +301,9 @@
             "sold_qty": 0,
             "left_qty": 10,
             "img": "img/food/XJ-6-SpaghettiChickenBolognese.jpg"
+
         }, {
+
             "id": 7,
             "name": "Deli Chicken Focaccia Bread Sandwich",
             "price": 200,
@@ -298,7 +311,10 @@
             "sold_qty": 0,
             "left_qty": 10,
             "img": "img/food/XJ-7-DeliChickenFocacciaBreadSandwich.jpg"
+
         }, {
+
+
             "id": 8,
             "name": "Pad Thai with prawns",
             "price": 190,
@@ -306,7 +322,9 @@
             "sold_qty": 0,
             "left_qty": 10,
             "img": "img/food/XJ-8-PadThaiwithprawns.jpg"
+
         }, {
+
             "id": 9,
             "name": "Spicy fried chicken with rice and traditional Thai-style omelette",
             "price": 220,
@@ -314,7 +332,9 @@
             "sold_qty": 0,
             "left_qty": 10,
             "img": "img/food/XJ-9-SpicyfriedchickenwithriceandtraditionalThaistyleomelette.jpg"
+
         }, {
+
             "id": 10,
             "name": "Chicken Lasagne",
             "price": 200,
@@ -322,7 +342,9 @@
             "sold_qty": 0,
             "left_qty": 10,
             "img": "img/food/XJ-10-ChickenLasagne.jpg"
+
         }, {
+
             "id": 11,
             "name": "Stir-fried beef with sesame oil and rice",
             "price": 240,
@@ -330,7 +352,9 @@
             "sold_qty": 0,
             "left_qty": 10,
             "img": "img/food/XJ-11-Stirfriedbeefwithsesameoilandrice.jpg"
+
         }, {
+
             "id": 12,
             "name": "Chicken Rice Soup Set",
             "price": 220,
