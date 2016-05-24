@@ -21,11 +21,107 @@
         }, {
             "id": 3,
             "name": "Mee Goreng Mamak + Teh Tarik",
-            "price": 200,
+            "price": 250,
             "total_qty": 7,
             "sold_qty": 1,
             "left_qty": 6,
             "img": "img/food/AK-3-MeeGorengMamakTehTarik.png"
+        }, {
+            "id": 4,
+            "name": "Roti Canai With Chicken Curry + Teh Tarik",
+            "price": 260,
+            "total_qty": 7,
+            "sold_qty": 1,
+            "left_qty": 6,
+            "img": "img/food/AK-4-RotiCanaiWithChickenCurryTehTarik.png"
+        }, {
+            "id": 5,
+            "name": "Kid’s Meal (Mac and Cheese + Ribena)",
+            "price": 240,
+            "total_qty": 7,
+            "sold_qty": 1,
+            "left_qty": 6,
+            "img": "img/food/AK-5-KidsMealMacandCheeseRibena.png"
+        }, {
+            "id": 6,
+            "name": "Pak Nasser's Nasi Lemak",
+            "price": 190,
+            "total_qty": 7,
+            "sold_qty": 1,
+            "left_qty": 6,
+            "img": "img/food/AK-6-PakNassersNasiLemak.png"
+        }, {
+            "id": 7,
+            "name": "Nasi Dagang with Chicken Curry",
+            "price": 220,
+            "total_qty": 7,
+            "sold_qty": 1,
+            "left_qty": 6,
+            "img": "img/food/AK-7-NasiDagangwithChickenCurry.png"
+        }, {
+            "id": 8,
+            "name": "Tomato Rice with Ayam Percik",
+            "price": 210,
+            "total_qty": 7,
+            "sold_qty": 1,
+            "left_qty": 6,
+            "img": "img/food/AK-8-TomatoRicewithAyamPercik.png"
+        }, {
+            "id": 9,
+            "name": "Chicken Satay Wrap",
+            "price": 150,
+            "total_qty": 7,
+            "sold_qty": 1,
+            "left_qty": 6,
+            "img": "img/food/AK-9-ChickenSatayWrap.png"
+        }, {
+            "id": 10,
+            "name": "Vegetable Pasta with Roast Chicken",
+            "price": 200,
+            "total_qty": 7,
+            "sold_qty": 1,
+            "left_qty": 6,
+            "img": "img/food/AK-10-VegetablePastawithRoastChicken.png"
+        }, {
+            "id": 11,
+            "name": "Roast Chicken with Cream Sauce",
+            "price": 220,
+            "total_qty": 7,
+            "sold_qty": 1,
+            "left_qty": 6,
+            "img": "img/food/AK-11-RoastChickenwithCreamSauce.png"
+        }, {
+            "id": 12,
+            "name": "Ginger Fried Rice with Vegetarian Chicken (V)",
+            "price": 240,
+            "total_qty": 7,
+            "sold_qty": 1,
+            "left_qty": 6,
+            "img": "img/food/AK-12-GingerFriedRicewithVegetarianChickenV.png"
+        }, {
+            "id": 13,
+            "name": "Vegetable Briyani (V)",
+            "price": 180,
+            "total_qty": 7,
+            "sold_qty": 1,
+            "left_qty": 6,
+            "img": "img/food/AK-13-VegetableBriyaniV.png"
+        }, {
+            "id": 14,
+            "name": "Chicken Rice",
+            "price": 160,
+            "total_qty": 7,
+            "sold_qty": 1,
+            "left_qty": 6,
+            "img": "img/food/AK-14-ChickenRice.png"
+        }, {
+            "id": 15,
+            "name": "Bukhara Chicken Briyani",
+            "price": 200,
+            "total_qty": 7,
+            "sold_qty": 1,
+            "left_qty": 6,
+            "img": "img/food/AK-15-BukharaChickenBriyani.png"
         }]
     }, {
         "id": 2,
@@ -54,34 +150,410 @@
             "sold_qty": 3,
             "left_qty": 1,
             "img": "img/food/I5-3-SouthIndianDelight.jpg"
+        }, {
+            "id": 4,
+            "name": "Purani Dilli Ke Raseele Rajma with Jeera Rice",
+            "price": 100,
+            "total_qty": 4,
+            "sold_qty": 3,
+            "left_qty": 1,
+            "img": "img/food/I5-4-PuraniDilliKeRaseeleRajmawithJeeraRice.jpg"
+        }, {
+            "id": 5,
+            "name": "Palak Pulao with Subz Kadhai & Dal Bukhara",
+            "price": 100,
+            "total_qty": 4,
+            "sold_qty": 3,
+            "left_qty": 1,
+            "img": "img/food/I5-5-PalakPulaowithSubzKadhaiDalBukhara.jpg"
+        }, {
+            "id": 6,
+            "name": "Subz Pulao with Tawa Chicken Slice and Tadka Tamateen",
+            "price": 100,
+            "total_qty": 4,
+            "sold_qty": 3,
+            "left_qty": 1,
+            "img": "img/food/I5-6-SubzPulaowithTawaChickenSliceandTadkaTamateen.jpg"
+        }, {
+            "id": 7,
+            "name": "Andhra Chicken Fry with Lemon Rice & Beans Poriyal",
+            "price": 100,
+            "total_qty": 4,
+            "sold_qty": 3,
+            "left_qty": 1,
+            "img": "img/food/I5-7-AndhraChickenFrywithLemonRiceBeansPoriyal.jpg"
+        }, {
+            "id": 8,
+            "name": "Vegetable Enchiladas with Cheese, Potato Wedges, Peas & Corn",
+            "price": 100,
+            "total_qty": 4,
+            "sold_qty": 3,
+            "left_qty": 1,
+            "img": "img/food/I5-8-VegetableEnchiladaswithCheesePotatoWedgesPeasCorn.jpg"
+        }, {
+            "id": 9,
+            "name": "Exotic Mexican Vegetable Steak with Mushroom Cream Sauce",
+            "price": 100,
+            "total_qty": 4,
+            "sold_qty": 3,
+            "left_qty": 1,
+            "img": "img/food/I5-9-ExoticMexicanVegetableSteakwithMushroomCreamSauce.jpg"
+        }, {
+            "id": 10,
+            "name": "Grilled Chicken Breast in Mushroom Sauce with Veggies",
+            "price": 100,
+            "total_qty": 4,
+            "sold_qty": 3,
+            "left_qty": 1,
+            "img": "img/food/I5-10-GrilledChickenBreastinMushroomSaucewithVeggies.jpg"
+        }, {
+            "id": 11,
+            "name": "Egg & Vegetable Fried Rice with Hoisin Chicken",
+            "price": 100,
+            "total_qty": 4,
+            "sold_qty": 3,
+            "left_qty": 1,
+            "img": "img/food/I5-11-EggVegetableFriedRicewithHoisinChicken.jpg"
+        }, {
+            "id": 12,
+            "name": "Grilled Basa Fish with Sautéed Vegetables",
+            "price": 100,
+            "total_qty": 4,
+            "sold_qty": 3,
+            "left_qty": 1,
+            "img": "img/food/I5-12-GrilledBasaFishwithSautéedVegetables.jpg"
+        }, {
+            "id": 13,
+            "name": "Chicken Tikka Sandwich with Mint Mayo",
+            "price": 100,
+            "total_qty": 4,
+            "sold_qty": 3,
+            "left_qty": 1,
+            "img": "img/food/I5-13-ChickenTikkaSandwichwithMintMayo.jpg"
+        }, {
+            "id": 14,
+            "name": "Corn & Bell Peppers Sandwich with Pesto Mayo In Marble Bread",
+            "price": 100,
+            "total_qty": 4,
+            "sold_qty": 3,
+            "left_qty": 1,
+            "img": "img/food/I5-14-CornBellPeppersSandwichwithPestoMayoInMarbleBread.jpg"
         }]
     }, {
         "id": 3,
         "class": "2A",
         "products": [{
             "id": 1,
+            "name": "Thai hot basil chicken stir-fry with rice",
+            "price": 190,
+            "total_qty": 10,
+            "sold_qty": 0,
+            "left_qty": 10,
+            "img": "img/food/XJ-1-Thaihotbasilchickenstirfrywithrice.jpg"
+        },{
+            "id": 2,
+            "name": "Tasty grilled chicken with sticky rice",
+            "price": 250,
+            "total_qty": 10,
+            "sold_qty": 0,
+            "left_qty": 10,
+            "img": "img/food/XJ-2-Tastygrilledchickenwithstickyrice.jpg"
+        },{
+            "id": 3,
+            "name": "Japanese Chicken Teriyaki with rice",
+            "price": 320,
+            "total_qty": 10,
+            "sold_qty": 0,
+            "left_qty": 10,
+            "img": "img/food/XJ-3-JapaneseChickenTeriyakiwithrice.jpg"
+        },{
+            "id": 4,
+            "name": "Korean kimchi stir-fried chicken with rice",
+            "price": 290,
+            "total_qty": 10,
+            "sold_qty": 0,
+            "left_qty": 10,
+            "img": "img/food/XJ-4-Koreankimchistirfriedchickenwithrice.jpg"
+        },{
+            "id": 5,
+            "name": "Vegetarian Thai Panaeng curry with rice",
+            "price": 190,
+            "total_qty": 10,
+            "sold_qty": 0,
+            "left_qty": 10,
+            "img": "img/food/XJ-5-VegetarianThaiPanaengcurrywithrice.jpg"
+        },{
+            "id": 6,
+            "name": "Spaghetti Chicken Bolognese",
+            "price": 220,
+            "total_qty": 10,
+            "sold_qty": 0,
+            "left_qty": 10,
+            "img": "img/food/XJ-6-SpaghettiChickenBolognese.jpg"
+        },{
+            "id": 7,
+            "name": "Deli Chicken Focaccia Bread Sandwich",
+            "price": 200,
+            "total_qty": 10,
+            "sold_qty": 0,
+            "left_qty": 10,
+            "img": "img/food/XJ-7-DeliChickenFocacciaBreadSandwich.jpg"
+        },{
+            "id": 8,
+            "name": "Pad Thai with prawns",
+            "price": 190,
+            "total_qty": 10,
+            "sold_qty": 0,
+            "left_qty": 10,
+            "img": "img/food/XJ-8-PadThaiwithprawns.jpg"
+        },{
+            "id": 9,
+            "name": "Spicy fried chicken with rice and traditional Thai-style omelette",
+            "price": 220,
+            "total_qty": 10,
+            "sold_qty": 0,
+            "left_qty": 10,
+            "img": "img/food/XJ-9-SpicyfriedchickenwithriceandtraditionalThaistyleomelette.jpg"
+        },{
+            "id": 10,
+            "name": "Chicken Lasagne",
+            "price": 200,
+            "total_qty": 10,
+            "sold_qty": 0,
+            "left_qty": 10,
+            "img": "img/food/XJ-10-ChickenLasagne.jpg"
+        },{
+            "id": 11,
+            "name": "Stir-fried beef with sesame oil and rice",
+            "price": 240,
+            "total_qty": 10,
+            "sold_qty": 0,
+            "left_qty": 10,
+            "img": "img/food/XJ-11-Stirfriedbeefwithsesameoilandrice.jpg"
+        },{
+            "id": 12,
             "name": "Chicken Rice Soup Set",
-            "price": 700,
+            "price": 220,
             "total_qty": 10,
             "sold_qty": 0,
             "left_qty": 10,
             "img": "img/food/XJ-12-ChickenRiceSoupSet.jpg"
         }, {
-            "id": 2,
+            "id": 13,
             "name": "American Breakfast Set",
-            "price": 900,
+            "price": 280,
             "total_qty": 5,
             "sold_qty": 1,
             "left_qty": 4,
             "img": "img/food/XJ-13-AmericanBreakfastSet.jpg"
         }, {
-            "id": 3,
+            "id": 14,
+            "name": "Chicken Biryani with rice",
+            "price": 220,
+            "total_qty": 10,
+            "sold_qty": 3,
+            "left_qty": 7,
+            "img": "img/food/XJ-14-ChickenBiryaniwithrice.jpg"
+        }, {
+            "id": 15,
+            "name": "Yamanishi Mochi",
+            "price": 180,
+            "total_qty": 10,
+            "sold_qty": 3,
+            "left_qty": 7,
+            "img": "img/food/XJ-15-YamanishiMochi.png"
+        }, {
+            "id": 16,
             "name": "Banana Cake with Malee Orange Juice",
-            "price": 600,
+            "price": 190,
             "total_qty": 10,
             "sold_qty": 3,
             "left_qty": 7,
             "img": "img/food/XJ-16-BananaCakewithMaleeOrangeJuice.jpg"
+        }]
+    }, {
+        "id": 4,
+        "class": "2B",
+        "products": [{
+            "id": 1,
+            "name": "Roast Chicken with Dijon Creamy Mushroom Sauce",
+            "price": 190,
+            "total_qty": 10,
+            "sold_qty": 0,
+            "left_qty": 10,
+            "img": "img/food/QC-1-RoastChickenwithDijonCreamyMushroomSauce.png"
+        }, {
+            "id": 2,
+            "name": "Kid’s Meal (Mac and Cheese + Beverage)",
+            "price": 190,
+            "total_qty": 5,
+            "sold_qty": 1,
+            "left_qty": 4,
+            "img": "img/food/QC-2-KidsMealMacandCheeseBeverage.png"
+        }, {
+            "id": 3,
+            "name": "Vegetable Pasta",
+            "price": 200,
+            "total_qty": 10,
+            "sold_qty": 3,
+            "left_qty": 7,
+            "img": "img/food/QC-3-VegetablePasta.png"
+        }, {
+            "id": 4,
+            "name": "Vegetarian Fried Rice with Tofu Lampion",
+            "price": 220,
+            "total_qty": 5,
+            "sold_qty": 1,
+            "left_qty": 4,
+            "img": "img/food/QC-4-VegetarianFriedRicewithTofuLampion.png"
+        }, {
+            "id": 5,
+            "name": "Chicken Satay (5 sticks)",
+            "price": 250,
+            "total_qty": 5,
+            "sold_qty": 1,
+            "left_qty": 4,
+            "img": "img/food/QC-5-ChickenSatay5sticks.png"
+        }, {
+            "id": 6,
+            "name": "Nasi Minyak Palembang",
+            "price": 180,
+            "total_qty": 5,
+            "sold_qty": 1,
+            "left_qty": 4,
+            "img": "img/food/QC-6-NasiMinyakPalembang.png"
+        }, {
+            "id": 7,
+            "name": "Spaghetti Chicken Bolognese",
+            "price": 250,
+            "total_qty": 5,
+            "sold_qty": 1,
+            "left_qty": 4,
+            "img": "img/food/QC-7-SpaghettiChickenBolognese.png"
+        }, {
+            "id": 8,
+            "name": "Pancakes + Maple Syrup + Butter",
+            "price": 250,
+            "total_qty": 5,
+            "sold_qty": 1,
+            "left_qty": 4,
+            "img": "img/food/QC-8-PancakesMapleSyrupButter.png"
+        }, {
+            "id": 9,
+            "name": "Pak Nasser's Nasi Lemak",
+            "price": 260,
+            "total_qty": 5,
+            "sold_qty": 1,
+            "left_qty": 4,
+            "img": "img/food/QC-9-PakNassersNasiLemak.png"
+        }, {
+            "id": 10,
+            "name": "Frankster (Chicken)",
+            "price": 190,
+            "total_qty": 5,
+            "sold_qty": 1,
+            "left_qty": 4,
+            "img": "img/food/QC-10-FranksterChicken.png"
+        }, {
+            "id": 11,
+            "name": "Asian Fried Rice with Chicken Satay",
+            "price": 150,
+            "total_qty": 5,
+            "sold_qty": 1,
+            "left_qty": 4,
+            "img": "img/food/QC-11-AsianFriedRicewithChickenSatay.png"
+        }, {
+            "id": 12,
+            "name": "Assorted Sandwiches",
+            "price": 160,
+            "total_qty": 5,
+            "sold_qty": 1,
+            "left_qty": 4,
+            "img": "img/food/QC-12-AssortedSandwiches.png"
+        }, {
+            "id": 13,
+            "name": "Chicken Rice",
+            "price": 220,
+            "total_qty": 5,
+            "sold_qty": 1,
+            "left_qty": 4,
+            "img": "img/food/QC-13-ChickenRice.png"
+        }, {
+            "id": 14,
+            "name": "Nasi Kuning Manado",
+            "price": 190,
+            "total_qty": 5,
+            "sold_qty": 1,
+            "left_qty": 4,
+            "img": "img/food/QC-14-NasiKuningManado.png"
+        }, {
+            "id": 15,
+            "name": "Nasi Padang",
+            "price": 200,
+            "total_qty": 5,
+            "sold_qty": 1,
+            "left_qty": 4,
+            "img": "img/food/QC-15-NasiPadang.png"
+        }]
+    }, {
+        "id": 5,
+        "class": "Soft Drink",
+        "products": [{
+            "id": 1,
+            "name": "Water",
+            "price": 50,
+            "total_qty": 10,
+            "sold_qty": 0,
+            "left_qty": 10,
+            "img": "img/softdrink/1-Water.jpg"
+        }, {
+            "id": 2,
+            "name": "Pepsi",
+            "price": 70,
+            "total_qty": 5,
+            "sold_qty": 1,
+            "left_qty": 4,
+            "img": "img/softdrink/2-Pepsi.jpg"
+        }, {
+            "id": 3,
+            "name": "Coca Cola",
+            "price": 70,
+            "total_qty": 10,
+            "sold_qty": 3,
+            "left_qty": 7,
+            "img": "img/softdrink/3-Cocacola.jpg"
+        }, {
+            "id": 4,
+            "name": "Green Fanta",
+            "price": 60,
+            "total_qty": 5,
+            "sold_qty": 1,
+            "left_qty": 4,
+            "img": "img/softdrink/4-GreenFanta.jpg"
+        }, {
+            "id": 5,
+            "name": "Red Fanta",
+            "price": 60,
+            "total_qty": 5,
+            "sold_qty": 1,
+            "left_qty": 4,
+            "img": "img/softdrink/5-RedFanta.jpg"
+        }, {
+            "id": 6,
+            "name": "Orange Fanta",
+            "price": 60,
+            "total_qty": 5,
+            "sold_qty": 1,
+            "left_qty": 4,
+            "img": "img/softdrink/6-OrangeFanta.jpg"
+        }, {
+            "id": 7,
+            "name": "Sprite",
+            "price": 70,
+            "total_qty": 5,
+            "sold_qty": 1,
+            "left_qty": 4,
+            "img": "img/softdrink/7-sprite.jpg"
         }]
     }],
 
