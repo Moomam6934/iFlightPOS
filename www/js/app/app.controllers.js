@@ -210,6 +210,7 @@ angular.module('your_app_name.app.controllers', [])
     PaymentService.getCurrency().then(function(currency){
         $scope.currency = currency;
     })
+    var test;
 
     $ionicModal.fromTemplateUrl('views/app/payment/type-of-payment.html', {
         scope: $scope,
