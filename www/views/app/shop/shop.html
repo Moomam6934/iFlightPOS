@@ -17,7 +17,7 @@
                 <div ng-class="{selected: selectItem.indexOf(product) != -1}">
                     <div class="list card">
                         <div class="item item-image">
-                            <div ng-repeat="itm in selectItem" ng-show="itm.piece > 0 && itm.name === product.name">
+                            <div ng-repeat="itm in selectItem" ng-show="itm.piece > 0 && itm.products_id === product.products_id">
                                 <span class="badge badge-assertive select-item-shop">{{itm.piece}}</span>
                             </div>
                             <pre-img ratio="_1_1" helper-class="main-image">

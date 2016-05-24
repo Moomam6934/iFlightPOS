@@ -131,7 +131,7 @@ angular.module('your_app_name.app.controllers', [])
 
         } else {
             $scope.addItem = $filter('filter')($scope.selectItem, function(item) {
-                return item.id === product.id;
+                return item.products_id === product.products_id;
             })
             $scope.addItem[0].piece += 1;
         }
@@ -210,7 +210,6 @@ angular.module('your_app_name.app.controllers', [])
     PaymentService.getCurrency().then(function(currency){
         $scope.currency = currency;
     })
-    var test;
 
     $ionicModal.fromTemplateUrl('views/app/payment/type-of-payment.html', {
         scope: $scope,
