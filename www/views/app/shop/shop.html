@@ -14,11 +14,11 @@
         <div class="row shop-products-narrow-cards-outer">
             <div ng-repeat="product in productsByCart" class="col col-33 shop-product-narrow-card" ng-click="select_item(product)" on-hold="onHold(product)">
                 <!-- ui-sref="app.product-detail({productId: product._id})" -->
-                <div ng-class="{selected: selectItem.indexOf(product) != -1}">
+                <div ng-class="{selected: orders.indexOf(product) != -1}">
                     <div class="list card">
                         <div class="item item-image">
-                            <div ng-repeat="itm in selectItem" ng-show="itm.piece > 0 && itm.products_id === product.products_id">
-                                <span class="badge badge-assertive select-item-shop">{{itm.piece}}</span>
+                            <div ng-repeat="itm in orders" ng-show="itm.qty > 0 && itm.products_id === product.products_id">
+                                <span class="badge badge-assertive select-item-shop">{{itm.qty}}</span>
                             </div>
                             <pre-img ratio="_1_1" helper-class="main-image">
                                 <img ng-src="{{product.img}}" spinner-on-load>

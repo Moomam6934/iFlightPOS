@@ -4,57 +4,25 @@
     </ion-nav-buttons>
     <ion-content overflow-scroll="false" has-bouncing="true" class="icon-red">
         <div class="row item item-text-wrap">
-            <div class="col col-40 "><img class="style-pix-h130-w150" ng-src="{{product.picture}}">
+            <div class="col col-40 "><img class="style-pix-h130-w150" ng-src="{{product.img}}">
             </div>
             <div class="col col-60 text-center">
                 <br>
-                <span class="product-title icon-red">{{product.title}}</span>
+                <span class="product-title icon-red">{{product.name}}</span>
                 <h1 class="product-price icon-red ">{{product.price}} THB</h1>
-                </div>
+            </div>
         </div>
-        <!-- <div class="item">
-            <div class="product-pic "><img ng-src="{{product.picture}}"></div>
-            <br>
-            <h2 class="product-title">{{product.title}}</h2>
-            <h1 class="product-price ">{{product.price}} THB</h1>
-        </div> -->
         <div class="icon-red">
             &nbsp; <b>{{"Promotion"}}</b>
             <br> &nbsp; <span>{{"Bey 1 Free 1"}}</span>
         </div>
-        
-        <!-- <div class="row shop-products-narrow-cards-outer shop-product-cards-scroller">
-    <div class="item item-image product-pic-wh">
-        <pre-img ratio="_1_1" helper-class="main-image">
-            <img ng-src="{{product.picture}}" spinner-on-load>
-        </pre-img>
-    </div>
-</div>
- -->
-        <!-- <div class="row shop-product-narrow-card-outer shop-product-cards-scroller">
-            <div class="col col-50 shop-product-narrow-card" ui-sref="app.product-detail({productId: product._id})">
-                <div class="list card">
-                    <div class="item item-image">
-                        <pre-img ratio="_1_1" helper-class="main-image">
-                            <img ng-src="{{product.picture}}" spinner-on-load>
-                        </pre-img>
-                    </div>
-                    <div class="item item-body">
-            <h2 class="card-title">{{product.title}}</h2>
-            <p class="card-description"><b>${{product.price}}</b> - {{product.description}}</p>
-          </div>
-                </div>
-            </div>
-        </div> -->
-       
+                <ion-scroll direction="x" delegate-handle="isde" zooming="true" has-bouncing="true">
+            <img ng-repeat="range in range(product.total_qty + product.qty)" ng-src="{{product.img}}" />
+        </ion-scroll>
     </ion-content>
-     <div class="bar bar-footer style-height-100px">
-            <div class="row shop-products-narrow-cards-outer shop-product-cards-scroller ">
-                <div class="item item-image product-pic-wh">
-                    <pre-img ratio="_1_1" helper-class="main-image">
-                        <img ng-src="{{product.picture}}" spinner-on-load>
-                    </pre-img>
-                </div>
-            </div>
-        </div>  
+    <div class="bar bar-footer style-height-100px">
+        <ion-scroll direction="x" delegate-handle="isde" zooming="true" has-bouncing="true">
+            <img ng-repeat="range in range(product.total_qty + product.qty)" ng-src="{{product.img}}" />
+        </ion-scroll>
+    </div>
 </ion-view>

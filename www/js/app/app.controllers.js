@@ -20,33 +20,22 @@ angular.module('your_app_name.app.controllers', [])
 
 
 .controller('ProductCtrl', function($scope, $stateParams, ShopService, $ionicPopup, $ionicLoading) {
-    var productId = $stateParams.data._id;
+    $scope.product = $stateParams.data;
 
-    ShopService.getProduct(productId).then(function(product) {
-        $scope.product = product;
-    });
-    // $scope.addDiscount = function() {
-    //     var ids = $scope.payments.length + 1;
-    //     $scope.payments.push({
-    //         id: ids,
-    //         type: 'Discount',
-    //         currencye: {
-    //             exchange: null,
-    //             money: null,
-    //             card_id: null,
-    //             security: null,
-    //             exp: null
-    //         },
-    //         amount: null
-    //     });
+    // ShopService.getProduct(productId).then(function(product) {
+    //     $scope.product = product;
+    // });
 
-    // }
-    // $scope.cur = function(currency) {
-    //     $scope.itemTypePay.currency.exchange = currencye.name;
-    //     $scope.Discount.hide()
-    // }
+    $scope.range = function(count) {
 
-    // show add to cart popup on button click
+        var ratings = [];
+
+        for (var i = 0; i < count; i++) {
+            ratings.push(i)
+        }
+
+        return ratings;
+    }
     $scope.showAddToCartPopup = function(product) {
         $scope.data = {};
         $scope.data.product = product;
@@ -79,30 +68,6 @@ angular.module('your_app_name.app.controllers', [])
     };
 })
 
-
-.controller('PostCardCtrl', function($scope, PostService, $ionicPopup, $state) {
-    var commentsPopup = {};
-
-    $scope.showComments = function(post) {
-        PostService.getPostComments(post)
-            .then(function(data) {
-                post.comments_list = data;
-                commentsPopup = $ionicPopup.show({
-                    cssClass: 'popup-outer comments-view',
-                    templateUrl: 'views/app/partials/comments.html',
-                    scope: angular.extend($scope, { current_post: post }),
-                    title: post.comments + ' Comments',
-                    buttons: [
-                        { text: '', type: 'close-popup ion-ios-close-outline' }
-                    ]
-                });
-            });
-    };
-})
-
-
-
-
 .controller('ShopCtrl', function($scope, ShopService, $ionicActionSheet, $timeout, $ionicPopover, $filter, $state, $filter) {
     $scope.products = [];
     $scope.popular_products = [];
@@ -123,18 +88,25 @@ angular.module('your_app_name.app.controllers', [])
     ShopService.getProducts().then(function(products) {
         $scope.popular_products = products.slice(0, 2);
     });
-    $scope.selectItem = [];
+    $scope.orders = [];
     $scope.select_item = function(product) {
-        if ($scope.selectItem.indexOf(product) == -1) {
-            product.piece = 1;
-            $scope.selectItem.push(product)
+        if ($scope.orders.indexOf(product) == -1) {
+            product.qty = 1;
+            $scope.orders.push(product);
 
         } else {
-            $scope.addItem = $filter('filter')($scope.selectItem, function(item) {
+            $scope.addItem = $filter('filter')($scope.orders, function(item) {
                 return item.products_id === product.products_id;
             })
-            $scope.addItem[0].piece += 1;
+            $scope.addItem[0].qty += 1;
         }
+
+        for (var i = $scope.products.length - 1; i >= 0; i--) {
+            if ($scope.products[i].products.indexOf(product) != -1) {
+                $scope.products[i].products[$scope.products[i].products.indexOf(product)].total_qty -= 1;
+                break;
+            }
+        };
 
     }
     $scope.onHold = function(product) {
@@ -204,10 +176,10 @@ angular.module('your_app_name.app.controllers', [])
     //$scope.paymentDetails;
 })
 
-.controller('PaymentCtrl', function($scope, $ionicModal, $state, $ionicPopup,PaymentService) {
+.controller('PaymentCtrl', function($scope, $ionicModal, $state, $ionicPopup, PaymentService) {
 
     $scope.currency = [];
-    PaymentService.getCurrency().then(function(currency){
+    PaymentService.getCurrency().then(function(currency) {
         $scope.currency = currency;
     })
 
