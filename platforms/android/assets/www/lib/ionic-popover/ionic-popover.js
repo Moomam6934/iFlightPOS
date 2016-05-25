@@ -41,7 +41,6 @@ angular.module('popover', [])
                 animation: 'am-fade-and-scale' //am-fade-and-scale //am-fade-and-slide-top
             }).then(function(popover) {
                 $scope.popover = popover;
-                $scope.defaultSelect = $scope.list[0].class;
             });
 
 

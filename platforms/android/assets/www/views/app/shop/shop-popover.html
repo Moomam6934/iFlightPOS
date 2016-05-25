@@ -1,7 +1,7 @@
-<ion-popover-view class="drop-header">
+<ion-popover-view class="drop-header" cache-view="false">
     <ion-content scroll="true" overflow-scroll="false" has-bouncing="true">
-        <ion-list ng-repeat="product in list">
-            <ion-radio ng-model="defaultSelect" ng-value="product.class" ng-click="selectPath(product)" style="height:70px">
+        <ion-list ng-repeat="product in list.data">
+            <ion-radio ng-model="list.defaults" ng-value="product.class" ng-click="selectPath(product)" style="height:70px">
                 <div class=" item-avatar">
                     <!-- <img ng-src="{{product.picture}}"> -->
                     <h4><b>{{product.class}}</b></h4>
