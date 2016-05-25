@@ -19,22 +19,34 @@ angular.module('your_app_name.app.controllers', [])
 })
 
 
-.controller('ProductCtrl', function($scope, $stateParams, ShopService, $ionicPopup, $ionicLoading) {
+.controller('ProductCtrl', function($scope, $stateParams, ShopService, $ionicPopup, $ionicLoading, $state, $filter) {
+
     $scope.product = $stateParams.data;
-
-    // ShopService.getProduct(productId).then(function(product) {
-    //     $scope.product = product;
-    // });
-
-    $scope.range = function(count) {
+    $scope.allDate = $stateParams.allData;
+    $scope.qty = $scope.product.qty;
+    $scope.ranges = function(count) {
 
         var ratings = [];
 
         for (var i = 0; i < count; i++) {
-            ratings.push(i)
+            ratings.push(i + 1)
         }
 
         return ratings;
+    }
+    $scope.editProductQty = function(range) {
+        $scope.qty = range;
+    }
+    $scope.gotoShop = function() {
+        $scope.qty;
+
+        for (var i = $scope.allDate.length - 1; i >= 0; i--) {
+            if ($scope.allDate[i].products_id == $scope.product.products_id) {
+                $scope.allDate[i].qty = $scope.qty;
+                break;
+            }
+        };
+        $state.go('app.shop', { product_by_qty: $scope.allDate });
     }
     $scope.showAddToCartPopup = function(product) {
         $scope.data = {};
@@ -68,18 +80,26 @@ angular.module('your_app_name.app.controllers', [])
     };
 })
 
-.controller('ShopCtrl', function($scope, ShopService, $ionicActionSheet, $timeout, $ionicPopover, $filter, $state, $filter) {
+.controller('ShopCtrl', function($scope, ShopService, $ionicActionSheet, $timeout, $ionicPopover, $filter, $state, $filter, $stateParams) {
     $scope.products = [];
     $scope.popular_products = [];
+    $scope.orders = [];
+    $scope.ordersQty = $stateParams.product_by_qty;
+
+
+
+
+    var product_qty = $stateParams.product_qty;
     ShopService.getProducts().then(function(products) {
-        $scope.products = products;
-        $scope.productsByCart = $scope.products[0].products;
+
+        $scope.products.data = products;
+        $scope.products.defaults = $scope.products.data[0].class;
+        $scope.productsByCart = $scope.products.data[0].products;
 
     });
 
-    $scope.cate = {};
     $scope.onSelect = function(item) {
-        var productsByCart = $filter('filter')($scope.products, function(data) {
+        var productsByCart = $filter('filter')($scope.products.data, function(data) {
             return data.class === item.class;
         })
         $scope.productsByCart = productsByCart[0].products;
@@ -88,29 +108,68 @@ angular.module('your_app_name.app.controllers', [])
     ShopService.getProducts().then(function(products) {
         $scope.popular_products = products.slice(0, 2);
     });
-    $scope.orders = [];
+
+    $scope.loadData = function() {
+        if ($stateParams.product_by_qty == null) {
+            $scope.orders = [];
+        } else {
+            $scope.orders = $scope.ordersQty;
+
+            ShopService.getProducts().then(function(products) {
+                $scope.products.data = products;
+                for (var i = $scope.products.data.length - 1; i >= 0; i--) {
+                    if ($scope.products.data[i].products.indexOf($scope.orders[i]) != -1) {
+                        $scope.products.data[i].products[$scope.products.data[i].products.indexOf($scope.orders[i])].total_qty - $scope.orders[i].qty;
+                        break;
+                    }
+                };
+            });
+// fffffffffff
+
+        }
+    }
+
     $scope.select_item = function(product) {
-        if ($scope.orders.indexOf(product) == -1) {
+
+        if ($scope.orders.length > 0) {
+            for (var i = $scope.orders.length - 1; i >= 0; i--) {
+                if ($scope.orders.length > 0) {
+                    if ($scope.orders[i].products_id == product.products_id) {
+                        $scope.orders[i].qty += 1;
+                    }
+                }
+            }
+        } else {
             product.qty = 1;
             $scope.orders.push(product);
-
-        } else {
-            $scope.addItem = $filter('filter')($scope.orders, function(item) {
-                return item.products_id === product.products_id;
-            })
-            $scope.addItem[0].qty += 1;
         }
 
-        for (var i = $scope.products.length - 1; i >= 0; i--) {
-            if ($scope.products[i].products.indexOf(product) != -1) {
-                $scope.products[i].products[$scope.products[i].products.indexOf(product)].total_qty -= 1;
+
+
+        // if ($scope.orders.indexOf(product) == -1) {
+        //     product.qty = 1;
+        //     $scope.orders.push(product);
+
+        // } else {
+        //     $scope.addItem = $filter('filter')($scope.orders, function(item) {
+        //         return item.products_id === product.products_id;
+        //     })
+        //     $scope.addItem[0].qty += 1;
+        // }
+
+        for (var i = $scope.products.data.length - 1; i >= 0; i--) {
+            if ($scope.products.data[i].products.indexOf(product) != -1) {
+                $scope.products.data[i].products[$scope.products.data[i].products.indexOf(product)].total_qty -= 1;
                 break;
             }
         };
 
     }
     $scope.onHold = function(product) {
-            $state.go('app.product-detail', { data: product });
+            $state.go('app.product-detail', {
+                data: product,
+                allData: $scope.orders
+            });
 
             // app.product-detail({productId: product._id})
 

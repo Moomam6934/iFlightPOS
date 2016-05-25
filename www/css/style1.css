@@ -353,6 +353,7 @@
     margin-right: -25px;
     margin-top: -10px;
 }
+
 .select-item-shopgreen {
     background-color: #00AA00 !important;
     margin-right: -25px;
@@ -422,9 +423,11 @@
 .style-height-80px {
     height: 80px;
 }
+
 .style-height-100px {
     height: 105px;
 }
+
 .style-height--50px {
     height: -50px;
 }
@@ -432,6 +435,7 @@
 .style-margin-top-5px {
     margin-top: 18px;
 }
+
 .style-margin-top-20px {
     margin-top: 20px;
 }
@@ -445,7 +449,16 @@
     height: 65px;
 }
 
-.style-pix-h130-w150 {
-    height: 130px;
+.style-pix-h150-w150 {
+    height: 150px;
     width: 150px;
+}
+
+.footer-ber-image {
+    height: 90px;
+}
+
+.image-80 {
+    height: 80px;
+    width: 80px;
 }

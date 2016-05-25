@@ -20,33 +20,22 @@ angular.module('your_app_name.app.controllers', [])
 
 
 .controller('ProductCtrl', function($scope, $stateParams, ShopService, $ionicPopup, $ionicLoading) {
-    var productId = $stateParams.data._id;
+    $scope.product = $stateParams.data;
 
-    ShopService.getProduct(productId).then(function(product) {
-        $scope.product = product;
-    });
-    // $scope.addDiscount = function() {
-    //     var ids = $scope.payments.length + 1;
-    //     $scope.payments.push({
-    //         id: ids,
-    //         type: 'Discount',
-    //         currencye: {
-    //             exchange: null,
-    //             money: null,
-    //             card_id: null,
-    //             security: null,
-    //             exp: null
-    //         },
-    //         amount: null
-    //     });
+    // ShopService.getProduct(productId).then(function(product) {
+    //     $scope.product = product;
+    // });
 
-    // }
-    // $scope.cur = function(currency) {
-    //     $scope.itemTypePay.currency.exchange = currencye.name;
-    //     $scope.Discount.hide()
-    // }
+    $scope.range = function(count) {
 
-    // show add to cart popup on button click
+        var ratings = [];
+
+        for (var i = 0; i < count; i++) {
+            ratings.push(i)
+        }
+
+        return ratings;
+    }
     $scope.showAddToCartPopup = function(product) {
         $scope.data = {};
         $scope.data.product = product;
@@ -79,40 +68,12 @@ angular.module('your_app_name.app.controllers', [])
     };
 })
 
-
-.controller('PostCardCtrl', function($scope, PostService, $ionicPopup, $state) {
-    var commentsPopup = {};
-
-    $scope.showComments = function(post) {
-        PostService.getPostComments(post)
-            .then(function(data) {
-                post.comments_list = data;
-                commentsPopup = $ionicPopup.show({
-                    cssClass: 'popup-outer comments-view',
-                    templateUrl: 'views/app/partials/comments.html',
-                    scope: angular.extend($scope, { current_post: post }),
-                    title: post.comments + ' Comments',
-                    buttons: [
-                        { text: '', type: 'close-popup ion-ios-close-outline' }
-                    ]
-                });
-            });
-    };
-})
-
-
-
-
 .controller('ShopCtrl', function($scope, ShopService, $ionicActionSheet, $timeout, $ionicPopover, $filter, $state, $filter) {
     $scope.products = [];
     $scope.popular_products = [];
     ShopService.getProducts().then(function(products) {
         $scope.products = products;
         $scope.productsByCart = $scope.products[0].products;
-
-        $scope.select = {
-            data:$scope.products[0].class
-        }
 
     });
 
@@ -127,20 +88,25 @@ angular.module('your_app_name.app.controllers', [])
     ShopService.getProducts().then(function(products) {
         $scope.popular_products = products.slice(0, 2);
     });
-    $scope.selectItem = [];
+    $scope.orders = [];
     $scope.select_item = function(product) {
-        if ($scope.selectItem.indexOf(product) == -1) {
-            product.piece = 1;
-            $scope.selectItem.push(product)
-
+        if ($scope.orders.indexOf(product) == -1) {
+            product.qty = 1;
+            $scope.orders.push(product);
 
         } else {
-            $scope.addItem = $filter('filter')($scope.selectItem, function(item) {
-                return item._id === product._id;
+            $scope.addItem = $filter('filter')($scope.orders, function(item) {
+                return item.products_id === product.products_id;
             })
-            $scope.addItem[0].piece += 1;
+            $scope.addItem[0].qty += 1;
         }
 
+        for (var i = $scope.products.length - 1; i >= 0; i--) {
+            if ($scope.products[i].products.indexOf(product) != -1) {
+                $scope.products[i].products[$scope.products[i].products.indexOf(product)].total_qty -= 1;
+                break;
+            }
+        };
 
     }
     $scope.onHold = function(product) {
@@ -210,8 +176,12 @@ angular.module('your_app_name.app.controllers', [])
     //$scope.paymentDetails;
 })
 
+.controller('PaymentCtrl', function($scope, $ionicModal, $state, $ionicPopup, PaymentService) {
 
-.controller('PaymentCtrl', function($scope, $ionicModal, $state) {
+    $scope.currency = [];
+    PaymentService.getCurrency().then(function(currency) {
+        $scope.currency = currency;
+    })
 
     $ionicModal.fromTemplateUrl('views/app/payment/type-of-payment.html', {
         scope: $scope,
@@ -228,13 +198,11 @@ angular.module('your_app_name.app.controllers', [])
     });
 
 
-
-    $scope.payments = [];
-    $scope.paymentdetail = {
-        id: null,
+    $scope.payments = [{
+        id: 1,
         type: 'Cash',
         currency: {
-            exchange: null,
+            currencys: {},
             money: null,
             card_id: null,
             security: null,
@@ -242,24 +210,12 @@ angular.module('your_app_name.app.controllers', [])
         },
         amount: null
 
-    }
-    $scope.currencys = [{
-        id: 1,
-        name: "USD",
-        exchange: 35.36,
-        desc: "ดอลลาร์สหรัฐอเมริกา"
-    }, {
-        id: 2,
-        name: "JPY",
-        exchange: 0.32,
-        desc: "เยนญี่ปุ่น"
-    }, {
-        id: 3,
-        name: "EUR",
-        exchange: 40.01,
-        desc: "ยูโร"
-    }]
+    }];
+
+
     $scope.itemTypePay;
+    $scope.typePayment = ['Cash', 'Credit'];
+
     $scope.typeOfPayment = function(item) {
         $scope.Type_of_Payment.show();
         $scope.itemTypePay = item;
@@ -268,95 +224,67 @@ angular.module('your_app_name.app.controllers', [])
         $scope.Payment.show();
         $scope.itemTypePay = item;
     }
-    $scope.typeOfPay = function(type) {
-        $scope.itemTypePay.type = type;
-        $scope.Type_of_Payment.hide();
-    }
     $scope.addPayment = function() {
         var ids = $scope.payments.length + 1;
         $scope.payments.push({
             id: ids,
             type: 'Cash',
             currency: {
-                exchange: null,
+                currencys: {},
                 money: null,
                 card_id: null,
                 security: null,
                 exp: null
             },
             amount: null
+
         });
 
     }
-    $scope.cur = function(currency) {
-        $scope.itemTypePay.currency.exchange = currency.name;
+
+    $scope.curren = function(currency) {
+        $scope.itemTypePay.currency.currencys = currency;
         $scope.Payment.hide()
     }
-////////////////////////////////////////////////////////////////
-// $scope.promotions = [];
-//     $scope.promotiondetail = {
-//         id: null,
-//         type: 'Pro',
-//         currency: {
-//             exchange: null,
-//             money: null,
-//             card_id: null,
-//             security: null,
-//             exp: null
-//         },
-//         amount: null
 
-//     }
-//     $scope.currencys = [{
-//         id: 1,
-//         name: "1 Free 1",
-//         exchange: 35.36,
-//         desc: "ดอลลาร์สหรัฐอเมริกา"
-//     }, {
-//         id: 2,
-//         name: "2 Free 2",
-//         exchange: 0.32,
-//         desc: "เยนญี่ปุ่น"
-//     }, {
-//         id: 3,
-//         name: "3 Free 3",
-//         exchange: 40.01,
-//         desc: "ยูโร"
-//     }]
 
-//     $scope.itemTypePro;
-//     $scope.typeOfPromotion = function(item) {
-//         $scope.Type_of_Promotion.show();
-//         $scope.itemTypePro = item;
-//     }
-//     $scope.promotion = function(typepromotion, item) {
-//         $scope.promotion.show();
-//         $scope.itemTypePro = item;
-//     }
-//     $scope.typeOfPro = function(type) {
-//         $scope.itemTypePro.type = type;
-//         $scope.Type_of_Promotion.hide();
-//     }
-//     $scope.addPromotion = function() {
-//         var ids = $scope.promotions.length + 1;
-//         $scope.promotions.push({
-//             id: ids,
-//             type: 'Pro',
-//             currency: {
-//                 exchange: null,
-//                 money: null,
-//                 card_id: null,
-//                 security: null,
-//                 exp: null
-//             },
-//             amount: null
-//         });
 
-//     }
-//     $scope.cur = function(currency) {
-//         $scope.itemTypePro.currency.exchange = currency.name;
-//         $scope.Promotion.hide()
-//     }
+    $scope.showPopup = function(item) {
+        $scope.data = {};
+        var myPopup = $ionicPopup.show({
+            template: '<input type="number" ng-model="data.money" style="text-align:right;">',
+            title: 'Enter Your Money',
+            subTitle: '',
+            scope: $scope,
+            buttons: [{
+                text: 'Cancel',
+                onTap: function(e) {
+                    $scope.data.money = item.currency.money;
+                }
+            }, {
+                text: '<b>Confirm</b>',
+                type: 'button-positive',
+                onTap: function(e) {
+                    item.currency.money = $scope.data.money;
+                    $scope.data = {};
+                }
+            }]
+        })
+    }
+    $scope.$watch('payments', function(n, o) {
+
+        var res = 0;
+
+        for (var i = $scope.payments.length - 1; i >= 0; i--) {
+            if (n[i].currency.currencys.exchange != null) {
+                res = n[i].currency.money * n[i].currency.currencys.exchange;
+                n[i].amount = res;
+            } else if (n[i].currency.card_id) {
+                n[i].amount = n[i].currency.money;
+            }
+        };
+    }, true);
+
 })
 
 .controller('MainCtrl', function($scope, $state, ShopService) {

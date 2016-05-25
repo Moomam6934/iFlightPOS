@@ -77,6 +77,9 @@ angular.module('your_app_name', [
 
     .state('app.shop', {
         url: "/shop",
+        params : {
+            product_by_qty : null
+        },
         views: {
             'menuContent': {
                 templateUrl: "views/app/shop/shop.html",
@@ -120,7 +123,8 @@ angular.module('your_app_name', [
     .state('app.product-detail', {
             url: "/product",
             params: {
-                data: null
+                data: null,
+                allData:null
             },
             views: {
                 'menuContent': {
@@ -131,7 +135,6 @@ angular.module('your_app_name', [
         })
         .state('app.main', {
             url: "/main",
-
             views: {
                 'menuContent': {
                     templateUrl: "views/app/main.html",

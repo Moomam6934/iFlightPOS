@@ -1,10 +1,10 @@
 <ion-view view-title="Product">
     <ion-nav-buttons side="right">
-        <button class="button button-clear button-light" ui-sref="app.shop"><b>Done</b></button>
+        <button class="button button-clear button-light" ng-click="gotoShop(range)"><b>Done</b></button>
     </ion-nav-buttons>
-    <ion-content overflow-scroll="false" has-bouncing="true" class="icon-red">
+    <ion-content overflow-scroll="true" has-bouncing="true" class="icon-red">
         <div class="row item item-text-wrap">
-            <div class="col col-40 "><img class="style-pix-h130-w150" ng-src="{{product.img}}">
+            <div class="col col-40 "><img class="style-pix-h150-w150" ng-src="{{product.img}}">
             </div>
             <div class="col col-60 text-center">
                 <br>
@@ -12,17 +12,26 @@
                 <h1 class="product-price icon-red ">{{product.price}} THB</h1>
             </div>
         </div>
-        <div class="icon-red">
-            &nbsp; <b>{{"Promotion"}}</b>
-            <br> &nbsp; <span>{{"Bey 1 Free 1"}}</span>
+        <div class="item item-text-wrap">
+            <p style="color:red; font-size:25px;"><b>Promotion</b></p>
+            <br>
+            <p style="color:red; font-size:15px;">- Buy 1 Get 1 Free!</p>
         </div>
-                <ion-scroll direction="x" delegate-handle="isde" zooming="true" has-bouncing="true">
-            <img ng-repeat="range in range(product.total_qty + product.qty)" ng-src="{{product.img}}" />
-        </ion-scroll>
+        <div class="bar bar-footer footer-ber-image">
+            <div class="row shop-products-narrow-cards-outer shop-product-cards-scroller">
+                <div ng-repeat="range in ranges(product.total_qty + product.qty)" class="col col-25 shop-product-narrow-card" ui-sref="app.product-detail({productId: related_product._id})">
+                    <div ng-class="{selected: qty == range}">
+                        <div class="list card">
+                            <div class="item item-image" ng-click="editProductQty(range)">
+                                <pre-img ratio="_1_1" helper-class="main-image">
+                                    <img ng-src="{{product.img}}" spinner-on-load class="image-80">
+                                </pre-img>
+                                <span class="badge badge-assertive select-item-shop">{{range}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </ion-content>
-    <div class="bar bar-footer style-height-100px">
-        <ion-scroll direction="x" delegate-handle="isde" zooming="true" has-bouncing="true">
-            <img ng-repeat="range in range(product.total_qty + product.qty)" ng-src="{{product.img}}" />
-        </ion-scroll>
-    </div>
 </ion-view>

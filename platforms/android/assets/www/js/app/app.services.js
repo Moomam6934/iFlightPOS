@@ -16,7 +16,7 @@ angular.module('your_app_name.app.services', [])
 
 
 
-.service('ShopService', function($http, $q, _) {
+.service('ShopService', function($http,$filter, $q, _) {
 
     this.getProducts = function() {
         var dfd = $q.defer();
@@ -26,17 +26,21 @@ angular.module('your_app_name.app.services', [])
         return dfd.promise;
     };
 
-    this.getProduct = function(productId) {
-        var dfd = $q.defer();
-        $http.get('database.json').success(function(database) {
-            var product = _.find(database.products, function(product) {
-                return product._id == productId;
-            });
+    // this.getProduct = function(productId) {
+    //     var dfd = $q.defer();
+        
+    //     $http.get('database.json').success(function(database) {
+    //         for (var i = database.cart.length - 1; i >= 0; i--) {
+                
+    //             var productByID = $filter('filter')(database.cart[i].products,function(product){
+    //                 return product.products_id === productId;
+    //             })
+    //         };
 
-            dfd.resolve(product);
-        });
-        return dfd.promise;
-    };
+    //         dfd.resolve(productByID[0]);
+    //     });
+    //     return dfd.promise;
+    // };
 
     this.addProductToCart = function(productToAdd) {
         var cart_products = !_.isUndefined(window.localStorage.ionTheme1_cart) ? JSON.parse(window.localStorage.ionTheme1_cart) : [];
@@ -75,7 +79,12 @@ angular.module('your_app_name.app.services', [])
     };
 
 })
-
-
-
-;
+.service('PaymentService',function($q,$http){
+    this.getCurrency = function(){
+        var dfd =$q.defer();
+        $http.get('database.json').success(function(database) {
+            dfd.resolve(database.currency);
+        });
+        return dfd.promise;
+    }
+})
