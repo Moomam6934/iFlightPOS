@@ -19,22 +19,52 @@ angular.module('your_app_name.app.controllers', [])
 })
 
 
-.controller('ProductCtrl', function($scope, $stateParams, ShopService, $ionicPopup, $ionicLoading) {
+.controller('ProductCtrl', function($scope, $stateParams, ShopService, $ionicPopup, $ionicLoading, $state, $filter) {
+
     $scope.product = $stateParams.data;
-
-    // ShopService.getProduct(productId).then(function(product) {
-    //     $scope.product = product;
-    // });
-
-    $scope.range = function(count) {
+    $scope.order = $stateParams.orders;
+    $scope.products_all = $stateParams.product_data.data;
+    $scope.qty = $scope.product.qty;
+    $scope.isSelected = $stateParams.isSelected;
+    var quantity;
+    $scope.ranges = function(count) {
 
         var ratings = [];
 
         for (var i = 0; i < count; i++) {
-            ratings.push(i)
+            ratings.push(i + 1)
         }
-
+        quantity = ratings.length;
         return ratings;
+    }
+    $scope.editProductQty = function(range) {
+        $scope.qty = range;
+    }
+    $scope.gotoShop = function() {
+        $scope.qty;
+
+        for (var i = $scope.order.length - 1; i >= 0; i--) {
+            if ($scope.order[i].products_id == $scope.product.products_id) {
+                $scope.order[i].qty = $scope.qty;
+                break;
+            }
+        }
+        for (var i = $scope.products_all.length - 1; i >= 0; i--) {
+            if ($scope.products_all[i]) {
+                for (var ii = $scope.products_all[i].products.length - 1; ii >= 0; ii--) {
+                    if ($scope.products_all[i].products[ii].products_id === $scope.product.products_id) {
+                        $scope.products_all[i].products[ii].total_qty = quantity - $scope.qty;
+                        break;
+                    }
+                }
+            }
+        };
+        $scope.isSelected.push($scope.product.products_id);
+        $state.go('app.shop', {
+            product_by_qty: $scope.order,
+            isSelected: $scope.isSelected,
+            products_all: $scope.products_all
+        });
     }
     $scope.showAddToCartPopup = function(product) {
         $scope.data = {};
@@ -68,18 +98,59 @@ angular.module('your_app_name.app.controllers', [])
     };
 })
 
-.controller('ShopCtrl', function($scope, ShopService, $ionicActionSheet, $timeout, $ionicPopover, $filter, $state, $filter) {
+.controller('ShopCtrl', function($scope, ShopService, $ionicActionSheet, $timeout, $ionicPopover, $filter, $state, $filter, $stateParams) {
+
+
+    $scope.iFlightData = {
+        id: null,
+        receipt_number: null,
+        date: new Date(),
+        products: [],
+        total_gross_amount: 0,
+        total_discount: 0,
+        total_net_amount: 0,
+        payments: [],
+        payment_date: new Date(),
+        seller_user: "Nuttakrittra Phumsawai",
+        status: "keep"
+    }
+
     $scope.products = [];
     $scope.popular_products = [];
-    ShopService.getProducts().then(function(products) {
-        $scope.products = products;
-        $scope.productsByCart = $scope.products[0].products;
+    $scope.orders = [];
+    $scope.ordersQty = $stateParams.product_by_qty;
+    $scope.productsByCart;
 
-    });
+    $scope.isSelected = [];
+    // $scope.$watch('orders', function(o, n) {
 
-    $scope.cate = {};
+    //     var amt = 0;
+    //     var disc = 0;
+    //     var netamt = 0;
+
+    //     for (var i = $scope.invoice.detail.length - 1; i >= 0; i--) {
+    //         $scope.invoice.detail[i].total = o[i].product.price * o[i].count;
+    //         amt += o[i].product.price * o[i].count;
+    //         disc += o[i].discount;
+    //         netamt = amt - disc;
+    //     };
+    //     $scope.invoice.price = amt;
+    //     $scope.invoice.discount = disc;
+    //     $scope.invoice.total = netamt;
+    // }, true);
+
+    function getDataProduct() {
+        ShopService.getProducts().then(function(products) {
+
+            $scope.products.data = products;
+            $scope.products.defaults = $scope.products.data[0].class;
+            $scope.productsByCart = $scope.products.data[0].products;
+
+        });
+    }
+
     $scope.onSelect = function(item) {
-        var productsByCart = $filter('filter')($scope.products, function(data) {
+        var productsByCart = $filter('filter')($scope.products.data, function(data) {
             return data.class === item.class;
         })
         $scope.productsByCart = productsByCart[0].products;
@@ -88,29 +159,77 @@ angular.module('your_app_name.app.controllers', [])
     ShopService.getProducts().then(function(products) {
         $scope.popular_products = products.slice(0, 2);
     });
-    $scope.orders = [];
-    $scope.select_item = function(product) {
-        if ($scope.orders.indexOf(product) == -1) {
-            product.qty = 1;
-            $scope.orders.push(product);
 
+    $scope.loadData = function() {
+
+        if ($stateParams.product_by_qty == null) {
+            getDataProduct();
+            $scope.orders = [];
+            $scope.isSelected = [];
         } else {
-            $scope.addItem = $filter('filter')($scope.orders, function(item) {
+            $scope.isSelected = $stateParams.isSelected;
+            $scope.orders = $scope.ordersQty;
+            $scope.products.data = $stateParams.products_all;
+            $scope.productsByCart = $scope.products.data[0].products;
+        }
+    }
+
+    $scope.select_item = function(product, isHold) {
+
+        var count = 1;
+        var countNull = 0;
+        if ($scope.orders.length != 0 && isHold != 1) {
+            var chk = $filter('filter')($scope.orders, function(item) {
                 return item.products_id === product.products_id;
             })
-            $scope.addItem[0].qty += 1;
+            if (chk.length > 0) {
+                chk[0].qty = chk[0].qty + count;
+                countDown(product);
+            } else {
+                product.qty = count;
+                $scope.orders.push(product);
+                var addCheck = $filter('filter')($scope.productsByCart, function(item) {
+                    return item.products_id === product.products_id;
+                })
+                $scope.isSelected.push(addCheck[0].products_id);
+                countDown(product);
+            }
+        } else if (isHold == 1) {
+            if (product.qty == null) {
+                product.qty = count;
+                $scope.isSelected.push(product.products_id);
+                $scope.orders.push(product);
+                countDown(product);
+            }
+        } else {
+            product.qty = count;
+            $scope.orders.push(product);
+            var addCheck = $filter('filter')($scope.productsByCart, function(item) {
+                return item.products_id === product.products_id;
+            })
+            $scope.isSelected.push(addCheck[0].products_id);
+            countDown(product);
         }
+    }
 
-        for (var i = $scope.products.length - 1; i >= 0; i--) {
-            if ($scope.products[i].products.indexOf(product) != -1) {
-                $scope.products[i].products[$scope.products[i].products.indexOf(product)].total_qty -= 1;
+    function countDown(product) {
+        for (var i = $scope.products.data.length - 1; i >= 0; i--) {
+            if ($scope.products.data[i].products.indexOf(product) != -1) {
+                $scope.products.data[i].products[$scope.products.data[i].products.indexOf(product)].total_qty -= 1;
                 break;
             }
         };
-
     }
     $scope.onHold = function(product) {
-            $state.go('app.product-detail', { data: product });
+
+            var isHold = 1;
+            $scope.select_item(product, isHold);
+            $state.go('app.product-detail', {
+                data: product,
+                orders: $scope.orders,
+                product_data: $scope.products,
+                isSelected: $scope.isSelected
+            });
 
             // app.product-detail({productId: product._id})
 
@@ -124,16 +243,29 @@ angular.module('your_app_name.app.controllers', [])
                 { text: 'Keep' },
                 { text: 'Discard' }
             ],
-
+            titleText: 'Discard Order ?',
             cancelText: '<span class="test">Cancel</span>',
             cancel: function() {},
             buttonClicked: function(index) {
                 switch (index) {
                     case 0:
+                        var total_gross_amount = 0;
+                        for (var i = $scope.orders.length - 1; i >= 0; i--) {
+                            total_gross_amount += $scope.orders[i].price;
+                        };
+                        $scope.iFlightData.total_gross_amount = total_gross_amount
+                        $scope.iFlightData.products = $scope.orders;
+                        ShopService.setOrdersKeep($scope.iFlightData);
+                        $scope.orders = [];
+                        $scope.isSelected = [];
+                        getDataProduct();
                         $state.go('app.main.all');
                         break;
                     case 1:
                         $state.go('app.main.all');
+                        $scope.orders = [];
+                        $scope.isSelected = [];
+                        getDataProduct();
                         break;
 
                 }
@@ -289,7 +421,8 @@ angular.module('your_app_name.app.controllers', [])
 
 .controller('MainCtrl', function($scope, $state, ShopService) {
 
-    ShopService.getOrders().then(function(orders) {
-        $scope.orders = orders;
-    })
+    $scope.loadOrders = function() {
+        $scope.orders = ShopService.getOrders().orders;
+    }
+
 });

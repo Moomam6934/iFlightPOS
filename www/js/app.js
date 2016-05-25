@@ -78,7 +78,9 @@ angular.module('your_app_name', [
     .state('app.shop', {
         url: "/shop",
         params: {
-            product_by_qty: null
+            product_by_qty: null,
+            isSelected: null,
+            products_all: null
         },
         views: {
             'menuContent': {
@@ -124,7 +126,9 @@ angular.module('your_app_name', [
             url: "/product",
             params: {
                 data: null,
-                allData: null
+                orders: null,
+                product_data: null,
+                isSelected: null
             },
             views: {
                 'menuContent': {
@@ -134,6 +138,7 @@ angular.module('your_app_name', [
             }
         })
         .state('app.main', {
+            cache: false,
             url: "/main",
             views: {
                 'menuContent': {
@@ -191,11 +196,11 @@ angular.module('your_app_name', [
 
     ///////////////////////////MasterData//////////////////////////////////////
 
-    .state('app.master-data', {
+    .state('app.master', {
             url: "/master",
             views: {
                 'menuContent': {
-                    templateUrl: "views/app/master-data.html",
+                    templateUrl: "views/app/master.html",
                     controller: 'MasterCtrl'
 
                 }
