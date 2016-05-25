@@ -82,7 +82,7 @@
 .style-width95 {
     width: 95%;
     text-align: center;
-    color:#9C9C9C;
+    color: #9C9C9C;
 }
 
 .style-margin-left {
@@ -161,8 +161,35 @@
 .style-text-size-24px {
     font-size: 24px;
 }
+
 .style-text-color {
     color: #9C9C9C;
 }
- 
 
+.style-text {
+    font-size: 25px;
+    text-align: center;
+}
+
+.style-text-unit {
+    font-size: 24px;
+    margin-left: 30px;
+}
+
+.item-price1 {
+    float: center;
+    color: #000000;
+    font-size: 20px;
+    margin-left: 30px;
+}
+
+.style-textarea {
+    margin-top: 40px;
+    text-align: center;
+    border-style: 3px solid !important;
+}
+.style-textarea1 {
+    margin-top: 10px;
+    text-align: center;
+    border-style: 1px solid !important;
+}

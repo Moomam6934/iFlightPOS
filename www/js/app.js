@@ -77,8 +77,8 @@ angular.module('your_app_name', [
 
     .state('app.shop', {
         url: "/shop",
-        params : {
-            product_by_qty : null
+        params: {
+            product_by_qty: null
         },
         views: {
             'menuContent': {
@@ -124,7 +124,7 @@ angular.module('your_app_name', [
             url: "/product",
             params: {
                 data: null,
-                allData:null
+                allData: null
             },
             views: {
                 'menuContent': {
@@ -223,6 +223,37 @@ angular.module('your_app_name', [
         url: '/forgot-password',
         templateUrl: "views/auth/forgot-password.html",
         controller: 'ForgotPasswordCtrl'
+    })
+
+
+
+
+    .state('app.orderadjust', {
+        url: "/orderadjust",
+        views: {
+            'menuContent': {
+                templateUrl: "views/app/adjust/orderadjust.html",
+                controller: 'AdjustCtrl'
+            }
+        }
+    })
+    .state('app.shopadjust', {
+        url: "/shopadjust",
+        views: {
+            'menuContent': {
+                templateUrl: "views/app/adjust/shopadjust.html",
+               controller: 'ShopCtrl'
+            }
+        }
+    })
+    .state('app.adjustdetail', {
+        url: "/adjustdetail",
+        views: {
+            'menuContent': {
+                templateUrl: "views/app/adjust/adjustdetail.html",
+               controller: 'ShopCtrl'
+            }
+        }
     })
 
 

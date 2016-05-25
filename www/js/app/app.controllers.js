@@ -351,4 +351,11 @@ angular.module('your_app_name.app.controllers', [])
     ShopService.getOrders().then(function(orders) {
         $scope.orders = orders;
     })
+})
+.controller('AdjustCtrl', function($scope, $state, AdjustService) {
+
+    AdjustService.getProducts().then(function(products) {
+
+        $scope.products = products;
+    });
 });

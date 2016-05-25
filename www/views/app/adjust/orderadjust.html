@@ -1,0 +1,24 @@
+<ion-view view-title="Orders" class="shop-home-view">
+    <ion-nav-buttons side="right">
+        <button class="button button-clear button-light ion-ios-plus-outline icon-button-balance" ui-sref="app.shopadjust"></button>
+    </ion-nav-buttons>
+    <ion-content overflow-scroll="false" has-bouncing="true">
+        <div class="list list-balance">
+            <label class="item item-input input-balance">
+                <i class="icon ion-search placeholder-icon"></i>
+                <input type="text" placeholder="Search" ng-model="searchall">
+            </label>
+        </div>
+        <ion-list >
+            <ion-item > 
+           
+                <a class="front-black" href="#">
+                    <p> Product Adjust : <span class="item-price">&nbsp;Baht&nbsp;&nbsp;<i class="icon ion-chevron-right"></i></span>
+                    </p>
+                    <p> Date : </p>
+                </a>
+                <ion-option-button class="button-assertive">&nbsp;&nbsp;Delete&nbsp;&nbsp;
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>

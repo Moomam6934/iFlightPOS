@@ -1,0 +1,34 @@
+<ion-view view-title="Product">
+    <ion-nav-buttons side="right">
+        <button class="button button-clear button-light" ng-click="gotoShop(range)"><b>Done</b></button>
+    </ion-nav-buttons>
+    <ion-content overflow-scroll="true" has-bouncing="true" class="icon-red">
+        
+
+            <div class="row">
+                <div class="col col-50">
+                    <img src="{{product.img}}" alt="">
+                </div>
+                <div class="col col-50">
+                    <p class="style-text">Name.Product</p>
+                <p class="style-text">Price</p>
+                </div>
+            </div>
+           
+            <div class="row">
+                <div class="col col-25">
+                    <p class="style-text-unit"> Unit:</p>
+                </div>
+                <div class="col col-75">
+                    <span class="style-textarea1"> <input type="number" ></span>
+                </div>
+            </div>
+
+            
+            <br>
+            <p class="style-text-unit">Remark</p>
+            <textarea rows="2" cols="47" name="usrtxt" wrap="hard" class="style-textarea">remark
+            </textarea>
+       
+    </ion-content>
+</ion-view>
