@@ -424,5 +424,29 @@ angular.module('your_app_name.app.controllers', [])
     $scope.loadOrders = function() {
         $scope.orders = ShopService.getOrders().orders;
     }
+})
+
+.controller('AdjustCtrl', function($scope, $state, AdjustService) {
+
+    AdjustService.getProducts().then(function(products) {
+
+        $scope.products = products;
+    });
+
+
+})
+
+.controller('MasterCtrl', function($scope, $state, MasterService) {
+
+    MasterService.getBlacklists().then(function(blacklists) {
+        $scope.blacklists = blacklists;
+    });
+
+    MasterService.getPromotions().then(function(promotions) {
+        $scope.promotions = promotions;
+    });
+    MasterService.getCurrency().then(function(currency) {
+        $scope.currency = currency;
+    });
 
 });

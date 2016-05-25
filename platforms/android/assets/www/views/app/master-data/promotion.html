@@ -1,0 +1,17 @@
+<ion-view view-title="Promotion Discount">
+    <ion-content overflow-scroll="false" has-bouncing="true">
+        <div class="list list-balance">
+            <label class="item item-input input-balance">
+                <i class="icon ion-search placeholder-icon"></i>
+                <input type="text" placeholder="Search" ng-model="searchall">
+            </label>
+        </div>
+        <ion-list>
+            <ion-item ng-repeat="pro in promotions | filter: searchall">
+                <a class="front-black font-size-20" href="#">
+                <span class="font-size-20">{{pro.name}}</span>
+                </a>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>

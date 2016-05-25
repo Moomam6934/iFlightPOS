@@ -5338,6 +5338,7 @@ a.subdued:last-child {
 .platform-android .bar .title {
     font-size: 19px;
     line-height: 44px;
+    transform: translate3d(0px, 0px, 0px) !important;
 }
 
 .bar-light .button {

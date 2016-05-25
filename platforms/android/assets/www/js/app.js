@@ -138,7 +138,7 @@ angular.module('your_app_name', [
             }
         })
         .state('app.main', {
-            cache : false,
+            cache: false,
             url: "/main",
             views: {
                 'menuContent': {
@@ -181,6 +181,7 @@ angular.module('your_app_name', [
         })
 
 
+
     .state('app.pay', {
         url: "/pay",
         views: {
@@ -190,6 +191,37 @@ angular.module('your_app_name', [
             }
         }
     })
+
+
+
+    ///////////////////////////MasterData//////////////////////////////////////
+
+    .state('app.master', {
+            url: "/master",
+            views: {
+                'menuContent': {
+                    templateUrl: "views/app/master.html",
+                    controller: 'MasterCtrl'
+
+                }
+            }
+        })
+        .state('app.promotion', {
+            url: "/promotion",
+            templateUrl: "views/app/master-data/promotion.html",
+
+        })
+        .state('app.exchange', {
+            url: "/exchange",
+            templateUrl: "views/app/master-data/exchange.html"
+
+
+        })
+        .state('app.blacklist', {
+            url: "/blacklist",
+            templateUrl: "views/app/master-data/blacklist.html"
+
+        })
 
 
 
@@ -228,6 +260,37 @@ angular.module('your_app_name', [
         url: '/forgot-password',
         templateUrl: "views/auth/forgot-password.html",
         controller: 'ForgotPasswordCtrl'
+    })
+
+
+
+
+    .state('app.orderadjust', {
+        url: "/orderadjust",
+        views: {
+            'menuContent': {
+                templateUrl: "views/app/adjust/orderadjust.html",
+                controller: 'AdjustCtrl'
+            }
+        }
+    })
+    .state('app.shopadjust', {
+        url: "/shopadjust",
+        views: {
+            'menuContent': {
+                templateUrl: "views/app/adjust/shopadjust.html",
+               controller: 'ShopCtrl'
+            }
+        }
+    })
+    .state('app.adjustdetail', {
+        url: "/adjustdetail",
+        views: {
+            'menuContent': {
+                templateUrl: "views/app/adjust/adjustdetail.html",
+               controller: 'ShopCtrl'
+            }
+        }
     })
 
 

@@ -1,0 +1,19 @@
+<ion-view view-title="Exchange">
+    <ion-content overflow-scroll="false" has-bouncing="true">
+        <div class="list list-balance">
+            <label class="item item-input input-balance">
+                <i class="icon ion-search placeholder-icon"></i>
+                <input type="text" placeholder="Search" ng-model="searchall">
+            </label>
+        </div>
+        <div><ion-list class="style-text-center">
+            <ion-item ng-repeat="cur in currency | filter: searchall">
+                <a class="front-black" href="#">
+                    <span class="font-size-20">1{{cur.name}} <i class="icon ion-arrow-swap"></i> {{cur.exchange}}</span>
+                </a>
+            </ion-item>
+        </ion-list></div>
+        
+    </ion-content>
+</ion-view>
+
