@@ -77,8 +77,8 @@ angular.module('your_app_name', [
 
     .state('app.shop', {
         url: "/shop",
-        params : {
-            product_by_qty : null
+        params: {
+            product_by_qty: null
         },
         views: {
             'menuContent': {
@@ -124,7 +124,7 @@ angular.module('your_app_name', [
             url: "/product",
             params: {
                 data: null,
-                allData:null
+                allData: null
             },
             views: {
                 'menuContent': {
@@ -176,6 +176,7 @@ angular.module('your_app_name', [
         })
 
 
+
     .state('app.pay', {
         url: "/pay",
         views: {
@@ -185,6 +186,37 @@ angular.module('your_app_name', [
             }
         }
     })
+
+
+
+    ///////////////////////////MasterData//////////////////////////////////////
+
+    .state('app.master-data', {
+            url: "/master",
+            views: {
+                'menuContent': {
+                    templateUrl: "views/app/master-data.html",
+                    controller: 'MasterCtrl'
+
+                }
+            }
+        })
+        .state('app.promotion', {
+            url: "/promotion",
+            templateUrl: "views/app/master-data/promotion.html",
+
+        })
+        .state('app.exchange', {
+            url: "/exchange",
+            templateUrl: "views/app/master-data/exchange.html"
+
+
+        })
+        .state('app.blacklist', {
+            url: "/blacklist",
+            templateUrl: "views/app/master-data/blacklist.html"
+
+        })
 
 
 

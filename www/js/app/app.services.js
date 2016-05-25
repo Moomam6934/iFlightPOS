@@ -79,6 +79,35 @@ angular.module('your_app_name.app.services', [])
     };
 
 })
+.service('MasterService', function($http,$filter, $q, _) {
+
+    this.getBlacklists = function() {
+        var dfd = $q.defer();
+        $http.get('database.json').success(function(database) {
+            dfd.resolve(database.blacklists);
+        });
+        return dfd.promise;
+    };
+    this.getPromotions = function() {
+        var dfd = $q.defer();
+        $http.get('database.json').success(function(database) {
+            dfd.resolve(database.promotions);
+        });
+        return dfd.promise;
+    };
+    this.getCurrency = function() {
+        var dfd = $q.defer();
+        $http.get('database.json').success(function(database) {
+            dfd.resolve(database.currency);
+        });
+        return dfd.promise;
+    };
+    
+
+    
+    
+
+})
 .service('PaymentService',function($q,$http){
     this.getCurrency = function(){
         var dfd =$q.defer();

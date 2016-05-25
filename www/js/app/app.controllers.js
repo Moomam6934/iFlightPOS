@@ -124,7 +124,7 @@ angular.module('your_app_name.app.controllers', [])
                     }
                 };
             });
-// fffffffffff
+            // fffffffffff
 
         }
     }
@@ -348,7 +348,22 @@ angular.module('your_app_name.app.controllers', [])
 
 .controller('MainCtrl', function($scope, $state, ShopService) {
 
-    ShopService.getOrders().then(function(orders) {
-        $scope.orders = orders;
+        ShopService.getOrders().then(function(orders) {
+            $scope.orders = orders;
+        })
+
     })
-});
+.controller('MasterCtrl', function($scope, $state, MasterService) {
+
+        MasterService.getBlacklists().then(function(blacklists) {
+            $scope.blacklists = blacklists;
+        });
+
+        MasterService.getPromotions().then(function(promotions) {
+            $scope.promotions = promotions;
+        });
+        MasterService.getCurrency().then(function(currency) {
+            $scope.currency = currency;
+        });
+
+    });
