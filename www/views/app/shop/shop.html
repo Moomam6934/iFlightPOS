@@ -1,4 +1,4 @@
-<ion-view view-title="" ng-init="loadData()">
+<ion-view view-title="" ng-init="loadData()" hide-back-button="true">
     <ion-nav-title>
         <ione-popover title="Products" subtitle="change order" listmodel="products" templateurl='views/app/shop/shop-popover.html' on-selected="onSelect">
         </ione-popover>
@@ -14,7 +14,7 @@
         <div class="row shop-products-narrow-cards-outer">
             <div ng-repeat="product in productsByCart" class="col col-33 shop-product-narrow-card" ng-click="select_item(product)" on-hold="onHold(product)">
                 <!-- ui-sref="app.product-detail({productId: product._id})" -->
-                <div ng-class="{selected: orders.indexOf(product) != -1}">
+                <div ng-class="{selected: isSelected.indexOf(product.products_id) != -1}">
                     <div class="list card">
                         <div class="item item-image">
                             <div ng-repeat="itm in orders" ng-show="itm.qty > 0 && itm.products_id === product.products_id">

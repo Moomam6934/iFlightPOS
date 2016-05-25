@@ -348,10 +348,25 @@
 
 /*ionic add animation*/
 
-.select-item-shop {
+
+/*@media only screen and (min-device-width: 320px) {
+    .select-item-shop {
+        background-color: red !important;
+        margin-right: -25px;
+        margin-top: -20px;
+    }
+}*/
+
+.count-item-shop {
     background-color: red !important;
     margin-right: -25px;
     margin-top: -10px;
+}
+
+.select-item-shop {
+    background-color: red !important;
+    margin-right: -25px;
+    margin-top: 55px;
 }
 
 .select-item-shopgreen {
@@ -462,3 +477,10 @@
     height: 80px;
     width: 80px;
 }
+.font-size-20{
+    font-size: 20px;
+
+}
+.style-text-center{
+    text-align: center;
+   }

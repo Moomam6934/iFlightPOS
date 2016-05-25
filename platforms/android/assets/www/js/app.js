@@ -77,6 +77,11 @@ angular.module('your_app_name', [
 
     .state('app.shop', {
         url: "/shop",
+        params: {
+            product_by_qty: null,
+            isSelected: null,
+            products_all: null
+        },
         views: {
             'menuContent': {
                 templateUrl: "views/app/shop/shop.html",
@@ -120,7 +125,10 @@ angular.module('your_app_name', [
     .state('app.product-detail', {
             url: "/product",
             params: {
-                data: null
+                data: null,
+                orders: null,
+                product_data: null,
+                isSelected: null
             },
             views: {
                 'menuContent': {
@@ -130,8 +138,8 @@ angular.module('your_app_name', [
             }
         })
         .state('app.main', {
+            cache : false,
             url: "/main",
-
             views: {
                 'menuContent': {
                     templateUrl: "views/app/main.html",
