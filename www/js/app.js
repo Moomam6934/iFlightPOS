@@ -189,6 +189,9 @@ angular.module('your_app_name', [
     })
 
     .state('app.pay', {
+        params:{
+            iFlightData : null
+        },
         url: "/pay",
         views: {
             'menuContent': {
@@ -300,16 +303,21 @@ angular.module('your_app_name', [
             views: {
                 'menuContent': {
                     templateUrl: "views/app/adjust/shopadjust.html",
-                    controller: 'ShopCtrl'
+                    controller: 'AdjustCtrl'
                 }
             }
         })
         .state('app.adjustdetail', {
+            params: {
+            data: null,
+             isSelected: null
+        },
+
             url: "/adjustdetail",
             views: {
                 'menuContent': {
                     templateUrl: "views/app/adjust/adjustdetail.html",
-                    controller: 'ShopCtrl'
+                    controller: 'AdjustCtrl'
                 }
             }
         })

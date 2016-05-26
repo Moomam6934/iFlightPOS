@@ -1,6 +1,6 @@
 <ion-view view-title="Orders" class="cart-view" cache-view="false">
     <ion-nav-buttons side="right">
-        <button class="button button-clear button-light" ui-sref="app.pay"><b>Pay</b></button>
+        <button class="button button-clear button-light" ui-sref="app.pay({iFlightData : iFlightData})"><b>Pay</b></button>
     </ion-nav-buttons>
     <ion-content overflow-scroll="false" has-bouncing="true">
         <div class="item icon-red">
@@ -24,7 +24,8 @@
                     <div class="col col-40 style-margin-top-5px item-text-wrap">
                         <p class="row-item">{{item.name}}</p>
                     </div>
-                    <div class="col col-25 style-margin-top-5px "><b>{{item.gross_amount | number: 2}} THB</b>
+                    <div class="col col-35 style-margin-top-5px text-right">
+                        <p class=" margin-left-15 "><b>{{item.gross_amount | number: 2}} THB</b></p>
                     </div>
                 </div>
                 <ion-option-button class="button-assertive">&nbsp;&nbsp;&nbsp;Delete&nbsp;&nbsp;&nbsp;

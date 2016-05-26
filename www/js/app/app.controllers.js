@@ -268,7 +268,6 @@ angular.module('your_app_name.app.controllers', [])
 
 })
 
-
 .controller('ShoppingCartCtrl', function($scope, ShopService, $ionicActionSheet, _) {
     $scope.products = ShopService.getCartProducts();
 
@@ -300,9 +299,10 @@ angular.module('your_app_name.app.controllers', [])
     //$scope.paymentDetails;
 })
 
-.controller('PaymentCtrl', function($scope, $ionicModal, $state, $ionicPopup, PaymentService, $stateParams) {
+.controller('PaymentCtrl', function($scope, $ionicModal, $state, $ionicPopup, PaymentService, $stateParams, ShopService) {
 
     $scope.iFlightData = $stateParams.iFlightData;
+    $scope.calculatorTotal = $stateParams.iFlightData.total_gross_amount;
 
     $scope.currency = [];
     PaymentService.getCurrency().then(function(currency) {
@@ -337,6 +337,7 @@ angular.module('your_app_name.app.controllers', [])
         amount: null
 
     }];
+
 
 
     $scope.itemTypePay;
@@ -409,7 +410,41 @@ angular.module('your_app_name.app.controllers', [])
                 n[i].amount = n[i].currency.money;
             }
         };
+        var result = 0;
+        for (var i = $scope.payments.length - 1; i >= 0; i--) {
+            if ($scope.payments[i].amount != null) {
+                result += $scope.payments[i].amount;
+            }
+        };
+        $scope.calculatorTotal = $scope.iFlightData.total_gross_amount - result;
+        $scope.iFlightData.sold_total = result;
+        $scope.iFlightData.change = result - $scope.iFlightData.total_gross_amount;
+
     }, true);
+    $scope.removePayment = function(index) {
+        $scope.payments.splice(index, 1);
+    }
+
+    $scope.comfirmPayment = function() {
+        console.log($scope.iFlightData);
+
+        var confirmPopup = $ionicPopup.confirm({
+            title: 'Confirm',
+            template: 'Are you sure you want to continue ?'
+        });
+
+        confirmPopup.then(function(res) {
+            if (res) {
+                console.log('You are sure');
+                ShopService.setOrdersSuccess($scope.iFlightData);
+
+                $state.go('app.main.all');
+            } else {
+                console.log('You are not sure');
+            }
+        });
+
+    }
 
 })
 
@@ -420,12 +455,32 @@ angular.module('your_app_name.app.controllers', [])
     }
 })
 
-.controller('AdjustCtrl', function($scope, $state, AdjustService) {
 
+.controller('AdjustCtrl', function($scope, AdjustService, $state, $stateParams, $ionicPopover, $filter) {
+    $scope.detail = $stateParams.data;
+    $scope.res = {};
     AdjustService.getProducts().then(function(products) {
 
-        $scope.products = products;
+        $scope.products = products.cart[0].products;
+        $scope.res.data = products.cart;
     });
+
+    $scope.click = function(product) {
+
+        var click = 1;
+        $state.go('app.adjustdetail', {
+            data: product,
+        });
+
+        // app.product-detail({productId: product._id})
+
+    }
+    $scope.onSelect = function(item) {
+        var cart = $filter('filter')($scope.products.data, function(data) {
+                return data.class === item.class;
+            })
+            // $scope.cart = cart[0].products;
+    }
 
 
 })
@@ -443,4 +498,5 @@ angular.module('your_app_name.app.controllers', [])
         $scope.currency = currency;
     });
 
-});
+
+})

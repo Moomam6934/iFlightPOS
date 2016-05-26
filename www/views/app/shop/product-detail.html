@@ -19,9 +19,9 @@
         </div>
         <div class="bar bar-footer footer-ber-image">
             <div class="row shop-products-narrow-cards-outer shop-product-cards-scroller">
-                <div ng-repeat="range in ranges(product.total_qty + product.qty)" class="col col-25 shop-product-narrow-card" ui-sref="app.product-detail({productId: related_product._id})">
+                <div ng-repeat="range in ranges(product.total_qty + product.qty)" class="col col-25 shop-product-narrow-card">
                     <div ng-class="{selected: qty == range}">
-                        <div class="list card">
+                        <div class="list card list-card-range">
                             <div class="item item-image" ng-click="editProductQty(range)">
                                 <pre-img ratio="_1_1" helper-class="main-image">
                                     <img ng-src="{{product.img}}" spinner-on-load class="image-80">

@@ -1,32 +1,33 @@
-<ion-view view-title="" ng-init="loadData()" >
-    <ion-nav-title>
-        <!-- <ione-popover title="Products" subtitle="change order" listmodel="products" templateurl='views/app/shop/shop-popover.html' on-selected="onSelect">
-        </ione-popover> -->
-    </ion-nav-title>
-    <ion-nav-buttons side="left">
-        <button class="button button-icon button-clear ion-reply" ng-click="showActionSheet()">
-        </button>
-    </ion-nav-buttons>
+<ion-view view-title="Product">
     <ion-nav-buttons side="right">
-        <button class="button button-clear button-light" ui-sref="app.adjustdetail"><b>Orders</b></button>
+        <button class="button button-clear button-light" ng-click="gotoShop(range)"><b>Done</b></button>
     </ion-nav-buttons>
-    <ion-content overflow-scroll="false" has-bouncing="true">
-        <div class="row shop-products-narrow-cards-outer">
-            <div ng-repeat="product in productsByCart" class="col col-33 shop-product-narrow-card" ng-click="select_item(product)">
-                <!-- ui-sref="app.product-detail({productId: product._id})" -->
-                <div ng-class="{selected: orders.indexOf(product) != -1}">
-                    <div class="list card">
-                        <div class="item item-image">
-                            <div ng-repeat="itm in orders" ng-show="itm.qty > 0 && itm.products_id === product.products_id">
-                                <!-- <span class="badge badge-assertive select-item-shop">{{itm.qty}}</span> -->
+    <ion-content overflow-scroll="true" has-bouncing="true" class="icon-red">
+        <div class="row item item-text-wrap">
+            <div class="col col-40 "><img class="style-pix-h150-w150" ng-src="{{product.img}}">
+            </div>
+            <div class="col col-60 text-center">
+                <br>
+                <span class="product-title icon-red">{{product.name}}</span>
+                <h1 class="product-price icon-red ">{{product.price}} THB</h1>
+            </div>
+        </div>
+        <div class="item item-text-wrap">
+            <p style="color:red; font-size:25px;"><b>Promotion</b></p>
+            <br>
+            <p style="color:red; font-size:15px;">- Buy 1 Get 1 Free!</p>
+        </div>
+        <div class="bar bar-footer footer-ber-image">
+            <div class="row shop-products-narrow-cards-outer shop-product-cards-scroller">
+                <div ng-repeat="range in ranges(product.total_qty + product.qty)" class="col col-25 shop-product-narrow-card" ui-sref="app.product-detail({productId: related_product._id})">
+                    <div ng-class="{selected: qty == range}">
+                        <div class="list card">
+                            <div class="item item-image" ng-click="editProductQty(range)">
+                                <pre-img ratio="_1_1" helper-class="main-image">
+                                    <img ng-src="{{product.img}}" spinner-on-load class="image-80">
+                                </pre-img>
+                                <span class="badge badge-assertive count-item-shop">{{range}}</span>
                             </div>
-                            <pre-img ratio="_1_1" helper-class="main-image">
-                                <img ng-src="{{product.img}}" spinner-on-load>
-                            </pre-img>
-                        </div>
-                        <div class="item item-body">
-                            <h2 class="card-title">{{product.name}}</h2>
-                            <p class="card-description"><b>${{product.price}}</b></p><!-- <span class="badge badge-balanced select-item-shopgreen">{{product.total_qty}}</span> -->
                         </div>
                     </div>
                 </div>
