@@ -1,34 +1,39 @@
 <ion-view view-title="Product">
+
     <ion-nav-buttons side="right">
-        <button class="button button-clear button-light" ng-click="gotoShop(range)"><b>Done</b></button>
+        <button class="button button-clear button-light" ng-click="gotoShop(range)" ui-sref="app.main"><b>Done</b></button>
     </ion-nav-buttons>
     <ion-content overflow-scroll="true" has-bouncing="true" class="icon-red">
-        
-
-            <div class="row">
-                <div class="col col-50">
-                    <img src="{{product.img}}" alt="">
-                </div>
-                <div class="col col-50">
-                    <p class="style-text">Name.Product</p>
-                <p class="style-text">Price</p>
-                </div>
+        <div class="row item item-text-wrap">
+            <div class="col col-40 "><img class="style-pix-h150-w150" ng-src="{{detail.img}}">
             </div>
-           
-            <div class="row">
-                <div class="col col-25">
-                    <p class="style-text-unit"> Unit:</p>
-                </div>
-                <div class="col col-75">
-                    <span class="style-textarea1"> <input type="number" ></span>
-                </div>
+            <div class="col col-60 text-center">
+                <br>
+                <span class="product-title icon-red">{{detail.name}}</span>
+                <h1 class="product-price icon-red ">{{detail.price}} THB</h1>
             </div>
-
-            
+        </div>
+        <ion-item>
             <br>
-            <p class="style-text-unit">Remark</p>
-            <textarea rows="2" cols="47" name="usrtxt" wrap="hard" class="style-textarea">remark
-            </textarea>
-       
+            <div class="row">
+                <div class="col col-100">
+                    <div class="list">
+                        <h2 class="style-red1">Unit :</h2>
+                        <label class="item item-input">
+                            <input type="number" class="style-textarea1">
+                        </label>
+                    </div>
+                    <br>
+                    <br>
+                    <div class="list">
+                        <h2 class="style-red1">Remark :</h2>
+                        <label class="item item-input">
+                            <textarea rows="6" cols="45" wrap="hard" calss="style-textarea">
+                            </textarea>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </ion-item>
     </ion-content>
 </ion-view>

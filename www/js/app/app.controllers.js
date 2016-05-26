@@ -426,12 +426,32 @@ angular.module('your_app_name.app.controllers', [])
     }
 })
 
-.controller('AdjustCtrl', function($scope, $state, AdjustService) {
 
+.controller('AdjustCtrl', function($scope, AdjustService, $state, $stateParams,$ionicPopover,$filter) {
+$scope.detail= $stateParams.data;
+$scope.res = {};
     AdjustService.getProducts().then(function(products) {
 
-        $scope.products = products;
+        $scope.products = products.cart[0].products;
+        $scope.res.data = products.cart;
     });
+
+    $scope.click = function(product) {
+
+        var click = 1;
+        $state.go('app.adjustdetail', {
+            data: product,
+        });
+
+        // app.product-detail({productId: product._id})
+
+    }
+$scope.onSelect = function(item) {
+        var cart = $filter('filter')($scope.products.data, function(data) {
+            return data.class === item.class;
+        })
+        // $scope.cart = cart[0].products;
+    }
 
 
 })
@@ -448,5 +468,8 @@ angular.module('your_app_name.app.controllers', [])
     MasterService.getCurrency().then(function(currency) {
         $scope.currency = currency;
     });
+
+
+
 
 });

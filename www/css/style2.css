@@ -188,8 +188,13 @@
     text-align: center;
     border-style: 3px solid !important;
 }
+
 .style-textarea1 {
     margin-top: 10px;
-    text-align: center;
     border-style: 1px solid !important;
+}
+
+.style-red1 {
+    color: red;
+    font-size: 21px;
 }

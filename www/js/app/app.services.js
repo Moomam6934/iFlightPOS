@@ -118,7 +118,7 @@ angular.module('your_app_name.app.services', [])
     this.getProducts = function() {
         var dfd = $q.defer();
         $http.get('database.json').success(function(database) {
-            dfd.resolve(database.cart.products);
+            dfd.resolve(database);
         });
         return dfd.promise;
     };
