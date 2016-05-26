@@ -1,7 +1,7 @@
 /* Empty. Add your own CSS if you like */
 
 .selected {
-    background-color:#FFFFFF;
+    background-color:red;
     padding: 2px !important;
     /*margin-left: 10px !important;*/
 }
@@ -421,6 +421,10 @@
     font-size: 30px;
 }
 
+.style-text-size-35px {
+    font-size: 35px;
+}
+
 .style-text-size-20px {
     font-size: 20px;
 }
@@ -460,8 +464,8 @@
 }
 
 .style-width50-height50 {
-    width: 75px;
-    height: 65px;
+    width: 60px;
+    height: 60px;
 }
 
 .style-pix-h150-w150 {
@@ -477,10 +481,20 @@
     height: 80px;
     width: 80px;
 }
-.font-size-20{
-    font-size: 20px;
 
+.list-card-range {
+    height: 70px;
+    width: 70px;
 }
-.style-text-center{
+
+.font-size-20 {
+    font-size: 20px;
+}
+
+.style-text-center {
     text-align: center;
-   }
+}
+
+.margin-left-15 {
+    margin-left: -15px;
+}

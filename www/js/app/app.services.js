@@ -72,11 +72,26 @@ angular.module('your_app_name.app.services', [])
 
         orders_keep.id = ids;
         orders_keep.receipt_number = receipt_number;
+        orders_keep.status = 'keep';
 
         iFlight.orders.push(orders_keep);
 
         window.localStorage.iFlight_data = JSON.stringify(iFlight);
     };
+
+    this.setOrdersSuccess = function(orders_success) {
+        var iFlight = !_.isUndefined(window.localStorage.iFlight_data) ? JSON.parse(window.localStorage.iFlight_data) : [];
+        var ids = iFlight.orders.length + 1;
+        var receipt_number = iFlight.orders.length + 1;
+
+        orders_success.id = ids;
+        orders_success.receipt_number = receipt_number;
+        orders_success.status = 'sold';
+
+        iFlight.orders.push(orders_success);
+
+        window.localStorage.iFlight_data = JSON.stringify(iFlight);
+    }
 })
 
 .service('PaymentService', function($q, $http) {
@@ -113,7 +128,9 @@ angular.module('your_app_name.app.services', [])
         return dfd.promise;
     }
 })
-.service('AdjustService', function($http,$filter, $q, _) {
+
+.service('AdjustService', function($http, $filter, $q, _) {
+
 
     this.getProducts = function() {
         var dfd = $q.defer();
@@ -122,6 +139,7 @@ angular.module('your_app_name.app.services', [])
         });
         return dfd.promise;
     };
+
 
 
 })

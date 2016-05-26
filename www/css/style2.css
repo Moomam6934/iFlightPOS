@@ -1,11 +1,19 @@
 .item-price {
     float: right;
+    text-align: right;
     color: #000000;
     font-size: 20px;
+    margin-right: 10px;
+}
+.item-price-cart {
+    text-align: right;
+    color: #000000;
+    font-size: 20px;
+    margin-right: 10px;
 }
 
 .style-margin-right {
-    margin-right: 10px;
+    margin-right: 20px;
 }
 
 .item-total {
@@ -81,7 +89,7 @@
 
 .style-width95 {
     width: 95%;
-    text-align: center;
+    text-align: center !important;
     color: #9C9C9C;
 }
 
@@ -198,3 +206,43 @@
     color: red;
     font-size: 21px;
 }
+.button-sign-in {
+    margin-top: -350px !important;
+    color: #FFFFFF !important;
+    font-size: 30px;
+}
+
+.input-login {
+    height: 40px;
+    border-radius: 10px;
+    border-color: #FFF !important;
+}
+
+.item-row {
+    height: 100px;
+}
+
+.row-item {
+    margin-top: -7px;
+}
+
+.font-title {
+    font-size: 20px !important;
+}
+
+.margin-top-li {
+    margin-top: -10px;
+}
+
+.set-padding {
+    height: 90px;
+}
+
+.set-top {
+    margin-top: -20px;
+}
+
+.set-top-p {
+    margin-top: 7px;
+}
+

@@ -14,19 +14,17 @@
     <ion-content overflow-scroll="false" has-bouncing="true">
         <div class="row shop-products-narrow-cards-outer">
             <div ng-repeat="product in products" class="col col-33 shop-product-narrow-card" ng-click="click(product)" ui-sref="app.adjustdetail">
-                <div ng-class="{selected: isSelected.indexOf(product) != -1}">
-                    <div class="list card">
-                        <div class="item item-image">
-                            <div ng-repeat="itm in orders" ng-show="itm.qty > 0 && itm.products_id === product.products_id">
-                            </div>
-                            <pre-img ratio="_1_1" helper-class="main-image">
-                                <img ng-src="{{product.img}}" spinner-on-load>
-                            </pre-img>
+                <div class="list card">
+                    <div class="item item-image">
+                        <div ng-repeat="itm in orders" ng-show="itm.qty > 0 && itm.products_id === product.products_id">
                         </div>
-                        <div class="item item-body">
-                            <h2 class="card-title">{{product.name}}</h2>
-                            <p class="card-description"><b>${{product.price}}</b></p>
-                        </div>
+                        <pre-img ratio="_1_1" helper-class="main-image">
+                            <img ng-src="{{product.img}}" spinner-on-load>
+                        </pre-img>
+                    </div>
+                    <div class="item item-body">
+                        <h2 class="card-title">{{product.name}}</h2>
+                        <p class="card-description"><b>${{product.price}}</b></p>
                     </div>
                 </div>
             </div>

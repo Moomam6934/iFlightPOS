@@ -1,0 +1,17 @@
+<ion-view view-title="Blacklist" class="shop-home-view">
+    <ion-content overflow-scroll="false" has-bouncing="true">
+        <div class="list list-balance">
+            <label class="item item-input input-balance">
+                <i class="icon ion-search placeholder-icon"></i>
+                <input type="text" placeholder="Search" ng-model="searchall">
+            </label>
+        </div>
+        <ion-list >
+            <ion-item ng-repeat="black in blacklists | filter: searchall">
+                <a class="front-black" href="#">
+                    <b class="">{{black.account}} </b>
+                </a>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>
