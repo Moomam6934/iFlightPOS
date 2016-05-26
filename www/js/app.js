@@ -199,42 +199,14 @@ angular.module('your_app_name', [
 
     ///////////////////////////MasterData//////////////////////////////////////
 
-    .state('app.master', {
-        url: "/master",
-        views: {
-            'menuContent': {
-                templateUrl: "views/app/master.html",
-                controller: 'MasterCtrl'
-
-            }
-        }
-    })
-
-    .state('app.promotion', {
-        url: "/promotion",
-        templateUrl: "views/app/master-data/promotion.html",
-
-    })
-
-    .state('app.exchange', {
-        url: "/exchange",
-        templateUrl: "views/app/master-data/exchange.html"
-
-
-    })
-
-    // .state('app.blacklist', {
-    //     url: "/blacklist",
-    //     templateUrl: "views/app/master-data/blacklist.html"
-
-    // })
-
+    
     .state('app.data', {
         cache: false,
         url: "/data",
         views: {
             'menuContent': {
-                templateUrl: "views/app/master-data/data.html"
+                templateUrl: "views/app/master-data/data.html",
+                controller: 'MasterCtrl'
 
             }
         }
@@ -249,6 +221,15 @@ angular.module('your_app_name', [
         }
     })
 
+    .state('app.data.exchange', {
+        url: "/exchange",
+        views: {
+            'data-exchange': {
+                templateUrl: "views/app/master-data/data-exchange.html"
+            }
+        }
+    })
+
     .state('app.data.promotion', {
         url: "/promotion",
         views: {
@@ -257,6 +238,9 @@ angular.module('your_app_name', [
             }
         }
     })
+
+
+
 
     //AUTH ROUTES
 

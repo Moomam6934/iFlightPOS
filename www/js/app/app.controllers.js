@@ -98,7 +98,7 @@ angular.module('your_app_name.app.controllers', [])
     };
 })
 
-.controller('ShopCtrl', function($scope, ShopService, $ionicActionSheet, $timeout, $ionicPopover, $filter, $state, $filter, $stateParams) {
+.controller('ShopCtrl', function($scope, ShopService, $ionicActionSheet, $timeout, $ionicPopover, $state, $filter, $stateParams) {
 
 
     $scope.iFlightData = {
