@@ -93,6 +93,9 @@ angular.module('your_app_name', [
 
     .state('app.cart', {
         url: "/cart",
+        params:{
+            iFlightData : null 
+        },
         views: {
             'menuContent': {
                 templateUrl: "views/app/shop/cart.html",

@@ -8,7 +8,7 @@
         </button>
     </ion-nav-buttons>
     <ion-nav-buttons side="right">
-        <button class="button button-clear button-light" ui-sref="app.cart"><b>Orders</b></button>
+        <button class="button button-clear button-light" ng-click="checkoutProduct(iFlightData)"><b>Orders</b></button>
     </ion-nav-buttons>
     <ion-content overflow-scroll="false" has-bouncing="true">
         <div class="row shop-products-narrow-cards-outer">
@@ -17,7 +17,7 @@
                 <div ng-class="{selected: isSelected.indexOf(product.products_id) != -1}">
                     <div class="list card">
                         <div class="item item-image">
-                            <div ng-repeat="itm in orders" ng-show="itm.qty > 0 && itm.products_id === product.products_id">
+                            <div ng-repeat="itm in iFlightData.products" ng-show="itm.qty > 0 && itm.products_id === product.products_id">
                                 <span class="badge badge-assertive select-item-shop">{{itm.qty}}</span>
                             </div>
                             <pre-img ratio="_1_1" helper-class="main-image">

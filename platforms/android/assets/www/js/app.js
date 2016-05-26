@@ -93,6 +93,9 @@ angular.module('your_app_name', [
 
     .state('app.cart', {
         url: "/cart",
+        params:{
+            iFlightData : null 
+        },
         views: {
             'menuContent': {
                 templateUrl: "views/app/shop/cart.html",
@@ -123,64 +126,67 @@ angular.module('your_app_name', [
     })
 
     .state('app.product-detail', {
-            url: "/product",
-            params: {
-                data: null,
-                orders: null,
-                product_data: null,
-                isSelected: null
-            },
-            views: {
-                'menuContent': {
-                    templateUrl: "views/app/shop/product-detail.html",
-                    controller: 'ProductCtrl'
-                }
+        url: "/product",
+        params: {
+            data: null,
+            orders: null,
+            product_data: null,
+            isSelected: null
+        },
+        views: {
+            'menuContent': {
+                templateUrl: "views/app/shop/product-detail.html",
+                controller: 'ProductCtrl'
             }
-        })
-        .state('app.main', {
-            cache: false,
-            url: "/main",
-            views: {
-                'menuContent': {
-                    templateUrl: "views/app/main.html",
-                    controller: 'MainCtrl'
-                }
-            }
-        })
-        .state('app.main.all', {
-            url: "/all",
-            views: {
-                'main-all': {
-                    templateUrl: "views/app/main-tabs/main-all.html"
-                }
-            }
-        })
-        .state('app.main.keep', {
-            url: "/keep",
-            views: {
-                'main-keep': {
-                    templateUrl: "views/app/main-tabs/main-keep.html"
-                }
-            }
-        })
-        .state('app.main.sold', {
-            url: "/sold",
-            views: {
-                'main-sold': {
-                    templateUrl: "views/app/main-tabs/main-sold.html"
-                }
-            }
-        })
-        .state('app.main.void', {
-            url: "/void",
-            views: {
-                'main-void': {
-                    templateUrl: "views/app/main-tabs/main-void.html"
-                }
-            }
-        })
+        }
+    })
 
+    .state('app.main', {
+        cache: false,
+        url: "/main",
+        views: {
+            'menuContent': {
+                templateUrl: "views/app/main.html",
+                controller: 'MainCtrl'
+            }
+        }
+    })
 
+    .state('app.main.all', {
+        url: "/all",
+        views: {
+            'main-all': {
+                templateUrl: "views/app/main-tabs/main-all.html"
+            }
+        }
+    })
+
+    .state('app.main.keep', {
+        url: "/keep",
+        views: {
+            'main-keep': {
+                templateUrl: "views/app/main-tabs/main-keep.html"
+            }
+        }
+    })
+
+    .state('app.main.sold', {
+        url: "/sold",
+        views: {
+            'main-sold': {
+                templateUrl: "views/app/main-tabs/main-sold.html"
+            }
+        }
+    })
+
+    .state('app.main.void', {
+        url: "/void",
+        views: {
+            'main-void': {
+                templateUrl: "views/app/main-tabs/main-void.html"
+            }
+        }
+    })
 
     .state('app.pay', {
         url: "/pay",
@@ -197,35 +203,66 @@ angular.module('your_app_name', [
     ///////////////////////////MasterData//////////////////////////////////////
 
     .state('app.master', {
-            url: "/master",
-            views: {
-                'menuContent': {
-                    templateUrl: "views/app/master.html",
-                    controller: 'MasterCtrl'
+        url: "/master",
+        views: {
+            'menuContent': {
+                templateUrl: "views/app/master.html",
+                controller: 'MasterCtrl'
 
-                }
             }
-        })
-        .state('app.promotion', {
-            url: "/promotion",
-            templateUrl: "views/app/master-data/promotion.html",
+        }
+    })
 
-        })
-        .state('app.exchange', {
-            url: "/exchange",
-            templateUrl: "views/app/master-data/exchange.html"
+    .state('app.promotion', {
+        url: "/promotion",
+        templateUrl: "views/app/master-data/promotion.html",
 
+    })
 
-        })
-        .state('app.blacklist', {
-            url: "/blacklist",
-            templateUrl: "views/app/master-data/blacklist.html"
-
-        })
+    .state('app.exchange', {
+        url: "/exchange",
+        templateUrl: "views/app/master-data/exchange.html"
 
 
+    })
+
+    // .state('app.blacklist', {
+    //     url: "/blacklist",
+    //     templateUrl: "views/app/master-data/blacklist.html"
+
+    // })
+
+    .state('app.data', {
+        cache: false,
+        url: "/data",
+        views: {
+            'menuContent': {
+                templateUrl: "views/app/master-data/data.html"
+
+            }
+        }
+    })
+
+    .state('app.data.blacklist', {
+        url: "/blacklist",
+        views: {
+            'data-blacklist': {
+                templateUrl: "views/app/master-data/data-blacklist.html"
+            }
+        }
+    })
+
+    .state('app.data.promotion', {
+        url: "/promotion",
+        views: {
+            'data-promotion': {
+                templateUrl: "views/app/master-data/data-promotion.html"
+            }
+        }
+    })
 
     //AUTH ROUTES
+
     .state('auth', {
         url: "/auth",
         templateUrl: "views/auth/auth.html",
@@ -266,32 +303,32 @@ angular.module('your_app_name', [
 
 
     .state('app.orderadjust', {
-        url: "/orderadjust",
-        views: {
-            'menuContent': {
-                templateUrl: "views/app/adjust/orderadjust.html",
-                controller: 'AdjustCtrl'
+            url: "/orderadjust",
+            views: {
+                'menuContent': {
+                    templateUrl: "views/app/adjust/orderadjust.html",
+                    controller: 'AdjustCtrl'
+                }
             }
-        }
-    })
-    .state('app.shopadjust', {
-        url: "/shopadjust",
-        views: {
-            'menuContent': {
-                templateUrl: "views/app/adjust/shopadjust.html",
-               controller: 'ShopCtrl'
+        })
+        .state('app.shopadjust', {
+            url: "/shopadjust",
+            views: {
+                'menuContent': {
+                    templateUrl: "views/app/adjust/shopadjust.html",
+                    controller: 'ShopCtrl'
+                }
             }
-        }
-    })
-    .state('app.adjustdetail', {
-        url: "/adjustdetail",
-        views: {
-            'menuContent': {
-                templateUrl: "views/app/adjust/adjustdetail.html",
-               controller: 'ShopCtrl'
+        })
+        .state('app.adjustdetail', {
+            url: "/adjustdetail",
+            views: {
+                'menuContent': {
+                    templateUrl: "views/app/adjust/adjustdetail.html",
+                    controller: 'ShopCtrl'
+                }
             }
-        }
-    })
+        })
 
 
 

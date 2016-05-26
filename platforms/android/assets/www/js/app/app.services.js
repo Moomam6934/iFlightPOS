@@ -72,6 +72,7 @@ angular.module('your_app_name.app.services', [])
 
         orders_keep.id = ids;
         orders_keep.receipt_number = receipt_number;
+        orders_keep.status = 'keep';
 
         iFlight.orders.push(orders_keep);
 

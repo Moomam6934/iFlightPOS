@@ -188,8 +188,35 @@
     text-align: center;
     border-style: 3px solid !important;
 }
+
 .style-textarea1 {
     margin-top: 10px;
     text-align: center;
     border-style: 1px solid !important;
+}
+
+.button-sign-in {
+    margin-top: -350px !important;
+    color: #FFFFFF !important;
+    font-size: 30px;
+}
+
+.input-login {
+    height: 40px;
+    border-radius: 10px;
+    border-color: #FFF !important;
+}
+
+.item-row {
+    height: 80px;
+}
+
+.row-item {
+    margin-top: -16px;
+}
+.font-title{
+    font-size: 20px !important;
+}
+.margin-top-li{
+     margin-top:-10px;
 }

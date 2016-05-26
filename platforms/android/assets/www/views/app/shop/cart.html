@@ -3,25 +3,28 @@
         <button class="button button-clear button-light" ui-sref="app.pay"><b>Pay</b></button>
     </ion-nav-buttons>
     <ion-content overflow-scroll="false" has-bouncing="true">
-        <ion-list>
-            <div class="item icon-red style-text-size-20px " href="#">
-                &nbsp;&nbsp;Total
-                <span class="item-note icon-red style-text-size-30px">200.00 THB</span>
+        <div class="item icon-red">
+            <div class="row ">
+                <div class="col col-30 text-left">
+                    <h2 class="font-title test">Total</h2></div>
+                <div class="col col-70 text-right">
+                    <h2 class="font-title test">{{iFlightData.total_gross_amount | number: 2}} THB</h2></div>
             </div>
-        </ion-list>
+        </div>
         <ion-list>
-            <ion-item>
-                <div class="row">
+            <ion-item class="item-row" ng-repeat="item in iFlightData.products | orderBy :'products_id'">
+                <div class="row row-item">
                     <div class="col col-10 style-margin-top-5px">
-                        <label><b>A1</b></label>
+                        <label><b>1A</b></label>
                     </div>
                     <div class="col col-25">
-                        <img class="style-width50-height50" src="http://static1.squarespace.com/static/50e70ccbe4b0cdba76c4cad3/t/5137a580e4b0aafa8d413f8d/1362601347110/img_0198.jpg">
+                        <span class="badge badge-assertive count-item-shop">{{item.qty}}</span>
+                        <img class="style-width50-height50" ng-src="{{item.img}}">
                     </div>
                     <div class="col col-40 style-margin-top-5px item-text-wrap">
-                        <label><b>Chicken Satay Wrap</b></label>
+                        <p class="row-item">{{item.name}}</p>
                     </div>
-                    <div class="col col-25 style-margin-top-5px "><b>80.00 THB</b>
+                    <div class="col col-25 style-margin-top-5px "><b>{{item.gross_amount | number: 2}} THB</b>
                     </div>
                 </div>
                 <ion-option-button class="button-assertive">&nbsp;&nbsp;&nbsp;Delete&nbsp;&nbsp;&nbsp;
@@ -31,102 +34,20 @@
             <div class="item item-divider">
                 Discount
             </div>
+            <a class="item">
+                ....
+            </a>
         </div>
-        Buy 1 Get 1 Free!
-       <!--  <div class="style-margin-left" ng-repeat="item in promotions">
-            <div class="row ">
-                <div class="col col-25 style-margin-left10p" class="text-center" ng-click="typeOfPromotion(item)"><span class="input-label">{{item.type}}<i class="icon ion-chevron-right text-margin-left"></i></span></div>
-                <div class="col col-75 text-border">
-                    <input type="text" ng-click="promotion(typepromotion,item)" ng-show="item.type === 'Pro'" class="style-width95" ng-model="item.currency.exchange" readOnly>
-                    <input type="text" ng-show="item.type === 'Credit'" class="style-width95" ng-model="item.currency.card_id">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col col-25 style-margin-left10p"></div>
-                <div class="col col-75 style-border-left1">
-                    <input type="text" class="style-width90" ng-model="item.currency.money">
-                </div>
-            </div>
-        </div>
-        <ul class="list ">
-            <li class="item style-ul ">
-                <div class="style-margin-left15p ">
-                    <div class="row " ng-click="addPromotion() ">
-                        <div class="col col-25 style-text-align-center "><i class="ion-plus-circled "></i></div>
-                        <div class="col col-75 style-color-green ">
-                            <span>Add pppp</span>
-                        </div>
+        <li class="item style-ul margin-top-li">
+            <div class="style-margin-left15p">
+                <div class="row">
+                    <div class="col col-25 style-text-align-center">
+                        <i class="ion-ios-plus-outline"></i></div>
+                    <div class="col col-75 style-color-green">
+                        <span>Add Discount</span>
                     </div>
                 </div>
-            </li>
-        </ul> -->
+            </div>
+        </li>
     </ion-content>
 </ion-view>
-<!-- <ion-view view-title="Shopping cart " class="cart-view " cache-view="false ">
-  <ion-content>
-    <div ng-if="products.length==0 ">
-      <div class="empty-cart ">
-        <i class="icon ion-ios-cart-outline "></i>
-        <h3 class="no-products ">Your shopping cart is empty</h3>
-      </div>
-    </div>
-    <div ng-if="products.length> 0">
-            <div class="products-list">
-                <div class="product-list-item" ng-repeat="product in products">
-                    <div class="row product-title-wrapper">
-                        <span class="product-title">{{product.title}}</span>
-                    </div>
-                    <div class="row product-content-wrapper">
-                        <div class="col">
-                            <div class="product-picture">
-                                <pre-img ratio="_1_1" helper-class="main-image">
-                                    <img ng-src="{{product.picture}}" spinner-on-load>
-                                </pre-img>
-                            </div>
-                            <div class="product-options-wrapper">
-                                <div class="row product-options">
-                                    <div class="col col-75 select-option">
-                                        <select>
-                                            <option value="1">Shiny Black Gold</option>
-                                            <option value="2">Black Ice Revo</option>
-                                            <option value="3">Black Silver</option>
-                                        </select>
-                                    </div>
-                                    <div class="col col-25 select-option">
-                                        <select>
-                                            <option ng-repeat="i in [1,2,3,4,5,6,7,8,9,10]" value="{{i}}">{{i}}</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="row remove-product-wrapper">
-                                    <div class="col col-center col-75">
-                                        <span class="remove-product-button" ng-click="removeProductFromCart({{product}})">Remove</span>
-                                        <span class="remove-product-button" ng-click="removeProductFromCart(product)">Remove</span>
-                                        <button class="button button-clear button-small button-assertive remove-product-button" ng-click="removeProductFromCart(product)">
-                                            Remove
-                                        </button>
-                                    </div>
-                                    <div class="col col-center col-25">
-                                        <span class="product-price">${{product.price}}</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="item item-divider shop-section-title">
-                <span class="title-copy">Sub total</span>
-                <span class="checkout-total-price section-action">${{ getSubtotal() }} USD</span>
-            </div>
-            <div class="row padding">
-                <button class="button button-block button-energized checkout-btn" ui-sref="app.shipping-address">
-                    Continue to Checkout
-                </button>
-            </div>
-        </div>
-    </ion-content>
-</ion-view> -->
-<!-- 
-<h2 class="product-title">{{product.title}}</h2>
-            <p class="product-price">{{product.price}}</p> -->

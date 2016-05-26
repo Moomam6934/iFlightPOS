@@ -5338,6 +5338,7 @@ a.subdued:last-child {
 .platform-android .bar .title {
     font-size: 19px;
     line-height: 44px;
+    transform: translate3d(0px, 0px, 0px) !important;
 }
 
 .bar-light .button {
@@ -13187,7 +13188,7 @@ ion-spinner.spinner-on-load {
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: #303030;
+    /*background-color: #303030;*/
     z-index: -1;
     opacity: 0.6;
 }

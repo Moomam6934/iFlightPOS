@@ -2,12 +2,38 @@
     <ion-content scroll="false">
         <div class="top-content row">
             <div class="app-copy col col-center">
-                <h1 class="app-logo">LOGO</h1>
+            </div>
+        </div>
+        <div class="list">
+            <br>
+            <br>
+            <div class="row">
+                <div class="col col-10"></div>
+                <div class="col col-80">
+                    <label class="item item-input input-login">
+                        <span class="input-label">Username</span>
+                        <input type="text" >
+                    </label>
+                </div>
+                <div class="col col-10"></div>
+            </div>
+            <div class="row">
+                <div class="col col-10"></div>
+                <div class="col col-80">
+                    <label class="item item-input input-login">
+                        <span class="input-label">Password</span>
+                        <input type="password">
+                    </label>
+                </div>
+                <div class="col col-10"></div>
             </div>
         </div>
         <div class="bottom-content row">
             <div class="col col-bottom">
-                <a class="google-sign-in button button-block icon-left ion-social-google" ng-click="googleSignIn()">
+                <a class="button button-block button-clear button-sign-in" ng-click="googleSignIn()">
+                            Sign In
+                </a>
+                <!-- <a class="google-sign-in button button-block icon-left ion-social-google" ng-click="googleSignIn()">
                     <span class="btn-copy">Google</span>
                 </a>
                 <a class="facebook-sign-in button button-block icon-left ion-social-facebook" ng-click="facebookSignIn()">
@@ -16,26 +42,26 @@
                 <div class="row split-actions">
                     <div class="col">
                         <a class="button button-block button-outline" ui-sref="auth.signup">
-              Sign Up
-            </a>
+                            Sign Up
+                        </a>
                     </div>
                     <div class="col">
                         <a class="button button-block button-outline" ui-sref="auth.login">
-              Log In
-            </a>
-                    </div>
-                </div>
-                <div class="other-options-outer">
+                            Sign In
+                        </a>
+                    </div> -->
+            </div>
+            <!--                 <div class="other-options-outer">
                     <a ng-show="!show_hidden_actions" animation="'fade'" ng-click="toggleHiddenActions()" class="other-options button button-clear button-block">
-            Show more
-          </a>
+                            Show more
+                        </a>
                     <div ng-cloak ng-show="show_hidden_actions" animation="'fade'" class="hidden-actions ng-cloak ng-hide">
                         <a class="twitter-sign-in button button-block icon-left ion-social-twitter" ng-click="twitterSignIn()">
                             <span class="btn-copy">Twitter</span>
                         </a>
                     </div>
-                </div>
-            </div>
+                </div> -->
+        </div>
         </div>
     </ion-content>
 </ion-view>
