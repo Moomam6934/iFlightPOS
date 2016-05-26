@@ -412,6 +412,9 @@
 .style-col-right {
     text-align: right;
 }
+.style-col-left {
+    text-align: left;
+}
 
 .style-col-center {
     text-align: center;
@@ -437,6 +440,7 @@
     height: 5px;
     width: 100%;
 }
+
 
 .style-height-80px {
     height: 80px;
