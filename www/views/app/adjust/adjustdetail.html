@@ -2,33 +2,29 @@
     <ion-nav-buttons side="right">
         <button class="button button-clear button-light" ng-click="gotoShop(range)"><b>Done</b></button>
     </ion-nav-buttons>
-    <ion-content overflow-scroll="true" has-bouncing="true" class="icon-red">
-        
-
-            <div class="row">
-                <div class="col col-50">
-                    <img src="{{product.img}}" alt="">
-                </div>
-                <div class="col col-50">
-                    <p class="style-text">Name.Product</p>
-                <p class="style-text">Price</p>
+    <br>
+    <br>
+    <br>
+    <div class="row shop-products-narrow-cards-outer">
+            <div ng-repeat="product in productsByCart" class="col col-33 shop-product-narrow-card" ng-click="select_item(product)">
+                <!-- ui-sref="app.product-detail({productId: product._id})" -->
+                <div ng-class="{selected: orders.indexOf(product) != -1}">
+                    <div class="list card">
+                        <div class="item item-image">
+                            <div ng-repeat="itm in orders" ng-show="itm.qty > 0 && itm.products_id === product.products_id">
+                                <!-- <span class="badge badge-assertive select-item-shop">{{itm.qty}}</span> -->
+                            </div>
+                            <pre-img ratio="_1_1" helper-class="main-image">
+                                <img ng-src="{{product.img}}" spinner-on-load>
+                            </pre-img>
+                        </div>
+                        <div class="item item-body">
+                            <h2 class="card-title">{{product.name}}</h2>
+                            <p class="card-description"><b>${{product.price}}</b></p><!-- <span class="badge badge-balanced select-item-shopgreen">{{product.total_qty}}</span> -->
+                        </div>
+                    </div>
                 </div>
             </div>
-           
-            <div class="row">
-                <div class="col col-25">
-                    <p class="style-text-unit"> Unit:</p>
-                </div>
-                <div class="col col-75">
-                    <span class="style-textarea1"> <input type="number" ></span>
-                </div>
-            </div>
-
-            
-            <br>
-            <p class="style-text-unit">Remark</p>
-            <textarea rows="2" cols="47" name="usrtxt" wrap="hard" class="style-textarea">remark
-            </textarea>
-       
+        </div>
     </ion-content>
 </ion-view>

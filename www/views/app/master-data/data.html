@@ -1,10 +1,13 @@
 <ion-view view-title="main" class="main-view" nav-transition="ios">
     <ion-tabs class="tabs-icon-top tabs-striped tabs-background-balanced tabs-color-light shop-tabs">
-        <ion-tab title="Blacklist" icon-on="ion-ios-home" icon-off="ion-ios-home-outline" ui-sref="app.data.blacklist">
-            <ion-nav-view name="data-blacklist"></ion-nav-view>
-        </ion-tab>
-        <ion-tab title="Promotion" icon-on="ion-ios-pulse-strong" icon-off="ion-ios-pulse" ui-sref="app.data.promotion">
+        <ion-tab title="Promotion" icon-on="ion-ios-cart" icon-off="ion-ios-cart-outline" ui-sref="app.data.promotion">
             <ion-nav-view name="data-promotion"></ion-nav-view>
+        </ion-tab>
+        <ion-tab title="Exchange" icon-on="ion-arrow-swap" icon-off="ion-arrow-swap" ui-sref="app.data.exchange">
+            <ion-nav-view name="data-exchange"></ion-nav-view>
+        </ion-tab>
+        <ion-tab title="Blacklist" icon-on="ion-ios-box" icon-off="ion-ios-box-outline" ui-sref="app.data.blacklist">
+            <ion-nav-view name="data-blacklist"></ion-nav-view>
         </ion-tab>
     </ion-tabs>
 </ion-view>
