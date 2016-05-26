@@ -8,7 +8,7 @@
         </button>
     </ion-nav-buttons>
     <ion-nav-buttons side="right">
-        <button class="button button-clear button-light" ng-click="checkoutProduct(iFlightData)"><b>Orders</b></button>
+        <button class="button button-clear button-light" ng-disabled="iFlightData.products.length == 0" ng-click="checkoutProduct(iFlightData)"><b>Orders</b></button>
     </ion-nav-buttons>
     <ion-content overflow-scroll="false" has-bouncing="true">
         <div class="row shop-products-narrow-cards-outer">
@@ -26,7 +26,7 @@
                         </div>
                         <div class="item item-body">
                             <h2 class="card-title">{{product.name}}</h2>
-                            <p class="card-description"><b>${{product.price}}</b></p><span class="badge badge-balanced select-item-shopgreen">{{product.total_qty}}</span>
+                            <p class="card-description"><b>฿ {{product.price}}</b></p><span class="badge badge-balanced select-item-shopgreen">{{product.total_qty}}</span>
                         </div>
                     </div>
                 </div>

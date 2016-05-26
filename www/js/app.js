@@ -189,6 +189,9 @@ angular.module('your_app_name', [
     })
 
     .state('app.pay', {
+        params:{
+            iFlightData : null
+        },
         url: "/pay",
         views: {
             'menuContent': {
