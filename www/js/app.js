@@ -290,6 +290,9 @@ angular.module('your_app_name', [
 
 
     .state('app.orderadjust', {
+        params:{
+            adjust : null 
+        },
             url: "/orderadjust",
             views: {
                 'menuContent': {
@@ -310,7 +313,7 @@ angular.module('your_app_name', [
         .state('app.adjustdetail', {
             params: {
             data: null,
-             isSelected: null
+             adjust: null
         },
 
             url: "/adjustdetail",

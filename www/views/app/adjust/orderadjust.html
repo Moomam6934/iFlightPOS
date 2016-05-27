@@ -9,14 +9,22 @@
                 <input type="text" placeholder="Search" ng-model="searchall">
             </label>
         </div>
-        <ion-list >
-            <ion-item > 
-           
-                <a class="front-black" href="#">
-                    <p> Product Adjust : <span class="item-price">&nbsp;Baht&nbsp;&nbsp;<i class="icon ion-chevron-right"></i></span>
+        <ion-list>
+            <ion-item>
+                <div class="row text-margin-right-40" ng-repeat='itm in adjustsList'>
+                    <div class="col col-25">
+                        <img class="product-pic-wh-80" src="{{itm.img}}">
+                    </div>
+                    <div class="col col-75 txet-cut-overflow">
+                       <span class="txet-cut-overflow"><b>{{itm.name}} </b><br> <b>Unit</b> : {{itm.adjustmeny.unit}}</span><br>
+                       
+                    </div>
+                </div>
+               
+                <!-- <p> Product Adjust : <span class="item-price">&nbsp;Baht&nbsp;&nbsp;<i class="icon ion-chevron-right"></i></span>
                     </p>
-                    <p> Date : </p>
-                </a>
+                    <p> Date : </p> -->
+                </div>
                 <ion-option-button class="button-assertive">&nbsp;&nbsp;Delete&nbsp;&nbsp;
             </ion-item>
         </ion-list>
