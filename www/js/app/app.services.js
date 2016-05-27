@@ -25,11 +25,7 @@ angular.module('your_app_name.app.services', [])
 
 
     this.getProducts = function() {
-        var dfd = $q.defer();
-        $http.get('database.json').success(function(database) {
-            dfd.resolve(database.cart);
-        });
-        return dfd.promise;
+        return JSON.parse(window.localStorage.iFlight_data || '[]');
     };
 
     this.addProductToCart = function(productToAdd) {
@@ -84,6 +80,18 @@ angular.module('your_app_name.app.services', [])
         var ids = iFlight.orders.length + 1;
         var receipt_number = iFlight.orders.length + 1;
 
+        for (var i = iFlight.cart.length - 1; i >= 0; i--) {
+            for (var ii = iFlight.cart[i].products.length - 1; ii >= 0; ii--) {
+                for (var iii = orders_success.products.length - 1; iii >= 0; iii--) {
+                    if (orders_success.products[iii].products_id === iFlight.cart[i].products[ii].products_id) {
+                        iFlight.cart[i].products[ii].total_qty = orders_success.products[iii].total_qty
+                    }
+                };
+
+            };
+
+        };
+
         orders_success.id = ids;
         orders_success.receipt_number = receipt_number;
         orders_success.status = 'sold';
@@ -91,7 +99,62 @@ angular.module('your_app_name.app.services', [])
         iFlight.orders.push(orders_success);
 
         window.localStorage.iFlight_data = JSON.stringify(iFlight);
+        window.localStorage.removeItem('order_temporary');
+
     }
+
+    this.setOrderTemporary = function(orders) {
+        var order_temporary = !_.isUndefined(window.localStorage.order_temporary) ? JSON.parse(window.localStorage.order_temporary) : {};
+        if (angular.isArray(orders)) {
+
+            var iFlightData = {
+                id: null,
+                receipt_number: null,
+                date: new Date(),
+                products: orders,
+                total_gross_amount: 0,
+                total_discount: 0,
+                total_net_amount: 0,
+                payments: [],
+                payment_date: new Date(),
+                seller_user: "Nuttakrittra Phumsawai",
+                status: ''
+            }
+            window.localStorage.order_temporary = JSON.stringify(iFlightData);
+        } else {
+            window.localStorage.order_temporary = JSON.stringify(orders);
+        }
+    }
+    this.getOrderTemporary = function() {
+        return JSON.parse(window.localStorage.order_temporary || null);
+    };
+    this.clearOrderTemporary = function() {
+        window.localStorage.removeItem('order_temporary');
+    }
+    this.removeProduct = function(productToRemove) {
+        var order_temporary = JSON.parse(window.localStorage.order_temporary);
+
+        var new_products = _.reject(order_temporary.products, function(product) {
+            return product.products_id == productToRemove.products_id;
+        });
+
+        order_temporary.products = new_products;
+        window.localStorage.order_temporary = JSON.stringify(order_temporary);
+    };
+
+    this.removeOrder = function(orderToRemove) {
+        var iFlight_data = !_.isUndefined(window.localStorage.iFlight_data) ? JSON.parse(window.localStorage.iFlight_data) : [];
+
+        var new_products = _.reject(iFlight_data.orders, function(order) {
+            return order.id == orderToRemove.id;
+        });
+
+        iFlight_data.orders = new_products;
+        window.localStorage.iFlight_data = JSON.stringify(iFlight_data);
+    };
+    // window.localStorage.removeItem('iFlightData');
+
+
 })
 
 .service('PaymentService', function($q, $http) {

@@ -21,12 +21,28 @@ angular.module('your_app_name.app.controllers', [])
 
 .controller('ProductCtrl', function($scope, $stateParams, ShopService, $ionicPopup, $ionicLoading, $state, $filter) {
 
+    $scope.order = [];
+
     $scope.product = $stateParams.data;
     $scope.order = $stateParams.orders;
     $scope.products_all = $stateParams.product_data.data;
     $scope.qty = $scope.product.qty;
     $scope.isSelected = $stateParams.isSelected;
     var quantity;
+    $scope.checkoutProductData = function() {
+
+        var getOrderTemporary = ShopService.getOrderTemporary();
+        if (getOrderTemporary) {
+            var productBy = $filter('filter')(getOrderTemporary.products, function(data) {
+                return data.products_id === $scope.product.products_id;
+            })
+            if (productBy.length > 0) {
+                $scope.qty = productBy[0].qty;
+                $scope.product = productBy[0];
+            }
+        }
+
+    }
     $scope.ranges = function(count) {
 
         var ratings = [];
@@ -43,28 +59,25 @@ angular.module('your_app_name.app.controllers', [])
     $scope.gotoShop = function() {
         $scope.qty;
 
+        var checkByID = $filter('filter')($scope.order, function(dataByID) {
+            return dataByID.products_id === $scope.product.products_id;
+        })
+        if (checkByID.length == 0) {
+            $scope.order.push($scope.product);
+        }
+
+
         for (var i = $scope.order.length - 1; i >= 0; i--) {
             if ($scope.order[i].products_id == $scope.product.products_id) {
                 $scope.order[i].qty = $scope.qty;
+                $scope.order[i].total_qty = quantity - $scope.qty;
                 break;
             }
         }
-        for (var i = $scope.products_all.length - 1; i >= 0; i--) {
-            if ($scope.products_all[i]) {
-                for (var ii = $scope.products_all[i].products.length - 1; ii >= 0; ii--) {
-                    if ($scope.products_all[i].products[ii].products_id === $scope.product.products_id) {
-                        $scope.products_all[i].products[ii].total_qty = quantity - $scope.qty;
-                        break;
-                    }
-                }
-            }
-        };
-        // $scope.isSelected.push($scope.product.products_id);
-        $state.go('app.shop', {
-            product_by_qty: $scope.order,
-            isSelected: $scope.isSelected,
-            products_all: $scope.products_all
-        });
+
+        ShopService.setOrderTemporary($scope.order);
+        $state.go('app.shop');
+
     }
     $scope.showAddToCartPopup = function(product) {
         $scope.data = {};
@@ -96,9 +109,13 @@ angular.module('your_app_name.app.controllers', [])
             }
         });
     };
+    $scope.remove = function(product) {
+        ShopService.removeProduct(product);
+        $state.go('app.shop');
+    }
 })
 
-.controller('ShopCtrl', function($scope, ShopService, $ionicActionSheet, $timeout, $ionicPopover, $state, $filter, $stateParams) {
+.controller('ShopCtrl', function($scope, ShopService, $ionicActionSheet, $timeout, $ionicPopover, $state, $filter, $stateParams, $ionicPopup) {
 
 
     $scope.iFlightData = {
@@ -118,9 +135,9 @@ angular.module('your_app_name.app.controllers', [])
     $scope.products = [];
     $scope.popular_products = [];
     $scope.orders = [];
-    $scope.ordersQty = $stateParams.product_by_qty;
     $scope.productsByCart;
     $scope.isSelected = [];
+
 
     $scope.$watch('iFlightData.products', function(o, n) {
         var total_gross_amount = 0;
@@ -134,13 +151,14 @@ angular.module('your_app_name.app.controllers', [])
     }, true);
 
     function getDataProduct() {
-        ShopService.getProducts().then(function(products) {
 
-            $scope.products.data = products;
-            $scope.products.defaults = $scope.products.data[0].class;
-            $scope.productsByCart = $scope.products.data[0].products;
+        var products = ShopService.getProducts();
 
-        });
+        $scope.products.data = products.cart;
+        $scope.products.defaults = $scope.products.data[0].class;
+        $scope.productsByCart = $scope.products.data[0].products;
+
+
     }
 
     $scope.onSelect = function(item) {
@@ -150,35 +168,63 @@ angular.module('your_app_name.app.controllers', [])
         $scope.productsByCart = productsByCart[0].products;
     }
 
-    ShopService.getProducts().then(function(products) {
-        $scope.popular_products = products.slice(0, 2);
-    });
+    function loopCountData(data1, data2) {
+        for (var i = data1.length - 1; i >= 0; i--) {
+            for (var ii = data1[i].products.length - 1; ii >= 0; ii--) {
+                for (var iii = data2.length - 1; iii >= 0; iii--) {
+                    if (data2[iii].products_id === data1[i].products[ii].products_id) {
+                        data1[i].products[ii].total_qty = data2[iii].total_qty
+                    }
+                };
+
+            };
+
+        };
+    }
 
     $scope.loadData = function() {
+        var orderTemporary = ShopService.getOrderTemporary();
+        if (orderTemporary != null) {
+            getDataProduct();
+            $scope.iFlightData = orderTemporary;
+            for (var i = orderTemporary.products.length - 1; i >= 0; i--) {
+                if ($scope.isSelected.indexOf(orderTemporary.products[i].products_id) == -1) {
+                    $scope.isSelected.push(orderTemporary.products[i].products_id);
+                }
+            };
 
-        if ($scope.ordersQty == null) {
+            loopCountData($scope.products.data, $scope.iFlightData.products);
+
+        } else {
             getDataProduct();
             $scope.iFlightData.products = [];
             $scope.isSelected = [];
-        } else {
-            $scope.isSelected = $stateParams.isSelected;
-            $scope.iFlightData.products = $scope.ordersQty;
-            $scope.products.data = $stateParams.products_all;
-            $scope.productsByCart = $scope.products.data[0].products;
         }
+
     }
 
-    $scope.select_item = function(product, isHold) {
+    $scope.select_item = function(product) {
 
         var count = 1;
         var countNull = 0;
-        if ($scope.iFlightData.products.length != 0 && isHold != 1) {
-            var chk = $filter('filter')($scope.iFlightData.products, function(item) {
-                return item.products_id === product.products_id;
-            })
-            if (chk.length > 0) {
-                chk[0].qty = chk[0].qty + count;
-                countDown(product);
+
+        if (product.total_qty > 0) {
+            if ($scope.iFlightData.products.length != 0) {
+                var chk = $filter('filter')($scope.iFlightData.products, function(item) {
+                    return item.products_id === product.products_id;
+                })
+                if (chk.length > 0) {
+                    chk[0].qty = chk[0].qty + count;
+                    countDown(product);
+                } else {
+                    product.qty = count;
+                    $scope.iFlightData.products.push(product);
+                    var addCheck = $filter('filter')($scope.productsByCart, function(item) {
+                        return item.products_id === product.products_id;
+                    })
+                    $scope.isSelected.push(addCheck[0].products_id);
+                    countDown(product);
+                }
             } else {
                 product.qty = count;
                 $scope.iFlightData.products.push(product);
@@ -188,22 +234,24 @@ angular.module('your_app_name.app.controllers', [])
                 $scope.isSelected.push(addCheck[0].products_id);
                 countDown(product);
             }
-        } else if (isHold == 1) {
-            if (product.qty == null) {
-                product.qty = count;
-                $scope.isSelected.push(product.products_id);
-                $scope.iFlightData.products.push(product);
-                countDown(product);
-            }
+
+            ShopService.setOrderTemporary($scope.iFlightData);
         } else {
-            product.qty = count;
-            $scope.iFlightData.products.push(product);
-            var addCheck = $filter('filter')($scope.productsByCart, function(item) {
-                return item.products_id === product.products_id;
-            })
-            $scope.isSelected.push(addCheck[0].products_id);
-            countDown(product);
+            var confirmPopup = $ionicPopup.confirm({
+                title: 'Sold Out',
+                template: '<div class="text-center">Do you want to keep data ?</div>'
+            });
+
+            confirmPopup.then(function(res) {
+                if (res) {
+                    console.log('You are sure');
+
+                } else {
+                    console.log('You are not sure');
+                }
+            });
         }
+
     }
 
     function countDown(product) {
@@ -215,15 +263,25 @@ angular.module('your_app_name.app.controllers', [])
         };
     }
     $scope.onHold = function(product) {
-
-            var isHold = 1;
-            $scope.select_item(product, isHold);
-            $state.go('app.product-detail', {
-                data: product,
-                orders: $scope.iFlightData.products,
-                product_data: $scope.products,
-                isSelected: $scope.isSelected
-            });
+            var ckeckStock = ShopService.getProducts();
+            var e = [];
+            for (var i = ckeckStock.cart.length - 1; i >= 0; i--) {
+                var checked = $filter('filter')(ckeckStock.cart[i].products, function(data) {
+                    return data.products_id === product.products_id;
+                })
+                if (checked.length > 0) {
+                    e = checked[0];
+                    break;
+                }
+            };
+            if (e.total_qty != 0) {
+                $state.go('app.product-detail', {
+                    data: product,
+                    orders: $scope.iFlightData.products,
+                    product_data: $scope.products,
+                    isSelected: $scope.isSelected
+                });
+            }
 
         }
         // Triggered on a button click, or some other target
@@ -233,7 +291,8 @@ angular.module('your_app_name.app.controllers', [])
         var hideSheet = $ionicActionSheet.show({
             buttons: [
                 { text: 'Keep' },
-                { text: 'Discard' }
+                { text: 'Discard' },
+                { text: 'Clear Orders' }
             ],
             titleText: 'Discard Order ?',
             cancelText: '<span class="test">Cancel</span>',
@@ -242,19 +301,13 @@ angular.module('your_app_name.app.controllers', [])
                 switch (index) {
                     case 0:
                         ShopService.setOrdersKeep($scope.iFlightData);
-                        $scope.iFlightData.products = [];
-                        $scope.isSelected = [];
-                        $scope.ordersQty = [];
-                        getDataProduct();
                         $state.go('app.main.all');
-                        break;
                     case 1:
-                        getDataProduct();
-                        $scope.iFlightData.products = [];
-                        $scope.isSelected = [];
+                        ShopService.clearOrderTemporary();
                         $state.go('app.main.all');
-                        break;
-
+                    case 2:
+                        ShopService.clearOrderTemporary();
+                        $scope.loadData();
                 }
             }
         });
@@ -262,7 +315,7 @@ angular.module('your_app_name.app.controllers', [])
     };
 
     $scope.checkoutProduct = function(iFlightData) {
-        console.log(iFlightData);
+        ShopService.setOrderTemporary(iFlightData);
         $state.go('app.cart', { iFlightData: iFlightData });
     }
 
@@ -299,9 +352,11 @@ angular.module('your_app_name.app.controllers', [])
     //$scope.paymentDetails;
 })
 
-.controller('PaymentCtrl', function($scope, $ionicModal, $state, $ionicPopup, PaymentService, $stateParams, ShopService) {
+.controller('PaymentCtrl', function($scope, $ionicModal, $state, $ionicPopup, PaymentService, $stateParams, ShopService, $filter) {
 
-    $scope.iFlightData = $stateParams.iFlightData;
+
+
+    $scope.iFlightData = ShopService.getOrderTemporary();
     $scope.calculatorTotal = $stateParams.iFlightData.total_gross_amount;
 
     $scope.currency = [];
@@ -419,6 +474,7 @@ angular.module('your_app_name.app.controllers', [])
         $scope.calculatorTotal = $scope.iFlightData.total_gross_amount - result;
         $scope.iFlightData.sold_total = result;
         $scope.iFlightData.change = result - $scope.iFlightData.total_gross_amount;
+        $scope.iFlightData.payments = $scope.payments;
 
     }, true);
     $scope.removePayment = function(index) {
@@ -446,6 +502,54 @@ angular.module('your_app_name.app.controllers', [])
 
     }
 
+    $scope.$watch('iFlightData.products', function(n, o) {
+
+        var getStock = ShopService.getProducts();
+        var res_total_gross_amount = 0;
+        for (var i = 0; i < getStock.cart.length; i++) {
+            for (var ii = getStock.cart[i].products.length - 1; ii >= 0; ii--) {
+                for (var iii = $scope.iFlightData.products.length - 1; iii >= 0; iii--) {
+                    if (getStock.cart[i].products[ii].products_id === n[iii].products_id) {
+                        $scope.iFlightData.products[iii].total_qty = getStock.cart[i].products[ii].total_qty - parseInt(n[iii].qty);
+                        $scope.iFlightData.products[iii].gross_amount = parseInt(n[iii].qty) * n[iii].price;
+                        res_total_gross_amount += $scope.iFlightData.products[iii].gross_amount;
+
+                    }
+                };
+            };
+        }
+        $scope.iFlightData.total_gross_amount = res_total_gross_amount;
+        ShopService.setOrderTemporary($scope.iFlightData);
+
+
+    }, true);
+
+    $scope.ranges = function(id) {
+
+        var getStock = ShopService.getProducts();
+        var ratings = [];
+
+
+        for (var i = 0; i < getStock.cart.length; i++) {
+            for (var ii = getStock.cart[i].products.length - 1; ii >= 0; ii--) {
+                if (getStock.cart[i].products[ii].products_id === id) {
+                    inStock = getStock.cart[i].products[ii].total_qty;
+                }
+            };
+
+        }
+
+        for (var i = 0; i < inStock; i++) {
+            ratings.push(i + 1)
+        }
+
+        return ratings;
+    }
+    $scope.remove = function(product) {
+        ShopService.removeProduct(product);
+        $scope.iFlightData = ShopService.getOrderTemporary();
+    }
+
 })
 
 .controller('MainCtrl', function($scope, $state, ShopService) {
@@ -455,12 +559,32 @@ angular.module('your_app_name.app.controllers', [])
     }
 })
 
-.controller('AdjustCtrl', function($scope, $state, AdjustService) {
 
+.controller('AdjustCtrl', function($scope, AdjustService, $state, $stateParams, $ionicPopover, $filter) {
+    $scope.detail = $stateParams.data;
+    $scope.res = {};
     AdjustService.getProducts().then(function(products) {
 
-        $scope.products = products;
+        $scope.products = products.cart[0].products;
+        $scope.res.data = products.cart;
     });
+
+    $scope.click = function(product) {
+
+        var click = 1;
+        $state.go('app.adjustdetail', {
+            data: product,
+        });
+
+        // app.product-detail({productId: product._id})
+
+    }
+    $scope.onSelect = function(item) {
+        var cart = $filter('filter')($scope.products.data, function(data) {
+                return data.class === item.class;
+            })
+            // $scope.cart = cart[0].products;
+    }
 
 
 })
@@ -478,4 +602,5 @@ angular.module('your_app_name.app.controllers', [])
         $scope.currency = currency;
     });
 
-});
+
+})

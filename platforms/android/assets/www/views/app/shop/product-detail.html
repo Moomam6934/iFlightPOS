@@ -1,6 +1,6 @@
-<ion-view view-title="Product">
+<ion-view view-title="Product" ng-init="checkoutProductData()">
     <ion-nav-buttons side="right">
-        <button class="button button-clear button-light" ng-click="gotoShop(range)"><b>Done</b></button>
+        <button class="button button-clear button-light" ng-click="gotoShop(range)" ng-disabled="qty == null"><b>Done</b></button>
     </ion-nav-buttons>
     <ion-content overflow-scroll="true" has-bouncing="true" class="icon-red">
         <div class="row item item-text-wrap">
@@ -19,7 +19,7 @@
         </div>
         <div class="bar bar-footer footer-ber-image">
             <div class="row shop-products-narrow-cards-outer shop-product-cards-scroller">
-                <div ng-repeat="range in ranges(product.total_qty + product.qty)" class="col col-25 shop-product-narrow-card">
+                <div ng-repeat="range in ranges(product.total_qty + product.qty)" class="{{product.qty > 0 ? 'col col-31 shop-product-narrow-card' : 'col col-25 shop-product-narrow-card'}} ">
                     <div ng-class="{selected: qty == range}">
                         <div class="list card list-card-range">
                             <div class="item item-image" ng-click="editProductQty(range)">
@@ -32,6 +32,7 @@
                     </div>
                 </div>
             </div>
+            <div ng-show="product.qty > 0"><i class="icon ion-ios-trash icon-delete" ng-click="remove(product)"></i></div>
         </div>
     </ion-content>
 </ion-view>

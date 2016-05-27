@@ -76,12 +76,8 @@ angular.module('your_app_name', [
     })
 
     .state('app.shop', {
+        cache : false,
         url: "/shop",
-        params: {
-            product_by_qty: null,
-            isSelected: null,
-            products_all: null
-        },
         views: {
             'menuContent': {
                 templateUrl: "views/app/shop/shop.html",
@@ -92,6 +88,7 @@ angular.module('your_app_name', [
 
 
     .state('app.cart', {
+        cache : false,
         url: "/cart",
         params:{
             iFlightData : null 
@@ -126,6 +123,7 @@ angular.module('your_app_name', [
     })
 
     .state('app.product-detail', {
+        cache:false,
         url: "/product",
         params: {
             data: null,
@@ -189,6 +187,7 @@ angular.module('your_app_name', [
     })
 
     .state('app.pay', {
+        cache : false,
         params:{
             iFlightData : null
         },
@@ -303,16 +302,21 @@ angular.module('your_app_name', [
             views: {
                 'menuContent': {
                     templateUrl: "views/app/adjust/shopadjust.html",
-                    controller: 'ShopCtrl'
+                    controller: 'AdjustCtrl'
                 }
             }
         })
         .state('app.adjustdetail', {
+            params: {
+            data: null,
+             isSelected: null
+        },
+
             url: "/adjustdetail",
             views: {
                 'menuContent': {
                     templateUrl: "views/app/adjust/adjustdetail.html",
-                    controller: 'ShopCtrl'
+                    controller: 'AdjustCtrl'
                 }
             }
         })
