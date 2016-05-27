@@ -131,7 +131,30 @@ angular.module('your_app_name.app.services', [])
     this.clearOrderTemporary = function() {
         window.localStorage.removeItem('order_temporary');
     }
-    //window.localStorage.removeItem('order_temporary');
+    this.removeProduct = function(productToRemove) {
+        var order_temporary = JSON.parse(window.localStorage.order_temporary);
+
+        var new_products = _.reject(order_temporary.products, function(product) {
+            return product.products_id == productToRemove.products_id;
+        });
+
+        order_temporary.products = new_products;
+        window.localStorage.order_temporary = JSON.stringify(order_temporary);
+    };
+
+    this.removeOrder = function(orderToRemove) {
+        var iFlight_data = !_.isUndefined(window.localStorage.iFlight_data) ? JSON.parse(window.localStorage.iFlight_data) : [];
+
+        var new_products = _.reject(iFlight_data.orders, function(order) {
+            return order.id == orderToRemove.id;
+        });
+
+        iFlight_data.orders = new_products;
+        window.localStorage.iFlight_data = JSON.stringify(iFlight_data);
+    };
+    // window.localStorage.removeItem('iFlightData');
+
+
 })
 
 .service('PaymentService', function($q, $http) {

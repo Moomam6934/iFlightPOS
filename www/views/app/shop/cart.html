@@ -18,7 +18,6 @@
                         <label><b>1A</b></label>
                     </div>
                     <div class="col col-25">
-                        <span class="badge badge-assertive count-item-shop">{{item.qty}}</span>
                         <img class="style-width50-height50" ng-src="{{item.img}}">
                     </div>
                     <div class="col col-40 style-margin-top-5px item-text-wrap">
@@ -26,9 +25,12 @@
                     </div>
                     <div class="col col-35 style-margin-top-5px text-right">
                         <p class=" margin-left-15 "><b>{{item.gross_amount | number: 2}} THB</b></p>
+                        <!-- <span class="badge badge-assertive count-item-shop">{{item.qty}}</span> -->
+                        <select class="select-size" ng-model="item.qty" ng-options="range as range for range in ranges(item.products_id)" required>
+                        </select>
                     </div>
                 </div>
-                <ion-option-button class="button-assertive">&nbsp;&nbsp;&nbsp;Delete&nbsp;&nbsp;&nbsp;
+                <ion-option-button class="button-assertive" ng-click="remove(item)">Delete
             </ion-item>
         </ion-list>
         <div class="list">

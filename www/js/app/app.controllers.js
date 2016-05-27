@@ -109,6 +109,10 @@ angular.module('your_app_name.app.controllers', [])
             }
         });
     };
+    $scope.remove = function(product) {
+        ShopService.removeProduct(product);
+        $state.go('app.shop');
+    }
 })
 
 .controller('ShopCtrl', function($scope, ShopService, $ionicActionSheet, $timeout, $ionicPopover, $state, $filter, $stateParams, $ionicPopup) {
@@ -235,7 +239,7 @@ angular.module('your_app_name.app.controllers', [])
         } else {
             var confirmPopup = $ionicPopup.confirm({
                 title: 'Sold Out',
-                template: 'Do you want to keep data ?'
+                template: '<div class="text-center">Do you want to keep data ?</div>'
             });
 
             confirmPopup.then(function(res) {
@@ -260,13 +264,17 @@ angular.module('your_app_name.app.controllers', [])
     }
     $scope.onHold = function(product) {
             var ckeckStock = ShopService.getProducts();
-            var checked;
+            var e = [];
             for (var i = ckeckStock.cart.length - 1; i >= 0; i--) {
                 var checked = $filter('filter')(ckeckStock.cart[i].products, function(data) {
                     return data.products_id === product.products_id;
                 })
+                if (checked.length > 0) {
+                    e = checked[0];
+                    break;
+                }
             };
-            if (checked[0].total_qty != 0) {
+            if (e.total_qty != 0) {
                 $state.go('app.product-detail', {
                     data: product,
                     orders: $scope.iFlightData.products,
@@ -274,6 +282,7 @@ angular.module('your_app_name.app.controllers', [])
                     isSelected: $scope.isSelected
                 });
             }
+
         }
         // Triggered on a button click, or some other target
     $scope.showActionSheet = function() {
@@ -282,7 +291,8 @@ angular.module('your_app_name.app.controllers', [])
         var hideSheet = $ionicActionSheet.show({
             buttons: [
                 { text: 'Keep' },
-                { text: 'Discard' }
+                { text: 'Discard' },
+                { text: 'Clear Orders' }
             ],
             titleText: 'Discard Order ?',
             cancelText: '<span class="test">Cancel</span>',
@@ -295,7 +305,9 @@ angular.module('your_app_name.app.controllers', [])
                     case 1:
                         ShopService.clearOrderTemporary();
                         $state.go('app.main.all');
-
+                    case 2:
+                        ShopService.clearOrderTemporary();
+                        $scope.loadData();
                 }
             }
         });
@@ -340,9 +352,11 @@ angular.module('your_app_name.app.controllers', [])
     //$scope.paymentDetails;
 })
 
-.controller('PaymentCtrl', function($scope, $ionicModal, $state, $ionicPopup, PaymentService, $stateParams, ShopService) {
+.controller('PaymentCtrl', function($scope, $ionicModal, $state, $ionicPopup, PaymentService, $stateParams, ShopService, $filter) {
 
-    $scope.iFlightData = $stateParams.iFlightData;
+
+
+    $scope.iFlightData = ShopService.getOrderTemporary();
     $scope.calculatorTotal = $stateParams.iFlightData.total_gross_amount;
 
     $scope.currency = [];
@@ -488,6 +502,54 @@ angular.module('your_app_name.app.controllers', [])
 
     }
 
+    $scope.$watch('iFlightData.products', function(n, o) {
+
+        var getStock = ShopService.getProducts();
+        var res_total_gross_amount = 0;
+        for (var i = 0; i < getStock.cart.length; i++) {
+            for (var ii = getStock.cart[i].products.length - 1; ii >= 0; ii--) {
+                for (var iii = $scope.iFlightData.products.length - 1; iii >= 0; iii--) {
+                    if (getStock.cart[i].products[ii].products_id === n[iii].products_id) {
+                        $scope.iFlightData.products[iii].total_qty = getStock.cart[i].products[ii].total_qty - parseInt(n[iii].qty);
+                        $scope.iFlightData.products[iii].gross_amount = parseInt(n[iii].qty) * n[iii].price;
+                        res_total_gross_amount += $scope.iFlightData.products[iii].gross_amount;
+
+                    }
+                };
+            };
+        }
+        $scope.iFlightData.total_gross_amount = res_total_gross_amount;
+        ShopService.setOrderTemporary($scope.iFlightData);
+
+
+    }, true);
+
+    $scope.ranges = function(id) {
+
+        var getStock = ShopService.getProducts();
+        var ratings = [];
+
+
+        for (var i = 0; i < getStock.cart.length; i++) {
+            for (var ii = getStock.cart[i].products.length - 1; ii >= 0; ii--) {
+                if (getStock.cart[i].products[ii].products_id === id) {
+                    inStock = getStock.cart[i].products[ii].total_qty;
+                }
+            };
+
+        }
+
+        for (var i = 0; i < inStock; i++) {
+            ratings.push(i + 1)
+        }
+
+        return ratings;
+    }
+    $scope.remove = function(product) {
+        ShopService.removeProduct(product);
+        $scope.iFlightData = ShopService.getOrderTemporary();
+    }
+
 })
 
 .controller('MainCtrl', function($scope, $state, ShopService) {
@@ -495,6 +557,13 @@ angular.module('your_app_name.app.controllers', [])
     $scope.loadOrders = function() {
         $scope.orders = ShopService.getOrders().orders;
     }
+
+    $scope.removeOrder = function(order){
+        ShopService.removeOrder(order);
+        
+        $scope.loadOrders();
+    }
+
 })
 
 
