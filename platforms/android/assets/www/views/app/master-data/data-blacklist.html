@@ -6,12 +6,10 @@
                 <input type="text" placeholder="Search" ng-model="searchall">
             </label>
         </div>
-        <ion-list >
-            <ion-item ng-repeat="black in blacklists | filter: searchall">
-                <a class="front-black" href="#">
-                    <b class="">{{black.account}} </b>
-                </a>
-            </ion-item>
-        </ion-list>
+        <ul class="list item-text-wrap">
+            <li class="item" ng-repeat="black in blacklists | filter: searchall">
+                <a class="">{{black.account}} </a>
+            </li>
+        </ul>
     </ion-content>
 </ion-view>

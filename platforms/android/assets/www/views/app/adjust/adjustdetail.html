@@ -1,30 +1,38 @@
 <ion-view view-title="Product">
     <ion-nav-buttons side="right">
-        <button class="button button-clear button-light" ng-click="gotoShop(range)"><b>Done</b></button>
+        <button class="button button-clear button-light" ng-click="gotoShop(range)" ui-sref="app.main"><b>Done</b></button>
     </ion-nav-buttons>
-    <br>
-    <br>
-    <br>
-    <div class="row shop-products-narrow-cards-outer">
-            <div ng-repeat="product in productsByCart" class="col col-33 shop-product-narrow-card" ng-click="select_item(product)">
-                <!-- ui-sref="app.product-detail({productId: product._id})" -->
-                <div ng-class="{selected: orders.indexOf(product) != -1}">
-                    <div class="list card">
-                        <div class="item item-image">
-                            <div ng-repeat="itm in orders" ng-show="itm.qty > 0 && itm.products_id === product.products_id">
-                                <!-- <span class="badge badge-assertive select-item-shop">{{itm.qty}}</span> -->
-                            </div>
-                            <pre-img ratio="_1_1" helper-class="main-image">
-                                <img ng-src="{{product.img}}" spinner-on-load>
-                            </pre-img>
-                        </div>
-                        <div class="item item-body">
-                            <h2 class="card-title">{{product.name}}</h2>
-                            <p class="card-description"><b>${{product.price}}</b></p><!-- <span class="badge badge-balanced select-item-shopgreen">{{product.total_qty}}</span> -->
-                        </div>
+    <ion-content overflow-scroll="true" has-bouncing="true" class="icon-red">
+        <div class="row item item-text-wrap">
+            <div class="col col-40 "><img class="style-pix-h150-w150" ng-src="{{detail.img}}">
+            </div>
+            <div class="col col-60 text-center">
+                <br>
+                <span class="product-title icon-red">{{detail.name}}</span>
+                <h1 class="product-price icon-red ">{{detail.price}} THB</h1>
+            </div>
+        </div>
+        <ion-item>
+            <br>
+            <div class="row">
+                <div class="col col-100">
+                    <div class="list">
+                        <h2 class="style-red1">Unit :</h2>
+                        <label class="item item-input">
+                            <input type="number" class="style-textarea1">
+                        </label>
+                    </div>
+                    <br>
+                    <br>
+                    <div class="list">
+                        <h2 class="style-red1">Remark :</h2>
+                        <label class="item item-input">
+                            <textarea rows="6" cols="45" wrap="hard" calss="style-textarea">
+                            </textarea>
+                        </label>
                     </div>
                 </div>
             </div>
-        </div>
+        </ion-item>
     </ion-content>
 </ion-view>

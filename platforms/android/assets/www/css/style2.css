@@ -199,10 +199,13 @@
 
 .style-textarea1 {
     margin-top: 10px;
-    text-align: center;
     border-style: 1px solid !important;
 }
 
+.style-red1 {
+    color: red;
+    font-size: 21px;
+}
 .button-sign-in {
     margin-top: -350px !important;
     color: #FFFFFF !important;
@@ -242,3 +245,4 @@
 .set-top-p {
     margin-top: 7px;
 }
+
