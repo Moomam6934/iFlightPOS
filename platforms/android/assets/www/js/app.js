@@ -21,9 +21,8 @@ angular.module('your_app_name', [
 .config(function($ionicConfigProvider) {
     if (ionic.Platform.isAndroid()) {
         $ionicConfigProvider.scrolling.jsScrolling(false);
-        $ionicConfigProvider.navBar.alignTitle("center")
-
     }
+    $ionicConfigProvider.navBar.alignTitle("center");
     $ionicConfigProvider.tabs.position('bottom').style('standard');
 })
 
@@ -289,6 +288,9 @@ angular.module('your_app_name', [
 
 
     .state('app.orderadjust', {
+        params:{
+            adjust : null 
+        },
             url: "/orderadjust",
             views: {
                 'menuContent': {
@@ -309,7 +311,7 @@ angular.module('your_app_name', [
         .state('app.adjustdetail', {
             params: {
             data: null,
-             isSelected: null
+             adjust: null
         },
 
             url: "/adjustdetail",

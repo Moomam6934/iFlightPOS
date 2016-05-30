@@ -368,7 +368,9 @@
     margin-right: -25px;
     margin-top: 55px;
 }
-
+.txet-cut-overflow{
+    text-overflow: "...";
+}
 .select-item-shopgreen {
     background-color: #00AA00 !important;
     margin-right: -25px;
@@ -383,6 +385,10 @@
 .product-pic-wh {
     width: 100px;
     height: 100px;
+}
+.product-pic-wh-80 {
+    width: 80px;
+    height: 80px;
 }
 
 .product-pic {
