@@ -563,7 +563,8 @@ angular.module('your_app_name.app.controllers', [])
         $scope.orders = ShopService.getOrders().orders;
     }
 
-    $scope.removeOrder = function(order) {
+    $scope.removeOrder = function(order) { 
+
         if (order.status === 'sold') {
             $scope.securityCode;
             var myPopup = $ionicPopup.show({
@@ -586,10 +587,10 @@ angular.module('your_app_name.app.controllers', [])
                 }]
             })
         } else if (order.status === 'void') {
-            ShopService.removeOrder(order);
+            // ShopService.removeOrder(order);
         } else {
             ShopService.removeOrder(order);
-        }
+        } 
         $scope.loadOrders();
     }
 
@@ -598,8 +599,8 @@ angular.module('your_app_name.app.controllers', [])
 
 .controller('AdjustCtrl', function($scope, AdjustService, $state, $stateParams, $ionicPopover, $filter, ShopService) {
     $scope.detail = $stateParams.data;
-    $scope.adjustsList = $stateParams.adjust;
-    $scope.adjust = [];
+
+    $scope.adjustsList = AdjustService.getadjust();
     $scope.res = {};
     $scope.cart;
 
@@ -617,15 +618,7 @@ angular.module('your_app_name.app.controllers', [])
             data: product,
         });
 
-        app.product - detail({ productId: product._id })
-
-        ShopService.getProducts().then(function(products) {
-            $scope.popular_products = products.slice(0, 2);
-        });
-
     }
-
-
 
     $scope.onSelect = function(item) {
         var productsByCart = $filter('filter')($scope.res.data, function(data) {
@@ -639,15 +632,15 @@ angular.module('your_app_name.app.controllers', [])
     $scope.adjusts = {};
     $scope.aadAdjust = function() {
 
-
         $scope.detail.adjustmeny = $scope.adjusts;
-
-        $scope.adjust.push($scope.detail);
-        $state.go('app.orderadjust', {
-            adjust: $scope.adjust
-
-
-        });
+        AdjustService.setOrderAdjust($scope.detail);
+        $scope.detail = null;
+        $state.go('app.orderadjust');
+        $scope.adjustsList = AdjustService.getadjust();
+    }
+    $scope.removeAdj = function(id) {
+        AdjustService.removeAdjust(id);
+        $scope.adjustsList = AdjustService.getadjust();
 
     }
 

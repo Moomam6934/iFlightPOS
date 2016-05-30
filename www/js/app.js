@@ -245,8 +245,8 @@ angular.module('your_app_name', [
 
     .state('receipt', {
         url: "/receipt",
-        params:{
-            id : null
+        params: {
+            id: null
         },
         templateUrl: "views/app/payment/receipt.html",
         controller: "ReceiptCtrl"
@@ -295,40 +295,43 @@ angular.module('your_app_name', [
 
 
     .state('app.orderadjust', {
-            params: {
-                adjust: null
-            },
-            url: "/orderadjust",
-            views: {
-                'menuContent': {
-                    templateUrl: "views/app/adjust/orderadjust.html",
-                    controller: 'AdjustCtrl'
-                }
+        cache: false,
+        params: {
+            adjust: null
+        },
+        url: "/orderadjust",
+        views: {
+            'menuContent': {
+                templateUrl: "views/app/adjust/orderadjust.html",
+                controller: 'AdjustCtrl'
             }
-        })
-        .state('app.shopadjust', {
-            url: "/shopadjust",
-            views: {
-                'menuContent': {
-                    templateUrl: "views/app/adjust/shopadjust.html",
-                    controller: 'AdjustCtrl'
-                }
-            }
-        })
-        .state('app.adjustdetail', {
-            params: {
-                data: null,
-                adjust: null
-            },
+        }
+    })
 
-            url: "/adjustdetail",
-            views: {
-                'menuContent': {
-                    templateUrl: "views/app/adjust/adjustdetail.html",
-                    controller: 'AdjustCtrl'
-                }
+    .state('app.shopadjust', {
+        cache: false,
+        url: "/shopadjust",
+        views: {
+            'menuContent': {
+                templateUrl: "views/app/adjust/shopadjust.html",
+                controller: 'AdjustCtrl'
             }
-        })
+        }
+    })
+
+    .state('app.adjustdetail', {
+        cache: false,
+        params: {
+            data: null
+        },
+        url: "/adjustdetail",
+        views: {
+            'menuContent': {
+                templateUrl: "views/app/adjust/adjustdetail.html",
+                controller: 'AdjustCtrl'
+            }
+        }
+    })
 
 
 
