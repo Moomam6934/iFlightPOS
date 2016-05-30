@@ -386,9 +386,9 @@
     width: 100px;
     height: 100px;
 }
-.product-pic-wh-80 {
-    width: 80px;
-    height: 80px;
+.product-pic-wh-70 {
+    width: 70px;
+    height: 70px;
 }
 
 .product-pic {
@@ -456,7 +456,9 @@
 .style-height-100px {
     height: 105px;
 }
-
+.style-height-101px {
+    height: 100;
+}
 .style-height--50px {
     height: -50px;
 }
@@ -507,4 +509,8 @@
 
 .margin-left-15 {
     margin-left: -15px;
+}
+.margin-top-bottom-15 {
+    margin-top: -15px;
+    margin-bottom: -20px;
 }

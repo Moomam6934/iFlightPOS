@@ -326,7 +326,7 @@ angular.module('your_app_name', [
         },
         url: "/adjustdetail",
         views: {
-            'menuContent': {
+                'menuContent': {
                 templateUrl: "views/app/adjust/adjustdetail.html",
                 controller: 'AdjustCtrl'
             }

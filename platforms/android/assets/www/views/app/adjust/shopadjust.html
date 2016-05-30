@@ -4,13 +4,7 @@
         </ione-popover>
         Products
     </ion-nav-title>
-    <ion-nav-buttons side="left">
-        <button class="button button-icon button-clear ion-reply" ng-click="showActionSheet()">
-        </button>
-    </ion-nav-buttons>
-    <ion-nav-buttons side="right">
-        <button class="button button-clear button-light" ui-sref="app.adjustdetail"><b align="ringht">Orders</b></button>
-    </ion-nav-buttons>
+    
     <ion-content overflow-scroll="false" has-bouncing="true">
         <div class="row shop-products-narrow-cards-outer">
             <div ng-repeat="product in products" class="col col-33 shop-product-narrow-card" ng-click="click(product)" ui-sref="app.adjustdetail">

@@ -630,6 +630,10 @@ angular.module('your_app_name.app.controllers', [])
 
     /////////////////////addItem//////////////////////////
     $scope.adjusts = {};
+
+    $scope.gotoShopAdjust = function(){
+        $state.go('app.shopadjust');
+    }
     $scope.aadAdjust = function() {
 
         $scope.detail.adjustmeny = $scope.adjusts;

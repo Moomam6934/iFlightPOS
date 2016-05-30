@@ -25,7 +25,7 @@
                     </div>
                     <div class="col col-35 style-margin-top-5px text-right">
                         <p class=" margin-left-15 "><b>{{item.gross_amount | number: 2}} THB</b></p>
-                        <!-- <span class="badge badge-assertive count-item-shop">{{item.qty}}</span> -->
+                        
                         <select class="select-size" ng-model="item.qty" ng-options="range as range for range in ranges(item.products_id)" required>
                         </select>
                     </div>
