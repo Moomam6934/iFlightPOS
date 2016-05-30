@@ -47,16 +47,16 @@
                                 <h2 class="style-red1">Remark :</h2>
                             </div>
                             <select ng-model="adjusts.remark">
-                                <option>dilapidated</option>
-                                <option>lend</option>
-                                <option value="other">other</option>
+                                <option>Dilapidated</option>
+                                <option>Lend</option>
+                                <option value="other">Other</option>
                             </select>
                         </label>
                     </div>
                     <div class="list" ng-show="adjusts.remark == 'other'">
                         <label class="item item-input  ">
                             <div class="input-label">
-                                <input type="text" placeholder="remark">
+                                <input type="text" ng-model="adjusts.other" placeholder="remark">
                             </div>
                         </label>
                     </div>

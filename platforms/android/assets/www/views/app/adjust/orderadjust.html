@@ -1,6 +1,6 @@
 <ion-view view-title="AdjustsList" class="shop-home-view ">
     <ion-nav-buttons side="right">
-        <button class="button button-clear button-light ion-ios-plus-outline icon-button-balance" ui-sref="app.shopadjust"></button>
+        <button class="button button-clear button-light ion-ios-plus-outline icon-button-balance" ng-click="gotoShopAdjust()"></button>
     </ion-nav-buttons>
     <ion-content overflow-scroll="false" has-bouncing="true">
         <div class="list list-balance ">
@@ -16,7 +16,7 @@
                         <img class="product-pic-wh-70" ng-src="{{itm.img}}">
                     </div>
                     <div class="col col-75 txet-cut-overflow">
-                        <span class="txet-cut-overflow"><p>{{itm.name}} </p><p>Unit : {{itm.adjustmeny.unit}}</p><p>{{itm.adjustmeny.remark}}</p></span>
+                        <span class="txet-cut-overflow"><p>{{itm.name}} </p><p>Unit : {{itm.adjustmeny.unit}}</p><p>{{itm.adjustmeny.remark}} {{itm.adjustmeny.other}}</p></span>
                     </div>
                     <ion-option-button class="button-assertive" ng-click="removeAdj(itm.id)">&nbsp;&nbsp;Delete&nbsp;&nbsp;
                 </div>

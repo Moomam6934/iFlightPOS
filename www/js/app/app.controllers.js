@@ -352,7 +352,7 @@ angular.module('your_app_name.app.controllers', [])
     //$scope.paymentDetails;
 })
 
-.controller('PaymentCtrl', function($scope, $ionicModal, $state, $ionicPopup, PaymentService, $stateParams, ShopService, $filter) {
+.controller('PaymentCtrl', function($scope, $ionicModal, $state, $ionicPopup, PaymentService, $stateParams, ShopService, $filter, MasterService) {
 
 
 
@@ -456,6 +456,37 @@ angular.module('your_app_name.app.controllers', [])
     $scope.$watch('payments', function(n, o) {
 
         var res = 0;
+        var blacklists = null;
+
+        MasterService.getBlacklists().then(function(data) {
+            blacklists = data;
+
+            for (var i = $scope.iFlightData.payments.length - 1; i >= 0; i--) {
+                if ($scope.iFlightData.payments[i].currency.card_id != null) {
+                    var blacklists_checked = $filter('filter')(blacklists, function(rtBlacklists) {
+                        return rtBlacklists.account == $scope.iFlightData.payments[i].currency.card_id;
+                    })
+
+                    if (blacklists_checked.length > 0) {
+                        var alertPopup = $ionicPopup.alert({
+                            title: '<div class="text-center">Warning</div>',
+                            template: '<div class="text-center">Blacklist</div>'
+                        });
+
+                        alertPopup.then(function(res) {
+
+                        });
+                        $scope.iFlightData.payments[i].currency.card_id = null;
+                        $scope.iFlightData.payments[i].currency.money = null;
+                        $scope.iFlightData.payments[i].amount = null;
+                    }
+
+                }
+
+            };
+        });
+
+
 
         for (var i = $scope.payments.length - 1; i >= 0; i--) {
             if (n[i].currency.currencys.exchange != null) {
@@ -563,7 +594,7 @@ angular.module('your_app_name.app.controllers', [])
         $scope.orders = ShopService.getOrders().orders;
     }
 
-    $scope.removeOrder = function(order) { 
+    $scope.removeOrder = function(order) {
 
         if (order.status === 'sold') {
             $scope.securityCode;
@@ -590,7 +621,7 @@ angular.module('your_app_name.app.controllers', [])
             // ShopService.removeOrder(order);
         } else {
             ShopService.removeOrder(order);
-        } 
+        }
         $scope.loadOrders();
     }
 
@@ -631,7 +662,7 @@ angular.module('your_app_name.app.controllers', [])
     /////////////////////addItem//////////////////////////
     $scope.adjusts = {};
 
-    $scope.gotoShopAdjust = function(){
+    $scope.gotoShopAdjust = function() {
         $state.go('app.shopadjust');
     }
     $scope.aadAdjust = function() {
