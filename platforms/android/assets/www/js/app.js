@@ -75,7 +75,7 @@ angular.module('your_app_name', [
     })
 
     .state('app.shop', {
-        cache : false,
+        cache: false,
         url: "/shop",
         views: {
             'menuContent': {
@@ -87,10 +87,10 @@ angular.module('your_app_name', [
 
 
     .state('app.cart', {
-        cache : false,
+        cache: false,
         url: "/cart",
-        params:{
-            iFlightData : null 
+        params: {
+            iFlightData: null
         },
         views: {
             'menuContent': {
@@ -122,7 +122,7 @@ angular.module('your_app_name', [
     })
 
     .state('app.product-detail', {
-        cache:false,
+        cache: false,
         url: "/product",
         params: {
             data: null,
@@ -186,9 +186,9 @@ angular.module('your_app_name', [
     })
 
     .state('app.pay', {
-        cache : false,
-        params:{
-            iFlightData : null
+        cache: false,
+        params: {
+            iFlightData: null
         },
         url: "/pay",
         views: {
@@ -203,7 +203,7 @@ angular.module('your_app_name', [
 
     ///////////////////////////MasterData//////////////////////////////////////
 
-    
+
     .state('app.data', {
         cache: false,
         url: "/data",
@@ -243,7 +243,14 @@ angular.module('your_app_name', [
         }
     })
 
-
+    .state('receipt', {
+        url: "/receipt",
+        params:{
+            id : null
+        },
+        templateUrl: "views/app/payment/receipt.html",
+        controller: "ReceiptCtrl"
+    })
 
 
     //AUTH ROUTES
@@ -288,9 +295,9 @@ angular.module('your_app_name', [
 
 
     .state('app.orderadjust', {
-        params:{
-            adjust : null 
-        },
+            params: {
+                adjust: null
+            },
             url: "/orderadjust",
             views: {
                 'menuContent': {
@@ -310,9 +317,9 @@ angular.module('your_app_name', [
         })
         .state('app.adjustdetail', {
             params: {
-            data: null,
-             adjust: null
-        },
+                data: null,
+                adjust: null
+            },
 
             url: "/adjustdetail",
             views: {

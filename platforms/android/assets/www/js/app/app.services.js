@@ -64,8 +64,12 @@ angular.module('your_app_name.app.services', [])
     this.setOrdersKeep = function(orders_keep) {
         var iFlight = !_.isUndefined(window.localStorage.iFlight_data) ? JSON.parse(window.localStorage.iFlight_data) : [];
         var lastItem = _.last(iFlight.orders);
-        var ids = lastItem.id + 1;
-        var receipt_number = lastItem.id + 1;
+        var ids = 1;
+        var receipt_number = 1;
+        if (iFlight.orders.length > 0) {
+            ids = lastItem.id + 1;
+            receipt_number = lastItem.id + 1;
+        }
 
         orders_keep.id = ids;
         orders_keep.receipt_number = receipt_number;
@@ -92,9 +96,12 @@ angular.module('your_app_name.app.services', [])
     this.setOrdersSuccess = function(orders_success) {
         var iFlight = !_.isUndefined(window.localStorage.iFlight_data) ? JSON.parse(window.localStorage.iFlight_data) : [];
         var lastItem = _.last(iFlight.orders);
-        var ids = lastItem.id + 1;
-        var receipt_number = lastItem.id + 1;
-
+        var ids = 1;
+        var receipt_number = 1;
+        if (iFlight.orders.length > 0) {
+            ids = lastItem.id + 1;
+            receipt_number = lastItem.id + 1;
+        }
         for (var i = iFlight.cart.length - 1; i >= 0; i--) {
             for (var ii = iFlight.cart[i].products.length - 1; ii >= 0; ii--) {
                 for (var iii = orders_success.products.length - 1; iii >= 0; iii--) {

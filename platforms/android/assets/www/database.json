@@ -647,71 +647,7 @@
         }]
     }],
 
-    "orders": [{
-        "id": 1,
-        "receipt_number": 1,
-        "date": 1429935138465,
-        "products": [{
-            "id": 1,
-            "name": "Banana Cake with Malee Orange Juice",
-            "qty": 2,
-            "gross_amount": 600,
-            "discount": 0,
-            "net_amount": 600,
-            "img": "img/food/BananaCakewithMaleeOrangeJuice.jpg"
-        }],
-        "total_gross_amount": 600,
-        "total_discount": 600,
-        "total_net_amount": 600,
-        "payments": [{
-            "id": 1,
-            "type": "cash",
-            "currency": {
-                "name": "EUR",
-                "total": 1
-            },
-            "amount": 40.01
-        }, {
-            "id": 2,
-            "type": "credit",
-            "currency": {
-                "cardId": "1234567890123456",
-                "code": "012"
-            },
-            "amount": 9.99
-        }],
-        "payment_date": 1429935138465,
-        "seller_user": "Nuttakrittra Phumsawai",
-        "status": "sold"
-    }, {
-        "id": 2,
-        "receipt_number": 2,
-        "date": 1429935138465,
-        "products": [{
-            "id": 1,
-            "name": "Shepherd’s Pie",
-            "qty": 2,
-            "gross_amount": 120,
-            "discount": 0,
-            "net_amount": 120,
-            "img": "img/food/AK-2-Shepherd’sPie.png"
-        }],
-        "total_gross_amount": 120,
-        "total_discount": 120,
-        "total_net_amount": 120,
-        "payments": [{
-            "id": 1,
-            "type": "cash",
-            "currency": {
-                "name": "THB",
-                "total": 120
-            },
-            "amount": 120.00
-        }],
-        "payment_date": 1429935138465,
-        "seller_user": "Nuttakrittra Phumsawai",
-        "status": "keep"
-    }],
+    "orders": [],
 
     "currency": [{
         "id": 1,

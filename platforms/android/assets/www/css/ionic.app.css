@@ -10323,17 +10323,17 @@ input[type="file"] {
 
 input::-moz-placeholder,
 textarea::-moz-placeholder {
-    color: white;
+    color: #C1C1C1;;
 }
 
 input:-ms-input-placeholder,
 textarea:-ms-input-placeholder {
-    color: white;
+    color: #C1C1C1;;
 }
 
 input::-webkit-input-placeholder,
 textarea::-webkit-input-placeholder {
-    color: white;
+    color: #C1C1C1;;
     text-indent: 0;
 }
 

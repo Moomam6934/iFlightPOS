@@ -471,9 +471,15 @@ angular.module('your_app_name.app.controllers', [])
                 result += $scope.payments[i].amount;
             }
         };
-        $scope.calculatorTotal = $scope.iFlightData.total_gross_amount - result;
+        if (result > $scope.iFlightData.total_gross_amount) {
+            $scope.changemoney = Math.abs($scope.iFlightData.total_gross_amount - result);
+            $scope.calculatorTotal = 0;
+        } else {
+            $scope.calculatorTotal = $scope.iFlightData.total_gross_amount - result;
+            $scope.changemoney = 0;
+        }
         $scope.iFlightData.sold_total = result;
-        $scope.iFlightData.change = result - $scope.iFlightData.total_gross_amount;
+        $scope.iFlightData.change = $scope.changemoney;
         $scope.iFlightData.payments = $scope.payments;
 
     }, true);
@@ -493,8 +499,7 @@ angular.module('your_app_name.app.controllers', [])
             if (res) {
                 console.log('You are sure');
                 ShopService.setOrdersSuccess($scope.iFlightData);
-
-                $state.go('app.main.all');
+                $state.go('receipt', { id: $scope.iFlightData.receipt_number });
             } else {
                 console.log('You are not sure');
             }
@@ -662,5 +667,47 @@ angular.module('your_app_name.app.controllers', [])
     });
 
 
+
+})
+
+.controller('ReceiptCtrl', function($scope, $stateParams, $filter, ShopService, $state) {
+
+    var orderId = $stateParams.id;
+    var getOrdersData = ShopService.getProducts();
+
+    var filterOrderByID = $filter('filter')(getOrdersData.orders, function(order) {
+        return order.receipt_number === orderId;
+    })
+    console.log(filterOrderByID[0]);
+
+    $scope.receiptDetail = filterOrderByID[0];
+
+    $scope.totalCash = 0;
+    $scope.totalCredit = 0;
+    $scope.subTotalUnit = 0;
+    $scope.totalCredit = [];
+
+    for (var i = filterOrderByID[0].payments.length - 1; i >= 0; i--) {
+        if (filterOrderByID[0].payments[i].type == 'Cash') {
+            $scope.totalCash += filterOrderByID[0].payments[i].amount;
+        } else {
+            // $scope.totalCredit += filterOrderByID[0].payments[i].amount;
+            var card = filterOrderByID[0].payments[i].currency.card_id.toString();
+            var subCard = card.substring(12, 16);
+            var credit = {
+                no: subCard,
+                amount: filterOrderByID[0].payments[i].amount
+            }
+            $scope.totalCredit.push(credit)
+        }
+    };
+    for (var i = filterOrderByID[0].products.length - 1; i >= 0; i--) {
+
+        $scope.subTotalUnit += filterOrderByID[0].products[i].qty;
+    };
+
+    $scope.print = function() {
+        $state.go('app.main.all');
+    }
 
 })
