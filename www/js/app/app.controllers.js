@@ -552,15 +552,40 @@ angular.module('your_app_name.app.controllers', [])
 
 })
 
-.controller('MainCtrl', function($scope, $state, ShopService) {
+.controller('MainCtrl', function($scope, $state, ShopService, $ionicPopup) {
 
     $scope.loadOrders = function() {
         $scope.orders = ShopService.getOrders().orders;
     }
 
-    $scope.removeOrder = function(order) {
-        ShopService.removeOrder(order);
+    $scope.removeOrder = function(order) { 
 
+        if (order.status === 'sold') {
+            $scope.securityCode;
+            var myPopup = $ionicPopup.show({
+                template: '<input type="number" ng-model="securityCode" style="text-align:right;">',
+                title: 'Enter Your Security Code.',
+                subTitle: '',
+                scope: $scope,
+                buttons: [{
+                    text: 'Cancel',
+                    onTap: function(e) {
+
+                    }
+                }, {
+                    text: '<b>Confirm</b>',
+                    type: 'button-positive',
+                    onTap: function(e) {
+                        ShopService.setOrdersVold(order);
+                        $scope.loadOrders();
+                    }
+                }]
+            })
+        } else if (order.status === 'void') {
+            ShopService.removeOrder(order);
+        } else {
+            ShopService.removeOrder(order);
+        } 
         $scope.loadOrders();
     }
 
@@ -569,6 +594,7 @@ angular.module('your_app_name.app.controllers', [])
 
 .controller('AdjustCtrl', function($scope, AdjustService, $state, $stateParams, $ionicPopover, $filter, ShopService) {
     $scope.detail = $stateParams.data;
+
     $scope.adjustsList = AdjustService.getadjust();
     $scope.res = {};
     $scope.cart;
@@ -587,11 +613,7 @@ angular.module('your_app_name.app.controllers', [])
             data: product,
         });
 
-
-
     }
-
-
 
     $scope.onSelect = function(item) {
         var productsByCart = $filter('filter')($scope.res.data, function(data) {
