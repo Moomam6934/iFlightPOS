@@ -558,9 +558,9 @@ angular.module('your_app_name.app.controllers', [])
         $scope.orders = ShopService.getOrders().orders;
     }
 
-    $scope.removeOrder = function(order){
+    $scope.removeOrder = function(order) {
         ShopService.removeOrder(order);
-        
+
         $scope.loadOrders();
     }
 
@@ -568,37 +568,32 @@ angular.module('your_app_name.app.controllers', [])
 
 
 .controller('AdjustCtrl', function($scope, AdjustService, $state, $stateParams, $ionicPopover, $filter, ShopService) {
-            $scope.detail = $stateParams.data;
-            $scope.adjustsList = $stateParams.adjust;
-            $scope.adjust = [];
-            $scope.res = {};
-            $scope.cart;
+    $scope.detail = $stateParams.data;
+    $scope.adjustsList = AdjustService.getadjust();
+    $scope.res = {};
+    $scope.cart;
 
 
-            AdjustService.getProducts().then(function(products) {
+    AdjustService.getProducts().then(function(products) {
 
-                $scope.products = products.cart[0].products;
-                $scope.res.data = products.cart;
-            });
+        $scope.products = products.cart[0].products;
+        $scope.res.data = products.cart;
+    });
 
-            $scope.click = function(product) {
+    $scope.click = function(product) {
 
-                var click = 1;
-                $state.go('app.adjustdetail', {
-                    data: product,
-                });
+        var click = 1;
+        $state.go('app.adjustdetail', {
+            data: product,
+        });
 
-                app.product - detail({ productId: product._id })
 
-                ShopService.getProducts().then(function(products) {
-                    $scope.popular_products = products.slice(0, 2);
-                });
 
-            }
+    }
 
-                
 
-     $scope.onSelect = function(item) {
+
+    $scope.onSelect = function(item) {
         var productsByCart = $filter('filter')($scope.res.data, function(data) {
             return data.class === item.class;
         })
@@ -606,38 +601,36 @@ angular.module('your_app_name.app.controllers', [])
     }
 
 
-                /////////////////////addItem//////////////////////////
-                $scope.adjusts = {};
-                $scope.aadAdjust = function() {
+    /////////////////////addItem//////////////////////////
+    $scope.adjusts = {};
+    $scope.aadAdjust = function() {
+
+        $scope.detail.adjustmeny = $scope.adjusts;
+        AdjustService.setOrderAdjust($scope.detail);
+        $scope.detail = null;
+        $state.go('app.orderadjust');
+    }
+    $scope.removeAdj = function(id) {
+        AdjustService.removeAdjust(id);
+        $scope.adjustsList = AdjustService.getadjust();
+
+    }
+
+})
+
+.controller('MasterCtrl', function($scope, $state, MasterService) {
+
+    MasterService.getBlacklists().then(function(blacklists) {
+        $scope.blacklists = blacklists;
+    });
+
+    MasterService.getPromotions().then(function(promotions) {
+        $scope.promotions = promotions;
+    });
+    MasterService.getCurrency().then(function(currency) {
+        $scope.currency = currency;
+    });
 
 
-                    $scope.detail.adjustmeny = $scope.adjusts;
 
-                    $scope.adjust.push($scope.detail);
-                    $state.go('app.orderadjust', {
-                        adjust: $scope.adjust
-
-
-                    });
-
-                }
-
-            })
-
-        .controller('MasterCtrl', function($scope, $state, MasterService) {
-
-            MasterService.getBlacklists().then(function(blacklists) {
-                $scope.blacklists = blacklists;
-            });
-
-            MasterService.getPromotions().then(function(promotions) {
-                $scope.promotions = promotions;
-            });
-            MasterService.getCurrency().then(function(currency) {
-                $scope.currency = currency;
-            });
-
-
-
-        })
-
+})

@@ -205,4 +205,28 @@ angular.module('your_app_name.app.services', [])
 
 
 
+
+    this.setOrderAdjust = function(adjust) {
+        var order_adjust = !_.isUndefined(window.localStorage.order_adjust) ? JSON.parse(window.localStorage.order_adjust) : [];
+
+        order_adjust.push(adjust);
+
+        window.localStorage.order_adjust = JSON.stringify(order_adjust);
+    }
+
+    this.getadjust = function() {
+        return JSON.parse(window.localStorage.order_adjust || null);
+    };
+
+    this.removeAdjust = function(id) {
+        var order_adjust = JSON.parse(window.localStorage.order_adjust);
+
+        var adjust = _.reject(order_adjust, function(adjust) {
+            return adjust.id == id;
+        });
+
+        order_adjust = adjust;
+        window.localStorage.order_adjust = JSON.stringify(order_adjust);
+    };
+    // window.localStorage.removeItem('order_addjust');
 })

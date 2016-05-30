@@ -1,31 +1,25 @@
-<ion-view view-title="Orders" class="shop-home-view">
+<ion-view view-title="AdjustsList" class="shop-home-view ">
     <ion-nav-buttons side="right">
         <button class="button button-clear button-light ion-ios-plus-outline icon-button-balance" ui-sref="app.shopadjust"></button>
     </ion-nav-buttons>
     <ion-content overflow-scroll="false" has-bouncing="true">
-        <div class="list list-balance">
+        <div class="list list-balance ">
             <label class="item item-input input-balance">
                 <i class="icon ion-search placeholder-icon"></i>
                 <input type="text" placeholder="Search" ng-model="searchall">
             </label>
         </div>
         <ion-list>
-            <ion-item>
-                <div class="row text-margin-right-40" ng-repeat='itm in adjustsList'>
+            <ion-item ng-repeat='itm in adjustsList' class=" style-height-101px">
+                <div class="row text-margin-right-40 margin-top-bottom-15">
                     <div class="col col-25">
-                        <img class="product-pic-wh-80" src="{{itm.img}}">
+                        <img class="product-pic-wh-70" ng-src="{{itm.img}}">
                     </div>
                     <div class="col col-75 txet-cut-overflow">
-                       <span class="txet-cut-overflow"><b>{{itm.name}} </b><br> <b>Unit</b> : {{itm.adjustmeny.unit}}</span><br>
-                       
+                        <span class="txet-cut-overflow"><p>{{itm.name}} </p><p>Unit : {{itm.adjustmeny.unit}}</p><p>{{itm.adjustmeny.remark}}</p></span>
                     </div>
+                    <ion-option-button class="button-assertive" ng-click="removeAdj(itm.id)">&nbsp;&nbsp;Delete&nbsp;&nbsp;
                 </div>
-               
-                <!-- <p> Product Adjust : <span class="item-price">&nbsp;Baht&nbsp;&nbsp;<i class="icon ion-chevron-right"></i></span>
-                    </p>
-                    <p> Date : </p> -->
-                </div>
-                <ion-option-button class="button-assertive">&nbsp;&nbsp;Delete&nbsp;&nbsp;
             </ion-item>
         </ion-list>
     </ion-content>
