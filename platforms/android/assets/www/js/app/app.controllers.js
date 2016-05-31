@@ -469,7 +469,7 @@ angular.module('your_app_name.app.controllers', [])
 
                     if (blacklists_checked.length > 0) {
                         var alertPopup = $ionicPopup.alert({
-                            title: '<div class="text-center">Warning</div>',
+                            title: '<div class="text-center"><b>Warning</b></div>',
                             template: '<div class="text-center">Blacklist</div>'
                         });
 
