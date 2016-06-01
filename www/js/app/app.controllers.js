@@ -352,7 +352,7 @@ angular.module('iFlightPOS.app.controllers', [])
     //$scope.paymentDetails;
 })
 
-.controller('PaymentCtrl', function($scope, $ionicModal, $state, $ionicPopup, PaymentService, $stateParams, ShopService, $filter, MasterService) {
+.controller('PaymentCtrl', function($scope, $ionicModal, $state, $ionicPopup, PaymentService, $stateParams, ShopService, $filter, MasterService, $ionicActionSheet) {
 
 
 
@@ -585,6 +585,30 @@ angular.module('iFlightPOS.app.controllers', [])
         ShopService.removeProduct(product);
         $scope.iFlightData = ShopService.getOrderTemporary();
     }
+    $scope.showActionSheet = function() {
+
+        // Show the action sheet
+        var hideSheet = $ionicActionSheet.show({
+            buttons: [
+                { text: 'Keep' },
+                { text: 'Discard' }
+            ],
+            titleText: 'Discard Order ?',
+            cancelText: '<span class="test">Cancel</span>',
+            cancel: function() {},
+            buttonClicked: function(index) {
+                switch (index) {
+                    case 0:
+                        ShopService.setOrdersKeep($scope.iFlightData);
+                        $state.go('app.main.all');
+                    case 1:
+                        ShopService.clearOrderTemporary();
+                        $state.go('app.main.all');
+                }
+            }
+        });
+
+    };
 
 })
 

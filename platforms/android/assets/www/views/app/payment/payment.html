@@ -3,9 +3,10 @@
         <button class="button button-clear button-light" ng-disabled="calculatorTotal > 0" ng-click="comfirmPayment()"><b>Done</b></button>
     </ion-nav-buttons>
     <ion-content overflow-scroll="false" has-bouncing="true">
-        <div class="item icon-red style-text-size-24px">
-            &nbsp;&nbsp;Total
-            <span class="item-note icon-red style-text-size-25px">{{iFlightData.total_gross_amount | number: 2}} THB</span>
+        <div class="item icon-red style-text-size-24px item-sub-title-up">
+            <p class="item-sub-title">
+                &nbsp;&nbsp;<span>Total</span>
+                <span class="item-note icon-red style-text-size-25px">{{iFlightData.total_gross_amount | number: 2}} THB</span></p>
             <p>
                 <p class="item-price-cart" ng-show="changemoney == 0">Receive {{calculatorTotal | number: 2}} THB</p>
                 <p class="item-price-cart" ng-show="changemoney != 0">Change {{changemoney | number: 2}} THB</p>
@@ -18,7 +19,7 @@
                         <div class="col col-25 style-margin-left10p" class="text-center" ng-click="typeOfPayment(item)"><span class="input-label">{{item.type}}<i class="icon ion-chevron-right text-margin-left"></i></span></div>
                         <div class="col col-75 style-text-color  " style="border-left: 1px solid; border-color: #D0D0D0;">
                             <input type="text" class="style-width95  style-text-color " ng-click="payment(typepayment,item)" ng-show="item.type === 'Cash'" ng-model="item.currency.currencys.name_desc" placeholder="Select Currency." readOnly>
-                            <input type="number" ng-show="item.type === 'Credit'" class="style-width95   style-text-color" ng-model="item.currency.card_id" placeholder="Card No."  max="9999999999999999">
+                            <input type="number" ng-show="item.type === 'Credit'" class="style-width95   style-text-color" ng-model="item.currency.card_id" placeholder="Card No." max="9999999999999999">
                         </div>
                     </div>
                     <div class="row">

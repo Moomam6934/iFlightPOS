@@ -302,3 +302,19 @@
 .text-center {
     text-align: center !important;
 }
+
+.sub-title-item {
+    height: 40px;
+}
+
+.row-sub-title-item {
+    margin-top: -19px;
+}
+
+.item-sub-title {
+    margin-top: -10px;
+}
+
+.item-sub-title-up {
+    height: 55px;
+}
