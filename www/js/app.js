@@ -3,13 +3,13 @@ angular.module('underscore', [])
         return window._; // assumes underscore has already been loaded on the page
     });
 
-angular.module('your_app_name', [
+var iFlight = angular.module('iFlightPOS', [
     'ionic',
     'popover',
-    'your_app_name.common.directives',
-    'your_app_name.app.controllers',
-    'your_app_name.auth.controllers',
-    'your_app_name.app.services',
+    'iFlightPOS.common.directives',
+    'iFlightPOS.app.controllers',
+    'iFlightPOS.auth.controllers',
+    'iFlightPOS.app.services',
     'underscore',
     'angularMoment',
     'ngIOS9UIWebViewPatch'
@@ -18,15 +18,16 @@ angular.module('your_app_name', [
 
 // Enable native scrolls for Android platform only,
 // as you see, we're disabling jsScrolling to achieve this.
-.config(function($ionicConfigProvider) {
+iFlight.config(function($ionicConfigProvider) {
     if (ionic.Platform.isAndroid()) {
         $ionicConfigProvider.scrolling.jsScrolling(false);
     }
     $ionicConfigProvider.navBar.alignTitle("center");
     $ionicConfigProvider.tabs.position('bottom').style('standard');
+    $ionicConfigProvider.scrolling.jsScrolling(true);
 })
 
-.run(function($ionicPlatform, $rootScope, $ionicHistory, $timeout, $ionicConfig) {
+iFlight.run(function($ionicPlatform, $rootScope, $ionicHistory, $timeout, $ionicConfig) {
     $ionicPlatform.ready(function() {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
@@ -63,7 +64,7 @@ angular.module('your_app_name', [
     });
 })
 
-.config(function($stateProvider, $urlRouterProvider) {
+iFlight.config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
 
     //SIDE MENU ROUTES
@@ -85,6 +86,16 @@ angular.module('your_app_name', [
         }
     })
 
+    .state('app.shop-order', {
+        cache: false,
+        url: "/shop-order",
+        views: {
+            'menuContent': {
+                templateUrl: "views/app/shop/shop-order.html",
+                controller: 'ShopCtrl'
+            }
+        }
+    })
 
     .state('app.cart', {
         cache: false,
@@ -326,7 +337,7 @@ angular.module('your_app_name', [
         },
         url: "/adjustdetail",
         views: {
-                'menuContent': {
+            'menuContent': {
                 templateUrl: "views/app/adjust/adjustdetail.html",
                 controller: 'AdjustCtrl'
             }

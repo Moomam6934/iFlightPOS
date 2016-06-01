@@ -1,4 +1,4 @@
-angular.module('your_app_name.auth.controllers', [])
+angular.module('iFlightPOS.auth.controllers', [])
 
 .controller('AuthCtrl', function($scope) {
 

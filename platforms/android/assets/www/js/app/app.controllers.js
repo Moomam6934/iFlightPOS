@@ -1,4 +1,4 @@
-angular.module('your_app_name.app.controllers', [])
+angular.module('iFlightPOS.app.controllers', [])
 
 
 .controller('AppCtrl', function($scope, AuthService) {
@@ -629,8 +629,8 @@ angular.module('your_app_name.app.controllers', [])
 
 
 .controller('AdjustCtrl', function($scope, AdjustService, $state, $stateParams, $ionicPopover, $filter, ShopService) {
-    $scope.detail = $stateParams.data;
 
+    $scope.detail = $stateParams.data;
     $scope.adjustsList = AdjustService.getadjust();
     $scope.res = {};
     $scope.cart;

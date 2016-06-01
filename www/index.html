@@ -6,9 +6,13 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
     <meta http-equiv="Content-Security-Policy" content="default-src *; script-src &apos;self&apos; &apos;unsafe-inline&apos; &apos;unsafe-eval&apos; *; style-src  &apos;self&apos; &apos;unsafe-inline&apos; *">
     <title></title>
+    <!-- style -->
     <link href="css/ionic.app.css" rel="stylesheet">
     <link href="css/style1.css" rel="stylesheet">
     <link href="css/style2.css" rel="stylesheet">
+
+    <link href="src/css/slidingTabs.css" rel="stylesheet">
+    <!-- lib -->
     <script src="lib/ionic/js/ionic.bundle.js"></script>
     <script src="lib/underscore/underscore-min.js"></script>
     <script src="lib/moment/moment.js"></script>
@@ -23,9 +27,11 @@
     <script src="js/auth/auth.controllers.js"></script>
     <script src="js/app/app.controllers.js"></script>
     <script src="js/app/app.services.js"></script>
+    <!-- custom  directive-->
+    <script src="src/js/slidingTabsDirective.js"></script>
 </head>
 
-<body ng-app="your_app_name">
+<body ng-app="iFlightPOS">
     <ion-nav-view></ion-nav-view>
 </body>
 
