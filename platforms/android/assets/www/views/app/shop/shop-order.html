@@ -1,7 +1,18 @@
-<ion-view view-title="Shop" data-ng-init="loadData()">
+<ion-view view-title="Shop" data-ng-init="loadData()" hide-back-button="true">
+<!--     <ion-nav-title>
+        <ione-popover title="Products" subtitle="change order" listmodel="products" templateurl='views/app/shop/shop-popover.html' on-selected="onSelect">
+        </ione-popover>
+    </ion-nav-title> -->
+    <ion-nav-buttons side="left">
+        <button class="button button-icon button-clear ion-navicon" ng-click="showActionSheet(true)">
+        </button>
+    </ion-nav-buttons>
+    <ion-nav-buttons side="right">
+        <button class="button button-clear button-light" ng-disabled="iFlightData.products.length == 0" ng-click="checkoutProduct(iFlightData)"><b>Orders</b></button>
+    </ion-nav-buttons>
     <ion-content overflow-scroll="true" has-bouncing="true">
-        <ion-slide-box slide-tabs-scrollable="true" show-pager="false" ion-slide-tabs on-slide-changed="slideHasChanged($index)">
-            <ion-slide ion-slide-tab-label="{{item.class}}" ng-repeat="item in products.data">
+       <ion-slide-box slide-tabs-scrollable="true" show-pager="false" ion-slide-tabs on-slide-changed="slideHasChanged($index)">
+            <ion-slide ion-slide-tab-label="{{item.category_name}}" ng-repeat="item in products.data">
                 <ion-scroll direction="y" style="height:90%;">
                     <div class="row shop-products-narrow-cards-outer">
                         <div ng-repeat="product in item.products" class="col col-33 shop-product-narrow-card item-product" ng-click="select_item(product)" on-hold="onHold(product)">

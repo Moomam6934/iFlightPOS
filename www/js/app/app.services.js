@@ -10,18 +10,21 @@ angular.module('iFlightPOS.app.services', [])
 
 
     this.getProducts = function() {
-        return JSON.parse(window.localStorage.iFlight_data || '[]');
+        var getProducts = JSON.parse(window.localStorage.iFlight_data || '[]');
+
+        return getProducts.Categories;
     };
 
     this.getOrders = function() {
-        return (window.localStorage.iFlight_data) ?
-            JSON.parse(window.localStorage.iFlight_data) : null;
+        var getOrders = JSON.parse(window.localStorage.iFlight_data || '[]');
+
+        return getOrders.orders;
     };
     this.getOrdersKeep = function() {
         var getOrdersKeep = JSON.parse(window.localStorage.iFlight_data).orders;
         var keepOrders = [];
         for (var i = getOrdersKeep.length - 1; i >= 0; i--) {
-            if(getOrdersKeep[i].status == 'keep'){
+            if (getOrdersKeep[i].status == 'keep') {
                 keepOrders.push(getOrdersKeep[i]);
             }
         };
@@ -68,11 +71,11 @@ angular.module('iFlightPOS.app.services', [])
             ids = lastItem.id + 1;
             receipt_number = lastItem.id + 1;
         }
-        for (var i = iFlight.cart.length - 1; i >= 0; i--) {
-            for (var ii = iFlight.cart[i].products.length - 1; ii >= 0; ii--) {
+        for (var i = iFlight.Categories.length - 1; i >= 0; i--) {
+            for (var ii = iFlight.Categories[i].products.length - 1; ii >= 0; ii--) {
                 for (var iii = orders_success.products.length - 1; iii >= 0; iii--) {
-                    if (orders_success.products[iii].products_id === iFlight.cart[i].products[ii].products_id) {
-                        iFlight.cart[i].products[ii].total_qty = orders_success.products[iii].total_qty
+                    if (orders_success.products[iii].products_id === iFlight.Categories[i].products.products_id) {
+                        iFlight.Categories[i].products[ii].total_qty = orders_success.products[iii].total_qty
                     }
                 };
 
@@ -186,7 +189,7 @@ angular.module('iFlightPOS.app.services', [])
     this.getProducts = function() {
         var dfd = $q.defer();
         $http.get('database.json').success(function(database) {
-            dfd.resolve(database);
+            dfd.resolve(database.Categories);
         });
         return dfd.promise;
     };

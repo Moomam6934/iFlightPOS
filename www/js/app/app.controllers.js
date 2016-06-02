@@ -149,8 +149,8 @@ angular.module('iFlightPOS.app.controllers', [])
 
         var products = ShopService.getProducts();
 
-        $scope.products.data = products.cart;
-        $scope.products.defaults = $scope.products.data[0].class;
+        $scope.products.data = products;
+        $scope.products.defaults = $scope.products.data[0].category_name;
         $scope.productsByCart = $scope.products.data[0].products;
 
 
@@ -158,7 +158,7 @@ angular.module('iFlightPOS.app.controllers', [])
 
     $scope.onSelect = function(item) {
         var productsByCart = $filter('filter')($scope.products.data, function(data) {
-            return data.class === item.class;
+            return data.category_name === item.category_name;
         })
         $scope.productsByCart = productsByCart[0].products;
     }
@@ -257,8 +257,8 @@ angular.module('iFlightPOS.app.controllers', [])
     $scope.onHold = function(product) {
         var ckeckStock = ShopService.getProducts();
         var e = [];
-        for (var i = ckeckStock.cart.length - 1; i >= 0; i--) {
-            var checked = $filter('filter')(ckeckStock.cart[i].products, function(data) {
+        for (var i = ckeckStock.length - 1; i >= 0; i--) {
+            var checked = $filter('filter')(ckeckStock[i].products, function(data) {
                 return data.products_id === product.products_id;
             })
             if (checked.length > 0) {
@@ -302,16 +302,19 @@ angular.module('iFlightPOS.app.controllers', [])
                                 ShopService.setOrdersKeep($scope.iFlightData);
                                 ShopService.clearOrderTemporary();
                                 $scope.loadData();
-
                                 $ionicSideMenuDelegate.toggleLeft();
                                 $scope.menuOpen = false;
                             }
 
                         } else if (index == 1) {
-                            hideSheet();
+                            
                             ShopService.clearOrderTemporary();
                             $scope.loadData();
-                            $ionicSideMenuDelegate.toggleLeft();
+                            $timeout(function() {
+                                hideSheet();
+                                $ionicSideMenuDelegate.toggleLeft();
+                            }, 1500);
+
                             $scope.menuOpen = false;
                         } else {
                             ShopService.clearOrderTemporary();
@@ -332,6 +335,7 @@ angular.module('iFlightPOS.app.controllers', [])
 
 
     $scope.checkoutProduct = function(iFlightData) {
+
         ShopService.setOrderTemporary(iFlightData);
         $state.go('app.cart', { iFlightData: iFlightData });
     }
@@ -422,57 +426,70 @@ angular.module('iFlightPOS.app.controllers', [])
 
 
     $scope.showPopup = function(item) {
-        $scope.data = {};
-        var myPopup = $ionicPopup.show({
-            template: '<input type="number" ng-model="data.money" style="text-align:right;">',
-            title: 'Enter Your Money',
-            subTitle: '',
-            scope: $scope,
-            buttons: [{
-                text: 'Cancel',
-                onTap: function(e) {
-                    $scope.data.money = item.currency.money;
-                }
-            }, {
-                text: '<b>Confirm</b>',
-                type: 'button-positive',
-                onTap: function(e) {
-                    item.currency.money = $scope.data.money;
-                    $scope.data = {};
-                }
-            }]
-        })
-    }
-    var saveTotal = 0;
+            $scope.data = {};
+            var myPopup = $ionicPopup.show({
+                template: '<input type="number" ng-model="data.money" style="text-align:right;">',
+                title: 'Enter Your Money',
+                subTitle: '',
+                scope: $scope,
+                buttons: [{
+                    text: 'Cancel',
+                    onTap: function(e) {
+                        $scope.data.money = item.currency.money;
+                    }
+                }, {
+                    text: '<b>Confirm</b>',
+                    type: 'button-positive',
+                    onTap: function(e) {
+                        item.currency.money = $scope.data.money;
+                        $scope.data = {};
+                    }
+                }]
+            })
+        }
+        // var saveTotal = 0;
+        // var saveTotalFrist = 0;
     $scope.curren = function(currency) {
-        console.log($scope.iFlightData.total_gross_amount);
+        // console.log($scope.iFlightData.total_gross_amount, $scope.calculatorTotal);
         $scope.itemTypePay.currency.currencys = currency;
 
-        var checkedPay = $filter('filter')($scope.iFlightData.payments,function(data){
-            return data.id == $scope.itemTypePay.id;
-        })
+        // $scope.itemTypePay.currency.money = $scope.calculatorTotal / currency.exchange;
 
-        if ($scope.iFlightData.sold_total == 0 && $scope.itemTypePay.id == 1 || $scope.iFlightData.payments.length == 1) {
-            $scope.itemTypePay.currency.money = $scope.iFlightData.total_gross_amount / currency.exchange;
-        } else if($scope.iFlightData.payments.length > 1 && checkedPay.length == 0){
-            $scope.itemTypePay.currency.money = $scope.calculatorTotal / currency.exchange;
-        }else{
-            $scope.itemTypePay.currency.money = $scope.calculatorTotal / currency.exchange;
-            saveTotal = $scope.itemTypePay.currency.money;
-        }
+        // var checkedPay = $filter('filter')($scope.iFlightData.payments, function(data) {
+        //     return data.id == $scope.itemTypePay.id;
+        // })
 
+        // if ($scope.iFlightData.sold_total == 0 && $scope.itemTypePay.id == 1 || $scope.iFlightData.payments.length == 1) {
+        //     $scope.itemTypePay.currency.money = $scope.iFlightData.total_gross_amount / currency.exchange;
+        // } else if ($scope.itemTypePay.id == 1) {
+        //     $scope.itemTypePay.currency.money = saveTotalFrist / currency.exchange;
+        // } else if ($scope.iFlightData.payments.length > 1 && checkedPay.length == 0) {
+        //     $scope.itemTypePay.currency.money = $scope.calculatorTotal / currency.exchange;
+        // } else if (saveTotal != 0) {
+        //     $scope.itemTypePay.currency.money = saveTotal / currency.exchange;
+        // } else {
+        //     $scope.itemTypePay.currency.money = $scope.calculatorTotal / currency.exchange;
+        //     saveTotal = $scope.iFlightData.total_gross_amount - $scope.iFlightData.sold_total;
+        // }
 
         $scope.Payment.hide();
     }
 
-
+    var a;
 
     $scope.$watch('payments', function(n, o) {
 
         var res = 0;
         var blacklists = null;
         var result = 0;
-        var result2 = 0;
+
+        if ($scope.itemTypePay != undefined) {
+            var getOByID = $filter('filter')(n, function(data) {
+                return data.id == $scope.itemTypePay.id;
+            })
+            a = getOByID[0];
+        }
+
         $scope.calculatorTotal = 0;
 
         MasterService.getBlacklists().then(function(data) {
@@ -564,11 +581,11 @@ angular.module('iFlightPOS.app.controllers', [])
 
         var getStock = ShopService.getProducts();
         var res_total_gross_amount = 0;
-        for (var i = 0; i < getStock.cart.length; i++) {
-            for (var ii = getStock.cart[i].products.length - 1; ii >= 0; ii--) {
+        for (var i = 0; i < getStock.length; i++) {
+            for (var ii = getStock[i].products.length - 1; ii >= 0; ii--) {
                 for (var iii = $scope.iFlightData.products.length - 1; iii >= 0; iii--) {
-                    if (getStock.cart[i].products[ii].products_id === n[iii].products_id) {
-                        $scope.iFlightData.products[iii].total_qty = getStock.cart[i].products[ii].total_qty - parseInt(n[iii].qty);
+                    if (getStock[i].products[ii].products_id === n[iii].products_id) {
+                        $scope.iFlightData.products[iii].total_qty = getStock[i].products[ii].total_qty - parseInt(n[iii].qty);
                         $scope.iFlightData.products[iii].gross_amount = parseInt(n[iii].qty) * n[iii].price;
                         res_total_gross_amount += $scope.iFlightData.products[iii].gross_amount;
 
@@ -588,10 +605,10 @@ angular.module('iFlightPOS.app.controllers', [])
         var ratings = [];
 
 
-        for (var i = 0; i < getStock.cart.length; i++) {
-            for (var ii = getStock.cart[i].products.length - 1; ii >= 0; ii--) {
-                if (getStock.cart[i].products[ii].products_id === id) {
-                    inStock = getStock.cart[i].products[ii].total_qty;
+        for (var i = 0; i < getStock.length; i++) {
+            for (var ii = getStock[i].products.length - 1; ii >= 0; ii--) {
+                if (getStock[i].products[ii].products_id === id) {
+                    inStock = getStock[i].products[ii].total_qty;
                 }
             };
 
@@ -637,7 +654,7 @@ angular.module('iFlightPOS.app.controllers', [])
 .controller('MainCtrl', function($scope, $state, ShopService, $ionicPopup) {
 
     $scope.loadOrders = function() {
-        $scope.orders = ShopService.getOrders().orders;
+        $scope.orders = ShopService.getOrders();
     }
 
     $scope.removeOrder = function(order) {
@@ -684,8 +701,8 @@ angular.module('iFlightPOS.app.controllers', [])
 
     AdjustService.getProducts().then(function(products) {
 
-        $scope.products = products.cart[0].products;
-        $scope.res.data = products.cart;
+        $scope.products = products[0].products;
+        $scope.res.data = products;
     });
 
     $scope.click = function(product) {
@@ -699,7 +716,7 @@ angular.module('iFlightPOS.app.controllers', [])
 
     $scope.onSelect = function(item) {
         var productsByCart = $filter('filter')($scope.res.data, function(data) {
-            return data.class === item.class;
+            return data.category_name === item.category_name;
         })
         $scope.products = productsByCart[0].products;
     }
@@ -747,9 +764,9 @@ angular.module('iFlightPOS.app.controllers', [])
 .controller('ReceiptCtrl', function($scope, $stateParams, $filter, ShopService, $state) {
 
     var orderId = $stateParams.id;
-    var getOrdersData = ShopService.getProducts();
+    var getOrdersData = ShopService.getOrders();
 
-    var filterOrderByID = $filter('filter')(getOrdersData.orders, function(order) {
+    var filterOrderByID = $filter('filter')(getOrdersData, function(order) {
         return order.receipt_number === orderId;
     })
     console.log(filterOrderByID[0]);
