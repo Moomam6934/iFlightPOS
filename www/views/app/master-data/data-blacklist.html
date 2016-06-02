@@ -7,8 +7,9 @@
             </label>
         </div>
         <ul class="list item-text-wrap">
-            <li class="item" ng-repeat="black in blacklists | filter: searchall">
-                <a class="">{{black.account}} </a>
+            <li class="item item-icon-left" ng-repeat="black in blacklists | filter: searchall">
+                <i class="icon ion-card"></i>
+                <label class="">{{black.account}} | </label><label class="">EXP. {{black.expireDate}}</label>
             </li>
         </ul>
     </ion-content>
