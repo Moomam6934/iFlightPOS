@@ -35,7 +35,7 @@
                 <ion-option-button class="button-assertive" ng-click="removePayment($index)">&nbsp;&nbsp;Delete&nbsp;&nbsp;</ion-opton-button>
             </ion-item>
         </ion-list>
-        <ul class="list">
+        <ul class="list" ng-hide="iFlightData.sold_total >= iFlightData.total_gross_amount">
             <li class="item style-ul">
                 <div class="style-margin-left15p">
                     <div class="row" ng-click="addPayment()">

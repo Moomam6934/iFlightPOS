@@ -319,6 +319,7 @@
     height: 55px;
 }
 
+<<<<<<< HEAD
 .bigButton {
     font-size: 20px;
     margin-top: -15px;
@@ -341,4 +342,11 @@
 }
 .row-margin{
         margin-left: -5px;
+}
+
+.item-product {
+    margin-bottom: -8px !important;
+}
+.button-keep{
+     border-radius:100%;
 }

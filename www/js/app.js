@@ -51,7 +51,7 @@ iFlight.run(function($ionicPlatform, $rootScope, $ionicHistory, $timeout, $ionic
         }
     });
     $rootScope.$on("$stateChangeSuccess", function(event, toState, toParams, fromState, fromParams) {
-        if (toState.name.indexOf('app.main.all') > -1) {
+        if (toState.name.indexOf('app.shop') > -1) {
             // Restore platform default transition. We are just hardcoding android transitions to auth views.
             $ionicConfig.views.transition('platform');
             // If it's ios, then enable swipe back again
@@ -68,7 +68,8 @@ iFlight.config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
 
     //SIDE MENU ROUTES
-        .state('app', {
+
+    .state('app', {
         url: "/app",
         abstract: true,
         templateUrl: "views/app/side-menu.html",

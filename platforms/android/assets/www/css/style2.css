@@ -318,3 +318,10 @@
 .item-sub-title-up {
     height: 55px;
 }
+
+.item-product {
+    margin-bottom: -8px !important;
+}
+.button-keep{
+     border-radius:100%;
+}
