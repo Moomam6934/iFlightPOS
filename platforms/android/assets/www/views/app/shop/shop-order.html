@@ -1,26 +1,30 @@
-<ion-view view-title="Tabs">
-    <ion-content scroll="true">
-        <ion-slide-box slide-tabs-scrollable="true" does-continue="true" show-pager="false" ion-slide-tabs>
-            <ion-slide ion-slide-tab-label="Hello Tab1">
-                <h1>Tab 1</h1>
-            </ion-slide>
-            <ion-slide ion-slide-tab-label="Hello Tab2">
-                <h1>Tab 2</h1>
-            </ion-slide>
-            <ion-slide ion-slide-tab-label="Hello Tab3">
-                <h1>Tab 3</h1>
-            </ion-slide>
-            <ion-slide ion-slide-tab-label="Hello Tab4">
-                <h1>Tab 4</h1>
-            </ion-slide>
-            <ion-slide ion-slide-tab-label="Hello Tab5">
-                <h1>Tab 5</h1>
-            </ion-slide>
-            <ion-slide ion-slide-tab-label="Hello Tab6">
-                <h1>Tab 6</h1>
-            </ion-slide>
-            <ion-slide ion-slide-tab-label="Hello Tab7">
-                <h1>Tab 7</h1>
+<ion-view view-title="Shop" data-ng-init="loadData()">
+    <ion-content overflow-scroll="true" has-bouncing="true">
+        <ion-slide-box slide-tabs-scrollable="true" show-pager="false" ion-slide-tabs on-slide-changed="slideHasChanged($index)">
+            <ion-slide ion-slide-tab-label="{{item.class}}" ng-repeat="item in products.data">
+                <ion-scroll direction="y" style="height:90%;">
+                    <div class="row shop-products-narrow-cards-outer">
+                        <div ng-repeat="product in item.products" class="col col-33 shop-product-narrow-card item-product" ng-click="select_item(product)" on-hold="onHold(product)">
+                            <!-- ui-sref="app.product-detail({productId: product._id})" -->
+                            <div ng-class="{selected: isSelected.indexOf(product.products_id) != -1}">
+                                <div class="list card">
+                                    <div class="item item-image">
+                                        <div ng-repeat="itm in iFlightData.products" ng-show="itm.qty > 0 && itm.products_id === product.products_id">
+                                            <span class="badge badge-assertive select-item-shop">{{itm.qty}}</span>
+                                        </div>
+                                        <pre-img ratio="_1_1" helper-class="main-image">
+                                            <img ng-src="{{product.img}}" spinner-on-load>
+                                        </pre-img>
+                                    </div>
+                                    <div class="item item-body">
+                                        <h2 class="card-title">{{product.name}}</h2>
+                                        <p class="card-description"><b>฿ {{product.price}}</b></p><span class="badge badge-balanced select-item-shopgreen">{{product.total_qty}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ion-scroll>
             </ion-slide>
         </ion-slide-box>
     </ion-content>

@@ -16,9 +16,13 @@
                 <div class="row menu-top-options">
                     <div class="col col-top">
                         <ion-list>
-                            <ion-item ui-sref-active="active" class="item-icon-left" menu-close ui-sref="app.main">
+                            <ion-item ui-sref-active="active" class="item-icon-left" menu-close ui-sref="app.shop">
                                 <i class="menu-icon icon ion-ios-cart-outline"></i>
                                 <h2 class="menu-text">Sale</h2>
+                            </ion-item>
+                            <ion-item ui-sref-active="active" class="item-icon-left" menu-close ui-sref="app.main">
+                                <i class="menu-icon icon ion-ios-cart-outline"></i>
+                                <h2 class="menu-text">History</h2>
                             </ion-item>
                             <ion-item ui-sref-active="active" class="item-icon-left" menu-close ui-sref="app.orderadjust">
                                 <i class="menu-icon icon ion-document"></i>
@@ -45,12 +49,9 @@
                 </div>
                 <div class="row menu-bottom-options">
                     <div class="col col-bottom">
-                        <ion-list>
-                            <ion-item ui-sref-active="active" class="item-icon-left">
-                                <i class="menu-icon icon ion-ios-person-outline"></i>
-                                <h2 class="menu-text">Airasia</h2>
-                            </ion-item>
-                        </ion-list>
+                        <button class="button button-energized button-keep" ng-repeat="itm in keep | orderBy: 'id' ">
+                            {{itm.id}}
+                        </button>
                     </div>
                 </div>
             </div>

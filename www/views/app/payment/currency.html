@@ -7,7 +7,7 @@
     </ion-header-bar>
     <ion-content overflow-scroll="false" has-bouncing="true">
         <ion-list ng-repeat="currency in currency">
-            <ion-radio ng-value ="currency.name" ng-model="itemTypePay.currency.currencys.name" ng-click="curren(currency)" class="style-text-color">{{currency.name_desc}}</ion-radio>
+            <ion-radio ng-value ="currency.name" ng-click="curren(currency)" class="style-text-color">{{currency.name_desc}}</ion-radio>
         </ion-list>
     </ion-content>
 </ion-modal-view>

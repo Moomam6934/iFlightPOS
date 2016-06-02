@@ -4280,18 +4280,18 @@ body.grade-c {
 }
 
 .scroll-view.scroll-x {
-    overflow-x: scroll;
+    overflow-x: hidden;
     overflow-y: hidden;
 }
 
 .scroll-view.scroll-y {
     overflow-x: hidden;
-    overflow-y: scroll;
+    overflow-y: hidden;
 }
 
 .scroll-view.scroll-xy {
-    overflow-x: scroll;
-    overflow-y: scroll;
+    overflow-x: hidden;
+    overflow-y: hidden;
 }
 
 
