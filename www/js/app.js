@@ -355,13 +355,11 @@ iFlight.config(function($stateProvider, $urlRouterProvider) {
         }
     })
 
-        .state('app.menushop', {
+        .state('menushop', {
         url: "/menushop",
-        views: {
-            'menuContent': {
-                templateUrl: "views/menu/menushop.html"
-            }
-        }
+        templateUrl: "views/menu/menushop.html"
+
+
     })
 
 
