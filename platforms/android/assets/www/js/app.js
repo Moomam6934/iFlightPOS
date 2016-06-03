@@ -69,7 +69,7 @@ iFlight.config(function($stateProvider, $urlRouterProvider) {
 
     //SIDE MENU ROUTES
 
-    .state('app', {
+        .state('app', {
         url: "/app",
         abstract: true,
         templateUrl: "views/app/side-menu.html",
@@ -93,6 +93,17 @@ iFlight.config(function($stateProvider, $urlRouterProvider) {
         views: {
             'menuContent': {
                 templateUrl: "views/app/shop/shop-order.html",
+                controller: 'ShopCtrl'
+            }
+        }
+    })
+
+    .state('app.shop-order-2', {
+        cache: false,
+        url: "/shop-order-2",
+        views: {
+            'menuContent': {
+                templateUrl: "views/app/shop/shop-order-2.html",
                 controller: 'ShopCtrl'
             }
         }
@@ -355,13 +366,11 @@ iFlight.config(function($stateProvider, $urlRouterProvider) {
         }
     })
 
-        .state('app.menushop', {
+    .state('menushop', {
         url: "/menushop",
-        views: {
-            'menuContent': {
-                templateUrl: "views/menu/menushop.html"
-            }
-        }
+        templateUrl: "views/menu/menushop.html"
+
+
     })
 
 

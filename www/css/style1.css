@@ -357,6 +357,31 @@
     }
 }*/
 
+.bg-item-shop {
+    background-color: #F3F3F3 !important;
+}
+
+.div-item-select-shop {
+    margin-top: -45px;
+    margin-left: 6px;
+}
+
+.item-select-shop-up {
+    background-color: transparent !important;
+    margin-left: -6px;
+    margin-top: 10px;
+}
+
+.item-select-shop {
+    background-color: transparent !important;
+    margin-left: -2px;
+    margin-top: 10px;
+}
+
+.row-item-shop {
+    margin-left: -10px;
+}
+
 .count-item-shop {
     background-color: red !important;
     margin-right: -25px;
@@ -377,6 +402,8 @@
     background-color: #00AA00 !important;
     margin-right: 35px;
     margin-top: -10px;
+    height: 22px;
+    width: 33px;
 }
 
 .cart-item-shopgreen {
@@ -525,4 +552,42 @@
 .margin-top-bottom-15 {
     margin-top: -15px;
     margin-bottom: -20px;
+}
+
+.border-item-style {
+    border: 1px solid;
+    border-color: #F3F3F3;
+}
+progress {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width:100%;
+}
+
+progress[value] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+progress:not([value]) {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+progress[value], progress[value]::-webkit-progress-bar {
+    background: #EEE;
+    border-radius: 10px;
+    height: 10px;
+}
+
+progress[value], progress[value]::-webkit-progress-value {
+    border-radius: 6px;
+    background-color: blue;
+}
+
+.different progress[value], .different progress[value]::-webkit-progress-value {
+    background-color: red;
 }
