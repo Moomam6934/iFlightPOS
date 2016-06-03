@@ -1,7 +1,7 @@
 /* Empty. Add your own CSS if you like */
 
 .selected {
-    background-color:red;
+    background-color: red;
     padding: 2px !important;
     /*margin-left: 10px !important;*/
 }
@@ -366,15 +366,23 @@
 .select-item-shop {
     background-color: red !important;
     margin-right: -25px;
-    margin-top: 55px;
+    margin-top: 10px;
 }
-.txet-cut-overflow{
+
+.txet-cut-overflow {
     text-overflow: "...";
 }
+
 .select-item-shopgreen {
     background-color: #00AA00 !important;
-    margin-right: -25px;
-    margin-top: 10px;
+    margin-right: 35px;
+    margin-top: -10px;
+}
+
+.cart-item-shopgreen {
+    background-color: transparent !important;
+    margin-right: 33px !important;
+    margin-top: 12px;
 }
 
 .badge.badge-assertive {
@@ -386,6 +394,7 @@
     width: 100px;
     height: 100px;
 }
+
 .product-pic-wh-70 {
     width: 70px;
     height: 70px;
@@ -418,6 +427,7 @@
 .style-col-right {
     text-align: right;
 }
+
 .style-col-left {
     text-align: left;
 }
@@ -448,7 +458,6 @@
     width: 100%;
 }
 
-
 .style-height-80px {
     height: 80px;
 }
@@ -456,9 +465,11 @@
 .style-height-100px {
     height: 105px;
 }
+
 .style-height-101px {
     height: 100;
 }
+
 .style-height--50px {
     height: -50px;
 }
@@ -510,6 +521,7 @@
 .margin-left-15 {
     margin-left: -15px;
 }
+
 .margin-top-bottom-15 {
     margin-top: -15px;
     margin-bottom: -20px;

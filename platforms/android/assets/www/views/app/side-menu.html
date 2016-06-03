@@ -20,15 +20,19 @@
                                 <i class="menu-icon icon ion-ios-cart-outline"></i>
                                 <h2 class="menu-text">Sale</h2>
                             </ion-item>
+                            <ion-item ui-sref-active="active" class="item-icon-left" menu-close ui-sref="app.shop-order">
+                                <i class="menu-icon icon ion-ios-cart-outline"></i>
+                                <h2 class="menu-text">Shop-New-Order</h2>
+                            </ion-item>
                             <ion-item ui-sref-active="active" class="item-icon-left" menu-close ui-sref="app.main">
                                 <i class="menu-icon icon ion-ios-cart-outline"></i>
                                 <h2 class="menu-text">History</h2>
                             </ion-item>
                             <ion-item ui-sref-active="active" class="item-icon-left" menu-close ui-sref="app.orderadjust">
-                                <i class="menu-icon icon ion-document"></i>
+                                <i class="menu-icon icon ion-ios-information-outline"></i>
                                 <h2 class="menu-text">Adjustment</h2>
                             </ion-item>
-                            <ion-item ui-sref-active="active" class="item-icon-left" menu-close>
+                            <ion-item ui-sref-active="active" class="item-icon-left" menu-close ui-sref="app.main-sync">
                                 <i class="menu-icon icon ion-android-sync"></i>
                                 <h2 class="menu-text">Sync to Hub</h2>
                             </ion-item>
@@ -40,17 +44,13 @@
                                 <i class="menu-icon icon ion-log-out"></i>
                                 <h2 class="menu-text">Sign Out</h2>
                             </ion-item>
-                            <ion-item ui-sref-active="active" class="item-icon-left" menu-close ui-sref="app.shop-order">
-                                <i class="menu-icon icon ion-log-out"></i>
-                                <h2 class="menu-text">Shop-New-Order</h2>
-                            </ion-item>
                         </ion-list>
                     </div>
                 </div>
                 <div class="row menu-bottom-options">
                     <div class="col col-bottom">
                         <button class="button button-energized button-keep" ng-repeat="itm in keep | orderBy: 'id' ">
-                            {{itm.id}}
+                            {{itm.seat}}
                         </button>
                     </div>
                 </div>

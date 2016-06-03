@@ -319,6 +319,30 @@
     height: 55px;
 }
 
+.bigButton {
+    font-size: 20px;
+    margin-top: -15px;
+    border-radius:100px; 
+    width:110px;
+    height:110px;
+}
+
+.icon-font-40 {
+    font-size: 50px ;
+}
+
+.textButton
+{
+    margin-top: -15px;
+    font-size: 15px ;
+}
+.row-button-menu{
+    margin-top: 40px;
+}
+.row-margin{
+        margin-left: -5px;
+}
+
 .item-product {
     margin-bottom: -8px !important;
 }

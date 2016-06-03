@@ -16,7 +16,7 @@
                 <ion-item class="item-row" ng-repeat="item in iFlightData.products | orderBy :'products_id'">
                     <div class="row row-item">
                         <div class="col col-10 style-margin-top-5px">
-                            <label><b>1A</b></label>
+                            <label><b>{{item.cart.class_name}}</b></label>
                         </div>
                         <div class="col col-25">
                             <img class="style-width50-height50" ng-src="{{item.img}}">

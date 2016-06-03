@@ -110,7 +110,7 @@ angular.module('iFlightPOS.app.controllers', [])
     }
 })
 
-.controller('ShopCtrl', function($scope, ShopService, $ionicActionSheet, $timeout, $ionicPopover, $state, $filter, $stateParams, $ionicPopup, $ionicSideMenuDelegate) {
+.controller('ShopCtrl', function($scope, ShopService, $ionicActionSheet, $timeout, $ionicPopover, $state, $filter, $stateParams, $ionicPopup, $ionicSideMenuDelegate,$ionicSlideBoxDelegate) {
 
 
     $scope.iFlightData = {
@@ -195,7 +195,7 @@ angular.module('iFlightPOS.app.controllers', [])
             $scope.iFlightData.products = [];
             $scope.isSelected = [];
         }
-
+        console.log('load data complete');
     }
 
     $scope.select_item = function(product) {
@@ -282,8 +282,6 @@ angular.module('iFlightPOS.app.controllers', [])
     // Triggered on a button click, or some other target
     $scope.showActionSheet = function(pass) {
 
-
-
         if ($scope.iFlightData.products.length > 0) {
             if ($scope.menuOpen == pass) {
                 var hideSheet = $ionicActionSheet.show({
@@ -299,17 +297,39 @@ angular.module('iFlightPOS.app.controllers', [])
                         if (index == 0) {
                             hideSheet();
                             if ($scope.iFlightData.products.length > 0) {
-                                ShopService.setOrdersKeep($scope.iFlightData);
-                                ShopService.clearOrderTemporary();
-                                $scope.loadData();
-                                $ionicSideMenuDelegate.toggleLeft();
-                                $scope.menuOpen = false;
+                                $scope.data = {};
+                                var myPopup = $ionicPopup.show({
+                                    template: '<input type="text" ng-model="data.seat" style="text-align:right;">',
+                                    title: 'Seat',
+                                    subTitle: '',
+                                    scope: $scope,
+                                    buttons: [{
+                                        text: 'Cancel',
+                                        onTap: function(e) {
+                                            $scope.data.money = item.currency.money;
+                                        }
+                                    }, {
+                                        text: '<b>Confirm</b>',
+                                        type: 'button-positive',
+                                        onTap: function(e) {
+                                            $scope.iFlightData.seat = $scope.data.seat;
+                                            ShopService.setOrdersKeep($scope.iFlightData);
+                                            ShopService.clearOrderTemporary(); 
+                                            $scope.loadData();
+                                            $ionicSlideBoxDelegate.update();
+                                            $ionicSideMenuDelegate.toggleLeft();
+                                            $scope.menuOpen = false;
+                                        }
+                                    }]
+                                })
+
                             }
 
                         } else if (index == 1) {
-                            
+
                             ShopService.clearOrderTemporary();
                             $scope.loadData();
+                            $ionicSlideBoxDelegate.update();
                             $timeout(function() {
                                 hideSheet();
                                 $ionicSideMenuDelegate.toggleLeft();
@@ -319,6 +339,7 @@ angular.module('iFlightPOS.app.controllers', [])
                         } else {
                             ShopService.clearOrderTemporary();
                             $scope.loadData();
+                            $ionicSlideBoxDelegate.update();
                             hideSheet();
                         }
 
