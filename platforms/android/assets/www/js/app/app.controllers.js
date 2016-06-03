@@ -195,7 +195,7 @@ angular.module('iFlightPOS.app.controllers', [])
             $scope.iFlightData.products = [];
             $scope.isSelected = [];
         }
-        console.log('load data complete');
+        console.log('load data complete.');
     }
 
     $scope.select_item = function(product) {

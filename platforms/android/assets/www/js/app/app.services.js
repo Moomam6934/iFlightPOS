@@ -76,7 +76,7 @@ angular.module('iFlightPOS.app.services', [])
                 for (var iii = orders_success.products.length - 1; iii >= 0; iii--) {
                     if (orders_success.products[iii].products_id === iFlight.Categories[i].products[ii].products_id) {
                         iFlight.Categories[i].products[ii].total_qty = orders_success.products[iii].total_qty;
-                        iFlight.Categories[i].products[ii].qty = orders_success.products[iii].qty;
+                        iFlight.Categories[i].products[ii].sold_qty = iFlight.Categories[i].products[ii].sold_qty + orders_success.products[iii].qty;
                     }
                 };
 
