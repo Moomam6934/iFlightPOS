@@ -34,7 +34,7 @@ iFlight.controller('SyncCtrl', function($scope,$state){
 
         if ($scope.typedCode.length == 6) {
             if ($scope.typedCode == 111111) {
-                $location.path('templates/member');
+                $state.go('app.syncing');
             } else {
                 $scope.typedCode = "";
             }

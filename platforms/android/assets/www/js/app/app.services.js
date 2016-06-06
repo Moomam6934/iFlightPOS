@@ -35,17 +35,25 @@ angular.module('iFlightPOS.app.services', [])
         var lastItem = _.last(iFlight.orders);
         var ids = 1;
         var receipt_number = 1;
-        if (iFlight.orders.length > 0) {
-            ids = lastItem.id + 1;
-            receipt_number = lastItem.id + 1;
+
+        if (orders_keep.id != null) {
+            for (var i = iFlight.orders.length - 1; i >= 0; i--) {
+                if(iFlight.orders[i].id === orders_keep.id){
+                    iFlight.orders[i] = orders_keep;
+                }
+            };
+        } else {
+            if (iFlight.orders.length > 0) {
+                ids = lastItem.id + 1;
+                receipt_number = lastItem.id + 1;
+            }
+
+            orders_keep.id = ids;
+            orders_keep.receipt_number = receipt_number;
+            orders_keep.status = 'keep';
+
+            iFlight.orders.push(orders_keep);
         }
-
-        orders_keep.id = ids;
-        orders_keep.receipt_number = receipt_number;
-        orders_keep.status = 'keep';
-
-        iFlight.orders.push(orders_keep);
-
 
         for (var i = iFlight.Categories.length - 1; i >= 0; i--) {
             for (var ii = iFlight.Categories[i].products.length - 1; ii >= 0; ii--) {
@@ -147,7 +155,7 @@ angular.module('iFlightPOS.app.services', [])
         //     window.localStorage.order_temporary = JSON.stringify(orders);
         // }
 
-         window.localStorage.order_temporary = JSON.stringify(orders);
+        window.localStorage.order_temporary = JSON.stringify(orders);
     }
 
     this.setOrderTemporaryByKeep = function(id) {

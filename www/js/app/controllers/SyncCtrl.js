@@ -1,6 +1,6 @@
-iFlight.controller('SyncCtrl', function($scope,$state){
+iFlight.controller('SyncCtrl', function($scope, $state, $timeout) {
 
- $scope.keyPressed = function(keyCode) {
+    $scope.keyPressed = function(keyCode) {
 
         pword = $scope.typedCode;
 
@@ -9,7 +9,7 @@ iFlight.controller('SyncCtrl', function($scope,$state){
                 var codeLength = $scope.typedCode.length;
                 if (codeLength > 0) {
                     $scope.typedCode = $scope.typedCode.substr(0, codeLength - 1);
-                }else{
+                } else {
                     $scope.typedCode = "";
                 }
                 break;
@@ -42,8 +42,29 @@ iFlight.controller('SyncCtrl', function($scope,$state){
 
     };
 
-    $scope.goHome = function(){
-		$state.go('menushop');
+    $scope.goHome = function() {
+        $state.go('menushop');
 
     }
+
+    $scope.loadding = 0;
+    $scope.loadComplate = 100;
+
+    $scope.loadProgress = function() {
+        var elem = document.getElementById("myBar");
+        var width = 1;
+        var id = setInterval(frame, 10);
+
+        function frame() {
+            if (width >= 100) {
+                clearInterval(id);
+                alert('Success');
+            } else {
+                width++;
+                elem.style.width = width + '%';
+                document.getElementById("label").innerHTML = width * 1  + '%';
+            }
+        }
+    }
+
 });

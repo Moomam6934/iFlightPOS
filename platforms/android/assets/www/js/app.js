@@ -366,6 +366,17 @@ iFlight.config(function($stateProvider, $urlRouterProvider) {
         }
     })
 
+        .state('app.syncing', {
+        url: "/syncing",
+        views: {
+            'menuContent': {
+                templateUrl: "views/app/sync/syncing.html",
+                controller: 'SyncCtrl'
+            }
+        }
+    })
+
+
     .state('menushop', {
         url: "/menushop",
         templateUrl: "views/menu/menushop.html"

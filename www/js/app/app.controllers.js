@@ -302,7 +302,13 @@ angular.module('iFlightPOS.app.controllers', [])
 
     // Triggered on a button click, or some other target
     $scope.showActionSheet = function(pass) {
-
+        var checkedKeep = ShopService.getOrders();
+        var ch = false;
+        for (var i = checkedKeep.length - 1; i >= 0; i--) {
+            if (checkedKeep[i].id === $scope.iFlightData.id) {
+                ch = true;
+            }
+        };
         if ($scope.iFlightData.products.length > 0) {
             if ($scope.menuOpen == pass) {
                 var hideSheet = $ionicActionSheet.show({
@@ -318,45 +324,66 @@ angular.module('iFlightPOS.app.controllers', [])
                         if (index == 0) {
                             hideSheet();
                             if ($scope.iFlightData.products.length > 0) {
-                                $scope.data = {};
-                                var myPopup = $ionicPopup.show({
-                                    template: '<input type="text" ng-model="data.seat" style="text-align:right;">',
-                                    title: 'Seat',
-                                    subTitle: '',
-                                    scope: $scope,
-                                    buttons: [{
-                                        text: 'Cancel',
-                                        onTap: function(e) {
-                                            // $scope.data.money = item.currency.money;
-                                        }
-                                    }, {
-                                        text: '<b>Confirm</b>',
-                                        type: 'button-positive',
-                                        onTap: function(e) {
-                                            $scope.iFlightData.seat = $scope.data.seat;
-                                            ShopService.setOrdersKeep($scope.iFlightData);
-                                            $scope.iFlightData = {
-                                                id: null,
-                                                receipt_number: null,
-                                                date: new Date(),
-                                                products: [],
-                                                total_gross_amount: 0,
-                                                total_discount: 0,
-                                                total_net_amount: 0,
-                                                payments: [],
-                                                payment_date: new Date(),
-                                                seller_user: "Nuttakrittra Phumsawai",
-                                                status: ''
+                                if (ch == true) {
+                                    ShopService.setOrdersKeep($scope.iFlightData);
+                                    $scope.iFlightData = {
+                                        id: null,
+                                        receipt_number: null,
+                                        date: new Date(),
+                                        products: [],
+                                        total_gross_amount: 0,
+                                        total_discount: 0,
+                                        total_net_amount: 0,
+                                        payments: [],
+                                        payment_date: new Date(),
+                                        seller_user: "Nuttakrittra Phumsawai",
+                                        status: ''
+                                    }
+                                    ShopService.clearOrderTemporary();
+                                    $scope.loadData();
+                                    $ionicSlideBoxDelegate.update();
+                                    $ionicSideMenuDelegate.toggleLeft();
+                                    $scope.menuOpen = false;
+                                } else {
+                                    $scope.data = {};
+                                    var myPopup = $ionicPopup.show({
+                                        template: '<input type="text" ng-model="data.seat" style="text-align:right;">',
+                                        title: 'Seat',
+                                        subTitle: '',
+                                        scope: $scope,
+                                        buttons: [{
+                                            text: 'Cancel',
+                                            onTap: function(e) {
+                                                // $scope.data.money = item.currency.money;
                                             }
-                                            ShopService.clearOrderTemporary();
-                                            $scope.loadData();
-                                            $ionicSlideBoxDelegate.update();
-                                            $ionicSideMenuDelegate.toggleLeft();
-                                            $scope.menuOpen = false;
-                                        }
-                                    }]
-                                })
-
+                                        }, {
+                                            text: '<b>Confirm</b>',
+                                            type: 'button-positive',
+                                            onTap: function(e) {
+                                                $scope.iFlightData.seat = $scope.data.seat;
+                                                ShopService.setOrdersKeep($scope.iFlightData);
+                                                $scope.iFlightData = {
+                                                    id: null,
+                                                    receipt_number: null,
+                                                    date: new Date(),
+                                                    products: [],
+                                                    total_gross_amount: 0,
+                                                    total_discount: 0,
+                                                    total_net_amount: 0,
+                                                    payments: [],
+                                                    payment_date: new Date(),
+                                                    seller_user: "Nuttakrittra Phumsawai",
+                                                    status: ''
+                                                }
+                                                ShopService.clearOrderTemporary();
+                                                $scope.loadData();
+                                                $ionicSlideBoxDelegate.update();
+                                                $ionicSideMenuDelegate.toggleLeft();
+                                                $scope.menuOpen = false;
+                                            }
+                                        }]
+                                    })
+                                }
                             }
 
                         } else if (index == 1) {
@@ -680,7 +707,13 @@ angular.module('iFlightPOS.app.controllers', [])
         $scope.iFlightData = ShopService.getOrderTemporary();
     }
     $scope.showActionSheet = function() {
-
+        var checkedKeep = ShopService.getOrders();
+        var ch = false;
+        for (var i = checkedKeep.length - 1; i >= 0; i--) {
+            if (checkedKeep[i].id === $scope.iFlightData.id) {
+                ch = true;
+            }
+        };
         // Show the action sheet
         var hideSheet = $ionicActionSheet.show({
             buttons: [
@@ -693,41 +726,61 @@ angular.module('iFlightPOS.app.controllers', [])
             buttonClicked: function(index) {
                 if (index == 0) {
                     hideSheet();
-                    $scope.data = {};
-                    var myPopup = $ionicPopup.show({
-                        template: '<input type="text" ng-model="data.seat" style="text-align:right;">',
-                        title: 'Seat',
-                        subTitle: '',
-                        scope: $scope,
-                        buttons: [{
-                            text: 'Cancel',
-                            onTap: function(e) {
-                                // $scope.data.money = item.currency.money;
-                            }
-                        }, {
-                            text: '<b>Confirm</b>',
-                            type: 'button-positive',
-                            onTap: function(e) {
-                                $scope.iFlightData.seat = $scope.data.seat;
-                                ShopService.setOrdersKeep($scope.iFlightData);
-                                $scope.iFlightData = {
-                                    id: null,
-                                    receipt_number: null,
-                                    date: new Date(),
-                                    products: [],
-                                    total_gross_amount: 0,
-                                    total_discount: 0,
-                                    total_net_amount: 0,
-                                    payments: [],
-                                    payment_date: new Date(),
-                                    seller_user: "Nuttakrittra Phumsawai",
-                                    status: ''
+                    if (ch == true) {
+
+                        ShopService.setOrdersKeep($scope.iFlightData);
+                        $scope.iFlightData = {
+                            id: null,
+                            receipt_number: null,
+                            date: new Date(),
+                            products: [],
+                            total_gross_amount: 0,
+                            total_discount: 0,
+                            total_net_amount: 0,
+                            payments: [],
+                            payment_date: new Date(),
+                            seller_user: "Nuttakrittra Phumsawai",
+                            status: ''
+                        }
+                        ShopService.clearOrderTemporary();
+                        $state.go('app.shop');
+                    } else {
+                        $scope.data = {};
+                        var myPopup = $ionicPopup.show({
+                            template: '<input type="text" ng-model="data.seat" style="text-align:right;">',
+                            title: 'Seat',
+                            subTitle: '',
+                            scope: $scope,
+                            buttons: [{
+                                text: 'Cancel',
+                                onTap: function(e) {
+                                    // $scope.data.money = item.currency.money;
                                 }
-                                ShopService.clearOrderTemporary();
-                                $state.go('app.shop');
-                            }
-                        }]
-                    })
+                            }, {
+                                text: '<b>Confirm</b>',
+                                type: 'button-positive',
+                                onTap: function(e) {
+                                    $scope.iFlightData.seat = $scope.data.seat;
+                                    ShopService.setOrdersKeep($scope.iFlightData);
+                                    $scope.iFlightData = {
+                                        id: null,
+                                        receipt_number: null,
+                                        date: new Date(),
+                                        products: [],
+                                        total_gross_amount: 0,
+                                        total_discount: 0,
+                                        total_net_amount: 0,
+                                        payments: [],
+                                        payment_date: new Date(),
+                                        seller_user: "Nuttakrittra Phumsawai",
+                                        status: ''
+                                    }
+                                    ShopService.clearOrderTemporary();
+                                    $state.go('app.shop');
+                                }
+                            }]
+                        })
+                    }
 
                 } else if (index == 1) {
                     ShopService.clearOrderTemporary();
