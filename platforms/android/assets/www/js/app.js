@@ -25,6 +25,7 @@ iFlight.config(function($ionicConfigProvider) {
     $ionicConfigProvider.navBar.alignTitle("center");
     $ionicConfigProvider.tabs.position('bottom').style('standard');
     $ionicConfigProvider.scrolling.jsScrolling(true);
+    
 })
 
 iFlight.run(function($ionicPlatform, $rootScope, $ionicHistory, $timeout, $ionicConfig) {

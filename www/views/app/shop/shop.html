@@ -6,17 +6,25 @@
     <ion-nav-buttons side="right">
         <button class="button button-clear button-light" ng-disabled="iFlightData.products.length == 0" ng-click="checkoutProduct(iFlightData)"><b>Orders</b></button>
     </ion-nav-buttons>
-    <ion-content overflow-scroll="true" has-bouncing="true" style="    background-color: #E8E8E8;">
+    <ion-content overflow-scroll="true" has-bouncing="true" style="background-color: #E8E8E8;">
         <ion-slide-box slide-tabs-scrollable="true" show-pager="false" ion-slide-tabs on-slide-changed="slideHasChanged($index)">
-            <ion-slide ion-slide-tab-label="{{item.category_name}}" ng-repeat="item in products.data">
+            <ion-slide ion-slide-tab-label="All">
+                <div class="list list-balance">
+                    <label class="item item-input input-balance">
+                        <i class="icon ion-search placeholder-icon"></i>
+                        <input type="text" placeholder="Search" ng-model="searchProducts">
+                    </label>
+                </div>
                 <ion-scroll direction="y" style="height:90%;">
                     <div class="row shop-products-narrow-cards-outer">
-                        <div ng-repeat="product in item.products" class="col col-50 shop-product-narrow-card item-product" ng-click="select_item(product)" on-hold="onHold(product)">
+                        <div ng-repeat="product in products.all | filter:searchProducts | orderBy:['-bestSale','-product_type','name']" class="col col-50 shop-product-narrow-card item-product" ng-click="select_item(product)" on-hold="onHold(product)">
                             <!-- ui-sref="app.product-detail({productId: product._id})" -->
                             <div ng-class="{selected : isSelected.indexOf(product.products_id) != -1}">
                                 <div class="list card">
                                     <div class="row border-item-style">
-                                        <div class="col col-80"><img ng-src="{{product.img}}" style="width:100px; height:100px;"></div>
+                                        <img ng-show="product.bestSale == true" ng-src="img/bestseller.png" class="best-seller-bar">
+                                        <div class="col col-80"><img ng-src="{{product.img}}" style="width:100px; height:100px;">
+                                        </div>
                                         <div class="col col-20 row-item-shop">
                                             <p class="badge badge-balanced">{{product.cart.class_name}}</p>
                                             <p class="badge badge-balanced select-item-shopgreen">{{product.total_qty}}</p>
@@ -28,7 +36,119 @@
                                     </div>
                                     <div class="item item-body bg-item-shop">
                                         <h2 class="card-title">{{product.name}}</h2>
-                                        <p class="card-description"><b>฿ {{product.price}}</b></p>
+                                        <p class="card-description"><b>฿ {{product.price}}<span class="star-promotion" ng-show="product.product_type == 'promotion'"><i class="icon ion-ios-star"></i></span></b>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ion-scroll>
+            </ion-slide>
+            <ion-slide ion-slide-tab-label="BestSeller">
+                <ion-scroll direction="y" style="height:90%;">
+                    <div class="row shop-products-narrow-cards-outer">
+                        <div ng-repeat="product in products.best_seller | filter:searchProducts | orderBy:['-bestSale','-product_type','name']" class="col col-50 shop-product-narrow-card item-product" ng-click="select_item(product)" on-hold="onHold(product)">
+                            <!-- ui-sref="app.product-detail({productId: product._id})" -->
+                            <div ng-class="{selected : isSelected.indexOf(product.products_id) != -1}">
+                                <div class="list card">
+                                    <div class="row border-item-style">
+                                        <div class="col col-80"><img ng-show="product.bestSale == true" ng-src="img/bestseller.png" class="best-seller-bar-2"><img ng-src="{{product.img}}" style="width:100px; height:100px;"></div>
+                                        <div class="col col-20 row-item-shop">
+                                            <p class="badge badge-balanced">{{product.cart.class_name}}</p>
+                                            <p class="badge badge-balanced select-item-shopgreen">{{product.total_qty}}</p>
+                                            <img src="img/shopping-cart.png" style="width:35px;height:35px; margin-left: -2px;">
+                                            <div class="div-item-select-shop" ng-repeat="itm in iFlightData.products" ng-show="itm.qty > 0 && itm.products_id === product.products_id">
+                                                <span class="{{itm.qty <= 9 ? 'badge badge-assertive item-select-shop' : 'badge badge-assertive item-select-shop-up'}}">{{itm.qty}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="item item-body bg-item-shop">
+                                        <h2 class="card-title">{{product.name}}</h2>
+                                        <p class="card-description"><b>฿ {{product.price}}</b><span class="star-promotion" ng-show="product.product_type == 'promotion'"><i class="icon ion-ios-star"></i></span></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ion-scroll>
+            </ion-slide>
+            <ion-slide ion-slide-tab-label="Promotion">
+                <ion-scroll direction="y" style="height:90%;">
+                    <div class="row shop-products-narrow-cards-outer">
+                        <div ng-repeat="product in products.promotion | filter:searchProducts | orderBy:['-bestSale','-product_type','name']" class="col col-50 shop-product-narrow-card item-product" ng-click="select_item(product)" on-hold="onHold(product)">
+                            <!-- ui-sref="app.product-detail({productId: product._id})" -->
+                            <div ng-class="{selected : isSelected.indexOf(product.products_id) != -1}">
+                                <div class="list card">
+                                    <div class="row border-item-style">
+                                        <div class="col col-80"><img ng-show="product.bestSale == true" ng-src="img/bestseller.png" class="best-seller-bar-2"><img ng-src="{{product.img}}" style="width:100px; height:100px;"></div>
+                                        <div class="col col-20 row-item-shop">
+                                            <p class="badge badge-balanced">{{product.cart.class_name}}</p>
+                                            <p class="badge badge-balanced select-item-shopgreen">{{product.total_qty}}</p>
+                                            <img src="img/shopping-cart.png" style="width:35px;height:35px; margin-left: -2px;">
+                                            <div class="div-item-select-shop" ng-repeat="itm in iFlightData.products" ng-show="itm.qty > 0 && itm.products_id === product.products_id">
+                                                <span class="{{itm.qty <= 9 ? 'badge badge-assertive item-select-shop' : 'badge badge-assertive item-select-shop-up'}}">{{itm.qty}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="item item-body bg-item-shop">
+                                        <h2 class="card-title">{{product.name}}</h2>
+                                        <p class="card-description"><b>฿ {{product.price}}</b><span class="star-promotion" ng-show="product.product_type == 'promotion'"><i class="icon ion-ios-star"></i></span></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ion-scroll>
+            </ion-slide>
+               <ion-slide ion-slide-tab-label="Comboset">
+                <ion-scroll direction="y" style="height:90%;">
+                    <div class="row shop-products-narrow-cards-outer">
+                        <div ng-repeat="product in products.combo | filter:searchProducts | orderBy:['-bestSale','-product_type','name']" class="col col-50 shop-product-narrow-card item-product" ng-click="select_item(product)" on-hold="onHold(product)">
+                            <!-- ui-sref="app.product-detail({productId: product._id})" -->
+                            <div ng-class="{selected : isSelected.indexOf(product.products_id) != -1}">
+                                <div class="list card">
+                                    <div class="row border-item-style">
+                                        <div class="col col-80"><img ng-show="product.bestSale == true" ng-src="img/bestseller.png" class="best-seller-bar-2"><img ng-src="{{product.img}}" style="width:100px; height:100px;"></div>
+                                        <div class="col col-20 row-item-shop">
+                                            <p class="badge badge-balanced">{{product.cart.class_name}}</p>
+                                            <p class="badge badge-balanced select-item-shopgreen">{{product.total_qty}}</p>
+                                            <img src="img/shopping-cart.png" style="width:35px;height:35px; margin-left: -2px;">
+                                            <div class="div-item-select-shop" ng-repeat="itm in iFlightData.products" ng-show="itm.qty > 0 && itm.products_id === product.products_id">
+                                                <span class="{{itm.qty <= 9 ? 'badge badge-assertive item-select-shop' : 'badge badge-assertive item-select-shop-up'}}">{{itm.qty}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="item item-body bg-item-shop">
+                                        <h2 class="card-title">{{product.name}}</h2>
+                                        <p class="card-description"><b>฿ {{product.price}}</b><span class="star-promotion" ng-show="product.product_type == 'promotion'"><i class="icon ion-ios-star"></i></span></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ion-scroll>
+            </ion-slide>
+            <ion-slide ion-slide-tab-label="{{item.category_name}}" ng-repeat="item in products.data">
+                <ion-scroll direction="y" style="height:90%;" >
+                    <div class="row shop-products-narrow-cards-outer" >
+                        <div ng-repeat="product in item.products | orderBy:['-bestSale','-product_type','name']" class="col col-50 shop-product-narrow-card item-product" ng-click="select_item(product)" on-hold="onHold(product)">
+                            <!-- ui-sref="app.product-detail({productId: product._id})" -->
+                            <div ng-class="{selected : isSelected.indexOf(product.products_id) != -1}">
+                                <div class="list card">
+                                    <div class="row border-item-style">
+                                        <div class="col col-80"><img ng-show="product.bestSale == true" ng-src="img/bestseller.png" class="best-seller-bar-2"><img ng-src="{{product.img}}" style="width:100px; height:100px;"></div>
+                                        <div class="col col-20 row-item-shop">
+                                            <p class="badge badge-balanced">{{product.cart.class_name}}</p>
+                                            <p class="badge badge-balanced select-item-shopgreen">{{product.total_qty}}</p>
+                                            <img src="img/shopping-cart.png" style="width:35px;height:35px; margin-left: -2px;">
+                                            <div class="div-item-select-shop" ng-repeat="itm in iFlightData.products" ng-show="itm.qty > 0 && itm.products_id === product.products_id">
+                                                <span class="{{itm.qty <= 9 ? 'badge badge-assertive item-select-shop' : 'badge badge-assertive item-select-shop-up'}}">{{itm.qty}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="item item-body bg-item-shop">
+                                        <h2 class="card-title">{{product.name}}</h2>
+                                        <p class="card-description"><b>฿ {{product.price}}</b><span class="star-promotion" ng-show="product.product_type == 'promotion'"><i class="icon ion-ios-star"></i></span></p>
                                     </div>
                                 </div>
                             </div>
