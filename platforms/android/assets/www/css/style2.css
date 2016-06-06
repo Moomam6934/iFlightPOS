@@ -412,21 +412,29 @@
     -webkit-animation-duration: 300ms;
     animation-duration: 300ms;
 }
+
+#syncBar {
+    margin-top: 100px;
+}
+
 #myProgress {
-  position: relative;
-  width: 100%;
-  height: 30px;
-  background-color: #ddd;
+    position: relative;
+    width: 100%;
+    height: 20px;
+    background-color: #ddd;
 }
 
 #myBar {
-  position: absolute;
-  width: 1%;
-  height: 100%;
-  background-color: #4CAF50;
+    position: absolute;
+    width: 1%;
+    height: 20px;
+    background-color: #FFFFFF;
 }
+
 #label {
-    text-align: center; /* If you want to center it */
-    line-height: 30px; /* Set the line-height to the same as the height of the progress bar container, to center it vertically */
-    color: black;
+    text-align: center;
+    /* If you want to center it */
+    line-height: 30px;
+    /* Set the line-height to the same as the height of the progress bar container, to center it vertically */
+    color: #FFFFFF;
 }

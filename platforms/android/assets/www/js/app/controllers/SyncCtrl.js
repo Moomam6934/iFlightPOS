@@ -1,4 +1,6 @@
-iFlight.controller('SyncCtrl', function($scope, $state, $timeout) {
+iFlight.controller('SyncCtrl', function($scope, $state, $timeout, $ionicPopup, $stateParams) {
+
+    var pass = $stateParams.pass;
 
     $scope.keyPressed = function(keyCode) {
 
@@ -34,7 +36,11 @@ iFlight.controller('SyncCtrl', function($scope, $state, $timeout) {
 
         if ($scope.typedCode.length == 6) {
             if ($scope.typedCode == 111111) {
-                $state.go('app.syncing');
+                $state.go('app.syncing', { pass: $scope.typedCode });
+                $scope.typedCode = "";
+            } else if ($scope.typedCode == 000000) {
+                $state.go('app.syncing', { pass: $scope.typedCode });
+                $scope.typedCode = "";
             } else {
                 $scope.typedCode = "";
             }
@@ -52,20 +58,54 @@ iFlight.controller('SyncCtrl', function($scope, $state, $timeout) {
 
     $scope.loadProgress = function() {
         $timeout(function() {
-            var elem = document.getElementById("myBar");
-            var width = 1;
-            var id = setInterval(frame, 10);
+            if (pass == 000000) {
 
-            function frame() {
-                if (width >= 100) {
-                    clearInterval(id);
-                    alert('Success');
-                } else {
-                    width++;
-                    elem.style.width = width + '%';
-                    document.getElementById("label").innerHTML = width * 1 + '%';
+                var confirmPopup = $ionicPopup.confirm({
+                    template: "<div class='text-center'>Authen is invalid</div>",
+                    title: "Warning",
+                    buttons: [{
+                        text: "Try Agian",
+                        type: 'button-positive',
+                        onTap: function(e) {
+                            $scope.loadProgress();
+                        }
+                    }, {
+                        text: "Cancel",
+                        onTap: function(e) {
+                            $state.go('app.main-sync');
+                        }
+                    }, ]
+                });
+            } else {
+                var elem = document.getElementById("myBar");
+                var width = 1;
+                var id = setInterval(frame, 10);
+
+                function frame() {
+
+                    if (width >= 100) {
+                        clearInterval(id);
+
+                        var alertPopup = $ionicPopup.alert({
+                            title: 'Sync to Hub',
+                            template: '<div class="text-center">Success!</div>'
+                        });
+
+                        alertPopup.then(function(res) {
+                            $state.go('menushop');
+                        });
+
+
+                    } else {
+                        width++;
+                        elem.style.width = width + '%';
+                        document.getElementById("label").innerHTML = width * 1 + '%';
+                    }
+
+
                 }
             }
+
         }, 1000);
 
     }

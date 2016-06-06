@@ -4,9 +4,13 @@ angular.module('iFlightPOS.auth.controllers', [])
 
 })
 
-.controller('WelcomeCtrl', function($scope, $ionicModal, show_hidden_actions, $state) {
+.controller('WelcomeCtrl', function($scope, $ionicModal, show_hidden_actions, $state,$ionicHistory) {
 
     $scope.show_hidden_actions = show_hidden_actions;
+
+    $ionicHistory.nextViewOptions({
+        disableAnimate: true
+    });
 
     $scope.toggleHiddenActions = function() {
         $scope.show_hidden_actions = !$scope.show_hidden_actions;
@@ -27,7 +31,7 @@ angular.module('iFlightPOS.auth.controllers', [])
         console.log("doing twitter sign in");
         $state.go('app.shop');
     };
-    
+
 })
 
 .controller('LogInCtrl', function($scope, $state) {
