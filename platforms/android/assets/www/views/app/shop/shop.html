@@ -10,11 +10,10 @@
         <ion-slide-box slide-tabs-scrollable="true" show-pager="false" ion-slide-tabs on-slide-changed="slideHasChanged($index)">
             <ion-slide ion-slide-tab-label="{{item.category_name}}" ng-repeat="item in products.data">
                 <ion-scroll direction="y" style="height:90%;">
-                <progress id="progressbar" max="100" value="2" ng-model="test"> </progress>
                     <div class="row shop-products-narrow-cards-outer">
                         <div ng-repeat="product in item.products" class="col col-50 shop-product-narrow-card item-product" ng-click="select_item(product)" on-hold="onHold(product)">
                             <!-- ui-sref="app.product-detail({productId: product._id})" -->
-                            <div ng-class="{selected: isSelected.indexOf(product.products_id) != -1}">
+                            <div ng-class="{selected : isSelected.indexOf(product.products_id) != -1}">
                                 <div class="list card">
                                     <div class="row border-item-style">
                                         <div class="col col-80"><img ng-src="{{product.img}}" style="width:100px; height:100px;"></div>

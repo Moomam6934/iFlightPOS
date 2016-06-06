@@ -1,6 +1,6 @@
 angular.module('iFlightPOS.app.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicSideMenuDelegate, ShopService) {
+.controller('AppCtrl', function($scope, $ionicSideMenuDelegate, ShopService, $state) {
     $scope.keepOrders = [];
     $scope.$watch(function() {
             return $ionicSideMenuDelegate.isOpenLeft();
@@ -12,6 +12,12 @@ angular.module('iFlightPOS.app.controllers', [])
 
             }
         });
+
+    $scope.setKeepByOrder = function(id) {
+        ShopService.setOrderTemporaryByKeep(id);
+        $state.go('app.cart');
+        $ionicSideMenuDelegate.toggleLeft(false);
+    }
 })
 
 .controller('ProductCtrl', function($scope, $stateParams, ShopService, $ionicPopup, $ionicLoading, $state, $filter) {
@@ -19,7 +25,7 @@ angular.module('iFlightPOS.app.controllers', [])
     $scope.order = [];
 
     $scope.product = $stateParams.data;
-    $scope.order = $stateParams.orders;
+    $scope.order = $stateParams.orders.products;
     $scope.products_all = $stateParams.product_data.data;
     $scope.qty = $scope.product.qty;
     $scope.isSelected = $stateParams.isSelected;
@@ -70,7 +76,7 @@ angular.module('iFlightPOS.app.controllers', [])
             }
         }
 
-        ShopService.setOrderTemporary($scope.order);
+        ShopService.setOrderTemporary($stateParams.orders);
         $state.go('app.shop');
 
     }
@@ -110,7 +116,7 @@ angular.module('iFlightPOS.app.controllers', [])
     }
 })
 
-.controller('ShopCtrl', function($scope, ShopService, $ionicActionSheet, $timeout, $ionicPopover, $state, $filter, $stateParams, $ionicPopup, $ionicSideMenuDelegate,$ionicSlideBoxDelegate) {
+.controller('ShopCtrl', function($scope, ShopService, $ionicActionSheet, $timeout, $ionicPopover, $state, $filter, $stateParams, $ionicPopup, $ionicSideMenuDelegate, $ionicSlideBoxDelegate) {
 
 
     $scope.iFlightData = {
@@ -210,6 +216,7 @@ angular.module('iFlightPOS.app.controllers', [])
                 })
                 if (chk.length > 0) {
                     chk[0].qty = chk[0].qty + count;
+                    product.qty = chk[0].qty;
                     countDown(product);
                 } else {
                     product.qty = count;
@@ -247,12 +254,23 @@ angular.module('iFlightPOS.app.controllers', [])
     }
 
     function countDown(product) {
+
         for (var i = $scope.products.data.length - 1; i >= 0; i--) {
             if ($scope.products.data[i].products.indexOf(product) != -1) {
-                $scope.products.data[i].products[$scope.products.data[i].products.indexOf(product)].total_qty -= 1;
-                break;
+                for (var ii = $scope.iFlightData.products.length - 1; ii >= 0; ii--) {
+                    if ($scope.iFlightData.products[ii].products_id === $scope.products.data[i].products[$scope.products.data[i].products.indexOf(product)].products_id) {
+                        $scope.products.data[i].products[$scope.products.data[i].products.indexOf(product)].total_qty -= 1;
+                        $scope.iFlightData.products[ii].total_qty = $scope.products.data[i].products[$scope.products.data[i].products.indexOf(product)].total_qty;
+                        break;
+
+                    }
+
+                };
             }
+
+
         };
+
     }
     $scope.onHold = function(product) {
         var ckeckStock = ShopService.getProducts();
@@ -269,7 +287,7 @@ angular.module('iFlightPOS.app.controllers', [])
         if (e.total_qty != 0) {
             $state.go('app.product-detail', {
                 data: product,
-                orders: $scope.iFlightData.products,
+                orders: $scope.iFlightData,
                 product_data: $scope.products,
                 isSelected: $scope.isSelected
             });
@@ -306,7 +324,7 @@ angular.module('iFlightPOS.app.controllers', [])
                                     buttons: [{
                                         text: 'Cancel',
                                         onTap: function(e) {
-                                            $scope.data.money = item.currency.money;
+                                            // $scope.data.money = item.currency.money;
                                         }
                                     }, {
                                         text: '<b>Confirm</b>',
@@ -314,7 +332,20 @@ angular.module('iFlightPOS.app.controllers', [])
                                         onTap: function(e) {
                                             $scope.iFlightData.seat = $scope.data.seat;
                                             ShopService.setOrdersKeep($scope.iFlightData);
-                                            ShopService.clearOrderTemporary(); 
+                                            $scope.iFlightData = {
+                                                id: null,
+                                                receipt_number: null,
+                                                date: new Date(),
+                                                products: [],
+                                                total_gross_amount: 0,
+                                                total_discount: 0,
+                                                total_net_amount: 0,
+                                                payments: [],
+                                                payment_date: new Date(),
+                                                seller_user: "Nuttakrittra Phumsawai",
+                                                status: ''
+                                            }
+                                            ShopService.clearOrderTemporary();
                                             $scope.loadData();
                                             $ionicSlideBoxDelegate.update();
                                             $ionicSideMenuDelegate.toggleLeft();
@@ -376,7 +407,7 @@ angular.module('iFlightPOS.app.controllers', [])
 
 
     $scope.iFlightData = ShopService.getOrderTemporary();
-    $scope.calculatorTotal = $stateParams.iFlightData.total_gross_amount;
+    $scope.calculatorTotal = $scope.iFlightData.total_gross_amount;
     $scope.currency = [];
 
 
@@ -657,13 +688,47 @@ angular.module('iFlightPOS.app.controllers', [])
             cancelText: '<span class="test">Cancel</span>',
             cancel: function() {},
             buttonClicked: function(index) {
-                switch (index) {
-                    case 0:
-                        ShopService.setOrdersKeep($scope.iFlightData);
-                        $state.go('app.shop');
-                    case 1:
-                        ShopService.clearOrderTemporary();
-                        $state.go('app.shop');
+                if (index == 0) {
+                    hideSheet();
+                    $scope.data = {};
+                    var myPopup = $ionicPopup.show({
+                        template: '<input type="text" ng-model="data.seat" style="text-align:right;">',
+                        title: 'Seat',
+                        subTitle: '',
+                        scope: $scope,
+                        buttons: [{
+                            text: 'Cancel',
+                            onTap: function(e) {
+                                // $scope.data.money = item.currency.money;
+                            }
+                        }, {
+                            text: '<b>Confirm</b>',
+                            type: 'button-positive',
+                            onTap: function(e) {
+                                $scope.iFlightData.seat = $scope.data.seat;
+                                ShopService.setOrdersKeep($scope.iFlightData);
+                                $scope.iFlightData = {
+                                    id: null,
+                                    receipt_number: null,
+                                    date: new Date(),
+                                    products: [],
+                                    total_gross_amount: 0,
+                                    total_discount: 0,
+                                    total_net_amount: 0,
+                                    payments: [],
+                                    payment_date: new Date(),
+                                    seller_user: "Nuttakrittra Phumsawai",
+                                    status: ''
+                                }
+                                ShopService.clearOrderTemporary();
+                                $state.go('app.shop');
+                            }
+                        }]
+                    })
+
+                } else if (index == 1) {
+                    ShopService.clearOrderTemporary();
+                    $state.go('app.shop');
                 }
             }
         });

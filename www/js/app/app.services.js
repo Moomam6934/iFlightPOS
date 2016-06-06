@@ -1,7 +1,7 @@
 angular.module('iFlightPOS.app.services', [])
 
 
-.service('ShopService', function($http, $filter, $q, _) {
+.service('ShopService', function($http, $q, _) {
 
     $http.get('database.json').success(function(database) {
         var iFlight_data = database;
@@ -46,7 +46,23 @@ angular.module('iFlightPOS.app.services', [])
 
         iFlight.orders.push(orders_keep);
 
+
+        for (var i = iFlight.Categories.length - 1; i >= 0; i--) {
+            for (var ii = iFlight.Categories[i].products.length - 1; ii >= 0; ii--) {
+                for (var iii = orders_keep.products.length - 1; iii >= 0; iii--) {
+                    iFlight.Categories[i].products[ii].sold_qty = 0;
+                    if (orders_keep.products[iii].products_id === iFlight.Categories[i].products[ii].products_id) {
+                        iFlight.Categories[i].products[ii].total_qty = orders_keep.products[iii].total_qty;
+                        iFlight.Categories[i].products[ii].sold_qty = iFlight.Categories[i].products[ii].sold_qty + orders_keep.products[iii].qty;
+                    }
+                };
+
+            };
+
+        };
+
         window.localStorage.iFlight_data = JSON.stringify(iFlight);
+
     };
 
     this.setOrdersVold = function(orders_vold) {
@@ -67,10 +83,29 @@ angular.module('iFlightPOS.app.services', [])
         var lastItem = _.last(iFlight.orders);
         var ids = 1;
         var receipt_number = 1;
-        if (iFlight.orders.length > 0) {
-            ids = lastItem.id + 1;
-            receipt_number = lastItem.id + 1;
+
+        if (orders_success.id != null) {
+
+            for (var i = iFlight.orders.length - 1; i >= 0; i--) {
+                if (iFlight.orders[i].id === orders_success.id) {
+                    orders_success.status = 'sold';
+                    iFlight.orders[i] = orders_success;
+                }
+            };
+        } else {
+            if (iFlight.orders.length > 0) {
+                ids = lastItem.id + 1;
+                receipt_number = lastItem.id + 1;
+            }
+
+
+            orders_success.id = ids;
+            orders_success.receipt_number = receipt_number;
+            orders_success.status = 'sold';
+
+            iFlight.orders.push(orders_success);
         }
+
         for (var i = iFlight.Categories.length - 1; i >= 0; i--) {
             for (var ii = iFlight.Categories[i].products.length - 1; ii >= 0; ii--) {
                 for (var iii = orders_success.products.length - 1; iii >= 0; iii--) {
@@ -84,11 +119,6 @@ angular.module('iFlightPOS.app.services', [])
 
         };
 
-        orders_success.id = ids;
-        orders_success.receipt_number = receipt_number;
-        orders_success.status = 'sold';
-
-        iFlight.orders.push(orders_success);
 
         window.localStorage.iFlight_data = JSON.stringify(iFlight);
         window.localStorage.removeItem('order_temporary');
@@ -97,26 +127,57 @@ angular.module('iFlightPOS.app.services', [])
 
     this.setOrderTemporary = function(orders) {
         var order_temporary = !_.isUndefined(window.localStorage.order_temporary) ? JSON.parse(window.localStorage.order_temporary) : {};
-        if (angular.isArray(orders)) {
+        // if (angular.isArray(orders)) {
 
-            var iFlightData = {
-                id: null,
-                receipt_number: null,
-                date: new Date(),
-                products: orders,
-                total_gross_amount: 0,
-                total_discount: 0,
-                total_net_amount: 0,
-                payments: [],
-                payment_date: new Date(),
-                seller_user: "Nuttakrittra Phumsawai",
-                status: ''
-            }
-            window.localStorage.order_temporary = JSON.stringify(iFlightData);
-        } else {
-            window.localStorage.order_temporary = JSON.stringify(orders);
-        }
+        //     var iFlightData = {
+        //         id: null,
+        //         receipt_number: null,
+        //         date: new Date(),
+        //         products: orders,
+        //         total_gross_amount: 0,
+        //         total_discount: 0,
+        //         total_net_amount: 0,
+        //         payments: [],
+        //         payment_date: new Date(),
+        //         seller_user: "Nuttakrittra Phumsawai",
+        //         status: ''
+        //     }
+        //     window.localStorage.order_temporary = JSON.stringify(iFlightData);
+        // } else {
+        //     window.localStorage.order_temporary = JSON.stringify(orders);
+        // }
+
+         window.localStorage.order_temporary = JSON.stringify(orders);
     }
+
+    this.setOrderTemporaryByKeep = function(id) {
+        var iFlight = !_.isUndefined(window.localStorage.iFlight_data) ? JSON.parse(window.localStorage.iFlight_data) : [];
+        var order_temporary = !_.isUndefined(window.localStorage.order_temporary) ? JSON.parse(window.localStorage.order_temporary) : {};
+
+        var getOrderByID = _.find(iFlight.orders, function(order) {
+            return order.id == id;
+        });
+
+        order_temporary = getOrderByID;
+
+        window.localStorage.order_temporary = JSON.stringify(order_temporary);
+
+        for (var i = iFlight.Categories.length - 1; i >= 0; i--) {
+            for (var ii = iFlight.Categories[i].products.length - 1; ii >= 0; ii--) {
+                for (var iii = getOrderByID.products.length - 1; iii >= 0; iii--) {
+                    if (getOrderByID.products[iii].products_id === iFlight.Categories[i].products[ii].products_id) {
+                        iFlight.Categories[i].products[ii].total_qty += getOrderByID.products[iii].qty;
+                        iFlight.Categories[i].products[ii].sold_qty -= getOrderByID.products[iii].qty;
+                        iFlight.Categories[i].products[ii].qty = getOrderByID.products[iii].qty;
+                    }
+                };
+            };
+
+
+        };
+        window.localStorage.iFlight_data = JSON.stringify(iFlight);
+    }
+
     this.getOrderTemporary = function() {
         return JSON.parse(window.localStorage.order_temporary || null);
     };
@@ -159,7 +220,7 @@ angular.module('iFlightPOS.app.services', [])
     }
 })
 
-.service('MasterService', function($http, $filter, $q, _) {
+.service('MasterService', function($http, $q, _) {
 
     this.getBlacklists = function() {
         var dfd = $q.defer();
@@ -184,7 +245,7 @@ angular.module('iFlightPOS.app.services', [])
     }
 })
 
-.service('AdjustService', function($http, $filter, $q, _) {
+.service('AdjustService', function($http, $q, _) {
 
 
     this.getProducts = function() {

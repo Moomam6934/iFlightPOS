@@ -13,7 +13,7 @@
                     <div class="row shop-products-narrow-cards-outer">
                         <div ng-repeat="product in item.products" class="col col-50 shop-product-narrow-card item-product" ng-click="select_item(product)" on-hold="onHold(product)">
                             <!-- ui-sref="app.product-detail({productId: product._id})" -->
-                            <div ng-class="{selected: isSelected.indexOf(product.products_id) != -1}">
+                            <div ng-class="{selected : isSelected.indexOf(product.products_id) != -1}">
                                 <div class="list card">
                                     <div class="row border-item-style">
                                         <div class="col col-80"><img ng-src="{{product.img}}" style="width:100px; height:100px;"></div>
