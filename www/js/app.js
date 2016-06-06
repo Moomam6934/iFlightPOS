@@ -357,6 +357,7 @@ iFlight.config(function($stateProvider, $urlRouterProvider) {
     })
 
     .state('app.main-sync', {
+        cache: false,
         url: "/main-sync",
         views: {
             'menuContent': {
@@ -366,11 +367,25 @@ iFlight.config(function($stateProvider, $urlRouterProvider) {
         }
     })
 
-        .state('app.syncing', {
+    .state('app.syncing', {
+        cache: false,
+        params :{
+            pass : null
+        },
         url: "/syncing",
         views: {
             'menuContent': {
                 templateUrl: "views/app/sync/syncing.html",
+                controller: 'SyncCtrl'
+            }
+        }
+    })
+
+        .state('app.sync-complete', {
+        url: "/sync-complete",
+        views: {
+            'menuContent': {
+                templateUrl: "views/app/sync/sync-complete.html",
                 controller: 'SyncCtrl'
             }
         }
