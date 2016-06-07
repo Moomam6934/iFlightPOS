@@ -1,6 +1,6 @@
 angular.module('iFlightPOS.app.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicSideMenuDelegate, ShopService, $state) {
+.controller('AppCtrl', function($scope, $ionicSideMenuDelegate, ShopService, $state, $ionicModal) {
     $scope.keepOrders = [];
     $scope.$watch(function() {
             return $ionicSideMenuDelegate.isOpenLeft();
@@ -13,11 +13,46 @@ angular.module('iFlightPOS.app.controllers', [])
             }
         });
 
+    $scope.receiptDetail = "";
+    $scope.statusVoid = "";
+    $ionicModal.fromTemplateUrl('views/app/payment/view-history.html', {
+        scope: $scope,
+        animation: 'slide-in-up'
+    }).then(function(modal) {
+        $scope.view_history = modal;
+    });
     $scope.setKeepByOrder = function(id, status) {
-        if (status != 'sold') {
+        if (status == 'keep') {
             ShopService.setOrderTemporaryByKeep(id);
             $state.go('app.cart');
             $ionicSideMenuDelegate.toggleLeft(false);
+        } else if (status == 'sold' || status == 'void') {
+            $scope.statusVoid = status;
+            $scope.receiptDetail = ShopService.getOrdersByID(id);
+            $scope.view_history.show();
+            $scope.totalCash = 0;
+            $scope.totalCredit = 0;
+            $scope.subTotalUnit = 0;
+            $scope.totalCredit = [];
+
+            for (var i = $scope.receiptDetail.payments.length - 1; i >= 0; i--) {
+                if ($scope.receiptDetail.payments[i].type == 'Cash') {
+                    $scope.totalCash += $scope.receiptDetail.payments[i].amount;
+                } else {
+                    // $scope.totalCredit += filterOrderByID[0].payments[i].amount;
+                    var card = $scope.receiptDetail.payments[i].currency.card_id.toString();
+                    var subCard = card.substring(12, 16);
+                    var credit = {
+                        no: subCard,
+                        amount: $scope.receiptDetail.payments[i].amount
+                    }
+                    $scope.totalCredit.push(credit)
+                }
+            };
+            for (var i = $scope.receiptDetail.products.length - 1; i >= 0; i--) {
+
+                $scope.subTotalUnit += $scope.receiptDetail.products[i].qty;
+            };
         }
 
     }
@@ -83,36 +118,7 @@ angular.module('iFlightPOS.app.controllers', [])
         $state.go('app.shop');
 
     }
-    $scope.showAddToCartPopup = function(product) {
-        $scope.data = {};
-        $scope.data.product = product;
-        $scope.data.productOption = 1;
-        $scope.data.productQuantity = 1;
 
-        var myPopup = $ionicPopup.show({
-            cssClass: 'add-to-cart-popup',
-            templateUrl: 'views/app/shop/partials/add-to-cart-popup.html',
-            title: 'Add to Cart',
-            scope: $scope,
-            buttons: [
-                { text: '', type: 'close-popup ion-ios-close-outline' }, {
-                    text: 'Add to cart',
-                    onTap: function(e) {
-                        return $scope.data;
-                    }
-                }
-            ]
-        });
-        myPopup.then(function(res) {
-            if (res) {
-                $ionicLoading.show({ template: '<ion-spinner icon="ios"></ion-spinner><p style="margin: 5px 0 0 0;">Adding to cart</p>', duration: 1000 });
-                ShopService.addProductToCart(res.product);
-                console.log('Item added to cart!', res);
-            } else {
-                console.log('Popup closed');
-            }
-        });
-    };
     $scope.remove = function(product) {
         ShopService.removeProduct(product);
         $state.go('app.shop');
@@ -141,18 +147,6 @@ angular.module('iFlightPOS.app.controllers', [])
     $scope.orders = [];
     $scope.productsByCart;
     $scope.isSelected = [];
-
-
-    $scope.$watch('iFlightData.products', function(o, n) {
-        var total_gross_amount = 0;
-        var gross_amount = 0;
-        for (var i = $scope.iFlightData.products.length - 1; i >= 0; i--) {
-            total_gross_amount += $scope.iFlightData.products[i].price * $scope.iFlightData.products[i].qty;
-            gross_amount = $scope.iFlightData.products[i].price * $scope.iFlightData.products[i].qty;
-            $scope.iFlightData.products[i].gross_amount = gross_amount;
-        };
-        $scope.iFlightData.total_gross_amount = total_gross_amount
-    }, true);
 
     function getDataProduct() {
 
@@ -442,9 +436,23 @@ angular.module('iFlightPOS.app.controllers', [])
         ShopService.setOrderTemporary(iFlightData);
         $state.go('app.cart', { iFlightData: iFlightData });
     }
+
+
+    $scope.$watch('iFlightData.products', function(o, n) {
+        var total_gross_amount = 0;
+        var gross_amount = 0;
+        for (var i = $scope.iFlightData.products.length - 1; i >= 0; i--) {
+            total_gross_amount += $scope.iFlightData.products[i].price * $scope.iFlightData.products[i].qty;
+            gross_amount = $scope.iFlightData.products[i].price * $scope.iFlightData.products[i].qty;
+            $scope.iFlightData.products[i].gross_amount = gross_amount;
+        };
+        $scope.iFlightData.total_gross_amount = total_gross_amount
+    }, true);
+
     $scope.slideHasChanged = function(e) {
         console.log(e);
     }
+
 
 })
 
@@ -643,7 +651,7 @@ angular.module('iFlightPOS.app.controllers', [])
     }
 
     $scope.comfirmPayment = function() {
-        console.log($scope.iFlightData);
+
 
         var confirmPopup = $ionicPopup.confirm({
             title: 'Confirm',
@@ -807,7 +815,7 @@ angular.module('iFlightPOS.app.controllers', [])
         if (order.status === 'sold') {
             $scope.securityCode;
             var myPopup = $ionicPopup.show({
-                template: '<input type="number" ng-model="securityCode" style="text-align:right;">',
+                template: '<input type="password" ng-model="securityCode" style="text-align:center;">',
                 title: 'Enter Your Security Code.',
                 subTitle: '',
                 scope: $scope,
@@ -849,7 +857,7 @@ angular.module('iFlightPOS.app.controllers', [])
         $scope.products = products[0].products;
         $scope.res.data = products;
 
-        
+
     });
 
     $scope.click = function(product) {

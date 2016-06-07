@@ -38,7 +38,7 @@ angular.module('iFlightPOS.app.services', [])
 
         if (orders_keep.id != null) {
             for (var i = iFlight.orders.length - 1; i >= 0; i--) {
-                if(iFlight.orders[i].id === orders_keep.id){
+                if (iFlight.orders[i].id === orders_keep.id) {
                     iFlight.orders[i] = orders_keep;
                 }
             };
@@ -81,6 +81,19 @@ angular.module('iFlightPOS.app.services', [])
         });
 
         getOrderByID.status = 'void';
+
+        for (var i = orders_vold.products.length - 1; i >= 0; i--) {
+            for (var ii = iFlight.Categories.length - 1; ii >= 0; ii--) {
+                for (var iii = iFlight.Categories[ii].products.length - 1; iii >= 0; iii--) {
+                    if (orders_vold.products[i].products_id === iFlight.Categories[ii].products[iii].products_id) {
+                        console.log(iFlight.Categories[ii].products[iii]);
+                        console.log(orders_vold.products[i]);
+                        iFlight.Categories[ii].products[iii].total_qty += orders_vold.products[i].qty;
+                    }
+                };
+            };
+        };
+
 
 
         window.localStorage.iFlight_data = JSON.stringify(iFlight);
@@ -210,10 +223,34 @@ angular.module('iFlightPOS.app.services', [])
             return order.id == orderToRemove.id;
         });
 
+
+        for (var i = orderToRemove.products.length - 1; i >= 0; i--) {
+            for (var ii = iFlight_data.Categories.length - 1; ii >= 0; ii--) {
+                for (var iii = iFlight_data.Categories[ii].products.length - 1; iii >= 0; iii--) {
+                    if (orderToRemove.products[i].products_id === iFlight_data.Categories[ii].products[iii].products_id) {
+                        console.log(iFlight_data.Categories[ii].products[iii]);
+                        console.log(orderToRemove.products[i]);
+                        iFlight_data.Categories[ii].products[iii].total_qty += orderToRemove.products[i].qty;
+                    }
+                };
+            };
+        };
+
         iFlight_data.orders = new_products;
         window.localStorage.iFlight_data = JSON.stringify(iFlight_data);
     };
-    // window.localStorage.removeItem('iFlightData');
+
+    this.getOrdersByID = function(id) {
+
+            var iFlight_data = !_.isUndefined(window.localStorage.iFlight_data) ? JSON.parse(window.localStorage.iFlight_data) : [];
+            var getOrderByID = _.find(iFlight_data.orders, function(order) {
+                return order.id == id;
+            });
+
+            return getOrderByID;
+
+        }
+        // window.localStorage.removeItem('order_temporary');
 
 
 })
