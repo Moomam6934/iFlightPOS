@@ -53,7 +53,7 @@
                 </div>
                 <div class="row menu-bottom-options">
                     <div class="col col-bottom">
-                        <button ng-repeat="itm in keep | orderBy: 'id' " class="button button-energized button-keep shake" ng-click="setKeepByOrder(itm.id)">
+                        <button ng-repeat="itm in keep | orderBy: 'id' " class="button button-energized button-keep shake" ng-click="setKeepByOrder(itm.id,itm.status)">
                             {{itm.seat}}
                         </button>
                     </div>

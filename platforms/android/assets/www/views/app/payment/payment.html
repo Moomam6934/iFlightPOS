@@ -19,7 +19,7 @@
                         <div class="col col-25 style-margin-left10p" class="text-center" ng-click="typeOfPayment(item)"><span class="input-label">{{item.type}}<i class="icon ion-chevron-right text-margin-left"></i></span></div>
                         <div class="col col-75 style-text-color  " style="border-left: 1px solid; border-color: #D0D0D0;">
                             <input type="text" class="style-width95  style-text-color " ng-click="payment(typepayment,item)" ng-show="item.type === 'Cash'" ng-model="item.currency.currencys.name_desc" placeholder="Select Currency." readOnly>
-                            <input type="number" ng-show="item.type === 'Credit'" class="style-width95   style-text-color" ng-model="item.currency.card_id" placeholder="Card No." max="9999999999999999">
+                            <input type="number" ng-show="item.type === 'Credit'" class="style-width95   style-text-color" ng-model="item.currency.card_id" placeholder="Card No." max="9999999999999999" ng-keyup="keyCardId(item)">
                         </div>
                     </div>
                     <div class="row">

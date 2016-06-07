@@ -11,7 +11,7 @@
         </div>
         <ion-list>
             <ion-item ng-repeat="or in orders | filter:{'status':'void'}| filter: searchvoid ">
-                <a class="front-black " href="#">
+                <a class="front-black " ng-click="setKeepByOrder(or.id,or.status)">
                     <p> Receipt Number : {{or.receipt_number}} <span class="item-price">{{or.total_gross_amount | number}}&nbsp;Baht&nbsp;&nbsp;<i class="icon ion-chevron-right"></i></span>
                     </p>
                     <p> Date : {{or.payment_date | date:'dd MMMM yyyy hh:mm a'}} 

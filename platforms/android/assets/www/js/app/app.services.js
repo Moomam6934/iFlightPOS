@@ -240,6 +240,18 @@ angular.module('iFlightPOS.app.services', [])
         window.localStorage.iFlight_data = JSON.stringify(iFlight_data);
     };
 
+        this.removeOrderForKeep = function(orderToRemove) {
+        var iFlight_data = !_.isUndefined(window.localStorage.iFlight_data) ? JSON.parse(window.localStorage.iFlight_data) : [];
+
+        var new_products = _.reject(iFlight_data.orders, function(order) {
+            return order.id == orderToRemove.id;
+        });
+
+
+        iFlight_data.orders = new_products;
+        window.localStorage.iFlight_data = JSON.stringify(iFlight_data);
+    };
+
     this.getOrdersByID = function(id) {
 
             var iFlight_data = !_.isUndefined(window.localStorage.iFlight_data) ? JSON.parse(window.localStorage.iFlight_data) : [];
@@ -306,7 +318,12 @@ angular.module('iFlightPOS.app.services', [])
 
     this.setOrderAdjust = function(adjust) {
         var order_adjust = !_.isUndefined(window.localStorage.order_adjust) ? JSON.parse(window.localStorage.order_adjust) : [];
-
+        var adjust_lastItem = _.last(order_adjust);
+        var id = 1;
+        if(order_adjust.length != 0){
+            id = adjust_lastItem.adj_id + 1;
+        }
+        adjust.adj_id = id;
         order_adjust.push(adjust);
 
         window.localStorage.order_adjust = JSON.stringify(order_adjust);
@@ -316,11 +333,11 @@ angular.module('iFlightPOS.app.services', [])
         return JSON.parse(window.localStorage.order_adjust || null);
     };
 
-    this.removeAdjust = function(id) {
+    this.removeAdjust = function(adj_id) {
         var order_adjust = JSON.parse(window.localStorage.order_adjust);
 
         var adjust = _.reject(order_adjust, function(adjust) {
-            return adjust.id == id;
+            return adjust.adj_id == adj_id;
         });
 
         order_adjust = adjust;

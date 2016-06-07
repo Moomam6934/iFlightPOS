@@ -402,6 +402,9 @@ angular.module('iFlightPOS.app.controllers', [])
                             }
 
                         } else if (index == 1) {
+                            if ($scope.iFlightData.status == 'keep') {
+                                ShopService.removeOrderForKeep($scope.iFlightData);
+                            }
 
                             ShopService.clearOrderTemporary();
                             $scope.loadData();
@@ -642,7 +645,6 @@ angular.module('iFlightPOS.app.controllers', [])
         $scope.iFlightData.payments = $scope.payments;
 
 
-
     }, true);
 
 
@@ -794,6 +796,9 @@ angular.module('iFlightPOS.app.controllers', [])
                     }
 
                 } else if (index == 1) {
+                    if ($scope.iFlightData.status == 'keep') {
+                        ShopService.removeOrderForKeep($scope.iFlightData);
+                    }
                     ShopService.clearOrderTemporary();
                     $state.go('app.shop');
                 }
@@ -801,6 +806,16 @@ angular.module('iFlightPOS.app.controllers', [])
         });
 
     };
+
+    $scope.keyCardId = function(item) {
+        if (item.currency.card_id != null) {
+            if (item.currency.card_id.toString().length == 16) {
+                console.log("true");
+                item.currency.money = $scope.calculatorTotal;
+            }
+        }
+
+    }
 
 })
 
@@ -880,21 +895,38 @@ angular.module('iFlightPOS.app.controllers', [])
     /////////////////////addItem//////////////////////////
     $scope.adjusts = {};
 
+    $scope.qtyAdjust = function(count) {
+
+        var ratings = [];
+
+        for (var i = 0; i < count; i++) {
+            ratings.push(i + 1)
+        }
+        quantity = ratings.length;
+        return ratings;
+    }
+
+    $scope.selectRemark = function(rm) {
+        $scope.adjusts.remark = rm;
+    }
+
     $scope.gotoShopAdjust = function() {
         $state.go('app.shopadjust');
     }
     $scope.aadAdjust = function() {
 
-        $scope.detail.adjustmeny = $scope.adjusts;
+        $scope.detail.adjustment = $scope.adjusts;
         AdjustService.setOrderAdjust($scope.detail);
         $scope.detail = null;
         $state.go('app.orderadjust');
-        $scope.adjustsList = AdjustService.getadjust();
     }
-    $scope.removeAdj = function(id) {
-        AdjustService.removeAdjust(id);
+    $scope.removeAdj = function(adj_id) {
+        AdjustService.removeAdjust(adj_id);
         $scope.adjustsList = AdjustService.getadjust();
 
+    }
+    $scope.getAdjust = function() {
+        $scope.adjustsList = AdjustService.getadjust();
     }
 
 })

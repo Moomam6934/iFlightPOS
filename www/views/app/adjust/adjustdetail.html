@@ -1,8 +1,8 @@
 <ion-view view-title="Product">
     <ion-nav-buttons side="right">
-        <button class="button button-clear button-light" ng-click="aadAdjust()" ng-disabled="!adjusts.unit || !adjusts.remark"><b>Done</b></button>
+        <button class="button button-clear button-light" ng-click="aadAdjust()" ng-disabled="!adjusts.unit || !adjusts.remark || adjusts.remark == 'other'? !adjusts.other? true : false :false"><b>Done</b></button>
     </ion-nav-buttons>
-    <ion-content overflow-scroll="true" has-bouncing="true" class="icon-red">
+    <ion-content scroll="false" overflow-scroll="false" has-bouncing="true" class="icon-red">
         <div class="row item item-text-wrap">
             <div class="col col-40 "><img class="style-pix-h150-w150" ng-src="{{detail.img}}">
             </div>
@@ -12,57 +12,37 @@
                 <h1 class="product-price icon-red ">{{detail.price}} THB</h1>
             </div>
         </div>
-        <ion-item>
-            <br>
-            <div class="row">
-                <div class="col col-100">
-                    <div class="list">
-                        <label class="item item-input item-select">
-                            <div class="input-label">
-                                <h2 class="style-red1">Unit :</h2>
-                            </div>
-                            <select ng-model="adjusts.unit">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                                <option>6</option>
-                                <option>7</option>
-                                <option>8</option>
-                                <option>9</option>
-                                <option>10</option>
-                            </select>
-                        </label>
-                    </div>
-                </div>
-            </div>
-            <br>
-            <br>
-            <div class="row">
-                <div class="col col-100">
-                    <div class="list">
-                        <label class="item item-input item-select">
-                            <div class="input-label">
-                                <h2 class="style-red1">Remark :</h2>
-                            </div>
-                            <select ng-model="adjusts.remark">
-                                <option>Dilapidated</option>
-                                <option>Lend</option>
-                                <option value="other">Other</option>
-                            </select>
-                        </label>
-                    </div>
+        <br>
+        <div class="row">
+            <div class="col col-100">
+                <div class="list">
+                    <label class="item item-input item-select">
+                        <div class="input-label">
+                            Unit<span style="color:red;">*</span>
+                        </div>
+                        <select ng-model="adjusts.unit">
+                            <option ng-repeat="qty in qtyAdjust(detail.total_qty)">{{qty}}</option>
+                        </select>
+                    </label>
+                    <label class="item item-input item-select">
+                        <div class="input-label">
+                            Remark<span style="color:red;">*</span>
+                        </div>
+                        <select ng-model="adjusts.remark">
+                            <option>Dilapidated</option>
+                            <option>Lend</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </label>
                     <div class="list" ng-show="adjusts.remark == 'other'">
-                        <label class="item item-input  ">
-                            <div class="input-label">
-                                <input type="text" ng-model="adjusts.other" placeholder="remark">
-                            </div>
+                        <label class="item item-input">
+                            <span class="input-label">Other <span style="color:red;">*</span></span>
+                            <input type="text" ng-model="adjusts.other">
                         </label>
                     </div>
                 </div>
             </div>
-            </div>
-        </ion-item>
+        </div>
+        </div>
     </ion-content>
 </ion-view>
