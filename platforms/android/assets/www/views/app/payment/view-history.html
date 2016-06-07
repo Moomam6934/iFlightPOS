@@ -1,0 +1,66 @@
+<ion-modal-view class="modal-view">
+    <ion-header-bar>
+        <button class="button button-clear button-light ion-ios-close-outline icon-button-balance" ng-click="view_history.hide()"></button>
+        <h1 class="title modal-title"><b class="front-cancel">History</b></h1>
+    </ion-header-bar>
+    <ion-content scroll="false">
+        <br>
+        <ion-scroll direction="y" style="height:90%;">
+            <div class="row">
+                <div class="col col-50"><img src="img/logo-airasia2.png" class="image-logo-receipt"></div>
+                <div class="col col-50">
+                    <p>Rcpt-ID : {{receiptDetail.receipt_number}}</p>
+                    <p>Date : {{receiptDetail.date | date : 'yyyyMMdd (HH:mm)'}}</p>
+                    <p>POS : 123456</p>
+                </div>
+            </div>
+            <br>
+            <div class="row receipt-border-bottom receipt-border-top">
+                <div class="col col-50 text-left">Product</div>
+                <div class="col col-20 text-right">Unit</div>
+                <div class="col col-30 text-center">Price</div>
+            </div>
+            <div class="row receipt-item" ng-repeat="products in receiptDetail.products">
+                <div class="col col-50 text-left">{{products.name}}</div>
+                <div class="col col-20 text-right">{{products.qty}}</div>
+                <div class="col col-30 text-center">{{products.gross_amount | number : 2}}</div>
+            </div>
+            <br>
+            <div class="row receipt-border-top ">
+                <div class="col col-50 text-left"><b>Sub-Total</b></div>
+                <div class="col col-20 text-right"><b>{{subTotalUnit}}</b></div>
+                <div class="col col-30 text-center"><b>{{receiptDetail.total_gross_amount | number : 2}}</b></div>
+            </div>
+            <div class="row receipt-border-bottom">
+                <div class="col col-50 text-left"><b>Total</b></div>
+                <div class="col col-20 text-right"></div>
+                <div class="col col-30 text-center"><b>{{receiptDetail.total_gross_amount | number : 2}}</b></div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col col-33 text-left">Credit card</div>
+            </div>
+            <div class="row" ng-show="totalCredit.length > 0" ng-repeat="credit in totalCredit">
+                <div class="col col-50 text-left">XXXX XXXX XXXX {{credit.no}}</div>
+                <div class="col col-20 text-right"></div>
+                <div class="col col-30 text-center">{{credit.amount | number : 2}}</div>
+            </div>
+            <div class="row" ng-show="totalCash > 0">
+                <div class="col col-50 text-left">Cash</div>
+                <div class="col col-20 text-right"></div>
+                <div class="col col-30 text-center">{{totalCash | number : 2}}</div>
+            </div>
+            <div class="row">
+                <div class="col col-50 text-left">Change</div>
+                <div class="col col-20 text-right"></div>
+                <div class="col col-30 text-center">{{receiptDetail.change | number : 2}}</div>
+            </div>
+        </ion-scroll>
+        <br>
+        <div class="bar bar-footer">
+            <button class="button button-balanced width-100per" ng-click="view_history.hide()">
+                Print
+            </button>
+        </div>
+    </ion-content>
+</ion-modal-view>
