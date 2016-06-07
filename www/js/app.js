@@ -223,10 +223,7 @@ iFlight.config(function($stateProvider, $urlRouterProvider) {
         }
     })
 
-
-
     ///////////////////////////MasterData//////////////////////////////////////
-
 
     .state('app.data', {
         cache: false,
@@ -315,9 +312,6 @@ iFlight.config(function($stateProvider, $urlRouterProvider) {
         controller: 'ForgotPasswordCtrl'
     })
 
-
-
-
     .state('app.orderadjust', {
         cache: false,
         params: {
@@ -382,17 +376,12 @@ iFlight.config(function($stateProvider, $urlRouterProvider) {
         }
     })
 
-
-
     .state('menushop', {
         url: "/menushop",
         templateUrl: "views/menu/menushop.html"
 
 
     })
-
-
-
 
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/auth/welcome');
