@@ -382,15 +382,6 @@ iFlight.config(function($stateProvider, $urlRouterProvider) {
         }
     })
 
-        .state('app.sync-complete', {
-        url: "/sync-complete",
-        views: {
-            'menuContent': {
-                templateUrl: "views/app/sync/sync-complete.html",
-                controller: 'SyncCtrl'
-            }
-        }
-    })
 
 
     .state('menushop', {
