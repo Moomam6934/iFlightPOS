@@ -867,20 +867,23 @@ angular.module('iFlightPOS.app.controllers', [])
     $scope.cart;
 
 
-    AdjustService.getProducts().then(function(products) {
-
-        $scope.products = products[0].products;
-        $scope.res.data = products;
 
 
-    });
+    $scope.loadAdj = function() {
+
+            $scope.res.data = ShopService.getProducts();
+            $scope.products = $scope.res.data[0].products;
+    }
 
     $scope.click = function(product) {
 
         var click = 1;
-        $state.go('app.adjustdetail', {
-            data: product,
-        });
+        if (product.total_qty > 0) {
+            $state.go('app.adjustdetail', {
+                data: product,
+            });
+        }
+
 
     }
 
@@ -920,8 +923,8 @@ angular.module('iFlightPOS.app.controllers', [])
         $scope.detail = null;
         $state.go('app.orderadjust');
     }
-    $scope.removeAdj = function(adj_id) {
-        AdjustService.removeAdjust(adj_id);
+    $scope.removeAdj = function(adj) {
+        AdjustService.removeAdjust(adj);
         $scope.adjustsList = AdjustService.getadjust();
 
     }

@@ -1,10 +1,13 @@
 iFlight.controller('SyncCtrl', function($scope, $state, $timeout, $ionicPopup, $stateParams) {
 
     var pass = $stateParams.pass;
+    $scope.typedCode;
+    $scope.status = true;
 
     $scope.keyPressed = function(keyCode) {
 
         pword = $scope.typedCode;
+
 
         switch (keyCode) {
             case -3:
@@ -25,8 +28,9 @@ iFlight.controller('SyncCtrl', function($scope, $state, $timeout, $ionicPopup, $
             case 8:
             case 9:
             case 0:
+
                 if (!/^\d+$/.test(pword)) {
-                    $scope.typedCode = keyCode;
+                    $scope.typedCode = keyCode.toString();
                 } else {
                     $scope.typedCode += '' + keyCode;
                 }
@@ -34,17 +38,22 @@ iFlight.controller('SyncCtrl', function($scope, $state, $timeout, $ionicPopup, $
 
         }
 
-        if ($scope.typedCode.length == 6) {
-            if ($scope.typedCode == 111111) {
-                $state.go('app.syncing', { pass: $scope.typedCode });
-                $scope.typedCode = "";
-            } else if ($scope.typedCode == 000000) {
-                $state.go('app.syncing', { pass: $scope.typedCode });
-                $scope.typedCode = "";
-            } else {
-                $scope.typedCode = "";
+        $scope.status = true;
+        $timeout(function() {
+            if ($scope.typedCode.length == 6) {
+                if ($scope.typedCode == 111111) {
+                    $state.go('app.syncing', { pass: $scope.typedCode });
+                    $scope.typedCode = "";
+                } else if ($scope.typedCode == 000000) {
+                    $state.go('app.syncing', { pass: $scope.typedCode });
+                    $scope.typedCode = "";
+                } else {
+                    $scope.status = false;
+                    $scope.typedCode = "";
+                }
             }
-        }
+        }, 1000);
+
 
     };
 

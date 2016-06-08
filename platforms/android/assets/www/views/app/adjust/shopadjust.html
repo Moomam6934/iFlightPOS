@@ -1,14 +1,13 @@
-<ion-view view-title="Product Adjust" ng-init="loadData()">
+<ion-view view-title="Product Adjust" ng-init="loadAdj()">
     <ion-nav-title>
         <ione-popover title="Products" subtitle="change order" listmodel="res" templateurl='views/app/shop/shop-popover.html' on-selected="onSelect">
         </ione-popover>
         Products
     </ion-nav-title>
-    
     <ion-content overflow-scroll="false" has-bouncing="true">
         <div class="row shop-products-narrow-cards-outer">
             <div ng-repeat="product in products" class="col col-33 shop-product-narrow-card" ng-click="click(product)">
-                <div class="list card">
+                <div class="list card" ng-class="{brightness : product.total_qty == 0}" >
                     <div class="item item-image">
                         <div ng-repeat="itm in orders" ng-show="itm.qty > 0 && itm.products_id === product.products_id">
                         </div>
@@ -25,4 +24,3 @@
         </div>
     </ion-content>
 </ion-view>
-

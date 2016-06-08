@@ -240,7 +240,7 @@ angular.module('iFlightPOS.app.services', [])
         window.localStorage.iFlight_data = JSON.stringify(iFlight_data);
     };
 
-        this.removeOrderForKeep = function(orderToRemove) {
+    this.removeOrderForKeep = function(orderToRemove) {
         var iFlight_data = !_.isUndefined(window.localStorage.iFlight_data) ? JSON.parse(window.localStorage.iFlight_data) : [];
 
         var new_products = _.reject(iFlight_data.orders, function(order) {
@@ -317,31 +317,53 @@ angular.module('iFlightPOS.app.services', [])
 
 
     this.setOrderAdjust = function(adjust) {
+        var iFlight = !_.isUndefined(window.localStorage.iFlight_data) ? JSON.parse(window.localStorage.iFlight_data) : [];
         var order_adjust = !_.isUndefined(window.localStorage.order_adjust) ? JSON.parse(window.localStorage.order_adjust) : [];
         var adjust_lastItem = _.last(order_adjust);
         var id = 1;
-        if(order_adjust.length != 0){
+        if (order_adjust.length != 0) {
             id = adjust_lastItem.adj_id + 1;
         }
         adjust.adj_id = id;
+
         order_adjust.push(adjust);
 
+        for (var i = iFlight.Categories.length - 1; i >= 0; i--) {
+            for (var ii = iFlight.Categories[i].products.length - 1; ii >= 0; ii--) {
+                if (iFlight.Categories[i].products[ii].products_id == adjust.products_id) {
+                    iFlight.Categories[i].products[ii].total_qty -= adjust.adjustment.unit;
+                }
+            };
+
+        };
         window.localStorage.order_adjust = JSON.stringify(order_adjust);
+        window.localStorage.iFlight_data = JSON.stringify(iFlight);
     }
 
     this.getadjust = function() {
         return JSON.parse(window.localStorage.order_adjust || null);
     };
 
-    this.removeAdjust = function(adj_id) {
+    this.removeAdjust = function(adj) {
+        var iFlight = !_.isUndefined(window.localStorage.iFlight_data) ? JSON.parse(window.localStorage.iFlight_data) : [];
         var order_adjust = JSON.parse(window.localStorage.order_adjust);
 
         var adjust = _.reject(order_adjust, function(adjust) {
-            return adjust.adj_id == adj_id;
+            return adjust.adj_id == adj.adj_id;
         });
-
         order_adjust = adjust;
         window.localStorage.order_adjust = JSON.stringify(order_adjust);
+
+
+        for (var i = iFlight.Categories.length - 1; i >= 0; i--) {
+            for (var ii = iFlight.Categories[i].products.length - 1; ii >= 0; ii--) {
+                if (iFlight.Categories[i].products[ii].products_id == adj.products_id) {
+                    iFlight.Categories[i].products[ii].total_qty += parseInt(adj.adjustment.unit);
+                }
+            };
+
+        };
+        window.localStorage.iFlight_data = JSON.stringify(iFlight);
     };
     // window.localStorage.removeItem('order_addjust');
 })

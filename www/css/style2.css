@@ -384,13 +384,13 @@
     0% {
         -webkit-transform: translate3d(10%, 0, 0);
     }
-    10% {
+    20% {
         -webkit-transform: translate3d(-10%, 0, 0);
     }
     40% {
         -webkit-transform: translate3d(10%, 0, 0);
     }
-    50% {
+    60% {
         -webkit-transform: translate3d(-10%, 0, 0);
     }
     80% {
@@ -398,9 +398,6 @@
     }
     90% {
         -webkit-transform: translate3d(-10%, 0, 0);
-    }
-    100% {
-        -webkit-transform: translate3d(10%, 0, 0);
     }
 }
 
@@ -438,3 +435,5 @@
     /* Set the line-height to the same as the height of the progress bar container, to center it vertically */
     color: #FFFFFF;
 }
+.brightness {-webkit-filter: brightness(0.50);
+    
