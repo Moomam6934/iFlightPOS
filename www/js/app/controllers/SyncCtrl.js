@@ -54,6 +54,9 @@ iFlight.controller('SyncCtrl', function($scope, $state, $timeout, $ionicPopup, $
             }
         }, 1000);
 
+        // $scope.$watch('typedCode',function(){
+        //     console.log('hi');
+        // })
 
     };
 

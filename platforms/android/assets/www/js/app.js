@@ -25,7 +25,7 @@ iFlight.config(function($ionicConfigProvider) {
     $ionicConfigProvider.navBar.alignTitle("center");
     $ionicConfigProvider.tabs.position('bottom').style('standard');
     $ionicConfigProvider.scrolling.jsScrolling(true);
-    
+
 })
 
 iFlight.run(function($ionicPlatform, $rootScope, $ionicHistory, $timeout, $ionicConfig) {
@@ -364,8 +364,8 @@ iFlight.config(function($stateProvider, $urlRouterProvider) {
 
     .state('app.syncing', {
         cache: false,
-        params :{
-            pass : null
+        params: {
+            pass: null
         },
         url: "/syncing",
         views: {
@@ -379,8 +379,12 @@ iFlight.config(function($stateProvider, $urlRouterProvider) {
     .state('menushop', {
         url: "/menushop",
         templateUrl: "views/menu/menushop.html"
+    })
 
-
+    .state('flight', {
+        url: "/flight",
+        templateUrl: "views/app/flight/flight.html",
+        controller: 'FlightCtrl'
     })
 
     // if none of the above states are matched, use this as the fallback

@@ -1,0 +1,36 @@
+<ion-view class="bg-menu" animation="no-animation">
+    <ion-content style="margin-top:30px;" scroll="false">
+        <div class="text-center">
+            <img src="img/LogoX.png" style="width:150px;">
+        </div>
+        <div class="list list-inset row-top">
+            <a class="item item-avatar">
+                <img src="img/takeoff.png">
+                <h2>AK 6302 <label class="font-flight">(Bangkok - Tokyo) </label></h2>
+                <p><i class="icon ion-ios-cart"></i> <i class="icon ion-ios-cart"></i> <i class="icon ion-ios-cart"></i> <i class="icon ion-ios-cart"></i></p>
+                <p class="tag-icon-download">
+                    <ion-spinner icon="ios" class="icon-download" ng-show="downloadOne"></ion-spinner>
+                    <i class="icon ion-ios-checkmark icon-download icon-success" ng-show="successOne"></i>
+                </p>
+            </a>
+            <a class="item item-avatar">
+                <img src="img/landing.png">
+                <h2>AK 6304 <label class="font-flight">(Tokyo - Bangkok)</label></h2>
+                <p><i class="icon ion-ios-cart"></i> <i class="icon ion-ios-cart"></i> <i class="icon ion-ios-cart"></i> <i class="icon ion-ios-cart"></i></p>
+                <p class="tag-icon-download">
+                    <ion-spinner icon="ios" class="icon-download" ng-show="downloadTwo"></ion-spinner>
+                    <i class="icon ion-ios-checkmark icon-download icon-success" ng-show="successTwo"></i>
+                </p>
+            </a>
+        </div>
+        <div class="row row-top">
+            <div class="col col-20"></div>
+            <div class="col col-60 text-left">
+                <button class="button button-outline button-light" style="width:100%" ng-click="gotoSelectCart()">
+                    Download
+                </button>
+            </div>
+            <div class="col col-20"></div>
+        </div>
+    </ion-content>
+</ion-view>

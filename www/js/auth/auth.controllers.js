@@ -23,7 +23,7 @@ angular.module('iFlightPOS.auth.controllers', [])
 
     $scope.googleSignIn = function() {
         console.log("doing google sign in");
-        $state.go('menushop');
+        $state.go('flight');
 
     };
 

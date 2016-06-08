@@ -567,7 +567,13 @@ angular.module('iFlightPOS.app.controllers', [])
         $scope.itemTypePay.currency.currencys = currency;
 
         $scope.iFlightData.sumTotal
-        $scope.data.money = $scope.calculatorTotal / currency.exchange;
+        var money = $scope.calculatorTotal / currency.exchange;
+
+        if (money > parseInt(money)) {
+            $scope.data.money = parseInt(money + 1);
+        } else {
+            $scope.data.money = $scope.calculatorTotal / currency.exchange;
+        }
         $scope.Payment.hide();
     }
 
@@ -870,9 +876,17 @@ angular.module('iFlightPOS.app.controllers', [])
 
 
     $scope.loadAdj = function() {
+        $scope.products = [];
+        var products = ShopService.getProducts();
+        // $scope.products = $scope.res.data[0].products;
 
-            $scope.res.data = ShopService.getProducts();
-            $scope.products = $scope.res.data[0].products;
+        for (var i = products.length - 1; i >= 0; i--) {
+            for (var ii = products[i].products.length - 1; ii >= 0; ii--) {
+                $scope.products.push(products[i].products[ii]);
+
+            };
+
+        };
     }
 
     $scope.click = function(product) {
