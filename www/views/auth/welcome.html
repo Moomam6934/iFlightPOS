@@ -28,15 +28,23 @@
                 </div>
                 <div class="col col-10"></div>
             </div>
-<!--             <div class="spinner">
-                <div class="cube1"></div>
-                <div class="cube2"></div>
-            </div> -->
+            <br>
+            <br>
+            <div class="row" ng-show="hideLoginTrue">
+                <div class="col col-40"></div>
+                <div class="col col-20">
+                    <div class="spinner">
+                        <div class="cube1"></div>
+                        <div class="cube2"></div>
+                    </div>
+                </div>
+                <div class="col col-40"></div>
+            </div>
         </div>
-        <div class="bottom-content row">
+        <div class="bottom-content row" ng-hide="hideLoginTrue">
             <div class="col col-bottom">
                 <a class="button button-block button-clear button-sign-in" ng-click="googleSignIn()">
-                            Sign In
+                    Sign In
                 </a>
             </div>
         </div>
