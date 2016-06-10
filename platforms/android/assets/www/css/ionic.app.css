@@ -11600,7 +11600,7 @@ progress {
 
 .button.button-balanced {
     border-color: transparent;
-    background-color: #3E454C;
+    background-color: #33cd5f;
     color: #fff;
 }
 
@@ -11611,7 +11611,7 @@ progress {
 
 .button.button-balanced.active,
 .button.button-balanced.activated {
-    background-color: #272c30;
+    background-color: #33cd5f;
 }
 
 .button.button-balanced.button-clear {

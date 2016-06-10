@@ -4,7 +4,7 @@ angular.module('iFlightPOS.auth.controllers', [])
 
 })
 
-.controller('WelcomeCtrl', function($scope, $ionicModal, show_hidden_actions, $state,$ionicHistory) {
+.controller('WelcomeCtrl', function($scope, $ionicModal, show_hidden_actions, $state, $ionicHistory, $ionicLoading) {
 
     $scope.show_hidden_actions = show_hidden_actions;
 
@@ -22,8 +22,14 @@ angular.module('iFlightPOS.auth.controllers', [])
     };
 
     $scope.googleSignIn = function() {
+        $ionicLoading.show({
+            noBackdrop: false,
+            template: '<div class="spinner">< div class = "cube1" >< /div>< div class = "cube2" >< /div> < /div>',
+
+        });
         console.log("doing google sign in");
         $state.go('flight');
+        // $ionicLoading.hide();
 
     };
 

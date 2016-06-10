@@ -25,6 +25,7 @@ iFlight.config(function($ionicConfigProvider) {
     $ionicConfigProvider.navBar.alignTitle("center");
     $ionicConfigProvider.tabs.position('bottom').style('standard');
     $ionicConfigProvider.scrolling.jsScrolling(true);
+    $ionicConfigProvider.views.transition('ios');
 
 })
 
@@ -384,6 +385,12 @@ iFlight.config(function($stateProvider, $urlRouterProvider) {
     .state('flight', {
         url: "/flight",
         templateUrl: "views/app/flight/flight.html",
+        controller: 'FlightCtrl'
+    })
+
+    .state('cart', {
+        url: "/cart",
+        templateUrl: "views/app/flight/cart.html",
         controller: 'FlightCtrl'
     })
 
