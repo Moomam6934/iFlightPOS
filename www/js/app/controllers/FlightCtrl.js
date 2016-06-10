@@ -77,4 +77,14 @@ iFlight.controller('FlightCtrl', function($scope, $state, $timeout, $ionicLoadin
         $scope.var = num;
     }
 
+    $scope.startShop = function() {
+        $ionicLoading.show({
+            noBackdrop: false,
+            template: '<ion-spinner icon="ios" class="spinner-back"></ion-spinner>',
+
+        });
+
+        $state.go('app.shop');
+    }
+
 })

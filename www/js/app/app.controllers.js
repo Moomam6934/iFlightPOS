@@ -203,16 +203,6 @@ angular.module('iFlightPOS.app.controllers', [])
 
     $scope.loadData = function() {
 
-        $ionicLoading.show({
-            noBackdrop: false,
-            template: '<ion-spinner icon="ios" class="spinner-back"></ion-spinner>',
-
-        });
-
-        $timeout(function() {
-            $ionicLoading.hide();
-        }, 3000)
-
         var orderTemporary = ShopService.getOrderTemporary();
         if (orderTemporary != null) {
             getDataProduct();
@@ -231,6 +221,11 @@ angular.module('iFlightPOS.app.controllers', [])
             $scope.isSelected = [];
         }
         console.log('load data complete.');
+
+
+        $timeout(function() {
+            $ionicLoading.hide();
+        }, 2000)
 
     }
 
@@ -473,7 +468,6 @@ angular.module('iFlightPOS.app.controllers', [])
         console.log(e);
     }
 
-
 })
 
 
@@ -481,7 +475,7 @@ angular.module('iFlightPOS.app.controllers', [])
     //$scope.paymentDetails;
 })
 
-.controller('PaymentCtrl', function($scope, $ionicModal, $state, $ionicPopup, PaymentService, $stateParams, ShopService, $filter, MasterService, $ionicActionSheet,$ionicLoading) {
+.controller('PaymentCtrl', function($scope, $ionicModal, $state, $ionicPopup, PaymentService, $stateParams, ShopService, $filter, MasterService, $ionicActionSheet, $ionicLoading) {
 
     $ionicLoading.hide();
 
@@ -526,6 +520,18 @@ angular.module('iFlightPOS.app.controllers', [])
 
     $scope.itemTypePay;
     $scope.typePayment = ['Cash', 'Credit'];
+
+
+    $scope.goBackToShop = function() {
+
+        $ionicLoading.show({
+            noBackdrop: false,
+            template: '<ion-spinner icon="ios" class="spinner-back"></ion-spinner>',
+
+        });
+
+        $state.go('app.shop');
+    }
 
     $scope.typeOfPayment = function(item) {
         $scope.Type_of_Payment.show();
@@ -982,7 +988,7 @@ angular.module('iFlightPOS.app.controllers', [])
 
 })
 
-.controller('ReceiptCtrl', function($scope, $stateParams, $filter, ShopService, $state) {
+.controller('ReceiptCtrl', function($scope, $stateParams, $filter, ShopService, $state,$ionicLoading) {
 
     var orderId = $stateParams.id;
     var getOrdersData = ShopService.getOrders();
@@ -1019,6 +1025,12 @@ angular.module('iFlightPOS.app.controllers', [])
     };
 
     $scope.print = function() {
+        $ionicLoading.show({
+            noBackdrop: false,
+            template: '<ion-spinner icon="ios" class="spinner-back"></ion-spinner>',
+
+        });
+
         $state.go('app.shop');
     }
 
