@@ -17,6 +17,7 @@
             <div class="button-bar">
                 <a class="button" ng-repeat="item in cart" ng-class="var==item.id?'button-balanced':'button-light button-outline'" ng-click="click(item.id)">{{item.flight}}</a>
             </div>
+            <a class="button button-icon ion-log-out" style="color:#FFF;" ui-sref="auth.welcome"></a>
         </div>
     </ion-content>
 </ion-view>
