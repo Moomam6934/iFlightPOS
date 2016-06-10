@@ -125,7 +125,7 @@ angular.module('iFlightPOS.app.controllers', [])
     }
 })
 
-.controller('ShopCtrl', function($scope, ShopService, $ionicActionSheet, $timeout, $ionicPopover, $state, $filter, $stateParams, $ionicPopup, $ionicSideMenuDelegate, $ionicSlideBoxDelegate) {
+.controller('ShopCtrl', function($scope, ShopService, $ionicActionSheet, $timeout, $ionicPopover, $state, $filter, $stateParams, $ionicPopup, $ionicSideMenuDelegate, $ionicSlideBoxDelegate, $ionicLoading) {
 
 
     $scope.iFlightData = {
@@ -202,6 +202,17 @@ angular.module('iFlightPOS.app.controllers', [])
     }
 
     $scope.loadData = function() {
+
+        $ionicLoading.show({
+            noBackdrop: false,
+            template: '<ion-spinner icon="ios" class="spinner-back"></ion-spinner>',
+
+        });
+
+        $timeout(function() {
+            $ionicLoading.hide();
+        }, 3000)
+
         var orderTemporary = ShopService.getOrderTemporary();
         if (orderTemporary != null) {
             getDataProduct();
@@ -220,6 +231,7 @@ angular.module('iFlightPOS.app.controllers', [])
             $scope.isSelected = [];
         }
         console.log('load data complete.');
+
     }
 
     $scope.select_item = function(product) {
@@ -435,6 +447,11 @@ angular.module('iFlightPOS.app.controllers', [])
 
 
     $scope.checkoutProduct = function(iFlightData) {
+        $ionicLoading.show({
+            noBackdrop: false,
+            template: '<ion-spinner icon="ios" class="spinner-back"></ion-spinner>',
+
+        });
 
         ShopService.setOrderTemporary(iFlightData);
         $state.go('app.cart', { iFlightData: iFlightData });
@@ -464,9 +481,9 @@ angular.module('iFlightPOS.app.controllers', [])
     //$scope.paymentDetails;
 })
 
-.controller('PaymentCtrl', function($scope, $ionicModal, $state, $ionicPopup, PaymentService, $stateParams, ShopService, $filter, MasterService, $ionicActionSheet) {
+.controller('PaymentCtrl', function($scope, $ionicModal, $state, $ionicPopup, PaymentService, $stateParams, ShopService, $filter, MasterService, $ionicActionSheet,$ionicLoading) {
 
-
+    $ionicLoading.hide();
 
     $scope.iFlightData = ShopService.getOrderTemporary();
     $scope.calculatorTotal = $scope.iFlightData.total_gross_amount;

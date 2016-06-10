@@ -379,7 +379,8 @@ iFlight.config(function($stateProvider, $urlRouterProvider) {
 
     .state('menushop', {
         url: "/menushop",
-        templateUrl: "views/menu/menushop.html"
+        templateUrl: "views/menu/menushop.html",
+        controller: 'FlightCtrl'
     })
 
     .state('flight', {
