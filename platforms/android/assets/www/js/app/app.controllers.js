@@ -663,7 +663,16 @@ angular.module('iFlightPOS.app.controllers', [])
         };
 
         if (result > $scope.iFlightData.total_gross_amount) {
-            $scope.changemoney = Math.abs($scope.iFlightData.total_gross_amount - result);
+            var change = Math.abs($scope.iFlightData.total_gross_amount - result).toFixed(2);
+            var d = change.toString().split(".");
+            var satang = ['0','25', '50', '75','99.99'];
+            for (var i = 0; i <= satang.length -1; i++) {
+                if (satang[i] > d[1]) {
+                    d[1] = satang[i - 1];
+                    break;
+                }
+            };
+            $scope.changemoney = Math.abs(d[0] + "." + d[1]);
             $scope.calculatorTotal = 0;
         } else {
             $scope.calculatorTotal = $scope.iFlightData.total_gross_amount - result;
@@ -988,7 +997,7 @@ angular.module('iFlightPOS.app.controllers', [])
 
 })
 
-.controller('ReceiptCtrl', function($scope, $stateParams, $filter, ShopService, $state,$ionicLoading) {
+.controller('ReceiptCtrl', function($scope, $stateParams, $filter, ShopService, $state, $ionicLoading) {
 
     var orderId = $stateParams.id;
     var getOrdersData = ShopService.getOrders();

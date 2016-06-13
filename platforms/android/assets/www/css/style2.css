@@ -509,23 +509,4 @@
         background-color: #EEEEEE;
         color: #FFF;
     }
-    
-    .spinner {
-        /*margin: 100px auto;*/
-        width: 40px;
-        height: 40px;
-        position: relative;
-    }
-.row-item {
 
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
-
-  flex-direction: column;
-  flex-wrap: nowrap; 
-  min-height: 100% !important;
-  height: 100% !important;
-}

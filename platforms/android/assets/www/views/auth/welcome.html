@@ -31,8 +31,11 @@
             <br>
             <br>
         </div>
-        <div class="text-center">
-            <button class="button button-clear button-light" ng-click="googleSignIn()" >
+        <div class=" text-center" ng-show="hideLoginTrue">
+            <ion-spinner icon="lines" style="height:100px !important; width:100px !important;"></ion-spinner>
+        </div>
+        <div class="text-center" ng-hide="hideLoginTrue">
+            <button class="button button-clear button-light" ng-click="googleSignIn()">
                 <label class="button-sign-in">Sign In</label>
             </button>
         </div>

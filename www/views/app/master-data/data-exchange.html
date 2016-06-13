@@ -7,14 +7,11 @@
             </label>
         </div>
         <ion-list class="style-text-center">
-            <ion-item ng-repeat="cur in currency | filter: searchall">
-                <!-- <a class="front-black" href="#">
-                    <span class="">1 {{cur.name}} <i class="icon ion-arrow-swap"></i> {{cur.exchange}} THB</span>
-                </a> -->
+            <ion-item ng-repeat="cur in currency | filter: searchall" style="padding: 6px">
                 <div class="row">
-                    <div class="col-33 style-col-left ">1 {{cur.name}} </div>
-                    <div class="col-33 style-text-size-30px style-width-80px"><i class="icon ion-arrow-swap"></i></div>
-                    <div class="col-33 style-col-right">{{cur.exchange}} THB</div>
+                    <div class="col col-25 style-col-left">1 {{cur.name}} </div>
+                    <div class="col col-50 style-text-size-30px style-width-80px"><i class="icon ion-arrow-swap"></i></div>
+                    <div class="col col-25 style-col-right">{{cur.exchange}} THB</div>
                 </div>
             </ion-item>
         </ion-list>
