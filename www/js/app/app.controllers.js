@@ -1,6 +1,6 @@
 angular.module('iFlightPOS.app.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicSideMenuDelegate, ShopService, $state, $ionicModal) {
+.controller('AppCtrl', function($scope, $ionicSideMenuDelegate, ShopService, $state, $ionicModal,$ionicLoading) {
     $scope.keepOrders = [];
     $scope.$watch(function() {
             return $ionicSideMenuDelegate.isOpenLeft();
@@ -21,8 +21,17 @@ angular.module('iFlightPOS.app.controllers', [])
     }).then(function(modal) {
         $scope.view_history = modal;
     });
+
+    function loading_show() {
+        $ionicLoading.show({
+            noBackdrop: false,
+            template: '<ion-spinner icon="ios" class="spinner-back"></ion-spinner>',
+
+        });
+    }
     $scope.setKeepByOrder = function(id, status) {
         if (status == 'keep') {
+            loading_show();
             ShopService.setOrderTemporaryByKeep(id);
             $state.go('app.cart');
             $ionicSideMenuDelegate.toggleLeft(false);
@@ -68,6 +77,14 @@ angular.module('iFlightPOS.app.controllers', [])
     $scope.qty = $scope.product.qty;
     $scope.isSelected = $stateParams.isSelected;
     var quantity;
+
+    function loading_show() {
+        $ionicLoading.show({
+            noBackdrop: false,
+            template: '<ion-spinner icon="ios" class="spinner-back"></ion-spinner>',
+
+        });
+    }
     $scope.checkoutProductData = function() {
 
         var getOrderTemporary = ShopService.getOrderTemporary();
@@ -96,6 +113,7 @@ angular.module('iFlightPOS.app.controllers', [])
         $scope.qty = range;
     }
     $scope.gotoShop = function() {
+        loading_show();
         $scope.qty;
 
         var checkByID = $filter('filter')($scope.order, function(dataByID) {
@@ -120,8 +138,10 @@ angular.module('iFlightPOS.app.controllers', [])
     }
 
     $scope.remove = function(product) {
+        loading_show();
         ShopService.removeProduct(product);
         $state.go('app.shop');
+
     }
 })
 
@@ -147,6 +167,14 @@ angular.module('iFlightPOS.app.controllers', [])
     $scope.orders = [];
     $scope.productsByCart;
     $scope.isSelected = [];
+
+    function loading_show() {
+        $ionicLoading.show({
+            noBackdrop: false,
+            template: '<ion-spinner icon="ios" class="spinner-back"></ion-spinner>',
+
+        });
+    }
 
     function getDataProduct() {
 
@@ -225,7 +253,7 @@ angular.module('iFlightPOS.app.controllers', [])
 
         $timeout(function() {
             $ionicLoading.hide();
-        }, 2000)
+        }, 1000)
 
     }
 
@@ -298,6 +326,7 @@ angular.module('iFlightPOS.app.controllers', [])
 
     }
     $scope.onHold = function(product) {
+        loading_show();
         var ckeckStock = ShopService.getProducts();
         var e = [];
         for (var i = ckeckStock.length - 1; i >= 0; i--) {
@@ -316,6 +345,7 @@ angular.module('iFlightPOS.app.controllers', [])
                 product_data: $scope.products,
                 isSelected: $scope.isSelected
             });
+            $ionicLoading.hide();
         }
 
     }
@@ -347,6 +377,11 @@ angular.module('iFlightPOS.app.controllers', [])
                             hideSheet();
                             if ($scope.iFlightData.products.length > 0) {
                                 if (ch == true) {
+                                    $ionicLoading.show({
+                                        noBackdrop: false,
+                                        template: '<ion-spinner icon="ios" class="spinner-back"></ion-spinner>',
+
+                                    });
                                     ShopService.setOrdersKeep($scope.iFlightData);
                                     $scope.iFlightData = {
                                         id: null,
@@ -366,9 +401,10 @@ angular.module('iFlightPOS.app.controllers', [])
                                     $ionicSlideBoxDelegate.update();
                                     $ionicSideMenuDelegate.toggleLeft();
                                     $scope.menuOpen = false;
+                                    $ionicLoading.hide();
                                 } else {
                                     $scope.data = {
-                                        seat : ''
+                                        seat: ''
                                     };
                                     var myPopup = $ionicPopup.show({
                                         template: '<input type="text" ng-model="data.seat" style="text-align:right;">',
@@ -384,6 +420,11 @@ angular.module('iFlightPOS.app.controllers', [])
                                             text: '<b>Confirm</b>',
                                             type: 'button-positive',
                                             onTap: function(e) {
+                                                $ionicLoading.show({
+                                                    noBackdrop: false,
+                                                    template: '<ion-spinner icon="ios" class="spinner-back"></ion-spinner>',
+
+                                                });
                                                 $scope.iFlightData.seat = $scope.data.seat;
                                                 ShopService.setOrdersKeep($scope.iFlightData);
                                                 $scope.iFlightData = {
@@ -404,6 +445,7 @@ angular.module('iFlightPOS.app.controllers', [])
                                                 $ionicSlideBoxDelegate.update();
                                                 $ionicSideMenuDelegate.toggleLeft();
                                                 $scope.menuOpen = false;
+                                                $ionicLoading.hide();
                                             }
                                         }]
                                     })
@@ -411,6 +453,11 @@ angular.module('iFlightPOS.app.controllers', [])
                             }
 
                         } else if (index == 1) {
+                            $ionicLoading.show({
+                                noBackdrop: false,
+                                template: '<ion-spinner icon="ios" class="spinner-back"></ion-spinner>',
+
+                            });
                             if ($scope.iFlightData.status == 'keep') {
                                 ShopService.removeOrderForKeep($scope.iFlightData);
                             }
@@ -424,11 +471,18 @@ angular.module('iFlightPOS.app.controllers', [])
                             }, 1500);
 
                             $scope.menuOpen = false;
+                            $ionicLoading.hide();
                         } else {
+                            $ionicLoading.show({
+                                noBackdrop: false,
+                                template: '<ion-spinner icon="ios" class="spinner-back"></ion-spinner>',
+
+                            });
                             ShopService.clearOrderTemporary($scope.iFlightData);
                             $scope.loadData();
                             $ionicSlideBoxDelegate.update();
                             hideSheet();
+                            $ionicLoading.show();
                         }
 
                     }
@@ -444,12 +498,7 @@ angular.module('iFlightPOS.app.controllers', [])
 
 
     $scope.checkoutProduct = function(iFlightData) {
-        $ionicLoading.show({
-            noBackdrop: false,
-            template: '<ion-spinner icon="ios" class="spinner-back"></ion-spinner>',
-
-        });
-
+        loading_show();
         ShopService.setOrderTemporary(iFlightData);
         $state.go('app.cart', { iFlightData: iFlightData });
     }
@@ -523,14 +572,15 @@ angular.module('iFlightPOS.app.controllers', [])
     $scope.itemTypePay;
     $scope.typePayment = ['Cash', 'Credit'];
 
-
-    $scope.goBackToShop = function() {
-
+    function loading_show() {
         $ionicLoading.show({
             noBackdrop: false,
             template: '<ion-spinner icon="ios" class="spinner-back"></ion-spinner>',
 
         });
+    }
+    $scope.goBackToShop = function() {
+        loading_show();
 
         $state.go('app.shop');
     }
@@ -667,8 +717,8 @@ angular.module('iFlightPOS.app.controllers', [])
         if (result > $scope.iFlightData.total_gross_amount) {
             var change = Math.abs($scope.iFlightData.total_gross_amount - result).toFixed(2);
             var d = change.toString().split(".");
-            var satang = ['0','25', '50', '75','99.99'];
-            for (var i = 0; i <= satang.length -1; i++) {
+            var satang = ['0', '25', '50', '75', '99.99'];
+            for (var i = 0; i <= satang.length - 1; i++) {
                 if (satang[i] > d[1]) {
                     d[1] = satang[i - 1];
                     break;
@@ -702,9 +752,11 @@ angular.module('iFlightPOS.app.controllers', [])
 
         confirmPopup.then(function(res) {
             if (res) {
+                loading_show();
                 console.log('You are sure');
                 ShopService.setOrdersSuccess($scope.iFlightData);
                 $state.go('receipt', { id: $scope.iFlightData.receipt_number });
+                $ionicLoading.hide();
             } else {
                 console.log('You are not sure');
             }
@@ -780,7 +832,7 @@ angular.module('iFlightPOS.app.controllers', [])
                 if (index == 0) {
                     hideSheet();
                     if (ch == true) {
-
+                        loading_show();
                         ShopService.setOrdersKeep($scope.iFlightData);
                         $scope.iFlightData = {
                             id: null,
@@ -797,6 +849,7 @@ angular.module('iFlightPOS.app.controllers', [])
                         }
                         ShopService.clearOrderTemporary($scope.iFlightData);
                         $state.go('app.shop');
+                        $ionicLoading.hide();
                     } else {
                         $scope.data = {};
                         var myPopup = $ionicPopup.show({
@@ -813,6 +866,7 @@ angular.module('iFlightPOS.app.controllers', [])
                                 text: '<b>Confirm</b>',
                                 type: 'button-positive',
                                 onTap: function(e) {
+                                    loading_show();
                                     $scope.iFlightData.seat = $scope.data.seat;
                                     ShopService.setOrdersKeep($scope.iFlightData);
                                     $scope.iFlightData = {
@@ -830,17 +884,20 @@ angular.module('iFlightPOS.app.controllers', [])
                                     }
                                     ShopService.clearOrderTemporary($scope.iFlightData);
                                     $state.go('app.shop');
+                                    $ionicLoading.hide();
                                 }
                             }]
                         })
                     }
 
                 } else if (index == 1) {
+                    loading_show();
                     if ($scope.iFlightData.status == 'keep') {
                         ShopService.removeOrderForKeep($scope.iFlightData);
                     }
                     ShopService.clearOrderTemporary($scope.iFlightData);
                     $state.go('app.shop');
+                    $ionicLoading.hide();
                 }
             }
         });
@@ -860,6 +917,14 @@ angular.module('iFlightPOS.app.controllers', [])
 })
 
 .controller('MainCtrl', function($scope, $state, ShopService, $ionicPopup) {
+
+    function loading_show() {
+        $ionicLoading.show({
+            noBackdrop: false,
+            template: '<ion-spinner icon="ios" class="spinner-back"></ion-spinner>',
+
+        });
+    }
 
     $scope.loadOrders = function() {
         $scope.orders = ShopService.getOrders();
@@ -907,7 +972,13 @@ angular.module('iFlightPOS.app.controllers', [])
     $scope.cart;
 
 
+    function loading_show() {
+        $ionicLoading.show({
+            noBackdrop: false,
+            template: '<ion-spinner icon="ios" class="spinner-back"></ion-spinner>',
 
+        });
+    }
 
     $scope.loadAdj = function() {
         $scope.products = [];
@@ -984,6 +1055,14 @@ angular.module('iFlightPOS.app.controllers', [])
 
 .controller('MasterCtrl', function($scope, $state, MasterService) {
 
+    function loading_show() {
+        $ionicLoading.show({
+            noBackdrop: false,
+            template: '<ion-spinner icon="ios" class="spinner-back"></ion-spinner>',
+
+        });
+    }
+
     MasterService.getBlacklists().then(function(blacklists) {
         $scope.blacklists = blacklists;
     });
@@ -1035,12 +1114,16 @@ angular.module('iFlightPOS.app.controllers', [])
         $scope.subTotalUnit += filterOrderByID[0].products[i].qty;
     };
 
-    $scope.print = function() {
+    function loading_show() {
         $ionicLoading.show({
             noBackdrop: false,
             template: '<ion-spinner icon="ios" class="spinner-back"></ion-spinner>',
 
         });
+    }
+
+    $scope.print = function() {
+        loading_show();
 
         $state.go('app.shop');
     }

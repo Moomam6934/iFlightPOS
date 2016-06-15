@@ -28,7 +28,7 @@ angular.module('iFlightPOS.auth.controllers', [])
         $timeout(function() {
             console.log("doing google sign in");
             $state.go('flight');
-        }, 3000);
+        }, 1500);
 
     };
 

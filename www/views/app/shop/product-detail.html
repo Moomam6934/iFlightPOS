@@ -1,6 +1,6 @@
 <ion-view view-title="Product" ng-init="checkoutProductData()">
     <ion-nav-buttons side="right">
-        <button class="button button-clear button-light" ng-click="gotoShop(range)" ng-disabled="qty == null"><b>Done</b></button>
+        <button class="button button-clear button-light" ng-click="gotoShop(range)" ng-disabled="qty == null || qty < 1"><b>Done</b></button>
     </ion-nav-buttons>
     <ion-content overflow-scroll="true" has-bouncing="true" class="icon-red">
         <div class="row item item-text-wrap">

@@ -132,6 +132,8 @@ angular.module('iFlightPOS.app.services', [])
                 for (var iii = orders_success.products.length - 1; iii >= 0; iii--) {
                     if (orders_success.products[iii].products_id === iFlight.Categories[i].products[ii].products_id) {
                         iFlight.Categories[i].products[ii].total_qty = orders_success.products[iii].total_qty;
+                        iFlight.Categories[i].products[ii].qty = 0;
+                        iFlight.Categories[i].products[ii].sold_qty = 0;
                         iFlight.Categories[i].products[ii].sold_qty = iFlight.Categories[i].products[ii].sold_qty + orders_success.products[iii].qty;
                     }
                 };
@@ -139,6 +141,7 @@ angular.module('iFlightPOS.app.services', [])
             };
 
         };
+
 
 
         window.localStorage.iFlight_data = JSON.stringify(iFlight);
@@ -345,8 +348,17 @@ angular.module('iFlightPOS.app.services', [])
 
         for (var i = iFlight.Categories.length - 1; i >= 0; i--) {
             for (var ii = iFlight.Categories[i].products.length - 1; ii >= 0; ii--) {
+                if (_.isUndefined(iFlight.Categories[i].products[ii].adjustment)) {
+                    iFlight.Categories[i].products[ii].adjustment = {
+                        adj : [],
+                        adj_total : 0
+                    }
+                }
                 if (iFlight.Categories[i].products[ii].products_id == adjust.products_id) {
                     iFlight.Categories[i].products[ii].total_qty -= adjust.adjustment.unit;
+                    iFlight.Categories[i].products[ii].adjustment.adj.push(adjust.adjustment);
+                    iFlight.Categories[i].products[ii].adjustment.adj_total = iFlight.Categories[i].products[ii].adjustment.adj_total + parseInt(adjust.adjustment.unit);
+
                 }
             };
 
@@ -380,5 +392,5 @@ angular.module('iFlightPOS.app.services', [])
         };
         window.localStorage.iFlight_data = JSON.stringify(iFlight);
     };
-    // window.localStorage.removeItem('order_addjust');
+    // window.localStorage.removeItem('order_adjust');
 })

@@ -521,3 +521,9 @@
         margin-left: -11px;
         font-size: 15px;
     }
+    
+    .custom-icon {
+        width: 28px;
+        height: 28px;
+        fill: #FFFFFF !important;
+    }

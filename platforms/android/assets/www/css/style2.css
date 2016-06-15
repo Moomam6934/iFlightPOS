@@ -509,4 +509,21 @@
         background-color: #EEEEEE;
         color: #FFF;
     }
-
+    
+    .adjust-item {
+        color: #4c4c4c !important;
+        margin-left: -8px;
+        font-size: 15px;
+    }
+    
+    .adjust-item-up {
+        color: #4c4c4c !important;
+        margin-left: -11px;
+        font-size: 15px;
+    }
+    
+    .custom-icon {
+        width: 28px;
+        height: 28px;
+        fill: #FFFFFF !important;
+    }

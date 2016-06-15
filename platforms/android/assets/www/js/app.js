@@ -89,17 +89,6 @@ iFlight.config(function($stateProvider, $urlRouterProvider) {
         }
     })
 
-    .state('app.shop-order', {
-        cache: false,
-        url: "/shop-order",
-        views: {
-            'menuContent': {
-                templateUrl: "views/app/shop/shop-order.html",
-                controller: 'ShopCtrl'
-            }
-        }
-    })
-
     .state('app.shop-order-2', {
         cache: false,
         url: "/shop-order-2",
@@ -384,14 +373,15 @@ iFlight.config(function($stateProvider, $urlRouterProvider) {
     })
 
     .state('flight', {
+        cache: false,
         url: "/flight",
         templateUrl: "views/app/flight/flight.html",
         controller: 'FlightCtrl'
     })
 
-    .state('cart', {
+    .state('select-cart', {
         cache: false,
-        url: "/cart",
+        url: "/select-cart",
         templateUrl: "views/app/flight/cart.html",
         controller: 'FlightCtrl'
     })

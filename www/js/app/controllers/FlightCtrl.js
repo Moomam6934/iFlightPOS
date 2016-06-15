@@ -11,6 +11,8 @@ iFlight.controller('FlightCtrl', function($scope, $state, $timeout, $ionicLoadin
         $scope.cart = [{
             id: 1,
             flight: 'AK 6302',
+            desc: 'Bangkok - Tokyo',
+            type: 'out',
             cart: [{
                 id: 1,
                 name: 'Food'
@@ -27,6 +29,8 @@ iFlight.controller('FlightCtrl', function($scope, $state, $timeout, $ionicLoadin
         }, {
             id: 2,
             flight: 'AK 6304',
+            desc: 'Tokyo - Bangkok',
+            type: 'in',
             cart: [{
                 id: 1,
                 name: 'Food-2'
@@ -42,6 +46,14 @@ iFlight.controller('FlightCtrl', function($scope, $state, $timeout, $ionicLoadin
             }]
         }]
 
+        $scope.pic = '';
+        for (var i = 0; i < $scope.cart.length; i++) {
+            if ($scope.cart[i].type == 'out') {
+                $scope.cart[i].pic = 'img/takeoff.png';
+            } else {
+                $scope.cart[i].pic = 'img/landing.png';
+            };
+        };
         $ionicLoading.hide();
     }
 
@@ -64,7 +76,7 @@ iFlight.controller('FlightCtrl', function($scope, $state, $timeout, $ionicLoadin
             });
         }, 2000)
         $timeout(function() {
-            $state.go('cart');
+            $state.go('select-cart');
             $scope.download = false;
             $timeout(function() {
                 $scope.downloadding = false;

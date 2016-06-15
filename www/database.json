@@ -361,7 +361,8 @@
             "total_qty": 5,
             "qty": 0,
             "all_qty": 5,
-            "img": "img/softdrink/1-Water.jpg"
+            "img": "img/softdrink/1-Water.jpg",
+            "barcode": 8850051001516
         }, {
             "id": 2,
             "products_id": 62,
