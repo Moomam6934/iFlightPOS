@@ -361,13 +361,15 @@ angular.module('iFlightPOS.app.controllers', [])
                                         seller_user: "Nuttakrittra Phumsawai",
                                         status: ''
                                     }
-                                    ShopService.clearOrderTemporary();
+                                    ShopService.clearOrderTemporary($scope.iFlightData);
                                     $scope.loadData();
                                     $ionicSlideBoxDelegate.update();
                                     $ionicSideMenuDelegate.toggleLeft();
                                     $scope.menuOpen = false;
                                 } else {
-                                    $scope.data = {};
+                                    $scope.data = {
+                                        seat : ''
+                                    };
                                     var myPopup = $ionicPopup.show({
                                         template: '<input type="text" ng-model="data.seat" style="text-align:right;">',
                                         title: 'Seat',
@@ -397,7 +399,7 @@ angular.module('iFlightPOS.app.controllers', [])
                                                     seller_user: "Nuttakrittra Phumsawai",
                                                     status: ''
                                                 }
-                                                ShopService.clearOrderTemporary();
+                                                ShopService.clearOrderTemporary($scope.iFlightData);
                                                 $scope.loadData();
                                                 $ionicSlideBoxDelegate.update();
                                                 $ionicSideMenuDelegate.toggleLeft();
@@ -413,7 +415,7 @@ angular.module('iFlightPOS.app.controllers', [])
                                 ShopService.removeOrderForKeep($scope.iFlightData);
                             }
 
-                            ShopService.clearOrderTemporary();
+                            ShopService.clearOrderTemporary($scope.iFlightData);
                             $scope.loadData();
                             $ionicSlideBoxDelegate.update();
                             $timeout(function() {
@@ -423,7 +425,7 @@ angular.module('iFlightPOS.app.controllers', [])
 
                             $scope.menuOpen = false;
                         } else {
-                            ShopService.clearOrderTemporary();
+                            ShopService.clearOrderTemporary($scope.iFlightData);
                             $scope.loadData();
                             $ionicSlideBoxDelegate.update();
                             hideSheet();
@@ -629,7 +631,7 @@ angular.module('iFlightPOS.app.controllers', [])
                     if (blacklists_checked.length > 0) {
                         var alertPopup = $ionicPopup.alert({
                             title: '<div class="text-center"><b>Warning</b></div>',
-                            template: '<div class="text-center">Blacklist</div>'
+                            template: '<div class="text-center">Card Number is Blacklist.</div>'
                         });
 
                         alertPopup.then(function(res) {
@@ -793,7 +795,7 @@ angular.module('iFlightPOS.app.controllers', [])
                             seller_user: "Nuttakrittra Phumsawai",
                             status: ''
                         }
-                        ShopService.clearOrderTemporary();
+                        ShopService.clearOrderTemporary($scope.iFlightData);
                         $state.go('app.shop');
                     } else {
                         $scope.data = {};
@@ -826,7 +828,7 @@ angular.module('iFlightPOS.app.controllers', [])
                                         seller_user: "Nuttakrittra Phumsawai",
                                         status: ''
                                     }
-                                    ShopService.clearOrderTemporary();
+                                    ShopService.clearOrderTemporary($scope.iFlightData);
                                     $state.go('app.shop');
                                 }
                             }]
@@ -837,7 +839,7 @@ angular.module('iFlightPOS.app.controllers', [])
                     if ($scope.iFlightData.status == 'keep') {
                         ShopService.removeOrderForKeep($scope.iFlightData);
                     }
-                    ShopService.clearOrderTemporary();
+                    ShopService.clearOrderTemporary($scope.iFlightData);
                     $state.go('app.shop');
                 }
             }

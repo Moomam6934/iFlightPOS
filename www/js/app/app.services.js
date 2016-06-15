@@ -202,8 +202,23 @@ angular.module('iFlightPOS.app.services', [])
     this.getOrderTemporary = function() {
         return JSON.parse(window.localStorage.order_temporary || null);
     };
-    this.clearOrderTemporary = function() {
+    this.clearOrderTemporary = function(iFlightData) {
+        var iFlight = !_.isUndefined(window.localStorage.iFlight_data) ? JSON.parse(window.localStorage.iFlight_data) : [];
+        if (iFlightData.seat != null) {
+            for (var i = iFlightData.products.length - 1; i >= 0; i--) {
+                for (var ii = iFlight.Categories.length - 1; ii >= 0; ii--) {
+                    for (var iii = iFlight.Categories[ii].products.length - 1; iii >= 0; iii--) {
+                        if (iFlight.Categories[ii].products[iii].products_id === iFlightData.products[i].products_id) {
+                            iFlight.Categories[ii].products[iii].qty = 0;
+                        }
+                    };
+                };
+            };
+        }
+
         window.localStorage.removeItem('order_temporary');
+        window.localStorage.iFlight_data = JSON.stringify(iFlight);
+
     }
     this.removeProduct = function(productToRemove) {
         var order_temporary = JSON.parse(window.localStorage.order_temporary);

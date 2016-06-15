@@ -380,7 +380,7 @@ iFlight.config(function($stateProvider, $urlRouterProvider) {
     .state('menushop', {
         url: "/menushop",
         templateUrl: "views/menu/menushop.html",
-        controller:'FlightCtrl'
+        controller: 'FlightCtrl'
     })
 
     .state('flight', {
@@ -390,6 +390,7 @@ iFlight.config(function($stateProvider, $urlRouterProvider) {
     })
 
     .state('cart', {
+        cache: false,
         url: "/cart",
         templateUrl: "views/app/flight/cart.html",
         controller: 'FlightCtrl'
