@@ -2003,7 +2003,7 @@
     </option>
     <option name="modificationStamps">
       <map>
-        <entry key="D:\C@NET\project\MOBILE\Airasia\iFlightPOS\platforms\android" value="5862367706825" />
+        <entry key="D:\C@NET\project\MOBILE\Airasia\iFlightPOS\platforms\android" value="5862379824952" />
       </map>
     </option>
     <option name="projectBuildClasspath">
@@ -2441,7 +2441,7 @@
     <property name="recentsLimit" value="5" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../.." />
     <property name="ExportApk.ApkPath" value="D:\C@NET\project\MOBILE\Airasia" />
-    <property name="ExportApk.Flavors" value="x86" />
+    <property name="ExportApk.Flavors" value="armv7" />
     <property name="ExportApk.BuildType" value="release" />
     <property name="FullScreen" value="false" />
   </component>
@@ -2593,7 +2593,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="0" width="1364" height="744" extended-state="0" />
+    <frame x="-8" y="0" width="1364" height="744" extended-state="1" />
     <editor active="false" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
