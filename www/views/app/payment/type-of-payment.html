@@ -5,7 +5,7 @@
     </ion-header-bar>
     <ion-content overflow-scroll="false" has-bouncing="true">
         <ion-list ng-repeat="type in typePayment" >
-            <ion-radio ng-value="type" ng-model="itemTypePay.type" ng-click="Type_of_Payment.hide()">{{type}}</ion-radio>
+            <ion-radio ng-value="type" ng-model="itemTypePay.type" ng-click="gotoSelectCurren(itemTypePay.type)">{{type}}</ion-radio>
         </ion-list>
     </ion-content>
 </ion-modal-view>

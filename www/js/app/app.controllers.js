@@ -1,6 +1,6 @@
 angular.module('iFlightPOS.app.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicSideMenuDelegate, ShopService, $state, $ionicModal,$ionicLoading) {
+.controller('AppCtrl', function($scope, $ionicSideMenuDelegate, ShopService, $state, $ionicModal, $ionicLoading) {
     $scope.keepOrders = [];
     $scope.$watch(function() {
             return $ionicSideMenuDelegate.isOpenLeft();
@@ -593,6 +593,14 @@ angular.module('iFlightPOS.app.controllers', [])
         $scope.Payment.show();
         $scope.itemTypePay = item;
     }
+
+    $scope.gotoSelectCurren = function(type) {
+        $scope.Type_of_Payment.hide();
+        if (type == 'Cash') {
+            $scope.Payment.show();
+        };
+    }
+
     $scope.addPayment = function() {
         var ids = $scope.payments.length + 1;
         $scope.payments.push({
