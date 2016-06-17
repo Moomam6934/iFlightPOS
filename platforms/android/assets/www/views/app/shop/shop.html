@@ -15,7 +15,7 @@
                         <input type="text" placeholder="Search" ng-model="searchProducts">
                     </label>
                 </div>
-                <ion-scroll direction="y" style="height:90%;">
+                <ion-scroll direction="y" style="height:86%;">
                     <div class="row shop-products-narrow-cards-outer">
                         <div ng-repeat="product in products.all | filter:searchProducts | orderBy:['-bestSale','-product_type','name']" class="col col-50 shop-product-narrow-card item-product" ng-click="select_item(product)" on-hold="onHold(product)">
                             <!-- ui-sref="app.product-detail({productId: product._id})" -->
@@ -35,8 +35,10 @@
                                         </div>
                                     </div>
                                     <div class="item item-body bg-item-shop">
-                                        <h2 class="card-title">{{product.name}}</h2>
-                                        <p class="card-description"><b>฿ {{product.price}}<span class="star-promotion" ng-show="product.product_type == 'promotion'"><i class="icon ion-ios-star"></i></span></b>
+                                        <h2 class="card-title">{{product.products_id}}</h2>
+                                        <p class="card-description">{{product.name}}</p>
+                                        <p class="{{product.product_type == 'promotion' ? 'card-description icon-promotion' : 'card-description'}}"><b>฿ {{product.price}}</b>
+                                            <span class="star-promotion" ng-show="product.product_type == 'promotion'"><i class="icon ion-ios-star"></i></span>
                                     </div>
                                 </div>
                             </div>
@@ -63,8 +65,10 @@
                                         </div>
                                     </div>
                                     <div class="item item-body bg-item-shop">
-                                        <h2 class="card-title">{{product.name}}</h2>
-                                        <p class="card-description"><b>฿ {{product.price}}</b><span class="star-promotion" ng-show="product.product_type == 'promotion'"><i class="icon ion-ios-star"></i></span></p>
+                                        <h2 class="card-title">{{product.products_id}}</h2>
+                                        <p class="card-description">{{product.name}}</p>
+                                        <p class="{{product.product_type == 'promotion' ? 'card-description icon-promotion' : 'card-description'}}"><b>฿ {{product.price}}</b>
+                                            <span class="star-promotion" ng-show="product.product_type == 'promotion'"><i class="icon ion-ios-star"></i></span>
                                     </div>
                                 </div>
                             </div>
@@ -91,8 +95,10 @@
                                         </div>
                                     </div>
                                     <div class="item item-body bg-item-shop">
-                                        <h2 class="card-title">{{product.name}}</h2>
-                                        <p class="card-description"><b>฿ {{product.price}}</b><span class="star-promotion" ng-show="product.product_type == 'promotion'"><i class="icon ion-ios-star"></i></span></p>
+                                        <h2 class="card-title">{{product.products_id}}</h2>
+                                        <p class="card-description">{{product.name}}</p>
+                                        <p class="{{product.product_type == 'promotion' ? 'card-description icon-promotion' : 'card-description'}}"><b>฿ {{product.price}}</b>
+                                            <span class="star-promotion" ng-show="product.product_type == 'promotion'"><i class="icon ion-ios-star"></i></span>
                                     </div>
                                 </div>
                             </div>
@@ -100,7 +106,7 @@
                     </div>
                 </ion-scroll>
             </ion-slide>
-               <ion-slide ion-slide-tab-label="Comboset">
+            <ion-slide ion-slide-tab-label="Comboset">
                 <ion-scroll direction="y" style="height:90%;">
                     <div class="row shop-products-narrow-cards-outer">
                         <div ng-repeat="product in products.combo | filter:searchProducts | orderBy:['-bestSale','-product_type','name']" class="col col-50 shop-product-narrow-card item-product" ng-click="select_item(product)" on-hold="onHold(product)">
@@ -119,8 +125,10 @@
                                         </div>
                                     </div>
                                     <div class="item item-body bg-item-shop">
-                                        <h2 class="card-title">{{product.name}}</h2>
-                                        <p class="card-description"><b>฿ {{product.price}}</b><span class="star-promotion" ng-show="product.product_type == 'promotion'"><i class="icon ion-ios-star"></i></span></p>
+                                        <h2 class="card-title">{{product.products_id}}</h2>
+                                        <p class="card-description">{{product.name}}</p>
+                                        <p class="{{product.product_type == 'promotion' ? 'card-description icon-promotion' : 'card-description'}}"><b>฿ {{product.price}}</b>
+                                            <span class="star-promotion" ng-show="product.product_type == 'promotion'"><i class="icon ion-ios-star"></i></span>
                                     </div>
                                 </div>
                             </div>
@@ -129,8 +137,8 @@
                 </ion-scroll>
             </ion-slide>
             <ion-slide ion-slide-tab-label="{{item.category_name}}" ng-repeat="item in products.data">
-                <ion-scroll direction="y" style="height:90%;" >
-                    <div class="row shop-products-narrow-cards-outer" >
+                <ion-scroll direction="y" style="height:90%;">
+                    <div class="row shop-products-narrow-cards-outer">
                         <div ng-repeat="product in item.products | orderBy:['-bestSale','-product_type','name']" class="col col-50 shop-product-narrow-card item-product" ng-click="select_item(product)" on-hold="onHold(product)">
                             <!-- ui-sref="app.product-detail({productId: product._id})" -->
                             <div ng-class="{selected : isSelected.indexOf(product.products_id) != -1}">
@@ -147,8 +155,10 @@
                                         </div>
                                     </div>
                                     <div class="item item-body bg-item-shop">
-                                        <h2 class="card-title">{{product.name}}</h2>
-                                        <p class="card-description"><b>฿ {{product.price}}</b><span class="star-promotion" ng-show="product.product_type == 'promotion'"><i class="icon ion-ios-star"></i></span></p>
+                                        <h2 class="card-title">{{product.products_id}}</h2>
+                                        <p class="card-description">{{product.name}}</p>
+                                        <p class="{{product.product_type == 'promotion' ? 'card-description icon-promotion' : 'card-description'}}"><b>฿ {{product.price}}</b>
+                                            <span class="star-promotion" ng-show="product.product_type == 'promotion'"><i class="icon ion-ios-star"></i></span>
                                     </div>
                                 </div>
                             </div>

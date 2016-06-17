@@ -1,6 +1,6 @@
 angular.module('iFlightPOS.app.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicSideMenuDelegate, ShopService, $state, $ionicModal,$ionicLoading) {
+.controller('AppCtrl', function($scope, $ionicSideMenuDelegate, ShopService, $state, $ionicModal, $ionicLoading) {
     $scope.keepOrders = [];
     $scope.$watch(function() {
             return $ionicSideMenuDelegate.isOpenLeft();
@@ -593,6 +593,14 @@ angular.module('iFlightPOS.app.controllers', [])
         $scope.Payment.show();
         $scope.itemTypePay = item;
     }
+
+    $scope.gotoSelectCurren = function(type) {
+        $scope.Type_of_Payment.hide();
+        if (type == 'Cash') {
+            $scope.Payment.show();
+        };
+    }
+
     $scope.addPayment = function() {
         var ids = $scope.payments.length + 1;
         $scope.payments.push({
@@ -649,6 +657,7 @@ angular.module('iFlightPOS.app.controllers', [])
         } else {
             $scope.data.money = $scope.calculatorTotal / currency.exchange;
         }
+        $scope.itemTypePay.currency.money = $scope.data.money;
         $scope.Payment.hide();
     }
 
@@ -964,10 +973,10 @@ angular.module('iFlightPOS.app.controllers', [])
 })
 
 
-.controller('AdjustCtrl', function($scope, AdjustService, $state, $stateParams, $ionicPopover, $filter, ShopService) {
+.controller('AdjustCtrl', function($scope, DefectService, $state, $stateParams, $ionicPopover, $filter, ShopService,$ionicPopup) {
 
     $scope.detail = $stateParams.data;
-    $scope.adjustsList = AdjustService.getadjust();
+    $scope.defectList = DefectService.getadjust();
     $scope.res = {};
     $scope.cart;
 
@@ -1015,7 +1024,7 @@ angular.module('iFlightPOS.app.controllers', [])
 
 
     /////////////////////addItem//////////////////////////
-    $scope.adjusts = {};
+    $scope.defect = {};
 
     $scope.qtyAdjust = function(count) {
 
@@ -1035,20 +1044,44 @@ angular.module('iFlightPOS.app.controllers', [])
     $scope.gotoShopAdjust = function() {
         $state.go('app.shopadjust');
     }
-    $scope.aadAdjust = function() {
+    $scope.addDefect = function(type) {
+        if (type == 'claim') {
+            $scope.datas = {}
+            var myPopup = $ionicPopup.show({
+                template: '<input type="password" ng-model="data.security_code" style="text-align:right;">',
+                title: 'Enter Your Security code.',
+                subTitle: '',
+                scope: $scope,
+                buttons: [{
+                    text: 'Cancel',
+                    onTap: function(e) {}
+                }, {
+                    text: '<b>Confirm</b>',
+                    type: 'button-positive',
+                    onTap: function(e) {
+                        $scope.detail.defect = $scope.defect;
+                        DefectService.setOrderAdjust($scope.detail);
+                        $scope.detail = null;
+                        $state.go('app.orderadjust');
 
-        $scope.detail.adjustment = $scope.adjusts;
-        AdjustService.setOrderAdjust($scope.detail);
-        $scope.detail = null;
-        $state.go('app.orderadjust');
+                    }
+                }]
+            })
+        } else {
+            $scope.detail.defect = $scope.defect;
+            DefectService.setOrderAdjust($scope.detail);
+            $scope.detail = null;
+            $state.go('app.orderadjust');
+        };
+
     }
     $scope.removeAdj = function(adj) {
-        AdjustService.removeAdjust(adj);
-        $scope.adjustsList = AdjustService.getadjust();
+        DefectService.removeAdjust(adj);
+        $scope.defectList = DefectService.getadjust();
 
     }
     $scope.getAdjust = function() {
-        $scope.adjustsList = AdjustService.getadjust();
+        $scope.defectList = DefectService.getadjust();
     }
 
 })

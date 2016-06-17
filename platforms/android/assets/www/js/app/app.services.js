@@ -320,7 +320,7 @@ angular.module('iFlightPOS.app.services', [])
     }
 })
 
-.service('AdjustService', function($http, $q, _) {
+.service('DefectService', function($http, $q, _) {
 
 
     this.getProducts = function() {
@@ -334,62 +334,62 @@ angular.module('iFlightPOS.app.services', [])
 
 
 
-    this.setOrderAdjust = function(adjust) {
+    this.setOrderAdjust = function(defect) {
         var iFlight = !_.isUndefined(window.localStorage.iFlight_data) ? JSON.parse(window.localStorage.iFlight_data) : [];
-        var order_adjust = !_.isUndefined(window.localStorage.order_adjust) ? JSON.parse(window.localStorage.order_adjust) : [];
-        var adjust_lastItem = _.last(order_adjust);
+        var order_defect = !_.isUndefined(window.localStorage.order_defect) ? JSON.parse(window.localStorage.order_defect) : [];
+        var adjust_lastItem = _.last(order_defect);
         var id = 1;
-        if (order_adjust.length != 0) {
+        if (order_defect.length != 0) {
             id = adjust_lastItem.adj_id + 1;
         }
-        adjust.adj_id = id;
-        adjust.adjustment.adj_id = id;
-        order_adjust.push(adjust);
+        defect.adj_id = id;
+        defect.defect.adj_id = id;
+        order_defect.push(defect);
 
         for (var i = iFlight.Categories.length - 1; i >= 0; i--) {
             for (var ii = iFlight.Categories[i].products.length - 1; ii >= 0; ii--) {
-                if (_.isUndefined(iFlight.Categories[i].products[ii].adjustment)) {
-                    iFlight.Categories[i].products[ii].adjustment = {
-                        adj: [],
-                        adj_total: 0
+                if (_.isUndefined(iFlight.Categories[i].products[ii].defect)) {
+                    iFlight.Categories[i].products[ii].defect = {
+                        defect: [],
+                        defect_total: 0
                     }
                 }
-                if (iFlight.Categories[i].products[ii].products_id == adjust.products_id) {
-                    iFlight.Categories[i].products[ii].total_qty -= adjust.adjustment.unit;
-                    iFlight.Categories[i].products[ii].adjustment.adj.push(adjust.adjustment);
-                    iFlight.Categories[i].products[ii].adjustment.adj_total = iFlight.Categories[i].products[ii].adjustment.adj_total + parseInt(adjust.adjustment.unit);
+                if (iFlight.Categories[i].products[ii].products_id == defect.products_id) {
+                    iFlight.Categories[i].products[ii].total_qty -= defect.defect.unit;
+                    iFlight.Categories[i].products[ii].defect.defect.push(defect.defect);
+                    iFlight.Categories[i].products[ii].defect.defect_total = iFlight.Categories[i].products[ii].defect.adj_total + parseInt(defect.defect.unit);
 
                 }
             };
 
         };
-        window.localStorage.order_adjust = JSON.stringify(order_adjust);
+        window.localStorage.order_defect = JSON.stringify(order_defect);
         window.localStorage.iFlight_data = JSON.stringify(iFlight);
     }
 
     this.getadjust = function() {
-        return JSON.parse(window.localStorage.order_adjust || null);
+        return JSON.parse(window.localStorage.order_defect || null);
     };
 
     this.removeAdjust = function(adj) {
         var iFlight = !_.isUndefined(window.localStorage.iFlight_data) ? JSON.parse(window.localStorage.iFlight_data) : [];
-        var order_adjust = JSON.parse(window.localStorage.order_adjust);
+        var order_defect = JSON.parse(window.localStorage.order_defect);
 
-        var adjust = _.reject(order_adjust, function(adjust) {
-            return adjust.adj_id == adj.adj_id;
+        var defect = _.reject(order_defect, function(defect) {
+            return defect.adj_id == adj.adj_id;
         });
-        order_adjust = adjust;
-        window.localStorage.order_adjust = JSON.stringify(order_adjust);
+        order_defect = defect;
+        window.localStorage.order_defect = JSON.stringify(order_defect);
 
 
         for (var i = iFlight.Categories.length - 1; i >= 0; i--) {
             for (var ii = iFlight.Categories[i].products.length - 1; ii >= 0; ii--) {
-                if (iFlight.Categories[i].products[ii].adjustment.adj.length != 0) {
-                    for (var iii = iFlight.Categories[i].products[ii].adjustment.adj.length - 1; iii >= 0; iii--) {
+                if (iFlight.Categories[i].products[ii].defect.defect.length != 0) {
+                    for (var iii = iFlight.Categories[i].products[ii].defect.defect.length - 1; iii >= 0; iii--) {
                         if (iFlight.Categories[i].products[ii].products_id == adj.products_id) {
-                            iFlight.Categories[i].products[ii].total_qty += parseInt(adj.adjustment.unit);
-                            iFlight.Categories[i].products[ii].adjustment.adj.splice(iii, 1);
-                            iFlight.Categories[i].products[ii].adjustment.adj_total = iFlight.Categories[i].products[ii].adjustment.adj_total - parseInt(adj.adjustment.unit);
+                            iFlight.Categories[i].products[ii].total_qty += parseInt(adj.defect.unit);
+                            iFlight.Categories[i].products[ii].defect.defect.splice(iii, 1);
+                            iFlight.Categories[i].products[ii].defect.defect_total = iFlight.Categories[i].products[ii].defect.defect_total - parseInt(adj.defect.unit);
                             break;
                         }
                     };
@@ -401,5 +401,6 @@ angular.module('iFlightPOS.app.services', [])
         };
         window.localStorage.iFlight_data = JSON.stringify(iFlight);
     };
-    // window.localStorage.removeItem('order_adjust');
+
+    // window.localStorage.removeItem('order_defect');
 })

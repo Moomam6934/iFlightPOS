@@ -100,7 +100,7 @@
     }
     
     .text-margin-left {
-        margin-left: 20px;
+        margin-left: 50px;
     }
     
     .text-margin-right-40 {
@@ -114,9 +114,23 @@
         background-color: #ffffff;
     }
     
+    .margin-left-noborder {
+        margin-left: 10px;
+        /*border-bottom: 1px solid;*/
+        border-color: #D0D0D0;
+        background-color: #ffffff;
+    }
+    
     .style-border-left1 {
         border-left: 1px solid;
         border-bottom: 1px solid;
+        border-color: #D0D0D0;
+        background-color: white;
+    }
+    
+    .style-border-left2 {
+        border-left: 1px solid;
+        /*border-bottom: 1px solid;*/
         border-color: #D0D0D0;
         background-color: white;
     }
@@ -178,6 +192,10 @@
     
     .style-text-color {
         color: #9C9C9C;
+    }
+    
+    .text-amount {
+        color: #c1bebe !important;
     }
     
     .style-text {
@@ -299,8 +317,16 @@
         width: 100%
     }
     
+    .width-49per {
+        width: 49%
+    }
+    
     .text-center {
         text-align: center !important;
+    }
+    
+    .text-right {
+        text-align: right !important;
     }
     
     .sub-title-item {
@@ -526,4 +552,8 @@
         width: 28px;
         height: 28px;
         fill: #FFFFFF !important;
+    }
+    
+    .item-money {
+        margin-left: 25px;
     }

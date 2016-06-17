@@ -30,7 +30,7 @@
                         </div>
                         <div class="col col-66 style-border-left2" ng-click="showPopup(item)">
                             <!-- <input type="number" class="{{item.currency.money > 0 ? 'style-width90  style-text-color text-right item-money' : 'style-width90  style-text-color text-center'}}" ng-model="item.currency.money" placeholder="Amount" ng-click="showPopup(item)" readOnly> -->
-                            <p class="style-width90 style-text-color set-top-p" ng-show="item.currency.money > 1">{{item.currency.money | number : 0}} {{item.currency.currencys.name}}</p>
+                            <p class="style-width90 style-text-color set-top-p" ng-show="item.currency.money > 1">{{item.currency.money | number : 0}} {{item.currency.currencys.name}} <span ng-show="item.type === 'Credit' && item.currency.money > 0">THB</span></p>
                             <p class="style-width90 text-amount set-top-p text-center" ng-show="item.currency.money < 1">Amount</p>
                         </div>
                     </div>
