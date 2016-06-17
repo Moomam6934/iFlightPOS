@@ -114,9 +114,23 @@
         background-color: #ffffff;
     }
     
+    .margin-left-noborder {
+        margin-left: 10px;
+        /*border-bottom: 1px solid;*/
+        border-color: #D0D0D0;
+        background-color: #ffffff;
+    }
+    
     .style-border-left1 {
         border-left: 1px solid;
         border-bottom: 1px solid;
+        border-color: #D0D0D0;
+        background-color: white;
+    }
+    
+    .style-border-left2 {
+        border-left: 1px solid;
+        /*border-bottom: 1px solid;*/
         border-color: #D0D0D0;
         background-color: white;
     }
@@ -178,6 +192,10 @@
     
     .style-text-color {
         color: #9C9C9C;
+    }
+    
+    .text-amount {
+        color: #c1bebe !important;
     }
     
     .style-text {
@@ -534,4 +552,8 @@
         width: 28px;
         height: 28px;
         fill: #FFFFFF !important;
+    }
+    
+    .item-money {
+        margin-left: 25px;
     }

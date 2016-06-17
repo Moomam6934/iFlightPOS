@@ -23,13 +23,15 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col col-33 style-margin-left10p">
+                        <div class="col col-33 margin-left-noborder">
                             <p ng-show="item.type === 'Cash' && item.currency.money > 0" class="style-width90 style-text-color set-top-p">{{item.amount | number : 2}} THB</p>
                             <p ng-show="item.type === 'Credit' && item.currency.money > 0" class="style-width90 style-text-color set-top-p">{{item.currency.money}} THB</p>
                             <!-- <input type="text" ng-show="item.type === 'Credit'" class="style-width90 style-text-color" ng-model="item.currency.money" readOnly> -->
                         </div>
-                        <div class="col col-66 style-border-left1">
-                            <input type="text" class="{{item.currency.money > 0 ? 'style-width90  style-text-color text-right' : 'style-width90  style-text-color text-center'}}" ng-model="item.currency.money" placeholder="Amount" readOnly ng-click="showPopup(item)">
+                        <div class="col col-66 style-border-left2" ng-click="showPopup(item)">
+                            <!-- <input type="number" class="{{item.currency.money > 0 ? 'style-width90  style-text-color text-right item-money' : 'style-width90  style-text-color text-center'}}" ng-model="item.currency.money" placeholder="Amount" ng-click="showPopup(item)" readOnly> -->
+                            <p class="style-width90 style-text-color set-top-p" ng-show="item.currency.money > 1">{{item.currency.money | number : 0}} {{item.currency.currencys.name}}</p>
+                            <p class="style-width90 text-amount set-top-p text-center" ng-show="item.currency.money < 1">Amount</p>
                         </div>
                     </div>
                 </div>

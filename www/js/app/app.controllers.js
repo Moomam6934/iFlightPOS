@@ -657,6 +657,7 @@ angular.module('iFlightPOS.app.controllers', [])
         } else {
             $scope.data.money = $scope.calculatorTotal / currency.exchange;
         }
+        $scope.itemTypePay.currency.money = $scope.data.money;
         $scope.Payment.hide();
     }
 
