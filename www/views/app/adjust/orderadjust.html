@@ -1,4 +1,4 @@
-<ion-view view-title="Adjusts List" class="shop-home-view " hide-back-button="true" ng-init="getAdjust()">
+<ion-view view-title="Defect List" class="shop-home-view " hide-back-button="true" ng-init="getAdjust()">
     <ion-nav-buttons side="left">
         <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
         </button>
@@ -14,16 +14,16 @@
             </label>
         </div>
         <ion-list>
-            <ion-item ng-repeat="itm in adjustsList | filter:search" class=" style-height-101px">
+            <ion-item ng-repeat="itm in defectList | filter:search" class=" style-height-101px">
                 <div class="row text-margin-right-40 margin-top-bottom-15">
                     <div class="col col-25">
                         <img class="product-pic-wh-70" ng-src="{{itm.img}}">
                     </div>
                     <div class="col col-75 txet-cut-overflow">
                         <span class="txet-cut-overflow"><p>{{itm.name}} </p>
-                            <p>Unit : {{itm.adjustment.unit}}</p>
-                            <p ng-hide="itm.adjustment.other">{{itm.adjustment.remark}}</p>
-                            <p>{{itm.adjustment.other}}</p></span>
+                            <p>Unit : {{itm.defect.unit}}</p>
+                            <p ng-hide="itm.adjustment.other">{{itm.defect.remark}}&nbsp;&nbsp;({{itm.defect.product_code}})</p>
+                            <p>{{itm.defect.other}}</p></span>
                     </div>
                     <ion-option-button class="button-assertive" ng-click="removeAdj(itm)">&nbsp;&nbsp;Delete&nbsp;&nbsp;
                 </div>

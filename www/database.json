@@ -444,37 +444,37 @@
     "currency": [{
         "id": 1,
         "name": "USD",
-        "name_desc": "(USD) - US Dollar",
+        "name_desc": "US Dollar",
         "desc": "ดอลลาร์สหรัฐอเมริกา",
         "exchange": 35.36
     }, {
         "id": 2,
         "name": "JPY",
-        "name_desc": "(JPY) - Japanese Yen",
+        "name_desc": "Japanese Yen",
         "desc": "เยนญี่ปุ่",
         "exchange": 0.32
     }, {
         "id": 3,
         "name": "EUR",
-        "name_desc": "(EUR) - Euro",
+        "name_desc": "Euro",
         "desc": "ยูโร",
         "exchange": 40.01
     }, {
         "id": 4,
         "name": "GBP",
-        "name_desc": "(GBP) - British Pound",
+        "name_desc": "British Pound",
         "desc": "ปอนด์อังกฤษ",
         "exchange": 51.21
     }, {
         "id": 5,
         "name": "KRW",
-        "name_desc": "(KRW) - South Korean Won",
+        "name_desc": "South Korean Won",
         "desc": "วอนเกาหลีใต้",
         "exchange": 0.03
     }, {
         "id": 6,
         "name": "THB",
-        "name_desc": "(THB) - Thai Baht",
+        "name_desc": "Thai Baht",
         "desc": "ไทยบาท",
         "exchange": 1.00
     }],

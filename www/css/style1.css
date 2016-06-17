@@ -617,3 +617,6 @@ progress[value]::-webkit-progress-value {
     margin-top: -10px;
     margin-left: -10px;
 }
+.icon-promotion {
+    margin-top: -10px !important;
+}

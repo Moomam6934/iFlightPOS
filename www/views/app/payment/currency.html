@@ -7,16 +7,7 @@
     </ion-header-bar>
     <ion-content overflow-scroll="false" has-bouncing="true">
         <ion-list ng-repeat="currency in currency">
-            <ion-radio ng-value ="currency.name" ng-click="curren(currency)" class="style-text-color">{{currency.name_desc}}</ion-radio>
+            <ion-radio ng-value="currency.name" ng-click="curren(currency)" class="style-text-color">{{currency.name_desc}} : <b>{{(calculatorTotal / currency.exchange) > (calculatorTotal / currency.exchange | number : 0) ? (calculatorTotal / currency.exchange + 1 | number : 0): (calculatorTotal / currency.exchange | number : 0) }} {{currency.name}}</b> </ion-radio>
         </ion-list>
     </ion-content>
 </ion-modal-view>
-
-
-
-
-
-
-
-
-

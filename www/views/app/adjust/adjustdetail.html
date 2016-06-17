@@ -1,6 +1,6 @@
-<ion-view view-title="Product">
+<ion-view view-title="Defect Detail">
     <ion-nav-buttons side="right">
-        <button class="button button-clear button-light" ng-click="aadAdjust()" ng-disabled="!adjusts.unit || !adjusts.remark || adjusts.remark == 'other'? !adjusts.other? true : false :false"><b>Done</b></button>
+        <button class="button button-clear button-light" ng-click="addDefect(defect.remark)" ng-disabled="!defect.unit || !defect.remark || defect.remark == 'other'? !defect.other? true : false :false || defect.remark == 'claim'? !defect.product_code? true : false :false "><b>Done</b></button>
     </ion-nav-buttons>
     <ion-content scroll="false" overflow-scroll="false" has-bouncing="true" class="icon-red">
         <div class="row item item-text-wrap">
@@ -20,7 +20,7 @@
                         <div class="input-label">
                             Unit<span style="color:red;">*</span>
                         </div>
-                        <select ng-model="adjusts.unit">
+                        <select ng-model="defect.unit">
                             <option ng-repeat="qty in qtyAdjust(detail.total_qty)">{{qty}}</option>
                         </select>
                     </label>
@@ -28,16 +28,23 @@
                         <div class="input-label">
                             Remark<span style="color:red;">*</span>
                         </div>
-                        <select ng-model="adjusts.remark">
+                        <select ng-model="defect.remark">
                             <option>Dilapidated</option>
                             <option>Lend</option>
+                            <option value="claim">Claim</option>
                             <option value="other">Other</option>
                         </select>
                     </label>
-                    <div class="list" ng-show="adjusts.remark == 'other'">
+                    <div class="list" ng-show="defect.remark == 'other'">
                         <label class="item item-input">
                             <span class="input-label">Other <span style="color:red;">*</span></span>
-                            <input type="text" ng-model="adjusts.other">
+                            <input type="text" ng-model="defect.other">
+                        </label>
+                    </div>
+                    <div class="list" ng-show="defect.remark == 'claim'">
+                        <label class="item item-input">
+                            <span class="input-label">Product Code <span style="color:red;">*</span></span>
+                            <input type="text" ng-model="defect.product_code" style="text-align : right">
                         </label>
                     </div>
                 </div>

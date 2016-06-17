@@ -1,4 +1,4 @@
-<ion-view view-title="Product Adjustment" ng-init="loadAdj()">
+<ion-view view-title="Defect" ng-init="loadAdj()">
     <ion-nav-buttons side="right">
     </ion-nav-buttons>
     <ion-content overflow-scroll="true" has-bouncing="true" style="background-color: #E8E8E8;">
@@ -26,8 +26,10 @@
                             </div>
                         </div>
                         <div class="item item-body bg-item-shop">
-                            <h2 class="card-title">{{product.name}}</h2>
-                            <p class="card-description"><b>฿ {{product.price}}<span class="star-promotion" ng-show="product.product_type == 'promotion'"><i class="icon ion-ios-star"></i></span></b>
+                            <h2 class="card-title">A001</h2>
+                            <p class="card-description">{{product.name}}</p>
+                            <p class="{{product.product_type == 'promotion' ? 'card-description icon-promotion' : 'card-description'}}"><b>฿ {{product.price}}</b>
+                                <span class="star-promotion" ng-show="product.product_type == 'promotion'"><i class="icon ion-ios-star"></i></span>
                         </div>
                     </div>
                 </div>
