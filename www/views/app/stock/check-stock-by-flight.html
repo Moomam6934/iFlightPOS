@@ -1,0 +1,31 @@
+<ion-view class="bg-menu" ng-init="loadCartByFlight()">
+    <ion-content style="margin-top:0px;" scroll="false">
+        <div class="row">
+            <div class="col col-25">
+                <div class="text-center ">
+                    <img src="img/LogoX.png" style="width:50px;">
+                </div>
+            </div>
+            <div class="col col-50 text-center header-stock">
+                <h3 class="font-Comic"><b>Check Stock</b></h3></div>
+            <div class="col col-25"></div>
+        </div>
+        <ion-scroll direction="y" style="height:83%; background-color: whitesmoke;" has-bouncing="true">
+            <div class="list" ng-repeat="item in cartByFlight | filter:searchData">
+                <a class="item item-icon-left" ng-repeat="a in item.cart" ng-click="checkStockByflight(item.flight , a.name)">
+                    <i class="icon ion-ios-paper-outline"></i> {{a.name}}
+                    <span class="item-note">{{item.flight}}</span>
+                </a>
+            </div>
+        </ion-scroll>
+        <div class="bar bar-footer" style="background-color:#ed1c24;">
+            <div class="list list-balance search-stock">
+                <label class="item item-input input-balance">
+                    <i class="icon ion-search placeholder-icon"></i>
+                    <input type="text" placeholder="Search" ng-model="searchData">
+                </label>
+            </div>
+            <a class="button button-icon ion-log-out" style="color:#FFF;" ui-sref="auth.welcome"></a>
+        </div>
+    </ion-content>
+</ion-view>

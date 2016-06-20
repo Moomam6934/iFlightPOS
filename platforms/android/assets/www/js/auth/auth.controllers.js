@@ -53,7 +53,7 @@ angular.module('iFlightPOS.auth.controllers', [])
     $scope.checkedSignIn = function(name, position) {
         console.log(name + ', ' + position);
         if (position != undefined && position != 'P12') {
-            $state.go('menushop');
+            $state.go('select-cart');
         } else {
             $state.go('check-stock');
         };

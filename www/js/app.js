@@ -402,11 +402,28 @@ iFlight.config(function($stateProvider, $urlRouterProvider) {
 
     .state('stock-report', {
         cache: false,
-        params : {
-            data : null
+        params: {
+            data: null
         },
         url: "/stock-report",
         templateUrl: "views/app/stock/stock-report.html",
+        controller: 'StockCtrl'
+    })
+
+    .state('check-stock-by-flight', {
+        cache: false,
+        url: "/check-stock-by-flight",
+        templateUrl: "views/app/stock/check-stock-by-flight.html",
+        controller: 'StockCtrl'
+    })
+
+    .state('stock-report-by-flight', {
+        cache: false,
+        params: {
+            data: null
+        },
+        url: "/stock-report-by-flight",
+        templateUrl: "views/app/stock/stock-report-by-flight.html",
         controller: 'StockCtrl'
     })
 

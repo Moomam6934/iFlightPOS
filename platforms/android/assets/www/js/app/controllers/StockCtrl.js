@@ -1,4 +1,4 @@
-iFlight.controller('StockCtrl', function($scope, $state, $timeout, $ionicLoading, $stateParams,ShopService) {
+iFlight.controller('StockCtrl', function($scope, $state, $timeout, $ionicLoading, $stateParams, ShopService) {
 
     var data_to_stock = $stateParams.data;
 
@@ -88,6 +88,28 @@ iFlight.controller('StockCtrl', function($scope, $state, $timeout, $ionicLoading
         $ionicLoading.hide();
     }
 
+    $scope.loadCartByFlight = function() {
+        $scope.cartByFlight = [{
+            id: 1,
+            flight: 'AK 6302',
+            desc: 'Bangkok - Tokyo',
+            type: 'out',
+            cart: [{
+                id: 1,
+                name: 'Food 6302'
+            }, {
+                id: 2,
+                name: 'Food 6302'
+            }, {
+                id: 3,
+                name: 'Duty Free 6302'
+            }, {
+                id: 4,
+                name: 'Duty Free 6302'
+            }]
+        }]
+    }
+
     $scope.checkStock = function(flight, name) {
 
         var data = {
@@ -96,6 +118,17 @@ iFlight.controller('StockCtrl', function($scope, $state, $timeout, $ionicLoading
         }
 
         $state.go('stock-report', { data: data })
+
+    }
+
+    $scope.checkStockByflight = function(flight, name) {
+
+        var data = {
+            flight: flight,
+            name: name
+        }
+
+        $state.go('stock-report-by-flight', { data: data })
 
     }
 
