@@ -635,7 +635,6 @@ progress[value]::-webkit-progress-value {
 }
 
 .font-Comic {
-    font-family: Comic Sans MS;
     color: #FFFFFF;
 }
 
@@ -669,4 +668,15 @@ progress[value]::-webkit-progress-value {
 
 .headerbar-stock {
     height: 10px;
+}
+
+.badge-fab {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    /*font-size: 8px;*/
+}
+
+.date-stock {
+    margin-top: 46px;
 }

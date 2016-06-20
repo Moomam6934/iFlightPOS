@@ -1,6 +1,6 @@
 iFlight.controller('StockCtrl', function($scope, $state, $timeout, $ionicLoading, $stateParams, ShopService) {
 
-    var data_to_stock = $stateParams.data;
+    $scope.data_to_stock = $stateParams;
 
     $scope.loadCart = function() {
         $scope.cart = [{
@@ -110,15 +110,42 @@ iFlight.controller('StockCtrl', function($scope, $state, $timeout, $ionicLoading
         }]
     }
 
-    $scope.checkStock = function(flight, name) {
+    $scope.checkStock = function(data, flight, name) {
 
         var data = {
+            user: data.user,
             flight: flight,
             name: name
         }
 
         $state.go('stock-report', { data: data })
 
+    }
+
+    $scope.getStock = function() {
+        $scope.date = new Date();
+        $scope.data = $scope.data_to_stock.data;
+
+        if ($scope.data == undefined) {
+            $scope.data = {
+                username: 'Nuttakrittra Phumsawai',
+                position: 'P12',
+                flight: 'AK 6302',
+                name: 'Food 6302'
+            }
+        };
+
+        $scope.products = [];
+        var products = ShopService.getProducts();
+        // $scope.products = $scope.res.data[0].products;
+
+        for (var i = products.length - 1; i >= 0; i--) {
+            for (var ii = products[i].products.length - 1; ii >= 0; ii--) {
+                $scope.products.push(products[i].products[ii]);
+
+            };
+
+        };
     }
 
     $scope.checkStockByflight = function(flight, name) {
@@ -132,19 +159,33 @@ iFlight.controller('StockCtrl', function($scope, $state, $timeout, $ionicLoading
 
     }
 
-    $scope.getStock = function() {
-        $scope.data = data_to_stock;
-        $scope.products = [];
-        var products = ShopService.getProducts();
-        // $scope.products = $scope.res.data[0].products;
+    $scope.printStockReport = function(e) {
 
-        for (var i = products.length - 1; i >= 0; i--) {
-            for (var ii = products[i].products.length - 1; ii >= 0; ii--) {
-                $scope.products.push(products[i].products[ii]);
+        var data;
 
-            };
+        if (e.user.name == undefined) {
 
+            data = {
+                username: e.user.name,
+                position: e.user.position,
+                flight: e.flight,
+                name: e.name
+            }
+
+        } else {
+
+            data = {
+                username: e.user.name,
+                position: e.user.position,
+                flight: e.flight,
+                name: e.name
+            }
         };
+
+
+        $state.go('check-stock-print-report', { data: data })
+
     }
+
 
 })

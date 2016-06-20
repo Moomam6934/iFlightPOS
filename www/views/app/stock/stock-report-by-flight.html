@@ -20,7 +20,7 @@
                 <div class="col col-25">Quantity</div>
             </div>
         </div>
-        <ion-scroll direction="y" style="height:80%; background-color: whitesmoke;" has-bouncing="true">
+        <ion-scroll direction="y" style="height:75%; background-color: whitesmoke;" has-bouncing="true">
             <div class="list">
                 <a class="item" ng-repeat="product in products | filter:searchData | orderBy:'products_id'" href="#">
                     <div class="row">
@@ -43,7 +43,7 @@
                     <input type="text" placeholder="Search" ng-model="searchData">
                 </label>
             </div>
-            <a class="button button-icon ion-ios-printer-outline" style="color:#FFF;" ui-sref="check-stock-by-flight"></a>
+            <a class="button button-icon ion-ios-printer-outline" style="color:#FFF;" ui-sref="check-stock-print-report-by-flight"></a>
         </div>
     </ion-content>
 </ion-view>

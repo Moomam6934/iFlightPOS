@@ -1,0 +1,50 @@
+<ion-view class="bg-menu" ng-init="getStock()">
+    <ion-content style="margin-top:0px;" scroll="false">
+        <div class="row">
+            <div class="col col-25">
+                <div class="text-center ">
+                    <img src="img/LogoX.png" style="width:70px;">
+                </div>
+            </div>
+            <div class="col col-50 text-center header-stock">
+                <h3 class="font-Comic"><b>Check Stock</b></h3>
+                <p class="font-Comic">{{data.name}}({{data.flight}})</p>
+                <p class="font-Comic">{{data.username}} ({{data.position}})</p>
+            </div>
+            <div class="col col-25 text-left date-stock">
+                <p class="font-Comic"> {{date | date:'dd-MM-yy (HH:mm)'}}</p>
+            </div>
+        </div>
+        <div class="item item-divider headerbar-stock">
+            <div class="row text-center header-check">
+                <div class="col col-10">NO.</div>
+                <div class="col col-40">Description</div>
+                <div class="col col-15">Qty</div>
+                <div class="col col-15">C.Qty</div>
+                <div class="col col-15">T.Qty</div>
+            </div>
+        </div>
+        <ion-scroll direction="y" style="height:67%; background-color: whitesmoke;" has-bouncing="true">
+            <div class="list">
+                <a class="item" ng-repeat="product in products | filter:searchData | orderBy:'products_id'" href="#">
+                    <div class="row">
+                        <div class="col col-10">{{$index + 1}}</div>
+                        <div class="col col-40">
+                            <p class="item-stock"><b>{{product.products_id}}</b> ({{product.name}})</p>
+                        </div>
+                        <div class="col col-15 text-center">{{product.total_qty}}</div>
+                        <div class="col col-15 text-center">
+                            {{product.total_qty}}
+                        </div>
+                        <div class="col col-15 text-center">
+                            0
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </ion-scroll>
+        <div class="bar bar-footer" style="background-color:#ed1c24;">
+            <a class="button button-icon ion-ios-printer-outline" style="color:#FFF; width:100%;" ui-sref="check-stock-by-flight"> Print</a>
+        </div>
+    </ion-content>
+</ion-view>

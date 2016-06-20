@@ -5,6 +5,7 @@ angular.module('underscore', [])
 
 var iFlight = angular.module('iFlightPOS', [
     'ionic',
+    'fabDirective',
     'popover',
     'iFlightPOS.common.directives',
     'iFlightPOS.app.controllers',
@@ -395,6 +396,9 @@ iFlight.config(function($stateProvider, $urlRouterProvider) {
 
     .state('check-stock', {
         cache: false,
+        params: {
+            user: null
+        },
         url: "/check-stock",
         templateUrl: "views/app/stock/check-stock.html",
         controller: 'StockCtrl'
@@ -424,6 +428,23 @@ iFlight.config(function($stateProvider, $urlRouterProvider) {
         },
         url: "/stock-report-by-flight",
         templateUrl: "views/app/stock/stock-report-by-flight.html",
+        controller: 'StockCtrl'
+    })
+
+    .state('check-stock-print-report', {
+        cache: false,
+        params: {
+            data: null
+        },
+        url: "/check-stock-print-report",
+        templateUrl: "views/app/stock/check-stock-print-report.html",
+        controller: 'StockCtrl'
+    })
+
+    .state('check-stock-print-report-by-flight', {
+        cache: false,
+        url: "/check-stock-print-report-by-flight",
+        templateUrl: "views/app/stock/check-stock-print-report-by-flight.html",
         controller: 'StockCtrl'
     })
 

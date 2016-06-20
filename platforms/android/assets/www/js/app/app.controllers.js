@@ -289,19 +289,49 @@ angular.module('iFlightPOS.app.controllers', [])
 
             ShopService.setOrderTemporary($scope.iFlightData);
         } else {
-            var confirmPopup = $ionicPopup.confirm({
-                title: 'Sold Out',
-                template: '<div class="text-center">Do you want to keep data ?</div>'
-            });
+            var hideSheet = $ionicActionSheet.show({
+                buttons: [
+                    { text: 'Request' },
+                    { text: 'Keep data' }
+                ],
+                cancelText: '<span class="test">Cancel</span>',
+                cancel: function() {},
+                buttonClicked: function(index) {
+                    if (index == 0) {
+                        var confirmPopup = $ionicPopup.confirm({
+                            title: 'Request',
+                            template: '<div class="text-center">Do you want to Request ?</div>'
+                        });
 
-            confirmPopup.then(function(res) {
-                if (res) {
-                    console.log('You are sure');
+                        confirmPopup.then(function(res) {
+                            if (res) {
+                                console.log('You are sure,Request');
+                                hideSheet();
 
-                } else {
-                    console.log('You are not sure');
+                            } else {
+                                console.log('You are not sure,Request');
+                            }
+                        });
+
+                    } else if (index == 1) {
+
+                        var confirmPopup = $ionicPopup.confirm({
+                            title: 'Keep data',
+                            template: '<div class="text-center">Do you want to keep data ?</div>'
+                        });
+
+                        confirmPopup.then(function(res) {
+                            if (res) {
+                                console.log('You are sure,keep data');
+                                hideSheet();
+                            } else {
+                                console.log('You are not sure,keep data');
+                            }
+                        });
+                    }
                 }
             });
+
         }
 
     }
@@ -326,7 +356,7 @@ angular.module('iFlightPOS.app.controllers', [])
 
     }
     $scope.onHold = function(product) {
-        loading_show();
+        
         var ckeckStock = ShopService.getProducts();
         var e = [];
         for (var i = ckeckStock.length - 1; i >= 0; i--) {
@@ -339,6 +369,7 @@ angular.module('iFlightPOS.app.controllers', [])
             }
         };
         if (e.total_qty != 0) {
+            loading_show();
             $state.go('app.product-detail', {
                 data: product,
                 orders: $scope.iFlightData,
@@ -973,7 +1004,7 @@ angular.module('iFlightPOS.app.controllers', [])
 })
 
 
-.controller('AdjustCtrl', function($scope, DefectService, $state, $stateParams, $ionicPopover, $filter, ShopService,$ionicPopup) {
+.controller('AdjustCtrl', function($scope, DefectService, $state, $stateParams, $ionicPopover, $filter, ShopService, $ionicPopup) {
 
     $scope.detail = $stateParams.data;
     $scope.defectList = DefectService.getadjust();

@@ -357,7 +357,7 @@ angular.module('iFlightPOS.app.services', [])
                 if (iFlight.Categories[i].products[ii].products_id == defect.products_id) {
                     iFlight.Categories[i].products[ii].total_qty -= defect.defect.unit;
                     iFlight.Categories[i].products[ii].defect.defect.push(defect.defect);
-                    iFlight.Categories[i].products[ii].defect.defect_total = iFlight.Categories[i].products[ii].defect.adj_total + parseInt(defect.defect.unit);
+                    iFlight.Categories[i].products[ii].defect.defect_total = iFlight.Categories[i].products[ii].defect.defect_total + parseInt(defect.defect.unit);
 
                 }
             };

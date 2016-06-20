@@ -6,7 +6,7 @@
     <ion-nav-buttons side="right">
         <button class="button button-clear button-light" ng-disabled="iFlightData.products.length == 0" ng-click="checkoutProduct(iFlightData)"><b>Orders</b></button>
     </ion-nav-buttons>
-    <ion-content overflow-scroll="true" has-bouncing="true" style="background-color: #E8E8E8;">
+    <ion-content overflow-scroll="true" has-bouncing="true" style="background-color: #E8E8E8;" fab-scroll-container>
         <ion-slide-box slide-tabs-scrollable="true" show-pager="false" ion-slide-tabs on-slide-changed="slideHasChanged($index)">
             <ion-slide ion-slide-tab-label="All">
                 <div class="list list-balance">
@@ -168,4 +168,8 @@
             </ion-slide>
         </ion-slide-box>
     </ion-content>
+    <ion-fab>
+        <span class="badge badge-assertive badge-fab">0</span>
+        <i class="icon ion ion-ios-bell-outline" style="font-size:40px;"></i>
+    </ion-fab>
 </ion-view>

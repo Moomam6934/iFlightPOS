@@ -10,7 +10,7 @@
                 <h3 class="font-Comic"><b>Check Stock</b></h3></div>
             <div class="col col-25"></div>
         </div>
-        <ion-scroll direction="y" style="height:83%; background-color: whitesmoke;" has-bouncing="true">
+        <ion-scroll direction="y" style="height:83%; background-color: whitesmoke;" has-bouncing="true" >
             <!--             <div class="am-fade-and-scale" ng-repeat="item in cart" style="margin-top:30px;">
                 <div class="row shop-products-narrow-cards-outer ">
                     <div class="col col-50 shop-product-narrow-card center " ng-repeat="a in item.cart">
@@ -22,7 +22,7 @@
                 </div>
             </div> -->
             <div class="list" ng-repeat="item in cart | filter:searchData">
-                <a class="item item-icon-left" ng-repeat="a in item.cart" ng-click="checkStock(item.flight , a.name)">
+                <a class="item item-icon-left" ng-repeat="a in item.cart" ng-click="checkStock(data_to_stock , item.flight , a.name)">
                     <i class="icon ion-ios-paper-outline"></i> {{a.name}}
                     <span class="item-note">{{item.flight}}</span>
                 </a>
@@ -35,7 +35,7 @@
                     <input type="text" placeholder="Search" ng-model="searchData">
                 </label>
             </div>
-            <a class="button button-icon ion-log-out" style="color:#FFF;" ui-sref="auth.welcome"></a>
+            <a class="button button-icon ion-log-out" style="color:#FFF;" ui-sref="auth.user"></a>
         </div>
     </ion-content>
 </ion-view>
