@@ -284,6 +284,12 @@ iFlight.config(function($stateProvider, $urlRouterProvider) {
         }
     })
 
+    .state('auth.user', {
+        url: '/user',
+        templateUrl: "views/auth/user.html",
+        controller: 'UserCtrl'
+    })
+
     .state('auth.login', {
         url: '/login',
         templateUrl: "views/auth/login.html",
@@ -297,10 +303,11 @@ iFlight.config(function($stateProvider, $urlRouterProvider) {
     })
 
     .state('auth.forgot-password', {
-        url: '/forgot-password',
-        templateUrl: "views/auth/forgot-password.html",
-        controller: 'ForgotPasswordCtrl'
-    })
+            url: '/forgot-password',
+            templateUrl: "views/auth/forgot-password.html",
+            controller: 'ForgotPasswordCtrl'
+        })
+        // 
 
     .state('app.orderadjust', {
         cache: false,
@@ -384,6 +391,23 @@ iFlight.config(function($stateProvider, $urlRouterProvider) {
         url: "/select-cart",
         templateUrl: "views/app/flight/cart.html",
         controller: 'FlightCtrl'
+    })
+
+    .state('check-stock', {
+        cache: false,
+        url: "/check-stock",
+        templateUrl: "views/app/stock/check-stock.html",
+        controller: 'StockCtrl'
+    })
+
+    .state('stock-report', {
+        cache: false,
+        params : {
+            data : null
+        },
+        url: "/stock-report",
+        templateUrl: "views/app/stock/stock-report.html",
+        controller: 'StockCtrl'
     })
 
     // if none of the above states are matched, use this as the fallback

@@ -1,0 +1,49 @@
+<ion-view class="bg-menu" ng-init="getStock()">
+    <ion-content style="margin-top:0px;" scroll="false">
+        <div class="row">
+            <div class="col col-25">
+                <div class="text-center ">
+                    <img src="img/LogoX.png" style="width:70px;">
+                </div>
+            </div>
+            <div class="col col-50 text-center header-stock">
+                <h3 class="font-Comic"><b>Check Stock</b></h3>
+                <p class="font-Comic">{{data.name}}({{data.flight}})</p>
+            </div>
+            <div class="col col-25"></div>
+        </div>
+        <div class="item item-divider headerbar-stock">
+            <div class="row text-center header-check">
+                <div class="col col-10">NO.</div>
+                <div class="col col-40">Description</div>
+                <div class="col col-25">Quantity</div>
+                <div class="col col-25">Quantity</div>
+            </div>
+        </div>
+        <ion-scroll direction="y" style="height:80%; background-color: whitesmoke;" has-bouncing="true">
+            <div class="list">
+                <a class="item" ng-repeat="product in products | filter:searchData | orderBy:'products_id'" href="#">
+                    <div class="row">
+                        <div class="col col-10">{{$index + 1}}</div>
+                        <div class="col col-40">
+                            <p class="item-stock"><b>{{product.products_id}}</b> ({{product.name}})</p>
+                        </div>
+                        <div class="col col-25 text-center">{{product.total_qty}}</div>
+                        <div class="col col-25">
+                            <input type="number" class="number-input">
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </ion-scroll>
+        <div class="bar bar-footer" style="background-color:#ed1c24;">
+            <div class="list list-balance search-stock">
+                <label class="item item-input input-balance">
+                    <i class="icon ion-search placeholder-icon"></i>
+                    <input type="text" placeholder="Search" ng-model="searchData">
+                </label>
+            </div>
+            <a class="button button-icon ion-ios-printer-outline" style="color:#FFF;" ui-sref="auth.welcome"></a>
+        </div>
+    </ion-content>
+</ion-view>

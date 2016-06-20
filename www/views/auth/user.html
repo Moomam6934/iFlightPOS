@@ -1,0 +1,60 @@
+<ion-view class="welcome-view" cache-view="false">
+    <ion-content scroll="false">
+        <div class="top-content row">
+            <div class="app-copy col col-center">
+            </div>
+        </div>
+        <div class="list">
+            <br>
+            <br>
+            <br>
+            <div class="row">
+                <div class="col col-10"></div>
+                <div class="col col-80">
+                    <label class="item item-input input-login">
+                        <span class="input-label fix-input">Name</span>
+                        <input type="text" ng-model="name">
+                    </label>
+                </div>
+                <div class="col col-10"></div>
+            </div>
+            <div class="row">
+                <div class="col col-10"></div>
+                <div class="col col-40">
+                    <div class="input-label input-default">
+                        <p style="font-family: Georgia;">Position</p>
+                    </div>
+                </div>
+                <div class="col col-40 text-right">
+                    <select class="select-position" ng-model="position" ng-change="chk(position)" style="border-color: white; background-color: white !important;">
+                        <option value='' style="color:#b7b7b7;">-Select Position-</option>
+                        <option>P1</option>
+                        <option>P2</option>
+                        <option>P3</option>
+                        <option>P4</option>
+                        <option>P5</option>
+                        <option>P6</option>
+                        <option>P7</option>
+                        <option>P8</option>
+                        <option>P9</option>
+                        <option>P10</option>
+                        <option>P11</option>
+                        <option>P12</option>
+                    </select>
+                </div>
+                <div class="col col-10">
+                </div>
+            </div>
+            <br>
+            <br>
+        </div>
+        <div class=" text-center" ng-show="hideLoginTrue">
+            <ion-spinner icon="bubbles" class="custom-icon"></ion-spinner>
+        </div>
+        <div class="text-center" ng-hide="hideLoginTrue">
+            <button class="button button-clear button-light" ng-click="checkedSignIn(name,position)" ng-disabled="chkPosotion">
+                <label class="button-sign-in" style="font-family: Georgia;">Continue</label>
+            </button>
+        </div>
+    </ion-content>
+</ion-view>

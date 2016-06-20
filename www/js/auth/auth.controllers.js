@@ -20,23 +20,45 @@ angular.module('iFlightPOS.auth.controllers', [])
 
     $scope.facebookSignIn = function() {
         console.log("doing facebbok sign in");
-        $state.go('app.shop');
+        $state.go('auth.user');
     };
 
     $scope.googleSignIn = function() {
         $scope.hideLoginTrue = true;
         $timeout(function() {
             console.log("doing google sign in");
-            $state.go('flight');
+            $state.go('auth.user');
         }, 1500);
 
     };
 
     $scope.twitterSignIn = function() {
         console.log("doing twitter sign in");
-        $state.go('app.shop');
+        $state.go('auth.user');
     };
 
+})
+
+.controller('UserCtrl', function($scope, $state) {
+
+    $scope.chkPosotion = true;
+    $scope.chk = function(p) {
+        if (p != '') {
+            $scope.chkPosotion = false;
+        } else {
+            $scope.chkPosotion = true;
+        };
+    }
+
+    $scope.checkedSignIn = function(name, position) {
+        console.log(name + ', ' + position);
+        if (position != undefined && position != 'P12') {
+            $state.go('menushop');
+        } else {
+            $state.go('check-stock');
+        };
+
+    }
 })
 
 .controller('LogInCtrl', function($scope, $state) {

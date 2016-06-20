@@ -617,6 +617,56 @@ progress[value]::-webkit-progress-value {
     margin-top: -10px;
     margin-left: -10px;
 }
+
 .icon-promotion {
     margin-top: -10px !important;
+}
+
+.select-position {
+    margin-top: 7px;
+}
+
+.input-default {
+    color: #FFFFFF;
+}
+
+.fix-input {
+    width: 50px !important;
+}
+
+.font-Comic {
+    font-family: Comic Sans MS;
+    color: #FFFFFF;
+}
+
+.header-stock {
+    padding-top: 13px;
+}
+
+.search-stock {
+    margin-top: 0px !important;
+    width: 150%;
+}
+
+.item-stock {
+    text-overflow: ellipsis !important;
+}
+
+.header-check {
+    margin-left: 0px !important;
+    padding: 0px;
+    margin-top: -8px;
+}
+
+.number-input {
+    border: 1px solid !important;
+    width: 100%;
+    margin-top: -5px;
+    padding: 5px !important;
+    border-color: #7f7f7f !important;
+    text-align: right;
+}
+
+.headerbar-stock {
+    height: 10px;
 }
