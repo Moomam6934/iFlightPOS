@@ -380,6 +380,12 @@ iFlight.config(function($stateProvider, $urlRouterProvider) {
         controller: 'FlightCtrl'
     })
 
+    .state('menushop-sp', {
+        url: "/menushop-sp",
+        templateUrl: "views/menu/menushop-sp.html",
+        controller: 'FlightCtrl'
+    })
+
     .state('flight', {
         cache: false,
         url: "/flight",
@@ -411,13 +417,6 @@ iFlight.config(function($stateProvider, $urlRouterProvider) {
         },
         url: "/stock-report",
         templateUrl: "views/app/stock/stock-report.html",
-        controller: 'StockCtrl'
-    })
-
-    .state('check-stock-by-flight', {
-        cache: false,
-        url: "/check-stock-by-flight",
-        templateUrl: "views/app/stock/check-stock-by-flight.html",
         controller: 'StockCtrl'
     })
 

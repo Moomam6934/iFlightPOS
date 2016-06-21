@@ -171,7 +171,8 @@
     
     .input-balance {
         height: 35px;
-        border-radius: 8px;
+        border-radius: 0px;
+        border-color: white;
     }
     
     .icon-button-balance {

@@ -1,5 +1,5 @@
 <ion-view class="bg-menu" ng-init="getStock()">
-    <ion-content style="margin-top:0px;" scroll="false">
+    <ion-content style="margin-top:0px;" scroll="false" fab-scroll-container>
         <div class="row">
             <div class="col col-25">
                 <div class="text-center ">
@@ -43,7 +43,14 @@
                     <input type="text" placeholder="Search" ng-model="searchData">
                 </label>
             </div>
-            <a class="button button-icon ion-ios-printer-outline" style="color:#FFF;" ui-sref="check-stock-print-report-by-flight"></a>
+            <a class="button button-icon ion-navicon-round" style="color:#FFF;" ng-click="showFab()"></a>
         </div>
+        <!-- ui-sref="check-stock-print-report-by-flight" -->
     </ion-content>
+    <ion-fab ng-click="gotoHome()" ng-show="fab" class="fab1 am-fade-and-scale">
+        <i class="icon ion ion-ios-home-outline" style="font-size:40px;"></i>
+    </ion-fab>
+    <ion-fab ng-click="gotoPrintReportBF()" ng-show="fab" class="fab2 am-fade-and-scale">
+        <i class="icon ion ion-ios-printer-outline" style="font-size:40px;"></i>
+    </ion-fab>
 </ion-view>

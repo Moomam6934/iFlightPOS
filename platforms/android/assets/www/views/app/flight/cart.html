@@ -1,9 +1,19 @@
-<ion-view class="bg-menu" ng-init="loadCart()">
+<ion-view class="bg-menu">
     <ion-content style="margin-top:30px;" scroll="false">
         <div class="text-center ">
             <img src="img/LogoX.png" style="width:150px;">
         </div>
-        <div class="{{var == item.id ? 'am-fade-and-scale':''}}" ng-repeat="item in cart" ng-show="var == item.id" style="margin-top:30px;">
+        <div class="am-fade-and-scale" style="margin-top:30px;">
+            <div class="row shop-products-narrow-cards-outer ">
+                <div class="col col-50 shop-product-narrow-card center " ng-repeat="a in cartByFlight[0].cart">
+                    <button class="button button-light btn-cart " ui-sref="menushop">
+                        <i class="ion-ios-cart-outline" style="font-size:50px;"></i>
+                        <p class="textButton">{{a.name}}</p>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!--         <div class="{{var == item.id ? 'am-fade-and-scale':''}}" ng-repeat="item in cartByFlight" ng-show="var == item.id" style="margin-top:30px;">
             <div class="row shop-products-narrow-cards-outer ">
                 <div class="col col-50 shop-product-narrow-card center " ng-repeat="a in item.cart">
                     <button class="button button-light btn-cart " ui-sref="menushop">
@@ -12,12 +22,12 @@
                     </button>
                 </div>
             </div>
-        </div>
-        <div class="bar bar-footer" style="background-color:#ed1c24;">
+        </div> -->
+        <!--         <div class="bar bar-footer" style="background-color:#ed1c24;">
             <div class="button-bar">
                 <a class="button" ng-repeat="item in cart" ng-class="var==item.id?'button-balanced':'button-light button-outline'" ng-click="click(item.id)">{{item.flight}}</a>
             </div>
             <a class="button button-icon ion-log-out" style="color:#FFF;" ui-sref="auth.welcome"></a>
-        </div>
+        </div> -->
     </ion-content>
 </ion-view>

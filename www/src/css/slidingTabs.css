@@ -13,7 +13,7 @@ ion-slide:nth-child(2n) {
 }
 
 .slidingTabs {
-    height: 48px;
+    height: 38px;
     z-index: 10;
 }
 
@@ -24,16 +24,17 @@ ion-slide:nth-child(2n) {
 
 .slidingTabs ul {
     background-color: #FFFFFF;
-    height: 48px;
+    height: 38px;
 }
 
 .slidingTabs ul li {
-    height: 48px;
+    height: 38px;
     line-height: 48px;
     text-align: center;
     float: left;
     margin: 0;
     padding: 0px 15px 0px 25px;
+    margin-top: -4px;
     font-size: 11px;
     text-transform: uppercase;
     color: #969696;
@@ -75,7 +76,7 @@ ion-slide:nth-child(2n) {
     background-color: red;
     width: 70px;
     position: relative;
-    height: 10px;
+    height: 5px;
     margin-top: -3px;
 }
 

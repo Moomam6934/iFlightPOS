@@ -52,14 +52,14 @@ angular.module('iFlightPOS.auth.controllers', [])
 
     $scope.checkedSignIn = function(name, position) {
         var user = {
-            name : name,
-            position : position
+            name: name,
+            position: position
         }
         console.log(name + ', ' + position);
-        if (position != undefined && position != 'P12') {
+        if (position != undefined && position != 'P2' && position != 'P8') {
             $state.go('select-cart');
         } else {
-            $state.go('check-stock' , {user : user});
+            $state.go('menushop-sp', { user: user });
         };
 
     }

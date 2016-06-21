@@ -21,10 +21,10 @@
                     </div>
                 </div>
             </div> -->
-            <div class="list" ng-repeat="item in cart | filter:searchData">
-                <a class="item item-icon-left" ng-repeat="a in item.cart" ng-click="checkStock(data_to_stock , item.flight , a.name)">
+            <div class="list">
+                <a class="item item-icon-left" ng-repeat="a in cart[0].cart | filter:searchData" ng-click="checkStock(data_to_stock , cart[0].flight , a.name)">
                     <i class="icon ion-ios-paper-outline"></i> {{a.name}}
-                    <span class="item-note">{{item.flight}}</span>
+                    <span class="item-note">{{cart[0].flight}}</span>
                 </a>
             </div>
         </ion-scroll>

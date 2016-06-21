@@ -7,6 +7,27 @@ iFlight.controller('FlightCtrl', function($scope, $state, $timeout, $ionicLoadin
     $scope.successTwo = false;
     $scope.downloadding = false;
 
+
+    $scope.cartByFlight = [{
+        id: 1,
+        flight: 'AK 6302',
+        desc: 'Bangkok - Tokyo',
+        type: 'out',
+        cart: [{
+            id: 1,
+            name: 'Food(1) 6302'
+        }, {
+            id: 2,
+            name: 'Food(2) 6302'
+        }, {
+            id: 3,
+            name: 'Duty Free(1) 6302'
+        }, {
+            id: 4,
+            name: 'Duty Free(2) 6302'
+        }]
+    }]
+
     $scope.loadCart = function() {
         $scope.cart = [{
             id: 1,

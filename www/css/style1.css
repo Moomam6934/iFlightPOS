@@ -680,3 +680,15 @@ progress[value]::-webkit-progress-value {
 .date-stock {
     margin-top: 46px;
 }
+
+.fab1 {
+    background-color: rgb(63, 181, 87) !important;
+    bottom: 45px !important;
+    right: 75px !important;
+}
+
+.fab2 {
+    background-color: rgb(63, 181, 87) !important;
+    bottom: 45px !important;
+    right: 15px !important;
+}

@@ -10,82 +10,83 @@ iFlight.controller('StockCtrl', function($scope, $state, $timeout, $ionicLoading
             type: 'out',
             cart: [{
                 id: 1,
-                name: 'Food 6302'
+                name: 'Food(1) 6302'
             }, {
                 id: 2,
-                name: 'Food 6302'
+                name: 'Food(2) 6302'
             }, {
                 id: 3,
-                name: 'Duty Free 6302'
+                name: 'Duty Free(1) 6302'
             }, {
                 id: 4,
-                name: 'Duty Free 6302'
-            }]
-        }, {
-            id: 2,
-            flight: 'AK 6304',
-            desc: 'Tokyo - Bangkok',
-            type: 'in',
-            cart: [{
-                id: 1,
-                name: 'Food 6304'
-            }, {
-                id: 2,
-                name: 'Food 6304'
-            }, {
-                id: 3,
-                name: 'Duty Free 6304'
-            }, {
-                id: 4,
-                name: 'Duty Free 6304'
-            }]
-        }, {
-            id: 3,
-            flight: 'AK 6401',
-            desc: 'Narita - Bangkok',
-            type: 'in',
-            cart: [{
-                id: 1,
-                name: 'Food 6401'
-            }, {
-                id: 2,
-                name: 'Food 6401'
-            }, {
-                id: 3,
-                name: 'Duty Free 6401'
-            }, {
-                id: 4,
-                name: 'Duty Free 6401'
-            }]
-        }, {
-            id: 4,
-            flight: 'AK 6405',
-            desc: 'Bangkok - Narita',
-            type: 'out',
-            cart: [{
-                id: 1,
-                name: 'Food 6405'
-            }, {
-                id: 2,
-                name: 'Food 6405'
-            }, {
-                id: 3,
-                name: 'Duty Free 6405'
-            }, {
-                id: 4,
-                name: 'Duty Free 6405'
+                name: 'Duty Free(2) 6302'
             }]
         }]
 
-        $scope.pic = '';
-        for (var i = 0; i < $scope.cart.length; i++) {
-            if ($scope.cart[i].type == 'out') {
-                $scope.cart[i].pic = 'img/takeoff.png';
-            } else {
-                $scope.cart[i].pic = 'img/landing.png';
-            };
-        };
-        $ionicLoading.hide();
+        // , {
+        //     id: 2,
+        //     flight: 'AK 6304',
+        //     desc: 'Tokyo - Bangkok',
+        //     type: 'in',
+        //     cart: [{
+        //         id: 1,
+        //         name: 'Food 6304'
+        //     }, {
+        //         id: 2,
+        //         name: 'Food 6304'
+        //     }, {
+        //         id: 3,
+        //         name: 'Duty Free 6304'
+        //     }, {
+        //         id: 4,
+        //         name: 'Duty Free 6304'
+        //     }]
+        // }, {
+        //     id: 3,
+        //     flight: 'AK 6401',
+        //     desc: 'Narita - Bangkok',
+        //     type: 'in',
+        //     cart: [{
+        //         id: 1,
+        //         name: 'Food 6401'
+        //     }, {
+        //         id: 2,
+        //         name: 'Food 6401'
+        //     }, {
+        //         id: 3,
+        //         name: 'Duty Free 6401'
+        //     }, {
+        //         id: 4,
+        //         name: 'Duty Free 6401'
+        //     }]
+        // }, {
+        //     id: 4,
+        //     flight: 'AK 6405',
+        //     desc: 'Bangkok - Narita',
+        //     type: 'out',
+        //     cart: [{
+        //         id: 1,
+        //         name: 'Food 6405'
+        //     }, {
+        //         id: 2,
+        //         name: 'Food 6405'
+        //     }, {
+        //         id: 3,
+        //         name: 'Duty Free 6405'
+        //     }, {
+        //         id: 4,
+        //         name: 'Duty Free 6405'
+        //     }]
+
+        // $scope.pic = '';
+        // for (var i = 0; i < $scope.cart.length; i++) {
+        //     if ($scope.cart[i].type == 'out') {
+        //         $scope.cart[i].pic = 'img/takeoff.png';
+        //     } else {
+        //         $scope.cart[i].pic = 'img/landing.png';
+        //     };
+        // };
+        // $ionicLoading.hide();
     }
 
     $scope.loadCartByFlight = function() {
@@ -96,16 +97,16 @@ iFlight.controller('StockCtrl', function($scope, $state, $timeout, $ionicLoading
             type: 'out',
             cart: [{
                 id: 1,
-                name: 'Food 6302'
+                name: 'Food(1) 6302'
             }, {
                 id: 2,
-                name: 'Food 6302'
+                name: 'Food(2) 6302'
             }, {
                 id: 3,
-                name: 'Duty Free 6302'
+                name: 'Duty Free(1) 6302'
             }, {
                 id: 4,
-                name: 'Duty Free 6302'
+                name: 'Duty Free(2) 6302'
             }]
         }]
     }
@@ -163,11 +164,11 @@ iFlight.controller('StockCtrl', function($scope, $state, $timeout, $ionicLoading
 
         var data;
 
-        if (e.user.name == undefined) {
+        if (e.user == null) {
 
             data = {
-                username: e.user.name,
-                position: e.user.position,
+                username: 'Nuttakrittra Phumsawai',
+                position: 'P12',
                 flight: e.flight,
                 name: e.name
             }
@@ -186,6 +187,24 @@ iFlight.controller('StockCtrl', function($scope, $state, $timeout, $ionicLoading
         $state.go('check-stock-print-report', { data: data })
 
     }
-
-
+    $scope.fab = false;
+    $scope.showFab = function() {
+        if ($scope.fab == true) {
+            $scope.fab = false;
+        } else {
+            $scope.fab = true;
+        };
+    }
+    $scope.gotoPrintReportBF = function() {
+        $state.go('check-stock-print-report-by-flight');
+    }
+    $scope.gotoHome = function() {
+        $state.go('menushop');
+    }
+    $scope.gotoPrintReport = function() {
+        $state.go('check-stock-print-report');
+    }
+    $scope.gotoHomeSp = function() {
+        $state.go('menushop-sp');
+    }
 })
