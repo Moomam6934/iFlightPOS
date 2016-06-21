@@ -15,9 +15,9 @@
         <div class="item item-divider headerbar-stock">
             <div class="row text-center header-check">
                 <div class="col col-10">NO.</div>
-                <div class="col col-40">Description</div>
-                <div class="col col-25">Quantity</div>
-                <div class="col col-25">Total.Qty</div>
+                <div class="col col-60">Description</div>
+                <!-- <div class="col col-25">Quantity</div> -->
+                <div class="col col-30">Total.Qty</div>
             </div>
         </div>
         <ion-scroll direction="y" style="height:75%; background-color: whitesmoke;" has-bouncing="true">
@@ -25,11 +25,11 @@
                 <a class="item" ng-repeat="product in products | filter:searchData | orderBy:'products_id'" href="#">
                     <div class="row">
                         <div class="col col-10">{{$index + 1}}</div>
-                        <div class="col col-40">
+                        <div class="col col-60">
                             <p class="item-stock"><b>{{product.products_id}}</b> ({{product.name}})</p>
                         </div>
-                        <div class="col col-25 text-center">{{product.total_qty}}</div>
-                        <div class="col col-25">
+                        <!-- <div class="col col-25 text-center">{{product.total_qty}}</div> -->
+                        <div class="col col-30">
                             <input type="number" class="number-input" ng-model="product.total_qty">
                         </div>
                     </div>
@@ -50,7 +50,7 @@
     <ion-fab ng-click="gotoHome()" ng-show="fab" class="fab1 am-fade-and-scale">
         <i class="icon ion ion-ios-home-outline" style="font-size:40px;"></i>
     </ion-fab>
-    <ion-fab ng-click="gotoPrintReportBF()" ng-show="fab" class="fab2 am-fade-and-scale">
+    <ion-fab ng-click="gotoPrintReportBFC()" ng-show="fab" class="fab2 am-fade-and-scale">
         <i class="icon ion ion-ios-printer-outline" style="font-size:40px;"></i>
     </ion-fab>
 </ion-view>

@@ -447,6 +447,20 @@ iFlight.config(function($stateProvider, $urlRouterProvider) {
         controller: 'StockCtrl'
     })
 
+    .state('stock-report-by-flight-close', {
+        cache: false,
+        url: "/stock-report-by-flight-close",
+        templateUrl: "views/app/stock/stock-report-by-flight-close.html",
+        controller: 'StockCtrl'
+    })
+
+    .state('check-stock-print-report-by-flight-close', {
+        cache: false,
+        url: "/check-stock-print-report-by-flight-close",
+        templateUrl: "views/app/stock/check-stock-print-report-by-flight-close.html",
+        controller: 'StockCtrl'
+    })
+
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/auth/welcome');
     // $urlRouterProvider.otherwise('/app/feed');

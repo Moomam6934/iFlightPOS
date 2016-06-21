@@ -207,4 +207,7 @@ iFlight.controller('StockCtrl', function($scope, $state, $timeout, $ionicLoading
     $scope.gotoHomeSp = function() {
         $state.go('menushop-sp');
     }
+    $scope.gotoPrintReportBFC = function() {
+        $state.go('check-stock-print-report-by-flight-close');
+    }
 })

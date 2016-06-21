@@ -36,7 +36,10 @@
             </div>
             <br>
             <div class="row">
-                <div class="col col-33 text-left">Credit card</div>
+                <div class="col col-100 text-left"><b>For Information Only</b></div>
+            </div>
+            <div class="row">
+                <div class="col col-33 text-left" ng-show="totalCredit.length > 0">Credit card</div>
             </div>
             <div class="row" ng-show="totalCredit.length > 0" ng-repeat="credit in totalCredit">
                 <div class="col col-50 text-left">XXXX XXXX XXXX {{credit.no}}</div>

@@ -19,12 +19,12 @@
             <div class="row text-center header-check">
                 <div class="col col-10">NO.</div>
                 <div class="col col-40">Description</div>
-                <div class="col col-15">Qty</div>
-                <div class="col col-15">C.Qty</div>
-                <div class="col col-15">T.Qty</div>
+                <div class="col col-25">Quantity</div>
+                <!-- <div class="col col-15">C.Qty</div> -->
+                <div class="col col-25">Total.Qty</div>
             </div>
         </div>
-        <ion-scroll direction="y" style="height:68%; background-color: whitesmoke;" has-bouncing="true">
+        <ion-scroll direction="y" style="height:66%; background-color: whitesmoke;" has-bouncing="true">
             <div class="list">
                 <a class="item" ng-repeat="product in products | filter:searchData | orderBy:'products_id'" href="#">
                     <div class="row">
@@ -32,12 +32,12 @@
                         <div class="col col-40">
                             <p class="item-stock"><b>{{product.products_id}}</b> ({{product.name}})</p>
                         </div>
-                        <div class="col col-15 text-center">{{product.total_qty}}</div>
-                        <div class="col col-15 text-center">
+                        <div class="col col-25 text-center">{{product.total_qty}}</div>
+<!--                         <div class="col col-15 text-center">
                             {{product.total_qty}}
-                        </div>
-                        <div class="col col-15 text-center">
-                            0
+                        </div> -->
+                        <div class="col col-25 text-center">
+                            {{product.total_qty}}
                         </div>
                     </div>
                 </a>

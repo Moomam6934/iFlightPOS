@@ -18,10 +18,11 @@
         <div class="item item-divider headerbar-stock">
             <div class="row text-center header-check">
                 <div class="col col-10">NO.</div>
-                <div class="col col-40">Description</div>
-                <div class="col col-25">Quantity</div>
+                <div class="col col-30">Description</div>
+                <div class="col col-20">Quantity</div>
+                <div class="col col-20"> Remain</div>
                 <!-- <div class="col col-15">C.Qty</div> -->
-                <div class="col col-25">Total.Qty</div>
+                <div class="col col-20">Count</div>
             </div>
         </div>
         <ion-scroll direction="y" style="height:66%; background-color: whitesmoke;" has-bouncing="true">
@@ -29,14 +30,17 @@
                 <a class="item" ng-repeat="product in products | filter:searchData | orderBy:'products_id'" href="#">
                     <div class="row">
                         <div class="col col-10">{{$index + 1}}</div>
-                        <div class="col col-40">
-                            <p class="item-stock"><b>{{product.products_id}}</b> ({{product.name}})</p>
+                        <div class="col col-30 text-center">
+                            <p class="item-stock"><b>{{product.products_id}}</b></p>
                         </div>
-                        <div class="col col-25 text-center">{{product.total_qty}}</div>
-<!--                         <div class="col col-15 text-center">
+                        <div class="col col-20 text-right">{{product.total_qty}}</div>
+                        <!--                         <div class="col col-15 text-center">
                             {{product.total_qty}}
                         </div> -->
-                        <div class="col col-25 text-center">
+                        <div class="col col-20 text-right">
+                            {{product.total_qty}}
+                        </div>
+                        <div class="col col-20 text-right">
                             {{product.total_qty}}
                         </div>
                     </div>
